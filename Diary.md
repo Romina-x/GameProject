@@ -5,3 +5,7 @@
 ### 05/10/2024
 - Finished gathering 3D assets
 - Researching player movement in unity
+# Week 2
+### 08/10/2024
+- Began prototyping player character
+- Tied idle, walking and running animations to the keyboard keys

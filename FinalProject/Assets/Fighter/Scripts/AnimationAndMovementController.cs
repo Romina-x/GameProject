@@ -20,6 +20,7 @@ public class AnimationAndMovementController : MonoBehaviour
     bool isRunPressed;
     float rotationFactorPerFrame = 15.0f;
     float runMultiplier = 3.0f;
+    float walkMultiplier = 1.5f;
     // Start is called before the first frame update
     void Awake()
     {
@@ -40,6 +41,7 @@ public class AnimationAndMovementController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         handleRotation();
         handleAnimation();
         if (isRunPressed){
@@ -47,6 +49,8 @@ public class AnimationAndMovementController : MonoBehaviour
         } else {
             characterController.Move(currentMovement * Time.deltaTime);
         }
+        handleGravity();
+        
     }
 
     void OnEnable() 
@@ -59,11 +63,15 @@ public class AnimationAndMovementController : MonoBehaviour
     }
     void onMovementInput(InputAction.CallbackContext context) {
         currentMovementInput = context.ReadValue<Vector2>();
-        currentMovement.x = currentMovementInput.x;
-        currentMovement.z = currentMovementInput.y;
+        currentMovement.x = currentMovementInput.x * walkMultiplier;
+        currentMovement.z = currentMovementInput.y * walkMultiplier;
         currentRunMovement.x = currentMovementInput.x * runMultiplier; //run speed multiplier
         currentRunMovement.z = currentMovementInput.y * runMultiplier;
         isMovementPressed = currentMovementInput.x != 0 || currentMovementInput.y != 0;
+
+    }
+    void onRun(InputAction.CallbackContext context){
+        isRunPressed = context.ReadValueAsButton();
     }
 
     void handleAnimation(){
@@ -99,8 +107,18 @@ public class AnimationAndMovementController : MonoBehaviour
     
     }
 
-    void onRun(InputAction.CallbackContext context){
-        isRunPressed = context.ReadValueAsButton();
+    void handleGravity(){
+        if (characterController.isGrounded){
+            float groundedGravity = -.05f;
+            currentMovement.y = groundedGravity;
+            currentRunMovement.y = groundedGravity;
+        } else {
+            float gravity = -9.8f;
+            currentMovement.y += gravity;
+            currentRunMovement.y += gravity;
+        }
     }
+
+
 
 }

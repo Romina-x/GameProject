@@ -13,6 +13,7 @@ public class AnimationAndMovementController : MonoBehaviour
     //Hashes of repeated string values for animator booleans and triggers
     int isWalkingHash;
     int isRunningHash;
+    int isAttackingHash;
 
     //Movement vectors
     Vector2 currentMovementInput;
@@ -22,6 +23,7 @@ public class AnimationAndMovementController : MonoBehaviour
     //Movement booleans
     bool isMovementPressed;
     bool isRunPressed;
+    bool isAttackPressed;
     
     //Constants
     float groundedGravity = -.05f;
@@ -40,6 +42,7 @@ public class AnimationAndMovementController : MonoBehaviour
 
         isWalkingHash = Animator.StringToHash("isWalking");
         isRunningHash = Animator.StringToHash("isRunning");
+        isAttackingHash = Animator.StringToHash("isAttacking");
 
         //Assigning methods to each input event (event listeners)
         // e.g. onMovementInput is called when Move has started
@@ -48,6 +51,8 @@ public class AnimationAndMovementController : MonoBehaviour
         playerInput.CharacterControls.Move.performed += onMovementInput;
         playerInput.CharacterControls.Run.started += onRun;
         playerInput.CharacterControls.Run.canceled += onRun;
+        playerInput.CharacterControls.Attack.started += onAttack;
+        playerInput.CharacterControls.Attack.canceled += onAttack;
     }
 
     // Update is called once per frame
@@ -55,7 +60,6 @@ public class AnimationAndMovementController : MonoBehaviour
     {
         handleRotation();
         handleAnimation();
-
         if (isRunPressed){
             characterController.Move(currentRunMovement * Time.deltaTime);
         } else {
@@ -97,11 +101,16 @@ public class AnimationAndMovementController : MonoBehaviour
         isRunPressed = context.ReadValueAsButton();
     }
 
+    void onAttack(InputAction.CallbackContext context){
+        isAttackPressed = context.ReadValueAsButton();
+    }
+
     //Called every frame to determine what animation should be playing
     void handleAnimation(){
         //Getting current value of the animation bools from the animator component
         bool isWalking = animator.GetBool(isWalkingHash);
         bool isRunning = animator.GetBool(isRunningHash);
+        bool isAttacking = animator.GetBool(isAttackingHash);
 
         //If not currently walking and movement has been pressed, set to walking
         if (isMovementPressed && !isWalking){
@@ -119,6 +128,12 @@ public class AnimationAndMovementController : MonoBehaviour
         //If currently running but run or walk is not being pressed anymore, set to not running
         else if((!isMovementPressed || !isRunPressed) && isRunning){
             animator.SetBool(isRunningHash, false);
+        }
+
+        if (isAttackPressed && !isAttacking){
+            animator.SetBool(isAttackingHash, true);
+        } else if (!isAttackPressed && isAttacking){
+            animator.SetBool(isAttackingHash, false);
         }
     }
 

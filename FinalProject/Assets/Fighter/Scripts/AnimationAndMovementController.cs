@@ -39,6 +39,7 @@ public class AnimationAndMovementController : MonoBehaviour
     float maxJumpHeight = 1.0f;
     float maxJumpTime = 0.5f;
     bool isJumping = false;
+    bool isJumpAnimating = false;
 
     //Called when the script is loading before the game starts
     void Awake()
@@ -173,6 +174,12 @@ public class AnimationAndMovementController : MonoBehaviour
         //Different gravity depending on whether the player is on the ground or not
         //We don't need unecessary extra acceleration when the player is on the ground
         if (characterController.isGrounded){
+            animator.SetBool(isJumpingHash, false);
+            if (isJumpAnimating){
+                animator.SetBool(isJumpingHash, false);
+                isJumpAnimating = false;
+            }
+           // isJumping = false;//here
             currentMovement.y = groundedGravity;
             currentRunMovement.y = groundedGravity;
         } else {
@@ -189,11 +196,13 @@ public class AnimationAndMovementController : MonoBehaviour
 
     void handleJump(){
         if (!isJumping && characterController.isGrounded && isJumpPressed){
+            animator.SetBool(isJumpingHash, true);
+            isJumpAnimating = true;
             isJumping = true;
             currentMovement.y = initialJumpVelocity;
             currentRunMovement.y = initialJumpVelocity;
         } else if (isJumping && !isJumpPressed && characterController.isGrounded){
             isJumping = false;
-        }
+        } 
     }
 }

@@ -14,6 +14,7 @@ public class AnimationAndMovementController : MonoBehaviour
     int isWalkingHash;
     int isRunningHash;
     int isAttackingHash;
+    int isJumpingHash;
 
     //Movement vectors
     Vector2 currentMovementInput;
@@ -24,6 +25,7 @@ public class AnimationAndMovementController : MonoBehaviour
     bool isMovementPressed;
     bool isRunPressed;
     bool isAttackPressed;
+    bool isJumpPressed = false;
     
     //Constants
     float groundedGravity = -.05f;
@@ -31,6 +33,12 @@ public class AnimationAndMovementController : MonoBehaviour
     float rotationFactorPerFrame = 15.0f;
     float runMultiplier = 3.0f;
     float walkMultiplier = 1.5f;
+
+    //Jumping variables
+    float initialJumpVelocity;
+    float maxJumpHeight = 1.0f;
+    float maxJumpTime = 0.5f;
+    bool isJumping = false;
 
     //Called when the script is loading before the game starts
     void Awake()
@@ -43,6 +51,7 @@ public class AnimationAndMovementController : MonoBehaviour
         isWalkingHash = Animator.StringToHash("isWalking");
         isRunningHash = Animator.StringToHash("isRunning");
         isAttackingHash = Animator.StringToHash("isAttacking");
+        isJumpingHash = Animator.StringToHash("isJumping");
 
         //Assigning methods to each input event (event listeners)
         // e.g. onMovementInput is called when Move has started
@@ -53,6 +62,10 @@ public class AnimationAndMovementController : MonoBehaviour
         playerInput.CharacterControls.Run.canceled += onRun;
         playerInput.CharacterControls.Attack.started += onAttack;
         playerInput.CharacterControls.Attack.canceled += onAttack;
+        playerInput.CharacterControls.Jump.started += onJump;
+        playerInput.CharacterControls.Jump.canceled += onJump;
+
+        setupJumpVariables();
     }
 
     // Update is called once per frame
@@ -66,7 +79,7 @@ public class AnimationAndMovementController : MonoBehaviour
             characterController.Move(currentMovement * Time.deltaTime);
         }
         handleGravity();
-        
+        handleJump();
     }
 
     void OnEnable() 
@@ -103,6 +116,10 @@ public class AnimationAndMovementController : MonoBehaviour
 
     void onAttack(InputAction.CallbackContext context){
         isAttackPressed = context.ReadValueAsButton();
+    }
+
+    void onJump(InputAction.CallbackContext context){
+        isJumpPressed = context.ReadValueAsButton();
     }
 
     //Called every frame to determine what animation should be playing
@@ -159,8 +176,24 @@ public class AnimationAndMovementController : MonoBehaviour
             currentMovement.y = groundedGravity;
             currentRunMovement.y = groundedGravity;
         } else {
-            currentMovement.y += gravity;
-            currentRunMovement.y += gravity;
+            currentMovement.y += gravity * Time.deltaTime;
+            currentRunMovement.y += gravity * Time.deltaTime;
+        }
+    }
+
+    void setupJumpVariables(){
+        float timeToApex = maxJumpTime/2;
+        gravity = (-2 * maxJumpHeight) / Mathf.Pow(timeToApex,2);
+        initialJumpVelocity = (2*maxJumpHeight) / timeToApex;
+    }
+
+    void handleJump(){
+        if (!isJumping && characterController.isGrounded && isJumpPressed){
+            isJumping = true;
+            currentMovement.y = initialJumpVelocity;
+            currentRunMovement.y = initialJumpVelocity;
+        } else if (isJumping && !isJumpPressed && characterController.isGrounded){
+            isJumping = false;
         }
     }
 }

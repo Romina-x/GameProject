@@ -1,3 +1,8 @@
+# Week 4
+### 21/10/2024
+- Imported enemy prefab and configured it's movement to follow the player
+- Researched Nav Meshes and applied this to the enemy so that it uses AI to navigate around obstacles towards the player
+
 # Week 3
 ### 16/10/2024
 - Fixed the jump movement and added the jump animation to it.

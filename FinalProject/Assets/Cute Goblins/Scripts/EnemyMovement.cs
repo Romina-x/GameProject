@@ -6,9 +6,8 @@ using UnityEngine;
 public class EnemyMovement : MonoBehaviour
 {
     public Transform target;
-    public float updateSpeed = 0.1f;
+    public float updateSpeed = 0.1f;  // This will be set from the Enemy class
     private UnityEngine.AI.NavMeshAgent agent;
-    [SerializeField]
     private Animator animator;
 
     private int isMovingHash;
@@ -29,14 +28,17 @@ public class EnemyMovement : MonoBehaviour
     private IEnumerator FollowTarget(){
         WaitForSeconds wait = new WaitForSeconds(updateSpeed);
         while(enabled){
-            agent.SetDestination(target.transform.position);
+            if (target != null)
+            {
+                agent.SetDestination(target.position);  // Update enemy movement towards target
+            }
             yield return wait;
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
+        // Set the "isMoving" animation state based on NavMeshAgent's velocity
         animator.SetBool(isMovingHash, agent.velocity.magnitude > 0.01f);
     }
 }

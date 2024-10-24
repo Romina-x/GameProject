@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9a3d27a5a96d6e45b23f62575e149d5, type: 3}
   m_Name: GoblinWarior
   m_EditorClassIdentifier: 
-  speed: 3.5
+  speed: 2
   acceleration: 8
   angularSpeed: 120
   health: 100

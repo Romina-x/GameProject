@@ -16,7 +16,6 @@ public class EnemyScriptableObject : ScriptableObject
     public float baseOffset;
     public UnityEngine.AI.ObstacleAvoidanceType obstacleAvoidanceType;
 
-    // Add height and radius for NavMeshAgent
     public float height;
     public float radius;
 

@@ -8,10 +8,14 @@ public class PlayerIdleState : PlayerBaseState
     : base (currentContext, playerStateFactory){}
     public override void EnterState(){
         Ctx.Animator.SetBool(Ctx.IsWalkingHash, false);
-        Ctx.Animator.SetBool(Ctx.IsRunningHash, false);
+        // Ctx.Animator.SetBool(Ctx.IsRunningHash, false);
     }
     public override void UpdateState(){
         CheckSwitchStates();
+        Ctx.CurrentMovementX = 0;
+        Ctx.CurrentMovementZ = 0;
+        Ctx.CurrentRunMovementX = 0;
+        Ctx.CurrentRunMovementZ = 0;
     }
     public override void ExitState(){}
     public override void CheckSwitchStates(){

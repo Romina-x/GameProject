@@ -105,7 +105,6 @@ public class PlayerStateMachine : MonoBehaviour
     }
 
     void Update(){
-        
         handleRotation();
         currentState.UpdateStates();
         if (isRunPressed){
@@ -122,10 +121,10 @@ public class PlayerStateMachine : MonoBehaviour
         currentMovementInput = context.ReadValue<Vector2>();
 
         //Setting x and z values of the player to the new input value multiplied by a run and walk multiplier for different speeds
-        currentMovement.x = currentMovementInput.x * walkMultiplier;
-        currentMovement.z = currentMovementInput.y * walkMultiplier;
-        currentRunMovement.x = currentMovementInput.x * runMultiplier; //run speed multiplier
-        currentRunMovement.z = currentMovementInput.y * runMultiplier;
+        // currentMovement.x = currentMovementInput.x * walkMultiplier;
+        // currentMovement.z = currentMovementInput.y * walkMultiplier;
+        // currentRunMovement.x = currentMovementInput.x * runMultiplier; //run speed multiplier
+        // currentRunMovement.z = currentMovementInput.y * runMultiplier;
 
         //Changing movement pressed bool to true if the input wasn't 0
         isMovementPressed = currentMovementInput.x != 0 || currentMovementInput.y != 0;
@@ -155,9 +154,15 @@ public class PlayerStateMachine : MonoBehaviour
     //Called every frame to make sure the player is rotated in the direction it is moving in
     void handleRotation(){
         Vector3 positionToLookAt;
-        positionToLookAt.x = currentMovement.x;
         positionToLookAt.y = 0.0f;
-        positionToLookAt.z = currentMovement.z;
+
+        if (isRunPressed) {
+            positionToLookAt.x = currentRunMovement.x;
+            positionToLookAt.z = currentRunMovement.z;
+        } else {
+            positionToLookAt.x = currentMovement.x;
+            positionToLookAt.z = currentMovement.z;
+        }
         Quaternion currentRotation = transform.rotation;
 
         if(isMovementPressed){

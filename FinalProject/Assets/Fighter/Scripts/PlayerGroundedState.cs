@@ -10,11 +10,12 @@ public class PlayerGroundedState : PlayerBaseState
         InitialiseSubState();
     }
     public override void EnterState(){
-        Ctx.CurrentMovementY = Ctx.GroundedGravity;
-        Ctx.CurrentRunMovementY = Ctx.GroundedGravity;
     }
     public override void UpdateState(){
         CheckSwitchStates();
+        ApplyGroundedGravity();
+        // Ctx.CurrentMovementY = Ctx.GroundedGravity;
+        // Ctx.CurrentRunMovementY = Ctx.GroundedGravity;
     }
     public override void ExitState(){}
     public override void CheckSwitchStates(){
@@ -31,4 +32,16 @@ public class PlayerGroundedState : PlayerBaseState
             SetSubState(Factory.Run());
         }
     }
+    void ApplyGroundedGravity() {
+    if (Ctx.CharacterController.isGrounded) {
+        if (Ctx.CurrentMovementY < 0) {
+            Ctx.CurrentMovementY = Ctx.GroundedGravity; // Reset to grounded gravity when on ground
+            Ctx.CurrentRunMovementY = Ctx.GroundedGravity;
+        }
+    } else {
+        // Apply regular gravity if not grounded
+        Ctx.CurrentMovementY += Ctx.Gravity * Time.deltaTime;
+        Ctx.CurrentRunMovementY += Ctx.Gravity * Time.deltaTime;
+    }
+}
 }

@@ -2,16 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
-{
+public class Enemy : MonoBehaviour, IDamageable
+{   
+    public AttackRadius attackRadius;
+    public Animator animator;
     public EnemyScriptableObject enemyData;
     private EnemyMovement movement;
     private UnityEngine.AI.NavMeshAgent agent;
+    private int attackTriggerHash;
+    public int health = 100;
 
-    private void Awake()
-    {
+
+    private void Awake(){
+        attackTriggerHash = Animator.StringToHash("attack");
+        attackRadius.OnAttack += OnAttack;
+        animator = GetComponent<Animator>();
         movement = GetComponent<EnemyMovement>();
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
+    }
+
+    private void OnAttack(IDamageable target){
+        animator.SetTrigger(attackTriggerHash);
     }
 
     void Start()
@@ -32,5 +43,21 @@ public class Enemy : MonoBehaviour
 
         // Set the movement update speed from the enemy data
         movement.updateSpeed = enemyData.AIUpdateInterval;
+
+        health = enemyData.health;
+        attackRadius.collider.radius = enemyData.attackRadius;
+        attackRadius.attackDelay = enemyData.attackDelay;
+        attackRadius.damage = enemyData.damage;
+    }
+
+    public void TakeDamage(int damage){
+        health -= damage;
+        if (health <= 0){
+            gameObject.SetActive(false);
+        }
+    }
+
+    public Transform GetTransform(){
+        return transform;
     }
 }

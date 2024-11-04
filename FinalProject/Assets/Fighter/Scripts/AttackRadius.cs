@@ -2,15 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Collider))]
+[RequireComponent(typeof(SphereCollider))]
 public class AttackRadius : MonoBehaviour
 {
+    public SphereCollider collider;
     private List<IDamageable> damageables = new List<IDamageable>();
     public int damage = 10;
     public float attackDelay = 0.5f;
     public delegate void AttackEvent(IDamageable target);
-    public AttackEvent onAttack;
+    public AttackEvent OnAttack;
     private Coroutine attackCoroutine;
+
+    private void Awake(){
+        collider = GetComponent<SphereCollider>();
+    }
 
     private void OnTriggerEnter(Collider other) {
         IDamageable damageable = other.GetComponent<IDamageable>();
@@ -49,7 +54,7 @@ public class AttackRadius : MonoBehaviour
                 }
             }
             if(closestDamageable != null){
-                onAttack?.Invoke(closestDamageable);
+                OnAttack?.Invoke(closestDamageable);
                 closestDamageable.TakeDamage(damage);
             }
 
@@ -62,7 +67,23 @@ public class AttackRadius : MonoBehaviour
 
         attackCoroutine = null;
     }
+    public IDamageable GetClosestTarget()
+    {
+        IDamageable closestDamageable = null;
+        float closestDistance = float.MaxValue;
+        foreach (var damageable in damageables)
+        {
+            if (damageable == null) continue;
 
+            float distance = Vector3.Distance(transform.position, damageable.GetTransform().position);
+            if (distance < closestDistance)
+            {
+                closestDistance = distance;
+                closestDamageable = damageable;
+            }
+        }
+        return closestDamageable;
+    }
     private bool DisabledDamageables(IDamageable damageable){
         return damageable == null;
     }

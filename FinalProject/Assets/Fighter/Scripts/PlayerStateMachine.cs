@@ -15,12 +15,10 @@ public class PlayerStateMachine : MonoBehaviour
     //Hashes of repeated string values for animator booleans and triggers
     int isWalkingHash;
     int isRunningHash;
-    int isAttackingHash;
     int isJumpingHash;
     public int IsJumpingHash { get { return isJumpingHash; } }
     public int IsRunningHash { get { return isRunningHash; } }
     public int IsWalkingHash { get { return isWalkingHash; } }
-    public int IsAttackingHash { get { return isAttackingHash; } }
 
     //Movement vectors
     Vector2 currentMovementInput;
@@ -38,11 +36,9 @@ public class PlayerStateMachine : MonoBehaviour
     //Movement booleans
     bool isMovementPressed;
     bool isRunPressed;
-    bool isAttackPressed;
     bool isJumpPressed = false;
     public bool IsMovementPressed { get { return isMovementPressed; } }
     public bool IsRunPressed { get { return isRunPressed; } }
-    public bool IsAttackPressed { get { return isAttackPressed; } }
     
     //Constants
     float groundedGravity = -.05f;
@@ -86,7 +82,6 @@ public class PlayerStateMachine : MonoBehaviour
 
         isWalkingHash = Animator.StringToHash("isWalking");
         isRunningHash = Animator.StringToHash("isRunning");
-        isAttackingHash = Animator.StringToHash("isAttacking");
         isJumpingHash = Animator.StringToHash("isJumping");
 
         //Assigning methods to each input event (event listeners)
@@ -96,8 +91,6 @@ public class PlayerStateMachine : MonoBehaviour
         playerInput.CharacterControls.Move.performed += onMovementInput;
         playerInput.CharacterControls.Run.started += onRun;
         playerInput.CharacterControls.Run.canceled += onRun;
-        playerInput.CharacterControls.Attack.started += onAttack;
-        playerInput.CharacterControls.Attack.canceled += onAttack;
         playerInput.CharacterControls.Jump.started += onJump;
         playerInput.CharacterControls.Jump.canceled += onJump;
 
@@ -131,9 +124,6 @@ public class PlayerStateMachine : MonoBehaviour
         isRunPressed = context.ReadValueAsButton();
     }
 
-    void onAttack(InputAction.CallbackContext context){
-        isAttackPressed = context.ReadValueAsButton();
-    }
 
     void onJump(InputAction.CallbackContext context){
         isJumpPressed = context.ReadValueAsButton();

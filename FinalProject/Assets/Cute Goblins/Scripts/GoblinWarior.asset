@@ -12,15 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9a3d27a5a96d6e45b23f62575e149d5, type: 3}
   m_Name: GoblinWarior
   m_EditorClassIdentifier: 
-  speed: 2
+  health: 100
+  attackDelay: 1
+  damage: 10
+  attackRadius: 1.5
+  AIUpdateInterval: 0.1
   acceleration: 8
   angularSpeed: 120
-  health: 100
-  stoppingDistance: 1
-  areaMask: 1
+  areaMask: -1
   avoidancePriority: 50
   baseOffset: 0
-  obstacleAvoidanceType: 1
   height: 2
-  radius: 0.6
-  AIUpdateInterval: 0.2
+  obstacleAvoidanceType: 1
+  radius: 0.5
+  speed: 2
+  stoppingDistance: 0.5

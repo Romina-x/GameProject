@@ -19,8 +19,6 @@ public class PlayerGroundedState : PlayerBaseState
     public override void CheckSwitchStates(){
         if(Ctx.IsJumpPressed && !Ctx.RequireNewJumpPress){
             SwitchState(Factory.Jump());
-        }else if (Ctx.IsAttackPressed){
-            SwitchState(Factory.Attack());
         }
     }
     public override void InitialiseSubState(){

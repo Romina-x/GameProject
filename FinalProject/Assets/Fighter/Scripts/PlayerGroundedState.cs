@@ -14,13 +14,13 @@ public class PlayerGroundedState : PlayerBaseState
     public override void UpdateState(){
         CheckSwitchStates();
         ApplyGroundedGravity();
-        // Ctx.CurrentMovementY = Ctx.GroundedGravity;
-        // Ctx.CurrentRunMovementY = Ctx.GroundedGravity;
     }
     public override void ExitState(){}
     public override void CheckSwitchStates(){
         if(Ctx.IsJumpPressed && !Ctx.RequireNewJumpPress){
             SwitchState(Factory.Jump());
+        }else if (Ctx.IsAttackPressed){
+            SwitchState(Factory.Attack());
         }
     }
     public override void InitialiseSubState(){
@@ -33,15 +33,15 @@ public class PlayerGroundedState : PlayerBaseState
         }
     }
     void ApplyGroundedGravity() {
-    if (Ctx.CharacterController.isGrounded) {
-        if (Ctx.CurrentMovementY < 0) {
-            Ctx.CurrentMovementY = Ctx.GroundedGravity; // Reset to grounded gravity when on ground
-            Ctx.CurrentRunMovementY = Ctx.GroundedGravity;
+        if (Ctx.CharacterController.isGrounded) {
+            if (Ctx.CurrentMovementY < 0) {
+                Ctx.CurrentMovementY = Ctx.GroundedGravity; // Reset to grounded gravity when on ground
+                Ctx.CurrentRunMovementY = Ctx.GroundedGravity;
+            }
+        } else {
+            // Apply regular gravity if not grounded
+            Ctx.CurrentMovementY += Ctx.Gravity * Time.deltaTime;
+            Ctx.CurrentRunMovementY += Ctx.Gravity * Time.deltaTime;
         }
-    } else {
-        // Apply regular gravity if not grounded
-        Ctx.CurrentMovementY += Ctx.Gravity * Time.deltaTime;
-        Ctx.CurrentRunMovementY += Ctx.Gravity * Time.deltaTime;
     }
-}
 }

@@ -60,6 +60,7 @@ public class PlayerStateMachine : MonoBehaviour
     public CharacterController CharacterController { get { return characterController; } }
     public bool IsMovementPressed { get { return isMovementPressed; } }
     public bool IsRunPressed { get { return isRunPressed; } }
+    public bool IsAttackPressed { get { return isAttackPressed; } }
     public float CurrentMovementX { set { currentMovement.x = value; } }
     public float CurrentMovementZ { set { currentMovement.z = value; } }
     public float CurrentMovementInputX { get { return currentMovementInput.x; } }
@@ -68,6 +69,7 @@ public class PlayerStateMachine : MonoBehaviour
     public float RunMultiplier { get { return runMultiplier; } }
     public int IsRunningHash { get { return isRunningHash; } }
     public int IsWalkingHash { get { return isWalkingHash; } }
+    public int IsAttackingHash { get { return isAttackingHash; } }
     public float CurrentRunMovementX { set { currentRunMovement.x = value; } }
     public float CurrentRunMovementZ { set { currentRunMovement.z = value; } }
 

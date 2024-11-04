@@ -1,4 +1,14 @@
+# Week 5
+### 29/10/2024
+- Refactored all the states out into their respective classes
+- Fixed gravity and running bugs from refactored code
+
 # Week 4
+### 25/20/2024
+- Began refactoring player class into a hierarchical state machine
+- Created all state classes and state factory
+### 23/10/2024
+- Linked running animation to enemy movement
 ### 21/10/2024
 - Imported enemy prefab and configured it's movement to follow the player
 - Researched Nav Meshes and applied this to the enemy so that it uses AI to navigate around obstacles towards the player

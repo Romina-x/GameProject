@@ -11,6 +11,7 @@ public class EnemyMovement : MonoBehaviour
     private Animator animator;
 
     private int isMovingHash;
+    private bool isMoving = false;
 
     private void Awake() 
     {
@@ -30,6 +31,9 @@ public class EnemyMovement : MonoBehaviour
         while(enabled){
             if (target != null)
             {
+                isMoving = agent.velocity.magnitude > 0.2f;
+                Debug.Log(agent.velocity.magnitude);
+                animator.SetBool(isMovingHash, isMoving);
                 agent.SetDestination(target.position);  // Update enemy movement towards target
             }
             yield return wait;
@@ -39,6 +43,6 @@ public class EnemyMovement : MonoBehaviour
     void Update()
     {
         // Set the "isMoving" animation state based on NavMeshAgent's velocity
-        animator.SetBool(isMovingHash, agent.velocity.magnitude > 0.01f);
+        
     }
 }

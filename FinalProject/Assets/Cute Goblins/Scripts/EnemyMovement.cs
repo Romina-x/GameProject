@@ -32,7 +32,6 @@ public class EnemyMovement : MonoBehaviour
             if (target != null)
             {
                 isMoving = agent.velocity.magnitude > 0.2f;
-                Debug.Log(agent.velocity.magnitude);
                 animator.SetBool(isMovingHash, isMoving);
                 agent.SetDestination(target.position);  // Update enemy movement towards target
             }

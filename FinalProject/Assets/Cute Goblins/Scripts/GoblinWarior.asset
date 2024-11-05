@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: GoblinWarior
   m_EditorClassIdentifier: 
   health: 100
-  attackDelay: 1
-  damage: 10
+  attackDelay: 3
+  damage: 50
   attackRadius: 1.5
   AIUpdateInterval: 0.1
   acceleration: 8

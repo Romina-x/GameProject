@@ -519,7 +519,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   collider: {fileID: 0}
-  damage: 50
+  damage: 100
   attackDelay: 0.5
 --- !u!135 &692816039
 SphereCollider:

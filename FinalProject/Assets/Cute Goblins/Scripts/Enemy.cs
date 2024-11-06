@@ -10,11 +10,13 @@ public class Enemy : MonoBehaviour, IDamageable
     private EnemyMovement movement;
     private UnityEngine.AI.NavMeshAgent agent;
     private int attackTriggerHash;
+    private int diedTriggerHash;
     public int health = 100;
 
 
     private void Awake(){
         attackTriggerHash = Animator.StringToHash("attack");
+        attackTriggerHash = Animator.StringToHash("died");
         attackRadius.OnAttack += OnAttack;
         animator = GetComponent<Animator>();
         movement = GetComponent<EnemyMovement>();
@@ -54,7 +56,9 @@ public class Enemy : MonoBehaviour, IDamageable
         health -= damage;
         Debug.Log("take damage Here from enemy");
         if (health <= 0){
-            gameObject.SetActive(false);
+            animator.SetTrigger(diedTriggerHash);
+            movement.StopFollowing();
+            // gameObject.SetActive(false);
         }
     }
 

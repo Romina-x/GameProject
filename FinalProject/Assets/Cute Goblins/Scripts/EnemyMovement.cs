@@ -12,6 +12,7 @@ public class EnemyMovement : MonoBehaviour
 
     private int isMovingHash;
     private bool isMoving = false;
+    private Coroutine followCoroutine;
 
     private void Awake() 
     {
@@ -23,7 +24,7 @@ public class EnemyMovement : MonoBehaviour
 
     void Start()
     {
-        StartCoroutine(FollowTarget());
+        followCoroutine = StartCoroutine(FollowTarget());
     }
 
     private IEnumerator FollowTarget(){
@@ -37,6 +38,14 @@ public class EnemyMovement : MonoBehaviour
             }
             yield return wait;
         }
+    }
+
+    public void StopFollowing() {
+        if (followCoroutine != null) {
+            StopCoroutine(followCoroutine);  // Stop the coroutine
+            followCoroutine = null;
+        }
+        agent.isStopped = true;  // Stop the NavMeshAgent from moving
     }
 
     void Update()

@@ -8,19 +8,27 @@ public class PlayerHealthAndDamage : MonoBehaviour, IDamageable
     private Animator animator;
     private bool isDead = false;
     private int diedTriggerHash;
+    private int attackTriggerHash;
     private PlayerInput playerInput;
+    private bool attacked = false;
 
     [SerializeField]
     private int health = 300;
 
-    private void Awake()
+    void Awake()
     {
-        diedTriggerHash = Animator.StringToHash("died");
-        animator = GetComponent<Animator>();
-
+        animator = GetComponent<Animator>();     
         playerInput = new PlayerInput();
-        playerInput.CharacterControls.Enable();
+
+        attackTriggerHash = Animator.StringToHash("attack");
+        playerInput.CharacterControls.Attack.performed += OnAttack;
+
     }
+    void OnAttack(InputAction.CallbackContext context){
+        Debug.Log("Attack button pressed");
+        animator.SetTrigger(attackTriggerHash);
+    }
+
 
     public void TakeDamage(int damage)
     {
@@ -33,12 +41,20 @@ public class PlayerHealthAndDamage : MonoBehaviour, IDamageable
             animator.SetTrigger(diedTriggerHash);
         }
     }
-    
+
     private void OnDisable()
     {
         playerInput.CharacterControls.Disable();
     }
+    private void OnEnable()
+    {
+        playerInput.CharacterControls.Enable();
+    }
+
     public Transform GetTransform(){
         return transform;
+    }
+    public string GetName(){
+        return "Player";
     }
 }

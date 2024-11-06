@@ -67,24 +67,8 @@ public class AttackRadius : MonoBehaviour
 
         attackCoroutine = null;
     }
-    public IDamageable GetClosestTarget()
-    {
-        IDamageable closestDamageable = null;
-        float closestDistance = float.MaxValue;
-        foreach (var damageable in damageables)
-        {
-            if (damageable == null) continue;
-
-            float distance = Vector3.Distance(transform.position, damageable.GetTransform().position);
-            if (distance < closestDistance)
-            {
-                closestDistance = distance;
-                closestDamageable = damageable;
-            }
-        }
-        return closestDamageable;
-    }
+    
     private bool DisabledDamageables(IDamageable damageable){
-        return damageable == null;
+        return damageable != null && !damageable.GetTransform().gameObject.activeSelf;
     }
 }

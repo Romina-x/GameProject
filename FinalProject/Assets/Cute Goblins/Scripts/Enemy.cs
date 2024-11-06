@@ -52,6 +52,7 @@ public class Enemy : MonoBehaviour, IDamageable
 
     public void TakeDamage(int damage){
         health -= damage;
+        Debug.Log("take damage Here from enemy");
         if (health <= 0){
             gameObject.SetActive(false);
         }
@@ -59,5 +60,9 @@ public class Enemy : MonoBehaviour, IDamageable
 
     public Transform GetTransform(){
         return transform;
+    }
+
+    public string GetName(){
+        return "Enemy";
     }
 }

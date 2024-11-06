@@ -16,7 +16,7 @@ public class Enemy : MonoBehaviour, IDamageable
 
     private void Awake(){
         attackTriggerHash = Animator.StringToHash("attack");
-        attackTriggerHash = Animator.StringToHash("died");
+        diedTriggerHash = Animator.StringToHash("died");
         attackRadius.OnAttack += OnAttack;
         animator = GetComponent<Animator>();
         movement = GetComponent<EnemyMovement>();
@@ -56,6 +56,7 @@ public class Enemy : MonoBehaviour, IDamageable
         health -= damage;
         Debug.Log("take damage Here from enemy");
         if (health <= 0){
+            Debug.Log("health < 0");
             animator.SetTrigger(diedTriggerHash);
             movement.StopFollowing();
             // gameObject.SetActive(false);

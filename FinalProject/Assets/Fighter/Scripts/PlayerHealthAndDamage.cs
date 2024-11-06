@@ -9,6 +9,7 @@ public class PlayerHealthAndDamage : MonoBehaviour, IDamageable
     private bool isDead = false;
     private int diedTriggerHash;
     private int attackTriggerHash;
+    private int gotHitTriggerHash;
     private PlayerInput playerInput;
     private bool attacked = false;
 
@@ -21,6 +22,8 @@ public class PlayerHealthAndDamage : MonoBehaviour, IDamageable
         playerInput = new PlayerInput();
 
         attackTriggerHash = Animator.StringToHash("attack");
+        gotHitTriggerHash = Animator.StringToHash("gotHit");
+        diedTriggerHash = Animator.StringToHash("died");
         playerInput.CharacterControls.Attack.performed += OnAttack;
 
     }
@@ -33,8 +36,12 @@ public class PlayerHealthAndDamage : MonoBehaviour, IDamageable
     public void TakeDamage(int damage)
     {
         if (isDead) return;  // Prevent taking damage after death
-
         health -= damage;
+
+        if (health > 0) {
+            animator.SetTrigger(gotHitTriggerHash);
+        }
+
         if (health <= 0)
         {
             isDead = true;

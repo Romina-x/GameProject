@@ -67,7 +67,12 @@ public class AttackRadius : MonoBehaviour
 
         attackCoroutine = null;
     }
-    
+    public void StopAttackCoroutine() {
+        if (attackCoroutine != null) {
+            StopCoroutine(attackCoroutine);
+            attackCoroutine = null;
+        }
+    }    
     private bool DisabledDamageables(IDamageable damageable){
         return damageable != null && !damageable.GetTransform().gameObject.activeSelf;
     }

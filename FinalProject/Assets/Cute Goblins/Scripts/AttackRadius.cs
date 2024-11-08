@@ -71,6 +71,7 @@ public class AttackRadius : MonoBehaviour
         if (attackCoroutine != null) {
             StopCoroutine(attackCoroutine);
             attackCoroutine = null;
+            collider.enabled = false;
         }
     }    
     private bool DisabledDamageables(IDamageable damageable){

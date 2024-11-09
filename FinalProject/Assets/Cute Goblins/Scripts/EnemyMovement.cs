@@ -7,6 +7,7 @@ public class EnemyMovement : MonoBehaviour
 {
     public Transform target;
     public float updateSpeed = 0.1f;  // This will be set from the Enemy class
+    private float returnThreshold = 0.5f;
     private UnityEngine.AI.NavMeshAgent agent;
     private Animator animator;
 
@@ -14,6 +15,7 @@ public class EnemyMovement : MonoBehaviour
     private bool isMoving = false;
     private Coroutine followCoroutine;
     public FollowRadius followRadius;
+    private Vector3 originalPosition;
 
     private void Awake() 
     {
@@ -25,19 +27,16 @@ public class EnemyMovement : MonoBehaviour
         if (followRadius != null) 
         {
             followRadius.PlayerEnter += OnPlayerEntered;
-            followRadius.PlayerExit += OnPlayerExited;
+            followRadius.PlayerExit += ReturnToSpawn;
         }
+
+        originalPosition = transform.position;
     }
 
     private void OnPlayerEntered()
     {
         Debug.Log("OnPlayerEntered");
         StartFollowing();
-    }
-
-    private void OnPlayerExited()
-    {
-        StopFollowing();
     }
 
     // Method to start following the target
@@ -50,16 +49,13 @@ public class EnemyMovement : MonoBehaviour
         }
     }
 
-    // Method to stop following the target
-    public void StopFollowing() 
-    {
-        if (followCoroutine != null) 
-        {
+    private void ReturnToSpawn(){
+        if (followCoroutine != null){
             StopCoroutine(followCoroutine);
             followCoroutine = null;
         }
-        agent.isStopped = true;  // Stop the NavMeshAgent from moving
-        animator.SetBool(isMovingHash, false);  // Ensure the animation is idle
+
+        StartCoroutine(ReturnToOrigin());
     }
 
     private IEnumerator FollowTarget(){
@@ -73,6 +69,21 @@ public class EnemyMovement : MonoBehaviour
             }
             yield return wait;
         }
+    }
+
+    private IEnumerator ReturnToOrigin(){
+        agent.SetDestination(originalPosition);
+        // Wait until the enemy is close enough to the original position
+        float distanceToSpawn = Vector3.Distance(transform.position, originalPosition);
+        while (distanceToSpawn > returnThreshold)
+        {
+            bool isMoving = agent.velocity.magnitude > 0.2f;
+            animator.SetBool(isMovingHash, isMoving);
+            yield return null;
+        }
+
+        agent.isStopped = true;
+        animator.SetBool(isMovingHash, false);
     }
 
     public void StopFollowingOnDeath() {

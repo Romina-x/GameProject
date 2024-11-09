@@ -63,7 +63,7 @@ public class Enemy : MonoBehaviour, IDamageable
         if (health <= 0){
             Debug.Log("health < 0");
             animator.SetTrigger(diedTriggerHash);
-            movement.StopFollowing();
+            movement.StopFollowingOnDeath();
             attackRadius.StopAttackCoroutine();
             // gameObject.SetActive(false);
         }

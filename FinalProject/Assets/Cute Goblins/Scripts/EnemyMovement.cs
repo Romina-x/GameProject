@@ -13,6 +13,7 @@ public class EnemyMovement : MonoBehaviour
     private int isMovingHash;
     private bool isMoving = false;
     private Coroutine followCoroutine;
+    public FollowRadius followRadius;
 
     private void Awake() 
     {
@@ -20,11 +21,45 @@ public class EnemyMovement : MonoBehaviour
         animator = GetComponent<Animator>();
 
         isMovingHash = Animator.StringToHash("isMoving");
+        
+        if (followRadius != null) 
+        {
+            followRadius.PlayerEnter += OnPlayerEntered;
+            followRadius.PlayerExit += OnPlayerExited;
+        }
     }
 
-    void Start()
+    private void OnPlayerEntered()
     {
-        followCoroutine = StartCoroutine(FollowTarget());
+        Debug.Log("OnPlayerEntered");
+        StartFollowing();
+    }
+
+    private void OnPlayerExited()
+    {
+        StopFollowing();
+    }
+
+    // Method to start following the target
+    public void StartFollowing() 
+    {
+        if (followCoroutine == null) 
+        {
+            followCoroutine = StartCoroutine(FollowTarget());
+            agent.isStopped = false;  // Allow the NavMeshAgent to move
+        }
+    }
+
+    // Method to stop following the target
+    public void StopFollowing() 
+    {
+        if (followCoroutine != null) 
+        {
+            StopCoroutine(followCoroutine);
+            followCoroutine = null;
+        }
+        agent.isStopped = true;  // Stop the NavMeshAgent from moving
+        animator.SetBool(isMovingHash, false);  // Ensure the animation is idle
     }
 
     private IEnumerator FollowTarget(){
@@ -40,17 +75,11 @@ public class EnemyMovement : MonoBehaviour
         }
     }
 
-    public void StopFollowing() {
+    public void StopFollowingOnDeath() {
         if (followCoroutine != null) {
             StopCoroutine(followCoroutine);  // Stop the coroutine
             followCoroutine = null;
         }
         agent.isStopped = true;  // Stop the NavMeshAgent from moving
-    }
-
-    void Update()
-    {
-        // Set the "isMoving" animation state based on NavMeshAgent's velocity
-        
     }
 }

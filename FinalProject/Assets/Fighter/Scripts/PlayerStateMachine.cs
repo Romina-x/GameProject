@@ -9,23 +9,36 @@ public class PlayerStateMachine : MonoBehaviour
     PlayerInput playerInput;
     CharacterController characterController;
     Animator animator;
+    public Animator Animator { get { return animator; } }
+    public CharacterController CharacterController { get { return characterController; } }
 
     //Hashes of repeated string values for animator booleans and triggers
     int isWalkingHash;
     int isRunningHash;
-    int isAttackingHash;
     int isJumpingHash;
+    public int IsJumpingHash { get { return isJumpingHash; } }
+    public int IsRunningHash { get { return isRunningHash; } }
+    public int IsWalkingHash { get { return isWalkingHash; } }
 
     //Movement vectors
     Vector2 currentMovementInput;
     Vector3 currentMovement;
     Vector3 currentRunMovement;
+    public float CurrentMovementY { get { return currentMovement.y; } set { currentMovement.y = value; } }
+    public float CurrentRunMovementY { get { return currentRunMovement.y; } set { currentRunMovement.y = value; } }
+    public float CurrentMovementX { set { currentMovement.x = value; } }
+    public float CurrentMovementZ { set { currentMovement.z = value; } }
+    public float CurrentMovementInputX { get { return currentMovementInput.x; } }
+    public float CurrentMovementInputY { get { return currentMovementInput.y; } }
+    public float CurrentRunMovementX { set { currentRunMovement.x = value; } }
+    public float CurrentRunMovementZ { set { currentRunMovement.z = value; } }
 
     //Movement booleans
     bool isMovementPressed;
     bool isRunPressed;
-    bool isAttackPressed;
     bool isJumpPressed = false;
+    public bool IsMovementPressed { get { return isMovementPressed; } }
+    public bool IsRunPressed { get { return isRunPressed; } }
     
     //Constants
     float groundedGravity = -.05f;
@@ -33,6 +46,10 @@ public class PlayerStateMachine : MonoBehaviour
     float rotationFactorPerFrame = 15.0f;
     float runMultiplier = 3.0f;
     float walkMultiplier = 1.5f;
+    public float GroundedGravity { get { return groundedGravity; } }
+    public float Gravity { get { return gravity; } }
+    public float WalkMultiplier { get { return walkMultiplier; } }
+    public float RunMultiplier { get { return runMultiplier; } }
 
     //Jumping variables
     float initialJumpVelocity;
@@ -40,38 +57,15 @@ public class PlayerStateMachine : MonoBehaviour
     float maxJumpTime = 0.5f;
     bool isJumping = false;
     bool requireNewJumpPress = false;
+    public bool IsJumpPressed { get { return isJumpPressed; } }
+    public bool RequireNewJumpPress { get { return requireNewJumpPress; } set { requireNewJumpPress = value; } }
+    public bool IsJumping { set { isJumping = value; } }
+    public float InitialJumpVelocity { get { return initialJumpVelocity; } }
 
     // State variables
     PlayerBaseState currentState;
     PlayerStateFactory states;
-
-    // Getters and setters
     public PlayerBaseState CurrentState { get { return currentState; } set { currentState = value; } }
-    public bool IsJumpPressed { get { return isJumpPressed; } }
-    public int IsJumpingHash { get { return isJumpingHash; } }
-    public bool RequireNewJumpPress { get { return requireNewJumpPress; } set { requireNewJumpPress = value; } }
-    public bool IsJumping { set { isJumping = value; } }
-    public float CurrentMovementY { get { return currentMovement.y; } set { currentMovement.y = value; } }
-    public float CurrentRunMovementY { get { return currentRunMovement.y; } set { currentRunMovement.y = value; } }
-    public Animator Animator { get { return animator; } }
-    public float InitialJumpVelocity { get { return initialJumpVelocity; } }
-    public float GroundedGravity { get { return groundedGravity; } }
-    public float Gravity { get { return gravity; } }
-    public CharacterController CharacterController { get { return characterController; } }
-    public bool IsMovementPressed { get { return isMovementPressed; } }
-    public bool IsRunPressed { get { return isRunPressed; } }
-    public bool IsAttackPressed { get { return isAttackPressed; } }
-    public float CurrentMovementX { set { currentMovement.x = value; } }
-    public float CurrentMovementZ { set { currentMovement.z = value; } }
-    public float CurrentMovementInputX { get { return currentMovementInput.x; } }
-    public float CurrentMovementInputY { get { return currentMovementInput.y; } }
-    public float WalkMultiplier { get { return walkMultiplier; } }
-    public float RunMultiplier { get { return runMultiplier; } }
-    public int IsRunningHash { get { return isRunningHash; } }
-    public int IsWalkingHash { get { return isWalkingHash; } }
-    public int IsAttackingHash { get { return isAttackingHash; } }
-    public float CurrentRunMovementX { set { currentRunMovement.x = value; } }
-    public float CurrentRunMovementZ { set { currentRunMovement.z = value; } }
 
     //Called when the script is loading before the game starts
     void Awake()
@@ -88,7 +82,6 @@ public class PlayerStateMachine : MonoBehaviour
 
         isWalkingHash = Animator.StringToHash("isWalking");
         isRunningHash = Animator.StringToHash("isRunning");
-        isAttackingHash = Animator.StringToHash("isAttacking");
         isJumpingHash = Animator.StringToHash("isJumping");
 
         //Assigning methods to each input event (event listeners)
@@ -98,8 +91,6 @@ public class PlayerStateMachine : MonoBehaviour
         playerInput.CharacterControls.Move.performed += onMovementInput;
         playerInput.CharacterControls.Run.started += onRun;
         playerInput.CharacterControls.Run.canceled += onRun;
-        playerInput.CharacterControls.Attack.started += onAttack;
-        playerInput.CharacterControls.Attack.canceled += onAttack;
         playerInput.CharacterControls.Jump.started += onJump;
         playerInput.CharacterControls.Jump.canceled += onJump;
 
@@ -122,12 +113,6 @@ public class PlayerStateMachine : MonoBehaviour
         //Reading the input from WASD or joystick
         currentMovementInput = context.ReadValue<Vector2>();
 
-        //Setting x and z values of the player to the new input value multiplied by a run and walk multiplier for different speeds
-        // currentMovement.x = currentMovementInput.x * walkMultiplier;
-        // currentMovement.z = currentMovementInput.y * walkMultiplier;
-        // currentRunMovement.x = currentMovementInput.x * runMultiplier; //run speed multiplier
-        // currentRunMovement.z = currentMovementInput.y * runMultiplier;
-
         //Changing movement pressed bool to true if the input wasn't 0
         isMovementPressed = currentMovementInput.x != 0 || currentMovementInput.y != 0;
     }
@@ -139,9 +124,6 @@ public class PlayerStateMachine : MonoBehaviour
         isRunPressed = context.ReadValueAsButton();
     }
 
-    void onAttack(InputAction.CallbackContext context){
-        isAttackPressed = context.ReadValueAsButton();
-    }
 
     void onJump(InputAction.CallbackContext context){
         isJumpPressed = context.ReadValueAsButton();

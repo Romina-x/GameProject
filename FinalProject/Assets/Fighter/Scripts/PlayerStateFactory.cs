@@ -21,7 +21,4 @@ public class PlayerStateFactory
     public PlayerBaseState Jump(){
         return new PlayerJumpState(context, this);
     }
-    public PlayerBaseState Attack(){
-        return new PlayerAttackState(context, this);
-    }
 }

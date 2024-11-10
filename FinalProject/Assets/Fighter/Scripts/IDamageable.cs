@@ -6,4 +6,5 @@ public interface IDamageable
 {
     void TakeDamage(int damage);
     Transform GetTransform();
+    string GetName();
 }

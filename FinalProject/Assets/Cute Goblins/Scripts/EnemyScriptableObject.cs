@@ -6,18 +6,33 @@ using UnityEngine;
 
 public class EnemyScriptableObject : ScriptableObject
 {
-    public float speed;
+    // Enemy stats
+    public int health ;
+    public float attackDelay;
+    public int damage;
+    public float attackRadius;
+
+    // Navmesh agent configs
+    public float AIUpdateInterval;
+
     public float acceleration;
     public float angularSpeed;
-    public int health;
-    public float stoppingDistance;
     public int areaMask;
+
     public int avoidancePriority;
     public float baseOffset;
-    public UnityEngine.AI.ObstacleAvoidanceType obstacleAvoidanceType;
-
     public float height;
+    public UnityEngine.AI.ObstacleAvoidanceType obstacleAvoidanceType;
     public float radius;
+    public float speed;
 
-    public float AIUpdateInterval;
+    public float stoppingDistance;
+
+
+
+
+
+
+
+
 }

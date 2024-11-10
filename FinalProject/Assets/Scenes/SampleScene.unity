@@ -3913,7 +3913,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2183986441175730140, guid: ccdc041b7fd72a64f977b34c6c6bca0e, type: 3}
       propertyPath: m_Radius
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2922821066971152401, guid: ccdc041b7fd72a64f977b34c6c6bca0e, type: 3}
       propertyPath: m_Layer
@@ -3979,6 +3979,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 6166983638026539716, guid: ccdc041b7fd72a64f977b34c6c6bca0e, type: 3}
+      propertyPath: poofPrefab
+      value: 
+      objectReference: {fileID: 2551494956040147569, guid: e4a98111c61d6b1478c0e520ac522720, type: 3}
     - target: {fileID: 7127862735646426832, guid: ccdc041b7fd72a64f977b34c6c6bca0e, type: 3}
       propertyPath: m_Name
       value: EnemyAttackRadius

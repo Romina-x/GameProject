@@ -7,6 +7,8 @@ public class Enemy : MonoBehaviour, IDamageable
     public AttackRadius attackRadius;
     public Animator animator;
     public EnemyScriptableObject enemyData;
+    public GameObject poofPrefab; // Assign your poof prefab in the Inspector
+
     private EnemyMovement movement;
     private UnityEngine.AI.NavMeshAgent agent;
     private int attackTriggerHash;
@@ -65,6 +67,7 @@ public class Enemy : MonoBehaviour, IDamageable
             animator.SetTrigger(diedTriggerHash);
             movement.StopFollowingOnDeath();
             attackRadius.StopAttackCoroutine();
+            StartCoroutine(DelayedDeath());
             // gameObject.SetActive(false);
         }
     }
@@ -73,6 +76,26 @@ public class Enemy : MonoBehaviour, IDamageable
         return transform;
     }
 
+    public void Die()
+    {
+        // Check if the poofPrefab is assigned
+        if (poofPrefab != null)
+        {
+            // Instantiate the poof effect at the enemy's position
+            Instantiate(poofPrefab, transform.position, Quaternion.identity);
+        }
+
+        // Destroy the enemy game object (or disable it as needed)
+        Destroy(gameObject);
+    }
+    private IEnumerator DelayedDeath()
+    {
+        // Adjust this delay to match the length of your death animation
+        yield return new WaitForSeconds(1.8f); 
+
+        // Call Die() to instantiate the poof and disable the enemy
+        Die();
+    }
     public string GetName(){
         return "Enemy";
     }

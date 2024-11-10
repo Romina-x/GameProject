@@ -63,7 +63,7 @@ public class EnemyMovement : MonoBehaviour
         while(enabled){
             if (target != null)
             {
-                isMoving = agent.velocity.magnitude > 0.2f;
+                isMoving = agent.velocity.magnitude > 0.1f;
                 animator.SetBool(isMovingHash, isMoving);
                 agent.SetDestination(target.position);  // Update enemy movement towards target
             }
@@ -77,7 +77,7 @@ public class EnemyMovement : MonoBehaviour
         float distanceToSpawn = Vector3.Distance(transform.position, originalPosition);
         while (distanceToSpawn > returnThreshold)
         {
-            bool isMoving = agent.velocity.magnitude > 0.2f;
+            bool isMoving = agent.velocity.magnitude > 0.1f;
             animator.SetBool(isMovingHash, isMoving);
             yield return null;
         }

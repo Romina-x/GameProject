@@ -16,6 +16,11 @@ public class Enemy : MonoBehaviour, IDamageable
     private int gotHitTriggerHash;
     public int health = 100;
 
+    private bool isDefeated;
+    public bool IsDefeated { get { return isDefeated; } }
+    public delegate void EnemyDefeated(); 
+    public static event EnemyDefeated OnEnemyDefeated;
+
 
     private void Awake(){
         attackTriggerHash = Animator.StringToHash("attack");
@@ -63,12 +68,15 @@ public class Enemy : MonoBehaviour, IDamageable
             animator.SetTrigger(gotHitTriggerHash);
         }
         if (health <= 0){
+            isDefeated = true;
             Debug.Log("health < 0");
             animator.SetTrigger(diedTriggerHash);
             movement.StopFollowingOnDeath();
             attackRadius.StopAttackCoroutine();
             StartCoroutine(DelayedDeath());
             // gameObject.SetActive(false);
+
+            OnEnemyDefeated?.Invoke();
         }
     }
 

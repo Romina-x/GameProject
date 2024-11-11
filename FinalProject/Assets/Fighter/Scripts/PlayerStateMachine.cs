@@ -15,8 +15,10 @@ public class PlayerStateMachine : MonoBehaviour
     //Hashes of repeated string values for animator booleans and triggers
     int isWalkingHash;
     int isRunningHash;
-    int isJumpingHash;
-    public int IsJumpingHash { get { return isJumpingHash; } }
+    //int isJumpingHash;
+    //public int IsJumpingHash { get { return isJumpingHash; } }
+    int jumpTriggerHash;
+    public int JumpTriggerHash { get { return jumpTriggerHash; } }
     public int IsRunningHash { get { return isRunningHash; } }
     public int IsWalkingHash { get { return isWalkingHash; } }
 
@@ -82,7 +84,7 @@ public class PlayerStateMachine : MonoBehaviour
 
         isWalkingHash = Animator.StringToHash("isWalking");
         isRunningHash = Animator.StringToHash("isRunning");
-        isJumpingHash = Animator.StringToHash("isJumping");
+        jumpTriggerHash = Animator.StringToHash("jump");
 
         //Assigning methods to each input event (event listeners)
         // e.g. onMovementInput is called when Move has started

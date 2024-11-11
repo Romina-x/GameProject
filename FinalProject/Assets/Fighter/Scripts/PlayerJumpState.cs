@@ -13,13 +13,14 @@ public class PlayerJumpState : PlayerBaseState
 
     public override void EnterState(){
         HandleJump();
+        
     }
     public override void UpdateState(){
         CheckSwitchStates();
         HandleGravity();
     }
     public override void ExitState(){
-        Ctx.Animator.SetBool(Ctx.IsJumpingHash, false);
+        //Ctx.Animator.SetBool(Ctx.IsJumpingHash, false);
         if (Ctx.IsJumpPressed){
             Ctx.RequireNewJumpPress = true;
         }       
@@ -32,7 +33,7 @@ public class PlayerJumpState : PlayerBaseState
     public override void InitialiseSubState(){}
 
     void HandleJump(){
-        Ctx.Animator.SetBool(Ctx.IsJumpingHash, true);
+        Ctx.Animator.SetTrigger(Ctx.JumpTriggerHash);
         Ctx.IsJumping = true;
         Ctx.CurrentMovementY = Ctx.InitialJumpVelocity;
         Ctx.CurrentRunMovementY = Ctx.InitialJumpVelocity;

@@ -772,6 +772,78 @@ MonoBehaviour:
   m_CameraActivatedEvent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1001 &1275092408
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3024327034955682150, guid: ccdc041b7fd72a64f977b34c6c6bca0e, type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 1504346263}
+    - target: {fileID: 3725766207750886639, guid: ccdc041b7fd72a64f977b34c6c6bca0e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2.97
+      objectReference: {fileID: 0}
+    - target: {fileID: 3725766207750886639, guid: ccdc041b7fd72a64f977b34c6c6bca0e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3725766207750886639, guid: ccdc041b7fd72a64f977b34c6c6bca0e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2.06
+      objectReference: {fileID: 0}
+    - target: {fileID: 3725766207750886639, guid: ccdc041b7fd72a64f977b34c6c6bca0e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.03131943
+      objectReference: {fileID: 0}
+    - target: {fileID: 3725766207750886639, guid: ccdc041b7fd72a64f977b34c6c6bca0e, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3725766207750886639, guid: ccdc041b7fd72a64f977b34c6c6bca0e, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.99950945
+      objectReference: {fileID: 0}
+    - target: {fileID: 3725766207750886639, guid: ccdc041b7fd72a64f977b34c6c6bca0e, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3725766207750886639, guid: ccdc041b7fd72a64f977b34c6c6bca0e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3725766207750886639, guid: ccdc041b7fd72a64f977b34c6c6bca0e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 176.41
+      objectReference: {fileID: 0}
+    - target: {fileID: 3725766207750886639, guid: ccdc041b7fd72a64f977b34c6c6bca0e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4107076207199456853, guid: ccdc041b7fd72a64f977b34c6c6bca0e, type: 3}
+      propertyPath: m_Name
+      value: Goblin_Warrior (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ccdc041b7fd72a64f977b34c6c6bca0e, type: 3}
+--- !u!114 &1275092409 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6166983638026539716, guid: ccdc041b7fd72a64f977b34c6c6bca0e, type: 3}
+  m_PrefabInstance: {fileID: 1275092408}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad08a5e86558f6a40935746d56a82d07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1369611262
 GameObject:
   m_ObjectHideFlags: 3
@@ -927,6 +999,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   associatedEnemies:
   - {fileID: 66208832}
+  - {fileID: 1275092409}
   poofEffect: {fileID: 2551494956040147569, guid: e4a98111c61d6b1478c0e520ac522720, type: 3}
 --- !u!4 &1504346263 stripped
 Transform:
@@ -1649,6 +1722,7 @@ SceneRoots:
   - {fileID: 45354427}
   - {fileID: 1571479143}
   - {fileID: 1630618011}
+  - {fileID: 1275092408}
   - {fileID: 659087552}
   - {fileID: 1598939468}
   - {fileID: 98587791}

@@ -1,4 +1,18 @@
+# Week 8
+### 16/11/2024
+- Begun constructing level one terrain and features
+### 11/11/2024
+- Added cage and animal feature:
+- Enemies guard a cage containing an animal
+- When associated enemies are defeated, the cage disappears and animal is released
+
 # Week 7
+### 10/11/2024
+- Extra bug fixing for player movement:
+- Fix to jump animation bug which caused it to look like a double jump
+- Fix to bug that caused animations to get stuck when pressing jump twice
+### 9/11/2024
+- Enemy now has a movement radius - Enemy only begins following the player if the player enters it's follow radius. Enemy returns to spawn if player exits the radius
 ### 6/11/2024
 - Aded player attack mechanic - enemy takes damage on collision with axe
 - Situation where player dies is still unhandled
@@ -7,7 +21,6 @@
 - Fixed bug where enemy continues to follow player when dead
 ### 4/11/2024
 - Implemented enemy attack mechanism. Enemy auto attacks when player is in range.
-
 
 # Week 6
 ### 29/10/2024

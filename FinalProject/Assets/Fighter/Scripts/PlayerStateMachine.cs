@@ -3,166 +3,184 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+// Handles player movement input
 public class PlayerStateMachine : MonoBehaviour
 {
-    //Variables to store component objects
-    PlayerInput playerInput;
-    CharacterController characterController;
-    Animator animator;
-    public Animator Animator { get { return animator; } }
-    public CharacterController CharacterController { get { return characterController; } }
+    // Player components
+    private PlayerInput _playerInput;
+    private CharacterController _characterController;
+    private Animator _animator;
 
-    //Hashes of repeated string values for animator booleans and triggers
-    int isWalkingHash;
-    int isRunningHash;
-    //int isJumpingHash;
-    //public int IsJumpingHash { get { return isJumpingHash; } }
-    int jumpTriggerHash;
-    public int JumpTriggerHash { get { return jumpTriggerHash; } }
-    public int IsRunningHash { get { return isRunningHash; } }
-    public int IsWalkingHash { get { return isWalkingHash; } }
+    // Input vectors
+    private Vector2 _currentMovementInput;
+    private Vector3 _currentMovement;
+    private Vector3 _currentRunMovement;
 
-    //Movement vectors
-    Vector2 currentMovementInput;
-    Vector3 currentMovement;
-    Vector3 currentRunMovement;
-    public float CurrentMovementY { get { return currentMovement.y; } set { currentMovement.y = value; } }
-    public float CurrentRunMovementY { get { return currentRunMovement.y; } set { currentRunMovement.y = value; } }
-    public float CurrentMovementX { set { currentMovement.x = value; } }
-    public float CurrentMovementZ { set { currentMovement.z = value; } }
-    public float CurrentMovementInputX { get { return currentMovementInput.x; } }
-    public float CurrentMovementInputY { get { return currentMovementInput.y; } }
-    public float CurrentRunMovementX { set { currentRunMovement.x = value; } }
-    public float CurrentRunMovementZ { set { currentRunMovement.z = value; } }
+    // Input state booleans
+    private bool _isMovementPressed;
+    private bool _isRunPressed;
+    private bool _isJumpPressed = false;
 
-    //Movement booleans
-    bool isMovementPressed;
-    bool isRunPressed;
-    bool isJumpPressed = false;
-    public bool IsMovementPressed { get { return isMovementPressed; } }
-    public bool IsRunPressed { get { return isRunPressed; } }
+    // Jump logic
+    private bool _isJumping = false;
+    private bool _requireNewJumpPress = false;
+
+    // Movement physics constants
+    private readonly float _groundedGravity = -.05f;
+    private float _gravity = -9.8f;
+    private readonly float _rotationFactorPerFrame = 15.0f;
+    private readonly float _runMultiplier = 3.0f;
+    private readonly float _walkMultiplier = 1.5f;
+
+    //Jumping physics configuration
+    private float _initialJumpVelocity;
+    private readonly float _maxJumpHeight = 1.0f;
+    private readonly float _maxJumpTime = 0.5f;
+
+    // Animator hashes
+    private int _isWalkingHash;
+    private int _isRunningHash;
+    private int _jumpTriggerHash;
     
-    //Constants
-    float groundedGravity = -.05f;
-    float gravity = -9.8f;
-    float rotationFactorPerFrame = 15.0f;
-    float runMultiplier = 3.0f;
-    float walkMultiplier = 1.5f;
-    public float GroundedGravity { get { return groundedGravity; } }
-    public float Gravity { get { return gravity; } }
-    public float WalkMultiplier { get { return walkMultiplier; } }
-    public float RunMultiplier { get { return runMultiplier; } }
-
-    //Jumping variables
-    float initialJumpVelocity;
-    float maxJumpHeight = 1.0f;
-    float maxJumpTime = 0.5f;
-    bool isJumping = false;
-    bool requireNewJumpPress = false;
-    public bool IsJumpPressed { get { return isJumpPressed; } }
-    public bool RequireNewJumpPress { get { return requireNewJumpPress; } set { requireNewJumpPress = value; } }
-    public bool IsJumping { set { isJumping = value; } }
-    public float InitialJumpVelocity { get { return initialJumpVelocity; } }
-
     // State variables
-    PlayerBaseState currentState;
-    PlayerStateFactory states;
-    public PlayerBaseState CurrentState { get { return currentState; } set { currentState = value; } }
+    private PlayerBaseState _currentState;
+    private PlayerStateFactory _states;
 
-    //Called when the script is loading before the game starts
-    void Awake()
+    // Properties
+    public Animator Animator { get { return _animator; } }
+    public CharacterController CharacterController { get { return _characterController; } }
+
+    public int JumpTriggerHash { get { return _jumpTriggerHash; } }
+    public int IsRunningHash { get { return _isRunningHash; } }
+    public int IsWalkingHash { get { return _isWalkingHash; } }
+
+    public bool IsMovementPressed { get { return _isMovementPressed; } }
+    public bool IsRunPressed { get { return _isRunPressed; } }
+
+    public float CurrentMovementY { get { return _currentMovement.y; } set { _currentMovement.y = value; } }
+    public float CurrentRunMovementY { get { return _currentRunMovement.y; } set { _currentRunMovement.y = value; } }
+    public float CurrentMovementX { set { _currentMovement.x = value; } }
+    public float CurrentMovementZ { set { _currentMovement.z = value; } }
+    public float CurrentMovementInputX { get { return _currentMovementInput.x; } }
+    public float CurrentMovementInputY { get { return _currentMovementInput.y; } }
+    public float CurrentRunMovementX { set { _currentRunMovement.x = value; } }
+    public float CurrentRunMovementZ { set { _currentRunMovement.z = value; } }
+
+    public float GroundedGravity { get { return _groundedGravity; } }
+    public float Gravity { get { return _gravity; } }
+    public float WalkMultiplier { get { return _walkMultiplier; } }
+    public float RunMultiplier { get { return _runMultiplier; } }
+
+
+    public bool IsJumpPressed { get { return _isJumpPressed; } }
+    public bool RequireNewJumpPress { get { return _requireNewJumpPress; } set { _requireNewJumpPress = value; } }
+    public bool IsJumping { set { _isJumping = value; } }
+    public float InitialJumpVelocity { get { return _initialJumpVelocity; } }
+
+    public PlayerBaseState CurrentState { get { return _currentState; } set { _currentState = value; } }
+
+    // Monobehaviour methods
+    private void Awake()
     {
-        //Setting up components
-        playerInput = new PlayerInput();
-        characterController = GetComponent<CharacterController>();
-        animator = GetComponent<Animator>();
-
-        // Setup state
-        states = new PlayerStateFactory(this);
-        currentState = states.Grounded();
-        currentState.EnterState();
-
-        isWalkingHash = Animator.StringToHash("isWalking");
-        isRunningHash = Animator.StringToHash("isRunning");
-        jumpTriggerHash = Animator.StringToHash("jump");
-
-        //Assigning methods to each input event (event listeners)
-        // e.g. onMovementInput is called when Move has started
-        playerInput.CharacterControls.Move.started += onMovementInput;
-        playerInput.CharacterControls.Move.canceled += onMovementInput;
-        playerInput.CharacterControls.Move.performed += onMovementInput;
-        playerInput.CharacterControls.Run.started += onRun;
-        playerInput.CharacterControls.Run.canceled += onRun;
-        playerInput.CharacterControls.Jump.started += onJump;
-        playerInput.CharacterControls.Jump.canceled += onJump;
-
-        setupJumpVariables();
+        InitializeComponents();
+        SetupStateMachine();
+        SetupAnimatorHashes();
+        SetupInputCallbacks();
+        SetupJumpVariables();
     }
 
-    void Update(){
-        handleRotation();
-        currentState.UpdateStates();
-        if (isRunPressed){
-            characterController.Move(currentRunMovement * Time.deltaTime);
-        } else {
-            characterController.Move(currentMovement * Time.deltaTime);
-        }
-    }
-
-    //Called when there is movement input
-    //Passing in information about the movement event 'context'
-    void onMovementInput(InputAction.CallbackContext context) {
-        //Reading the input from WASD or joystick
-        currentMovementInput = context.ReadValue<Vector2>();
-
-        //Changing movement pressed bool to true if the input wasn't 0
-        isMovementPressed = currentMovementInput.x != 0 || currentMovementInput.y != 0;
-    }
-
-    //Called when there is input from the run buttons
-    //Passing in information about the current movement
-    void onRun(InputAction.CallbackContext context){
-        //Run is now true if the button has been pressed
-        isRunPressed = context.ReadValueAsButton();
-    }
-
-
-    void onJump(InputAction.CallbackContext context){
-        isJumpPressed = context.ReadValueAsButton();
-        requireNewJumpPress = false;
-    }
-    void setupJumpVariables(){
-        float timeToApex = maxJumpTime/2;
-        gravity = (-2 * maxJumpHeight) / Mathf.Pow(timeToApex,2);
-        initialJumpVelocity = (2*maxJumpHeight) / timeToApex;
-    }
-
-    //Called every frame to make sure the player is rotated in the direction it is moving in
-    void handleRotation(){
-        Vector3 positionToLookAt;
-        positionToLookAt.y = 0.0f;
-
-        if (isRunPressed) {
-            positionToLookAt.x = currentRunMovement.x;
-            positionToLookAt.z = currentRunMovement.z;
-        } else {
-            positionToLookAt.x = currentMovement.x;
-            positionToLookAt.z = currentMovement.z;
-        }
-        Quaternion currentRotation = transform.rotation;
-
-        if(isMovementPressed){
-            Quaternion targetRotation = Quaternion.LookRotation(positionToLookAt);
-            transform.rotation = Quaternion.Slerp(currentRotation, targetRotation, rotationFactorPerFrame * Time.deltaTime);
-        }
-    }
-    void OnEnable() 
+    private void Update()
     {
-        playerInput.CharacterControls.Enable();
-    }
-    void OnDisable() 
-    {
-        playerInput.CharacterControls.Disable();
+        HandleRotation();
+        _currentState.UpdateStates();
+        MoveCharacter();
     }
 
+    private void OnEnable()
+    {
+        _playerInput.CharacterControls.Enable();
+    } 
+
+    private void OnDisable()
+    {
+        _playerInput.CharacterControls.Disable();
+    }
+
+    private void InitializeComponents()
+    {
+        _playerInput = new PlayerInput();
+        _characterController = GetComponent<CharacterController>();
+        _animator = GetComponent<Animator>();
+    }
+
+    private void SetupStateMachine()
+    {
+        _states = new PlayerStateFactory(this);
+        _currentState = _states.Grounded();
+        _currentState.EnterState();
+    }
+
+    private void SetupAnimatorHashes()
+    {
+        _isWalkingHash = Animator.StringToHash("isWalking");
+        _isRunningHash = Animator.StringToHash("isRunning");
+        _jumpTriggerHash = Animator.StringToHash("jump");
+    }
+
+    private void SetupInputCallbacks()
+    {
+        _playerInput.CharacterControls.Move.started += OnMovementInput;
+        _playerInput.CharacterControls.Move.canceled += OnMovementInput;
+        _playerInput.CharacterControls.Move.performed += OnMovementInput;
+
+        _playerInput.CharacterControls.Run.started += OnRun;
+        _playerInput.CharacterControls.Run.canceled += OnRun;
+
+        _playerInput.CharacterControls.Jump.started += OnJump;
+        _playerInput.CharacterControls.Jump.canceled += OnJump;
+    }
+
+    private void SetupJumpVariables()
+    {
+        float timeToApex = _maxJumpTime / 2;
+        _gravity = (-2 * _maxJumpHeight) / Mathf.Pow(timeToApex, 2);
+        _initialJumpVelocity = (2 * _maxJumpHeight) / timeToApex;
+    }
+
+    private void OnMovementInput(InputAction.CallbackContext context)
+    {
+        _currentMovementInput = context.ReadValue<Vector2>();
+        _isMovementPressed = _currentMovementInput.x != 0 || _currentMovementInput.y != 0;
+    }
+
+    private void OnRun(InputAction.CallbackContext context)
+    {
+        _isRunPressed = context.ReadValueAsButton();
+    }
+
+    private void OnJump(InputAction.CallbackContext context)
+    {
+        _isJumpPressed = context.ReadValueAsButton();
+        _requireNewJumpPress = false;
+    }
+
+    private void HandleRotation()
+    {
+        if (!_isMovementPressed) return;
+
+        Vector3 positionToLookAt = new Vector3(
+            _isRunPressed ? _currentRunMovement.x : _currentMovement.x,
+            0.0f,
+            _isRunPressed ? _currentRunMovement.z : _currentMovement.z
+        );
+
+        Quaternion targetRotation = Quaternion.LookRotation(positionToLookAt);
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, _rotationFactorPerFrame * Time.deltaTime);
+    }
+
+    private void MoveCharacter()
+    {
+        Vector3 movement = _isRunPressed ? _currentRunMovement : _currentMovement;
+        _characterController.Move(movement * Time.deltaTime);
+    }
 }

@@ -22,7 +22,8 @@ public class PlayerHealthAndDamage : MonoBehaviour, IDamageable
     // Player health
     private int _health = 300;
     private int _maxHealth = 300;
-    [SerializeField] private HealthBar _healthBar; 
+    [SerializeField] private HealthBar _healthBar;
+    [SerializeField] private GameOver _gameOverScreen; 
 
     void Awake()
     {
@@ -66,6 +67,7 @@ public class PlayerHealthAndDamage : MonoBehaviour, IDamageable
         {
             _isDead = true;
             _animator.SetTrigger(_diedTriggerHash);
+            _gameOverScreen.Setup();
         }
     }
 

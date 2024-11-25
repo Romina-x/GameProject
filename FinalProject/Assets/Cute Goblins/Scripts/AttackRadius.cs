@@ -1,80 +1,128 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Manages the enemy attack radius
+// When player is close enough (in this radius) the enemy attacks
 [RequireComponent(typeof(SphereCollider))]
 public class AttackRadius : MonoBehaviour
 {
-    public SphereCollider collider;
-    private List<IDamageable> damageables = new List<IDamageable>();
-    public int damage = 10;
-    public float attackDelay = 0.5f;
-    public delegate void AttackEvent(IDamageable target);
-    public AttackEvent OnAttack;
-    private Coroutine attackCoroutine;
+    // Components
+    public SphereCollider Collider;
 
-    private void Awake(){
-        collider = GetComponent<SphereCollider>();
+    // List of damageable game objects in the radius
+    private List<IDamageable> _damageables = new List<IDamageable>();
+
+    // Attack settings
+    private float _attackDelay = 0.5f;
+    private int _damage = 10;
+
+    // Attack event
+    public event Action<IDamageable> OnAttack;
+    private Coroutine _attackCoroutine;
+
+    // Properties
+    public float AttackDelay { set { _attackDelay = value; } }
+    public int Damage { set { _damage = value; } }
+
+    private void Awake()
+    {
+        Collider = GetComponent<SphereCollider>();
     }
 
-    private void OnTriggerEnter(Collider other) {
+    // Triggered when something enters the radius
+    private void OnTriggerEnter(Collider other) 
+    {
         IDamageable damageable = other.GetComponent<IDamageable>();
-        if (damageable != null){
-            damageables.Add(damageable);
-            if(attackCoroutine == null){
-                attackCoroutine = StartCoroutine(Attack());
+
+        // If object is a damageable
+        if (damageable != null)
+        {
+            _damageables.Add(damageable);
+            // Begin attacking
+            if(_attackCoroutine == null)
+            {
+                _attackCoroutine = StartCoroutine(Attack());
             }
         }
     }
 
-    private void OnTriggerExit(Collider other) {
+    // Triggered when something leaves the radius
+    private void OnTriggerExit(Collider other) 
+    {
         IDamageable damageable = other.GetComponent<IDamageable>();
-        if (damageable != null){
-            damageables.Remove(damageable);
-            if(damageables.Count == 0){
-                StopCoroutine(attackCoroutine);
-                attackCoroutine = null;
+        if (damageable != null)
+        {
+            _damageables.Remove(damageable);
+            // Stop attacking
+            if(_damageables.Count == 0){
+                StopCoroutine(_attackCoroutine);
+                _attackCoroutine = null;
             }
         }
     }
 
-    private IEnumerator Attack(){
-        WaitForSeconds wait = new WaitForSeconds(attackDelay);
+    private IEnumerator Attack()
+    {
+        // Delay between attacks
+        WaitForSeconds wait = new WaitForSeconds(_attackDelay);
         yield return wait;
+
         IDamageable closestDamageable = null;
         float closestDistance = float.MaxValue;
-        while (damageables.Count > 0){
-            for (int i = 0; i < damageables.Count; i++){
-                Transform damageableTransform = damageables[i].GetTransform();
+        while (_damageables.Count > 0)
+        {
+            for (int i = 0; i < _damageables.Count; i++)
+            {
+                Transform damageableTransform = _damageables[i].GetTransform();
                 float distance = Vector3.Distance(transform.position, damageableTransform.position);
 
-                if(distance < closestDistance){
+                if(distance < closestDistance)
+                {
                     closestDistance = distance;
-                    closestDamageable = damageables[i];
+                    closestDamageable = _damageables[i];
                 }
             }
-            if(closestDamageable != null){
+
+            if(closestDamageable != null)
+            {
                 OnAttack?.Invoke(closestDamageable);
-                closestDamageable.TakeDamage(damage);
+                closestDamageable.TakeDamage(_damage);
             }
 
             closestDamageable = null;
             closestDistance = float.MaxValue;
 
             yield return wait;
-            damageables.RemoveAll(DisabledDamageables);
+            _damageables.RemoveAll(DisabledDamageables);
         }
 
-        attackCoroutine = null;
+        _attackCoroutine = null;
     }
-    public void StopAttackCoroutine() {
-        if (attackCoroutine != null) {
-            StopCoroutine(attackCoroutine);
-            attackCoroutine = null;
-            collider.enabled = false;
+
+    public void StopAttackCoroutine()
+    {
+        if (_attackCoroutine != null) 
+        {
+            StopCoroutine(_attackCoroutine);
+            _attackCoroutine = null;
+            Collider.enabled = false;
         }
-    }    
-    private bool DisabledDamageables(IDamageable damageable){
+    } 
+
+    private bool DisabledDamageables(IDamageable damageable)
+    {
         return damageable != null && !damageable.GetTransform().gameObject.activeSelf;
+    }
+
+    public void SubscribeToAttackEvent(System.Action<IDamageable> handler)
+    {
+        OnAttack += handler;
+    }
+
+    public void UnsubscribeFromAttackEvent(System.Action<IDamageable> handler)
+    {
+        OnAttack -= handler;
     }
 }

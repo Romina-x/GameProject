@@ -3,94 +3,109 @@ using System.Collections.Generic;
 using UnityEngine;
 [RequireComponent(typeof(UnityEngine.AI.NavMeshAgent))]
 
+// Controller for enemy movement input
 public class EnemyMovement : MonoBehaviour
 {
-    public Transform target;
-    public float updateSpeed = 0.1f;  // This will be set from the Enemy class
-    private float returnThreshold = 0.5f;
-    private UnityEngine.AI.NavMeshAgent agent;
-    private Animator animator;
+    // Components assigned in the unity editor
+    public Transform Target;
+    public FollowRadius FollowRadius;
 
-    private int isMovingHash;
-    private bool isMoving = false;
-    private Coroutine followCoroutine;
-    public FollowRadius followRadius;
-    private Vector3 originalPosition;
+    private UnityEngine.AI.NavMeshAgent _agent;
+    private Animator _animator;
+
+    // Settings
+    private float _updateSpeed = 0.1f;
+    private float _returnThreshold = 0.5f;
+
+    // Animation state  
+    private int _isMovingHash;
+    private bool _isMoving = false;
+
+    private Coroutine _followCoroutine;
+    private Vector3 _originalPosition;
+
+    // Properties
+    public float UpdateSpeed { set { _updateSpeed = value; } }
 
     private void Awake() 
     {
-        agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
-        animator = GetComponent<Animator>();
+        _agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
+        _animator = GetComponent<Animator>();
 
-        isMovingHash = Animator.StringToHash("isMoving");
+        _isMovingHash = Animator.StringToHash("isMoving");
         
-        if (followRadius != null) 
+        if (FollowRadius != null) 
         {
-            followRadius.PlayerEnter += OnPlayerEntered;
-            followRadius.PlayerExit += ReturnToSpawn;
+            FollowRadius.SubscribeToPlayerEnter(OnPlayerEntered);
+            FollowRadius.SubscribeToPlayerExit(ReturnToSpawn);
         }
 
-        originalPosition = transform.position;
+        _originalPosition = transform.position;
     }
 
     private void OnPlayerEntered()
     {
-        Debug.Log("OnPlayerEntered");
         StartFollowing();
     }
 
     // Method to start following the target
     public void StartFollowing() 
     {
-        if (followCoroutine == null) 
+        if (_followCoroutine == null) 
         {
-            followCoroutine = StartCoroutine(FollowTarget());
-            agent.isStopped = false;  // Allow the NavMeshAgent to move
+            _followCoroutine = StartCoroutine(FollowTarget());
+            _agent.isStopped = false;  // Allow the NavMeshAgent to move
         }
     }
 
-    private void ReturnToSpawn(){
-        if (followCoroutine != null){
-            StopCoroutine(followCoroutine);
-            followCoroutine = null;
+    private void ReturnToSpawn()
+    {
+        if (_followCoroutine != null)
+        {
+            StopCoroutine(_followCoroutine);
+            _followCoroutine = null;
         }
 
         StartCoroutine(ReturnToOrigin());
     }
 
-    private IEnumerator FollowTarget(){
-        WaitForSeconds wait = new WaitForSeconds(updateSpeed);
+    private IEnumerator FollowTarget()
+    {
+        WaitForSeconds wait = new WaitForSeconds(_updateSpeed);
         while(enabled){
-            if (target != null)
+            if (Target != null)
             {
-                isMoving = agent.velocity.magnitude > 0.1f;
-                animator.SetBool(isMovingHash, isMoving);
-                agent.SetDestination(target.position);  // Update enemy movement towards target
+                _isMoving = _agent.velocity.magnitude > 0.1f;
+                _animator.SetBool(_isMovingHash, _isMoving);
+                _agent.SetDestination(Target.position);  // Update enemy movement towards target
             }
             yield return wait;
         }
     }
 
-    private IEnumerator ReturnToOrigin(){
-        agent.SetDestination(originalPosition);
+    private IEnumerator ReturnToOrigin()
+    {
+        _agent.SetDestination(_originalPosition);
         // Wait until the enemy is close enough to the original position
-        float distanceToSpawn = Vector3.Distance(transform.position, originalPosition);
-        while (distanceToSpawn > returnThreshold)
+        float distanceToSpawn = Vector3.Distance(transform.position, _originalPosition);
+        while (distanceToSpawn > _returnThreshold)
         {
-            bool isMoving = agent.velocity.magnitude > 0.1f;
-            animator.SetBool(isMovingHash, isMoving);
+            bool isMoving = _agent.velocity.magnitude > 0.1f;
+            _animator.SetBool(_isMovingHash, isMoving);
             yield return null;
         }
 
-        agent.isStopped = true;
-        animator.SetBool(isMovingHash, false);
+        _agent.isStopped = true;
+        _animator.SetBool(_isMovingHash, false);
     }
 
-    public void StopFollowingOnDeath() {
-        if (followCoroutine != null) {
-            StopCoroutine(followCoroutine);  // Stop the coroutine
-            followCoroutine = null;
+    public void StopFollowingOnDeath() 
+    {
+        if (_followCoroutine != null)
+        {
+            StopCoroutine(_followCoroutine);  // Stop the coroutine
+            _followCoroutine = null;
         }
-        agent.isStopped = true;  // Stop the NavMeshAgent from moving
+        _agent.isStopped = true;  // Stop the NavMeshAgent from moving
     }
 }

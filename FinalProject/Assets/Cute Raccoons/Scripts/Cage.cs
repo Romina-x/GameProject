@@ -2,42 +2,57 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Manages cage that holds trapped animal
+// Cage should disappear when associated enemies are defeated
 public class Cage : MonoBehaviour
 {
-    public List<Enemy> associatedEnemies;
-    public GameObject poofEffect;
-    private bool isFreed = false;
+    // Components that are assigned in the unity editor
+    public List<Enemy> AssociatedEnemies;
+    public GameObject PoofEffect;
+    
+    private bool _isFreed = false;
 
 
     void Awake(){
-        Enemy.OnEnemyDefeated += CheckIfAllEnemiesDefeated;
+        Enemy.SubscribeToEnemyDefeated(CheckIfAllEnemiesDefeated);
     }
 
+    // When cage object is destroyed
     private void OnDestroy() {
-        Enemy.OnEnemyDefeated -= CheckIfAllEnemiesDefeated;
+        Enemy.UnsubscribeFromEnemyDefeated(CheckIfAllEnemiesDefeated);
     }
 
-    private void CheckIfAllEnemiesDefeated(){
-        if (!isFreed && AreAllEnemiesDefeated()){
+    // Every time an enemy dies, this method is called
+    private void CheckIfAllEnemiesDefeated()
+    {
+        if (!_isFreed && AreAllEnemiesDefeated())
+        {
             FreeAnimal();
         }
     }
 
-    private bool AreAllEnemiesDefeated(){
-        foreach (Enemy enemy in associatedEnemies){
-            if (enemy != null && !enemy.IsDefeated){
+    // Check if all associated enemies have been defeated
+    private bool AreAllEnemiesDefeated()
+    {
+        foreach (Enemy enemy in AssociatedEnemies)
+        {
+            if (enemy != null && !enemy.IsDefeated)
+            {
                 return false;
             }
         }
         return true;
     }
 
-    private void FreeAnimal(){
-        if (poofEffect != null){
-            Instantiate(poofEffect, transform.position, Quaternion.identity);
-
+    // Cage disappears with poof VFX to free animal
+    private void FreeAnimal()
+    {
+        if (PoofEffect != null)
+        {
+            Instantiate(PoofEffect, transform.position, Quaternion.identity);
         }
+        // Destroy this game object
         Destroy(gameObject);
-        isFreed = true;
+        _isFreed = true;
     }
 }

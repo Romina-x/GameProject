@@ -322,13 +322,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fighter
       objectReference: {fileID: 0}
+    - target: {fileID: 2432053098496739652, guid: dbe979a9d4b5f6a49b75cbccbf7cd9e6, type: 3}
+      propertyPath: m_Radius
+      value: 0.35
+      objectReference: {fileID: 0}
     - target: {fileID: 4057998833081291324, guid: dbe979a9d4b5f6a49b75cbccbf7cd9e6, type: 3}
       propertyPath: Weapon
       value: 
       objectReference: {fileID: 1475256307}
     - target: {fileID: 7882768320018121959, guid: dbe979a9d4b5f6a49b75cbccbf7cd9e6, type: 3}
       propertyPath: m_Radius
-      value: 0.5
+      value: 0.3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -544,17 +548,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &66208832 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6166983638026539716, guid: ccdc041b7fd72a64f977b34c6c6bca0e, type: 3}
-  m_PrefabInstance: {fileID: 1630618011}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad08a5e86558f6a40935746d56a82d07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &68589157 stripped
@@ -2910,6 +2903,17 @@ MonoBehaviour:
   m_CameraActivatedEvent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &967250381 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6908597510445123346, guid: ccdc041b7fd72a64f977b34c6c6bca0e, type: 3}
+  m_PrefabInstance: {fileID: 1630618011}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86a75528240ba244da3a6ebbca15fd51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &968757925
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3398,6 +3402,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 77a6e444e3fa8b545b47c8bb91d18619, type: 3}
+--- !u!114 &1242309155 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9035554609243395226, guid: ccdc041b7fd72a64f977b34c6c6bca0e, type: 3}
+  m_PrefabInstance: {fileID: 1630618011}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6f24026db35c3047a4eca4d684feb91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1253735957
 GameObject:
   m_ObjectHideFlags: 0
@@ -4138,9 +4153,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f77001f9b640376449cc87b7a205931e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  associatedEnemies:
-  - {fileID: 66208832}
-  poofEffect: {fileID: 2551494956040147569, guid: e4a98111c61d6b1478c0e520ac522720, type: 3}
+  AssociatedEnemies: []
+  PoofEffect: {fileID: 2551494956040147569, guid: e4a98111c61d6b1478c0e520ac522720, type: 3}
 --- !u!1001 &1496066395
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4814,16 +4828,24 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 49308226953098075, guid: ccdc041b7fd72a64f977b34c6c6bca0e, type: 3}
       propertyPath: m_Radius
-      value: 0.3
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 49308226953098075, guid: ccdc041b7fd72a64f977b34c6c6bca0e, type: 3}
       propertyPath: m_StoppingDistance
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3024327034955682150, guid: ccdc041b7fd72a64f977b34c6c6bca0e, type: 3}
+      propertyPath: Target
+      value: 
+      objectReference: {fileID: 1504346263}
     - target: {fileID: 3024327034955682150, guid: ccdc041b7fd72a64f977b34c6c6bca0e, type: 3}
       propertyPath: target
       value: 
       objectReference: {fileID: 1504346263}
+    - target: {fileID: 3024327034955682150, guid: ccdc041b7fd72a64f977b34c6c6bca0e, type: 3}
+      propertyPath: FollowRadius
+      value: 
+      objectReference: {fileID: 1242309155}
     - target: {fileID: 3725766207750886639, guid: ccdc041b7fd72a64f977b34c6c6bca0e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 19.47
@@ -4868,6 +4890,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Goblin_Warrior
       objectReference: {fileID: 0}
+    - target: {fileID: 6166983638026539716, guid: ccdc041b7fd72a64f977b34c6c6bca0e, type: 3}
+      propertyPath: EnemyData
+      value: 
+      objectReference: {fileID: 11400000, guid: 4f85ace7e20316c4395d5f098092106a, type: 2}
+    - target: {fileID: 6166983638026539716, guid: ccdc041b7fd72a64f977b34c6c6bca0e, type: 3}
+      propertyPath: PoofPrefab
+      value: 
+      objectReference: {fileID: 2551494956040147569, guid: e4a98111c61d6b1478c0e520ac522720, type: 3}
+    - target: {fileID: 6166983638026539716, guid: ccdc041b7fd72a64f977b34c6c6bca0e, type: 3}
+      propertyPath: AttackRadius
+      value: 
+      objectReference: {fileID: 967250381}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

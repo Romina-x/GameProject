@@ -19,9 +19,11 @@ public class PlayerHealthAndDamage : MonoBehaviour, IDamageable
     private int _attackTriggerHash;
     private int _gotHitTriggerHash;
 
-    // Player health, can be changed in the unity editor
-    [SerializeField]
+    // Player health
     private int _health = 300;
+    private int _maxHealth = 300;
+    [SerializeField] private HealthBar _healthBar;
+    [SerializeField] private GameOver _gameOverScreen; 
 
     void Awake()
     {
@@ -36,7 +38,7 @@ public class PlayerHealthAndDamage : MonoBehaviour, IDamageable
 
         // Subscribe to attack input action
         _playerInput.CharacterControls.Attack.performed += OnAttack;
-
+        _healthBar.UpdateHealthBar(_maxHealth, _health);
     }
 
     void OnAttack(InputAction.CallbackContext context)
@@ -53,6 +55,9 @@ public class PlayerHealthAndDamage : MonoBehaviour, IDamageable
         // Take damage
         _health -= damage;
 
+        // Update health bar
+        _healthBar.UpdateHealthBar(_maxHealth, _health);
+
         if (_health > 0) 
         {
             _animator.SetTrigger(_gotHitTriggerHash);
@@ -62,6 +67,7 @@ public class PlayerHealthAndDamage : MonoBehaviour, IDamageable
         {
             _isDead = true;
             _animator.SetTrigger(_diedTriggerHash);
+            _gameOverScreen.Setup();
         }
     }
 

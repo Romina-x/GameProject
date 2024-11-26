@@ -9,6 +9,7 @@ public class Enemy : MonoBehaviour, IDamageable
     public AttackRadius AttackRadius;
     public EnemyScriptableObject EnemyData;
     public GameObject PoofPrefab;
+    [SerializeField] private HealthBar _healthBar; 
 
     private Animator _animator;
     private EnemyMovement _movement;
@@ -18,7 +19,10 @@ public class Enemy : MonoBehaviour, IDamageable
     private int _attackTriggerHash;
     private int _diedTriggerHash;
     private int _gotHitTriggerHash;
-    public int _health = 100;
+
+    private int _maxHealth = 100;
+    private int _health;
+    
 
     // Enemy state
     private bool _isDefeated;
@@ -56,6 +60,7 @@ public class Enemy : MonoBehaviour, IDamageable
     void Start()
     {
         SetupEnemyFromData();
+        _healthBar.UpdateHealthBar(_maxHealth, _health);
     }
 
     private void OnAttack(IDamageable target)
@@ -78,6 +83,7 @@ public class Enemy : MonoBehaviour, IDamageable
         _movement.UpdateSpeed = EnemyData.AIUpdateInterval;
 
         _health = EnemyData.health;
+        _maxHealth = EnemyData.health;
         AttackRadius.Collider.radius = EnemyData.attackRadius;
         AttackRadius.AttackDelay = EnemyData.attackDelay;
         AttackRadius.Damage = EnemyData.damage;
@@ -87,6 +93,9 @@ public class Enemy : MonoBehaviour, IDamageable
     {
         // Take damage
         _health -= damage;
+
+        // Update health bar
+        _healthBar.UpdateHealthBar(_maxHealth, _health);
 
         // Get hit if not dead
         if (_health > 0) 

@@ -1,3 +1,18 @@
+# Week 10
+### 25/11/2024
+- Created the HUD (Heads up diplay) for the player
+- Added player health bar
+- Added enemy health bars
+- Created game over screen with restart level button
+ 
+# Week 9
+### 20/11/2024
+- Reconfigured NavMeshSurface to fit the new terrain
+- Enemies can now move around the new ground
+- Refactored code style on all files to follow unity guidelines
+### 19/11/2024
+- Continued building level one terrain
+
 # Week 8
 ### 16/11/2024
 - Begun constructing level one terrain and features

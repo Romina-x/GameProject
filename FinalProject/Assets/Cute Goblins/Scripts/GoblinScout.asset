@@ -25,5 +25,5 @@ MonoBehaviour:
   height: 2
   obstacleAvoidanceType: 1
   radius: 0.3
-  speed: 3
+  speed: 2
   stoppingDistance: 0

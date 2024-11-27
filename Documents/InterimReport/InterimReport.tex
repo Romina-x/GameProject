@@ -164,6 +164,86 @@ Still to include: \newline
 
 %%%%%%%%%%%%%%%%%%%%%%
 %%% Appendix#
+\appendix
+\chapter{Appendix}
+
+\section{Development Diary}
+\textbf{Week 10}\newline
+25/11/2024
+\newline- Created the HUD (Heads up diplay) for the player which includes player and enemy health bars.
+\newline- Created game over screen with restart level button, which is triggered when the player's health is below zero.
+ 
+\textbf{Week 9}\newline
+20/11/2024
+\newline- Reconfigured NavMeshSurface to fit the new terrain so that enemies can move around the new level area.
+\newline- Refactored code style on all files to follow unity guidelines for readability.
+\newline19/11/2024
+\newline- Continued building level one terrain.
+
+\textbf{Week 8}\newline
+16/11/2024
+\newline- Began constructing level one terrain and features.
+\newline11/11/2024
+\newline- Added cage with trapped animal for rescue mechanic: Enemies guard a cage and when they are defeated the cage disappears and the animal is released.
+
+\textbf{Week 7}\newline
+10/11/2024
+\newline- Extra bug fixing for player movement:
+\newline- Fix to jump animation bug which caused it to look like a double jump.
+\newline- Fix to bug that caused animations to get stuck when pressing jump twice.
+\newline9/11/2024
+\newline- Added a movement radius to the enemy: Now the enemy only starts following the player if the player enters it's follow radius. The Enemy returns to spawn if player exits the radius.
+\newline6/11/2024
+\newline- Aded player attack mechanic: Enemy takes damage on collision with the player's axe.
+\newline- Situation where player dies is still unhandled.
+\newline5/11/2024
+\newline- Added death animation for player.
+\newline- Fixed bug where enemy continues to follow player when dead.
+\newline4/11/2024
+\newline- Implemented enemy attack mechanic: Enemy auto attacks when the player is in range (Within the attack radius).
+\textbf{Week 6}\newline
+29/10/2024
+\newline- Refactored all the states out into their respective classes.
+\newline- Fixed gravity and running bugs from refactored code.
+
+\textbf{Week 5}\newline
+25/20/2024
+\newline- Began refactoring player class into a hierarchical state machine.
+\newline- Created all state classes and state factory.
+\newline23/10/2024
+\newline- Linked running animation to enemy movement.
+\newline21/10/2024
+\newline- Imported enemy prefab and configured it's movement to follow the player.
+\newline- Researched Nav Meshes and applied this to the enemy so that it uses AI to navigate around obstacles towards the player.
+
+\textbf{Week 4}\newline
+16/10/2024
+\newline- Fixed the jump movement and added the jump animation to it.
+\newline15/10/2024
+\newline- Researched animation layering for attack movement.
+\newline- Added attack animation that layers over walking and running.
+
+\textbf{Week 3}\newline
+13/10/2024
+\newline- First attempt at jump physics / movement. Not fixed.
+\newline- Added basic terrain / skybox.
+\newline12/10/2024
+\newline- Added walk and run movement, and linked them to their corresponding animations.
+\newline08/10/2024
+\newline- Began prototyping player character.
+\newline- Tied idle, walking and running animations to the keyboard keys.
+
+\textbf{Week 2}\newline
+05/10/2024
+\newline- Finished gathering 3D assets.
+\newline- Researched player movement in unity.
+\newline03/10/2024
+\newline- Finalised game idea and mechanics and documented them.
+\newline- Began gathering 3D assets.
+\section{Submission Directory Structure}
+
+\section{Demo Video Link}
+
 \chapter{Appendix}
 - Diary \newline
 - Submission directory explanation \newline

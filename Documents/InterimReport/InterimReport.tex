@@ -9,6 +9,7 @@
 \usepackage{amsmath}
 \usepackage{caption}
 \usepackage{fancyhdr}
+\usepackage{forest}
 
 %%%%%%%%%%%%%%%%%%%%%%
 %%% Input project details
@@ -146,9 +147,6 @@ private void SetupJumpVariables()
 }
 \end{verbatim}
 For the gravity applied to the player while grounded, I used a smaller value of gravity to avoid unecessary gravitational calculations and to prevent the high gravity from slowing down the player's movement. \newline
-Still to include: \newline
-- Rotation (Maybe)\newline
-- Input system : Controller and keyboard controls \newline
 
 \section{Enemy AI \& Combat}
 Still to include : \newline
@@ -156,11 +154,12 @@ Still to include : \newline
 - Observer for combat system + UML \newline
 - NavMesh agents for AI pathfinding for enemies \newline
 - Coroutines  \newline
-\section{Other}
+\section{User Experience}
 Still to include: \newline
 - Cinemachine for smooth camera movement \newline
 - Animation \newline
 - UI
+- Input system : Controller and keyboard controls \newline
 
 %%%%%%%%%%%%%%%%%%%%%%
 %%% Appendix#
@@ -201,6 +200,7 @@ Still to include: \newline
 \newline- Fixed bug where enemy continues to follow player when dead.
 \newline4/11/2024
 \newline- Implemented enemy attack mechanic: Enemy auto attacks when the player is in range (Within the attack radius).
+
 \textbf{Week 6}\newline
 29/10/2024
 \newline- Refactored all the states out into their respective classes.
@@ -240,14 +240,18 @@ Still to include: \newline
 \newline03/10/2024
 \newline- Finalised game idea and mechanics and documented them.
 \newline- Began gathering 3D assets.
-\section{Submission Directory Structure}
 
+\newpage
+\section{Submission Directory Structure}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.4\textwidth]{FileStructure.png}
+    \caption{Diagram of Directory Structure}
+    \label{fig:label_name}
+\end{figure}
+The Assets folder contains all of the work I have completed so far including the 3D models for the player, enemies, terrain etc., as well as the associated scripts and animations. The diagram hilights the most important subfolders, such as the scripts folders, where all my C\# scripts are organised. Note that not all folders are included in the diagram.
 \section{Demo Video Link}
 
-\chapter{Appendix}
-- Diary \newline
-- Submission directory explanation \newline
-- Demo video link\newline
 %%%%%%%%%%%%%%%%%%%%%%
 %%% References
 \chapter{References}

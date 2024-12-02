@@ -48,3 +48,11 @@ Update Mode: mergeDefaultDependencies
 
 The following packages were added:
   com.unity.toonshader@0.9.4-preview
+
+=== Mon Dec  2 11:12:57 2024
+
+Packages were changed.
+Update Mode: mergeDefaultDependencies
+
+The following packages were added:
+  com.unity.postprocessing@3.4.0

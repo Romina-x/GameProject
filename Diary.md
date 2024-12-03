@@ -1,4 +1,12 @@
+# Week 11
+### 03/12/2024
+- Added collectible hearts which increase the player's health.
+### 02/12/2024
+- Redesigned layout and environment for level one.
+
 # Week 10
+### 27/11/2024
+- Created a second melee enemy which is faster and does less damage.
 ### 25/11/2024
 - Created the HUD (Heads up diplay) for the player which includes player and enemy health bars.
 - Created game over screen with restart level button, which is triggered when the player's health is below zero.

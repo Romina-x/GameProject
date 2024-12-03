@@ -71,6 +71,14 @@ public class PlayerHealthAndDamage : MonoBehaviour, IDamageable
         }
     }
 
+    // Called when the player collects a heart 
+    public void AddHealth(int amount)
+    {
+        if (_isDead) return; // Don't add health if the player is dead
+
+        _health = Mathf.Clamp(_health + amount, 0, _maxHealth);
+        _healthBar.UpdateHealthBar(_maxHealth, _health);
+    }
     private void OnDisable()
     {
         _playerInput.CharacterControls.Disable();

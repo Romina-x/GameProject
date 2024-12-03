@@ -4,11 +4,14 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 // Handles player attack behaviour and damage taking.
-public class PlayerHealthAndDamage : MonoBehaviour, IDamageable
+public class PlayerHealthAndDamage : MonoBehaviour, IDamageable, IHealthSubject
 {
     // Player components
     private Animator _animator;
     private PlayerInput _playerInput;
+
+    // Observers
+    private List<IHealthObserver> _observers = new List<IHealthObserver>();
 
     // State flags
     private bool _isDead = false;
@@ -22,8 +25,6 @@ public class PlayerHealthAndDamage : MonoBehaviour, IDamageable
     // Player health
     private int _health = 300;
     private int _maxHealth = 300;
-    [SerializeField] private HealthBar _healthBar;
-    [SerializeField] private GameOver _gameOverScreen; 
 
     void Awake()
     {
@@ -38,7 +39,7 @@ public class PlayerHealthAndDamage : MonoBehaviour, IDamageable
 
         // Subscribe to attack input action
         _playerInput.CharacterControls.Attack.performed += OnAttack;
-        _healthBar.UpdateHealthBar(_maxHealth, _health);
+        //_healthBar.UpdateHealthBar(_maxHealth, _health);
     }
 
     void OnAttack(InputAction.CallbackContext context)
@@ -47,38 +48,15 @@ public class PlayerHealthAndDamage : MonoBehaviour, IDamageable
         _animator.SetTrigger(_attackTriggerHash);
     }
 
-    // Called every time the player gets hit by an enemy
-    public void TakeDamage(int damage)
-    {
-        if (_isDead) return;  // Prevent taking damage after death
-
-        // Take damage
-        _health -= damage;
-
-        // Update health bar
-        _healthBar.UpdateHealthBar(_maxHealth, _health);
-
-        if (_health > 0) 
-        {
-            _animator.SetTrigger(_gotHitTriggerHash);
-        }
-
-        if (_health <= 0)
-        {
-            _isDead = true;
-            _animator.SetTrigger(_diedTriggerHash);
-            _gameOverScreen.Setup();
-        }
-    }
-
     // Called when the player collects a heart 
     public void AddHealth(int amount)
     {
         if (_isDead) return; // Don't add health if the player is dead
 
         _health = Mathf.Clamp(_health + amount, 0, _maxHealth);
-        _healthBar.UpdateHealthBar(_maxHealth, _health);
+        Notify(); // Notfy all observers of health change
     }
+
     private void OnDisable()
     {
         _playerInput.CharacterControls.Disable();
@@ -90,6 +68,29 @@ public class PlayerHealthAndDamage : MonoBehaviour, IDamageable
     }
 
     // IDamageable interface methods
+
+    // Called every time the player gets hit by an enemy
+    public void TakeDamage(int damage)
+    {
+        if (_isDead) return;
+
+        // Take damage
+        _health -= damage;
+        Notify(); // Notify all observers of health change
+
+
+        if (_health > 0) 
+        {
+            _animator.SetTrigger(_gotHitTriggerHash);
+        }
+
+        if (_health <= 0)
+        {
+            _isDead = true;
+            _animator.SetTrigger(_diedTriggerHash);
+        }
+    }
+
     public Transform GetTransform()
     {
         return transform;
@@ -98,5 +99,24 @@ public class PlayerHealthAndDamage : MonoBehaviour, IDamageable
     public string GetName()
     {
         return "Player";
+    }
+
+    // IHealthSubject interface methods
+    public void RegisterObserver(IHealthObserver observer)
+    {
+        _observers.Add(observer);
+    }
+
+    public void UnregisterObserver(IHealthObserver observer)
+    {
+        _observers.Remove(observer);
+    }
+
+    public void Notify()
+    {
+        foreach (IHealthObserver observer in _observers)
+        {
+            observer.OnNotify(_maxHealth, _health);
+        }
     }
 }

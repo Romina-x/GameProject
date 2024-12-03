@@ -9,7 +9,6 @@ public class Enemy : MonoBehaviour, IDamageable
     public AttackRadius AttackRadius;
     public EnemyScriptableObject EnemyData;
     public GameObject PoofPrefab;
-    [SerializeField] private HealthBar _healthBar; 
 
     private Animator _animator;
     private EnemyMovement _movement;
@@ -22,6 +21,7 @@ public class Enemy : MonoBehaviour, IDamageable
 
     private int _maxHealth = 100;
     private int _health;
+    private List<IHealthObserver> _observers = new List<IHealthObserver>();
     
 
     // Enemy state
@@ -60,7 +60,8 @@ public class Enemy : MonoBehaviour, IDamageable
     void Start()
     {
         SetupEnemyFromData();
-        _healthBar.UpdateHealthBar(_maxHealth, _health);
+        Notify();
+        //_healthBar.UpdateHealthBar(_maxHealth, _health);
     }
 
     private void OnAttack(IDamageable target)
@@ -89,13 +90,12 @@ public class Enemy : MonoBehaviour, IDamageable
         AttackRadius.Damage = EnemyData.damage;
     }
 
+    // IDamageable interface methods
     public void TakeDamage(int damage)
     {
         // Take damage
         _health -= damage;
-
-        // Update health bar
-        _healthBar.UpdateHealthBar(_maxHealth, _health);
+        Notify(); // Notify observers of health change
 
         // Get hit if not dead
         if (_health > 0) 
@@ -120,6 +120,11 @@ public class Enemy : MonoBehaviour, IDamageable
         return transform;
     }
 
+    public string GetName()
+    {
+        return "Enemy";
+    }
+
     // Death sequence 
     private IEnumerator DelayedDeath()
     {
@@ -139,8 +144,23 @@ public class Enemy : MonoBehaviour, IDamageable
         Destroy(gameObject);
     }
 
-    public string GetName()
+    // IHealthSubject interface methods
+    public void RegisterObserver(IHealthObserver observer)
     {
-        return "Enemy";
+        _observers.Add(observer);
     }
+
+    public void UnregisterObserver(IHealthObserver observer)
+    {
+        _observers.Remove(observer);
+    }
+
+    public void Notify()
+    {
+        foreach (IHealthObserver observer in _observers)
+        {
+            observer.OnNotify(_maxHealth, _health);
+        }
+    }
+
 }

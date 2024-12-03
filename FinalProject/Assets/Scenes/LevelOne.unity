@@ -1432,6 +1432,10 @@ PrefabInstance:
       propertyPath: m_Radius
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6166983638026539716, guid: ccdc041b7fd72a64f977b34c6c6bca0e, type: 3}
+      propertyPath: PoofPrefab
+      value: 
+      objectReference: {fileID: 6073891735194678028, guid: 064c608c3a271334299e1fa22913842f, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6904,7 +6908,7 @@ MonoBehaviour:
   AssociatedEnemies:
   - {fileID: 76941743}
   - {fileID: 1517201473}
-  PoofEffect: {fileID: 2551494956040147569, guid: e4a98111c61d6b1478c0e520ac522720, type: 3}
+  PoofEffect: {fileID: 8919484260529707532, guid: 2c27f6103c8348844a3cc636de15052a, type: 3}
 --- !u!4 &415875178 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7605426715356279294, guid: db4677f9b0ce5bd4b95b2be5e4a67031, type: 3}
@@ -17745,7 +17749,7 @@ MonoBehaviour:
   AssociatedEnemies:
   - {fileID: 2115978526}
   - {fileID: 1904982506}
-  PoofEffect: {fileID: 2551494956040147569, guid: e4a98111c61d6b1478c0e520ac522720, type: 3}
+  PoofEffect: {fileID: 8919484260529707532, guid: 2c27f6103c8348844a3cc636de15052a, type: 3}
 --- !u!4 &1005407236 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7605426715356279294, guid: db4677f9b0ce5bd4b95b2be5e4a67031, type: 3}
@@ -26379,7 +26383,7 @@ MonoBehaviour:
   AssociatedEnemies:
   - {fileID: 1630618015}
   - {fileID: 1613098098}
-  PoofEffect: {fileID: 2551494956040147569, guid: e4a98111c61d6b1478c0e520ac522720, type: 3}
+  PoofEffect: {fileID: 8919484260529707532, guid: 2c27f6103c8348844a3cc636de15052a, type: 3}
 --- !u!4 &1479595143 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7605426715356279294, guid: db4677f9b0ce5bd4b95b2be5e4a67031, type: 3}
@@ -27221,6 +27225,10 @@ PrefabInstance:
       propertyPath: m_Radius
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6166983638026539716, guid: ccdc041b7fd72a64f977b34c6c6bca0e, type: 3}
+      propertyPath: PoofPrefab
+      value: 
+      objectReference: {fileID: 6073891735194678028, guid: 064c608c3a271334299e1fa22913842f, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -29143,7 +29151,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AttackRadius: {fileID: 184463305}
   EnemyData: {fileID: 11400000, guid: a7d31482d1d095346abafd928befa2f0, type: 2}
-  PoofPrefab: {fileID: 2551494956040147569, guid: e4a98111c61d6b1478c0e520ac522720, type: 3}
+  PoofPrefab: {fileID: 6073891735194678028, guid: 064c608c3a271334299e1fa22913842f, type: 3}
   _healthBar: {fileID: 621551082}
 --- !u!1001 &1615691819
 PrefabInstance:
@@ -29610,6 +29618,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _heartHealth: 150
+  collectionVFX: {fileID: 8680598818964007281, guid: dcd90c4976197424b9958a7c54b6bb8c, type: 3}
 --- !u!1001 &1630618011
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -29690,6 +29699,10 @@ PrefabInstance:
       propertyPath: m_Radius
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6166983638026539716, guid: ccdc041b7fd72a64f977b34c6c6bca0e, type: 3}
+      propertyPath: PoofPrefab
+      value: 
+      objectReference: {fileID: 6073891735194678028, guid: 064c608c3a271334299e1fa22913842f, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -35067,7 +35080,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AttackRadius: {fileID: 1231287445}
   EnemyData: {fileID: 11400000, guid: a7d31482d1d095346abafd928befa2f0, type: 2}
-  PoofPrefab: {fileID: 2551494956040147569, guid: e4a98111c61d6b1478c0e520ac522720, type: 3}
+  PoofPrefab: {fileID: 6073891735194678028, guid: 064c608c3a271334299e1fa22913842f, type: 3}
   _healthBar: {fileID: 713335084}
 --- !u!136 &1904982507
 CapsuleCollider:
@@ -38282,7 +38295,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AttackRadius: {fileID: 1645605873}
   EnemyData: {fileID: 11400000, guid: a7d31482d1d095346abafd928befa2f0, type: 2}
-  PoofPrefab: {fileID: 2551494956040147569, guid: e4a98111c61d6b1478c0e520ac522720, type: 3}
+  PoofPrefab: {fileID: 6073891735194678028, guid: 064c608c3a271334299e1fa22913842f, type: 3}
   _healthBar: {fileID: 1039249849}
 --- !u!136 &2115978527
 CapsuleCollider:

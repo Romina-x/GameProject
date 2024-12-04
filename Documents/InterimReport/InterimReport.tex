@@ -80,6 +80,9 @@ Signature:
 %%%%%%%%%%%%%%%%%%%%%%
 %%% Background
 \chapter{Background}
+\section{Architecture}
+\subsection{Hierarchical State Machine}\label{HSM}
+The Hierarchical State Machine (HSM)  is a variation of the standard Finite State Machine (FSM) design pattern. The FSM pattern addresses player/object states for example, walking, idle and running and encapsulates each as an object. This pattern solves two problems: an object should change it’s behaviour when its internal state changes, and adding new states does not impact the behaviour of existing states (Unity Technologies, 2022). I will use this for the player's movement, as the player is the most complex game object in terms of states. Using a state machine simplifies the process of adding new states without affecting existing ones.  It ensures all states are handled consistently, avoiding conflicts. A HSM builds on the concept of FSM by adding a hierarchy of states, allowing shared behaviours across multiple states. This includes super states and sub states, which can run simultaneously. Super states manage the shared behaviour across the substates, while the substates define specific actions.
 - Description \& explanation of all the concepts you used so far with citations. Best to put it into sections like '1.1' so you can reference them later on \newline
 - Game engine choice  \newline
 - What is involved in making a game  \newline
@@ -120,10 +123,10 @@ Week 10-11: & \textcolor{black}{|} & $\bullet$ & Work on final report \\
 \section{Player Movement}
 Creating smooth and responsive movement for the player is essential for the user experience, as 3D platformer games require precise movements to traverse the levels. The player's movement covers standing idle, walking, running and jumping. 
 \subsection{Architecture}
-The architecture for the player's movement uses a Hierarchical State Machine (HSM) which is a variation of the standard Finite State Machine (FSM) design pattern. The FSM pattern addresses player/object states for example, walking, idle and running and encapsulates each as an object. This pattern solves two problems: an object should change it’s behaviour when its internal state changes, and adding new states does not impact the behaviour of existing states (Unity Technologies, 2022). Since the player is the most complex game object in terms of states, using a state machine simplifies the process of adding new states without affecting existing ones.  It ensures all states are handled consistently, avoiding conflicts. A HSM builds on the concept of FSM by adding a hierarchy of states, allowing shared behaviours across multiple states. This includes super states and sub states, which can run simultaneously. Super states manage the shared behaviour across the substates, while the substates define specific actions. For example, in my game I have a Grounded super state that applies gravity to the Idle, Walk and Run substates. Figure 1.5 details this architecture:
+The architecture for the player's movement uses a Hierarchical State Machine (HSM) , as discussed in section \ref{HSM}.  I decided specifically to use a HSM for the player's movement as there was shared behaviour that I wanted to apply across multiple states without duplicating it into each one.  For example, there is a Grounded super state that applies gravity to the Idle, Walk and Run substates. Figure 1.5 details this architecture:
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=\textwidth]{PlayerStateUML.png}
+    \includegraphics[width=\textwidth]{PlayerStateUML.drawio.png}
     \caption{UML Class digram of Player State Machine.}
     \label{fig:label_name}
 \end{figure}
@@ -153,7 +156,8 @@ For the gravity applied to the player while grounded, I used a smaller value of 
 
 \section{Enemy AI \& Combat}
 Still to include : \newline
-- Strategy pattern for enemies + UML \newline
+- Strategy pattern for enemies \newline
+
 - Observer for combat system + UML \newline
 - NavMesh agents for AI pathfinding for enemies \newline
 - Coroutines  \newline

@@ -26,4 +26,9 @@ public class Heart : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    void OnDestroy()
+    {
+        Debug.Log("Heart destroyed: ");
+    }
 }

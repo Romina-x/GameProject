@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // Main controller for enemy movement and combat
-public class Enemy : MonoBehaviour, IDamageable
+public class Enemy : MonoBehaviour, IDamageable, IHealthSubject, IDefeatSubject
 {   
     // Components assigned in unity editor
     public AttackRadius AttackRadius;
     public EnemyScriptableObject EnemyData;
     public GameObject PoofPrefab;
-    [SerializeField] private HealthBar _healthBar; 
 
     private Animator _animator;
     private EnemyMovement _movement;
@@ -22,27 +21,15 @@ public class Enemy : MonoBehaviour, IDamageable
 
     private int _maxHealth = 100;
     private int _health;
+    private bool _isDefeated = false;
+
+    // Observers
+    private List<IHealthObserver> _healthObservers = new List<IHealthObserver>();
+    private List<IDefeatObserver> _defeatObservers = new List<IDefeatObserver>();
     
-
-    // Enemy state
-    private bool _isDefeated;
-
-    // Events
-    private static event System.Action OnEnemyDefeated;
 
     // Properties
     public bool IsDefeated { get { return _isDefeated; } }
-
-    // Public event subscription methods
-    public static void SubscribeToEnemyDefeated(System.Action handler)
-    {
-        OnEnemyDefeated += handler;
-    }
-
-    public static void UnsubscribeFromEnemyDefeated(System.Action handler)
-    {
-        OnEnemyDefeated -= handler;
-    }
 
     private void Awake()
     {
@@ -60,7 +47,7 @@ public class Enemy : MonoBehaviour, IDamageable
     void Start()
     {
         SetupEnemyFromData();
-        _healthBar.UpdateHealthBar(_maxHealth, _health);
+        NotifyHealthObservers(); // Put health bars to the start health
     }
 
     private void OnAttack(IDamageable target)
@@ -89,13 +76,12 @@ public class Enemy : MonoBehaviour, IDamageable
         AttackRadius.Damage = EnemyData.damage;
     }
 
+    // IDamageable interface methods
     public void TakeDamage(int damage)
     {
         // Take damage
         _health -= damage;
-
-        // Update health bar
-        _healthBar.UpdateHealthBar(_maxHealth, _health);
+        NotifyHealthObservers(); // Notify observers of health change
 
         // Get hit if not dead
         if (_health > 0) 
@@ -109,15 +95,18 @@ public class Enemy : MonoBehaviour, IDamageable
             _animator.SetTrigger(_diedTriggerHash);
             _movement.StopFollowingOnDeath();
             AttackRadius.UnsubscribeFromAttackEvent(OnAttack);
-            //AttackRadius.StopAttackCoroutine();
             StartCoroutine(DelayedDeath());
-            OnEnemyDefeated?.Invoke();
         }
     }
 
     public Transform GetTransform()
     {
         return transform;
+    }
+
+    public string GetName()
+    {
+        return "Enemy";
     }
 
     // Death sequence 
@@ -135,12 +124,44 @@ public class Enemy : MonoBehaviour, IDamageable
             // Instantiate the poof effect at the enemy's position
             Instantiate(PoofPrefab, transform.position, Quaternion.identity);
         }
-
+        NotifyDefeatObservers();
         Destroy(gameObject);
     }
 
-    public string GetName()
+    // IHealthSubject interface methods
+    public void RegisterHealthObserver(IHealthObserver observer)
     {
-        return "Enemy";
+        _healthObservers.Add(observer);
     }
+
+    public void UnregisterHealthObserver(IHealthObserver observer)
+    {
+        _healthObservers.Remove(observer);
+    }
+
+    public void NotifyHealthObservers()
+    {
+        foreach (IHealthObserver observer in _healthObservers)
+        {
+            observer.OnNotify(_maxHealth, _health);
+        }
+    }
+
+    // IDefeatSubject interface methods
+    public void RegisterDefeatObserver(IDefeatObserver observer)
+    {
+        _defeatObservers.Add(observer);
+    }
+    public void UnregisterDefeatObserver(IDefeatObserver observer)
+    {
+        _defeatObservers.Remove(observer);
+    }
+    public void NotifyDefeatObservers()
+    {
+        foreach (IDefeatObserver observer in _defeatObservers)
+        {
+            observer.OnNotify();
+        }
+    }
+
 }

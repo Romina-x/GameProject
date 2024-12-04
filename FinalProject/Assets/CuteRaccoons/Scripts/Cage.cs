@@ -4,7 +4,7 @@ using UnityEngine;
 
 // Manages cage that holds trapped animal
 // Cage should disappear when associated enemies are defeated
-public class Cage : MonoBehaviour
+public class Cage : MonoBehaviour, IDefeatObserver
 {
     // Components that are assigned in the unity editor
     public List<Enemy> AssociatedEnemies;
@@ -14,16 +14,30 @@ public class Cage : MonoBehaviour
 
 
     void Awake(){
-        Enemy.SubscribeToEnemyDefeated(CheckIfAllEnemiesDefeated);
+        // Register this cage as an observer of all it's associated enemies
+        foreach (var enemy in AssociatedEnemies)
+        {
+            if (enemy != null)
+            {
+                enemy.RegisterDefeatObserver(this);
+            }
+        }
     }
 
     // When cage object is destroyed
     private void OnDestroy() {
-        Enemy.UnsubscribeFromEnemyDefeated(CheckIfAllEnemiesDefeated);
+        // Unregister from all enemies
+        foreach (var enemy in AssociatedEnemies)
+        {
+            if (enemy != null)
+            {
+                enemy.UnregisterDefeatObserver(this);
+            }
+        }
     }
 
-    // Every time an enemy dies, this method is called
-    private void CheckIfAllEnemiesDefeated()
+    // Cage is notified when an associated enemy dies and subsequently checks if all are dead
+    public void OnNotify()
     {
         if (!_isFreed && AreAllEnemiesDefeated())
         {

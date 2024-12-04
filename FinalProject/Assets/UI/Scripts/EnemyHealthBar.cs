@@ -37,11 +37,11 @@ public class EnemyHealthBar : MonoBehaviour, IHealthObserver
     // Register as an observer of enemy health
     private void OnEnable()
     {
-        _enemyHealth.RegisterObserver(this);
+        _enemyHealth.RegisterHealthObserver(this);
     }
 
     private void OnDisable()
     {
-        _enemyHealth.UnregisterObserver(this);
+        _enemyHealth.UnregisterHealthObserver(this);
     }
 }

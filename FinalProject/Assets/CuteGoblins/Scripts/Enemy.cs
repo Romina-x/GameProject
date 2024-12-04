@@ -21,28 +21,15 @@ public class Enemy : MonoBehaviour, IDamageable
 
     private int _maxHealth = 100;
     private int _health;
-    private List<IHealthObserver> _observers = new List<IHealthObserver>();
+    private bool _isDefeated = false;
+
+    // Observers
+    private List<IHealthObserver> _healthObservers = new List<IHealthObserver>();
+    private List<IDefeatObserver> _defeatObservers = new List<IDefeatObserver>();
     
-
-    // Enemy state
-    private bool _isDefeated;
-
-    // Events
-    private static event System.Action OnEnemyDefeated;
 
     // Properties
     public bool IsDefeated { get { return _isDefeated; } }
-
-    // Public event subscription methods
-    public static void SubscribeToEnemyDefeated(System.Action handler)
-    {
-        OnEnemyDefeated += handler;
-    }
-
-    public static void UnsubscribeFromEnemyDefeated(System.Action handler)
-    {
-        OnEnemyDefeated -= handler;
-    }
 
     private void Awake()
     {
@@ -60,8 +47,7 @@ public class Enemy : MonoBehaviour, IDamageable
     void Start()
     {
         SetupEnemyFromData();
-        Notify();
-        //_healthBar.UpdateHealthBar(_maxHealth, _health);
+        NotifyHealthObservers(); // Put health bars to the start health
     }
 
     private void OnAttack(IDamageable target)
@@ -95,7 +81,7 @@ public class Enemy : MonoBehaviour, IDamageable
     {
         // Take damage
         _health -= damage;
-        Notify(); // Notify observers of health change
+        NotifyHealthObservers(); // Notify observers of health change
 
         // Get hit if not dead
         if (_health > 0) 
@@ -109,9 +95,7 @@ public class Enemy : MonoBehaviour, IDamageable
             _animator.SetTrigger(_diedTriggerHash);
             _movement.StopFollowingOnDeath();
             AttackRadius.UnsubscribeFromAttackEvent(OnAttack);
-            //AttackRadius.StopAttackCoroutine();
             StartCoroutine(DelayedDeath());
-            OnEnemyDefeated?.Invoke();
         }
     }
 
@@ -140,26 +124,43 @@ public class Enemy : MonoBehaviour, IDamageable
             // Instantiate the poof effect at the enemy's position
             Instantiate(PoofPrefab, transform.position, Quaternion.identity);
         }
-
+        NotifyDefeatObservers();
         Destroy(gameObject);
     }
 
     // IHealthSubject interface methods
-    public void RegisterObserver(IHealthObserver observer)
+    public void RegisterHealthObserver(IHealthObserver observer)
     {
-        _observers.Add(observer);
+        _healthObservers.Add(observer);
     }
 
-    public void UnregisterObserver(IHealthObserver observer)
+    public void UnregisterHealthObserver(IHealthObserver observer)
     {
-        _observers.Remove(observer);
+        _healthObservers.Remove(observer);
     }
 
-    public void Notify()
+    public void NotifyHealthObservers()
     {
-        foreach (IHealthObserver observer in _observers)
+        foreach (IHealthObserver observer in _healthObservers)
         {
             observer.OnNotify(_maxHealth, _health);
+        }
+    }
+
+    // IDefeatSubject interface methods
+    public void RegisterDefeatObserver(IDefeatObserver observer)
+    {
+        _defeatObservers.Add(observer);
+    }
+    public void UnregisterDefeatObserver(IDefeatObserver observer)
+    {
+        _defeatObservers.Remove(observer);
+    }
+    public void NotifyDefeatObservers()
+    {
+        foreach (IDefeatObserver observer in _defeatObservers)
+        {
+            observer.OnNotify();
         }
     }
 

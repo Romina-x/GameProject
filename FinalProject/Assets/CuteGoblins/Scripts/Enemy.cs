@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // Main controller for enemy movement and combat
-public class Enemy : MonoBehaviour, IDamageable
+public class Enemy : MonoBehaviour, IDamageable, IHealthSubject, IDefeatSubject
 {   
     // Components assigned in unity editor
     public AttackRadius AttackRadius;

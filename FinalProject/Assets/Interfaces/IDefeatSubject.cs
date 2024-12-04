@@ -5,7 +5,7 @@ using UnityEngine;
 public interface IDefeatSubject
 {
 
-    public void RegisterObserver(IDefeatObserver observer);
-    public void UnregisterObserver(IDefeatObserver observer);
-    public void Notify();
+    public void RegisterDefeatObserver(IDefeatObserver observer);
+    public void UnregisterDefeatObserver(IDefeatObserver observer);
+    public void NotifyDefeatObservers();
 }

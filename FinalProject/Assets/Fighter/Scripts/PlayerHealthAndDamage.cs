@@ -54,7 +54,7 @@ public class PlayerHealthAndDamage : MonoBehaviour, IDamageable, IHealthSubject
         if (_isDead) return; // Don't add health if the player is dead
 
         _health = Mathf.Clamp(_health + amount, 0, _maxHealth);
-        Notify(); // Notfy all observers of health change
+        NotifyHealthObservers(); // Notfy all observers of health change
     }
 
     private void OnDisable()
@@ -76,7 +76,7 @@ public class PlayerHealthAndDamage : MonoBehaviour, IDamageable, IHealthSubject
 
         // Take damage
         _health -= damage;
-        Notify(); // Notify all observers of health change
+        NotifyHealthObservers(); // Notify all observers of health change
 
 
         if (_health > 0) 
@@ -102,17 +102,17 @@ public class PlayerHealthAndDamage : MonoBehaviour, IDamageable, IHealthSubject
     }
 
     // IHealthSubject interface methods
-    public void RegisterObserver(IHealthObserver observer)
+    public void RegisterHealthObserver(IHealthObserver observer)
     {
         _observers.Add(observer);
     }
 
-    public void UnregisterObserver(IHealthObserver observer)
+    public void UnregisterHealthObserver(IHealthObserver observer)
     {
         _observers.Remove(observer);
     }
 
-    public void Notify()
+    public void NotifyHealthObservers()
     {
         foreach (IHealthObserver observer in _observers)
         {

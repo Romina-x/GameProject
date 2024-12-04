@@ -35,11 +35,11 @@ public class GameOver : MonoBehaviour, IHealthObserver
     private void Start()
     {
         gameObject.SetActive(false);
-        _playerHealth.RegisterObserver(this); 
+        _playerHealth.RegisterHealthObserver(this); 
     }
 
     private void OnDisable()
     {
-        _playerHealth.UnregisterObserver(this);
+        _playerHealth.UnregisterHealthObserver(this);
     }
 }

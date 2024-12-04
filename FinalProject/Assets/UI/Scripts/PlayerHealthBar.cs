@@ -37,11 +37,11 @@ public class PlayerHealthBar : MonoBehaviour, IHealthObserver
     // Register as an observer of the subject
     private void OnEnable()
     {
-        _playerHealth.RegisterObserver(this);
+        _playerHealth.RegisterHealthObserver(this);
     }
 
     private void OnDisable()
     {
-        _playerHealth.UnregisterObserver(this);
+        _playerHealth.UnregisterHealthObserver(this);
     }
 }

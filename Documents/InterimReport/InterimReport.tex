@@ -1,7 +1,6 @@
 \documentclass[]{final_report}
 \usepackage{graphicx}
 \usepackage{hyperref}
-\usepackage{graphicx}
 \usepackage{array}
 \usepackage{xcolor} % Added package for text coloring
 \usepackage{titlesec}
@@ -10,6 +9,7 @@
 \usepackage{caption}
 \usepackage{fancyhdr}
 \usepackage{forest}
+\usepackage{cite}
 
 %%%%%%%%%%%%%%%%%%%%%%
 %%% Input project details
@@ -80,9 +80,15 @@ Signature:
 %%%%%%%%%%%%%%%%%%%%%%
 %%% Background
 \chapter{Background}
-\section{Architecture}
+\section{Game Engines}
+For the development of this game, I have chosen to use Unity game engine. `Game engines are platforms that make it easier to create computer games. They allow you to integrate and combine into single unit individual game elements such as animations, interaction with the user, or detection of collisions between objects' (Barczak M, Woźniak H, 2019). There are many game engines available for 3D development, with notable examples including Unity, Unreal Engine, and CryEngine. As Barczak and Wozniak (2019) explain, these engines provide reusable components, allowing developers to focus on gameplay and design rather than redeveloping fundamental systems. Unity stands out as the best choice for my project due to its powerful capabilities, user-friendly interface, and well documented resources. According to Christopoulou and Xinogalos (2017), Unreal Engine 4 and Unity are the two most developed engines, with Unreal Engine being more suited to experienced users providing remarkable graphics, while Unity is more suited to beginners with a large asset library and simpler user interface.
+\section{Design Patterns}
+As programs get larger, it is critical to write code in such a way that classes and modules can communicate with each other in an intelligent way \cite{alma997871033502671}. In the context of game development, the complexity of the code can become large very fast, making it important to ensure that the code is clean, reusable, and scalable. Design patterns provide solutions to common design problems, enabling code to be easily extended and reused. There are many patterns that are widely used across many types of games. Some specific patterns I have chosen to use for the game are the Hierarchical State Machine, Observer pattern, Strategy pattern and the Component Object Model. 
 \subsection{Hierarchical State Machine}\label{HSM}
-The Hierarchical State Machine (HSM)  is a variation of the standard Finite State Machine (FSM) design pattern. The FSM pattern addresses player/object states for example, walking, idle and running and encapsulates each as an object. This pattern solves two problems: an object should change it’s behaviour when its internal state changes, and adding new states does not impact the behaviour of existing states (Unity Technologies, 2022). I will use this for the player's movement, as the player is the most complex game object in terms of states. Using a state machine simplifies the process of adding new states without affecting existing ones.  It ensures all states are handled consistently, avoiding conflicts. A HSM builds on the concept of FSM by adding a hierarchy of states, allowing shared behaviours across multiple states. This includes super states and sub states, which can run simultaneously. Super states manage the shared behaviour across the substates, while the substates define specific actions.
+The Hierarchical State Machine (HSM)  is a variation of the standard Finite State Machine (FSM) design pattern. The FSM pattern addresses player/object states for example, walking, idle and running and encapsulates each as an object. This pattern solves two problems: an object should change it’s behaviour when its internal state changes, and adding new states does not impact the behaviour of existing states \cite{unity2022_patterns}. I will use this for the player's movement, as the player is the most complex game object in terms of states. Using a state machine simplifies the process of adding new states without affecting existing ones.  It ensures all states are handled consistently, avoiding conflicts. A HSM builds on the concept of FSM by adding a hierarchy of states, allowing shared behaviours across multiple states. This includes super states and sub states, which can run simultaneously. Super states manage the shared behaviour across the substates, while the substates define specific actions.
+\subsection{Observer}\label{observer}
+The Observer Pattern is particularly useful in games when an event occurs and multiple objects need to be notified to perform specific actions. Without this pattern, the subject would need to reference each observer directly, resulting in high coupling between classes. The pattern involves observer and subject classes, where the observer contains a method that defines what action to take when notified by the subject, while the subject keeps a list of observers and notifies them when a specific event occurs \cite{nystrom2011game}. This decouples the objects, allowing the subject to notify multiple observers without explicitly referencing them. I have decided to use this pattern in a few places in the game's code. for example, the event of a health change in the player or enemy notifying related elements such as health bars or the game over screen.
+\newline
 - Description \& explanation of all the concepts you used so far with citations. Best to put it into sections like '1.1' so you can reference them later on \newline
 - Game engine choice  \newline
 - What is involved in making a game  \newline
@@ -126,15 +132,15 @@ Creating smooth and responsive movement for the player is essential for the user
 The architecture for the player's movement uses a Hierarchical State Machine (HSM) , as discussed in section \ref{HSM}.  I decided specifically to use a HSM for the player's movement as there was shared behaviour that I wanted to apply across multiple states without duplicating it into each one.  For example, there is a Grounded super state that applies gravity to the Idle, Walk and Run substates. Figure 1.5 details this architecture:
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=\textwidth]{PlayerStateUML.drawio.png}
+    \includegraphics[width=\textwidth]{UMLDiagrams/PlayerStateUML.drawio.png}
     \caption{UML Class digram of Player State Machine.}
-    \label{fig:label_name}
+    \label{fig:label_State}
 \end{figure}
 \newline The PlayerStateMachine is the core component which manages the players states and transitions. This script is attached to the player game object and it's Update() method is called every frame to handle the player movement and state changes. PlayerStateFactory handles the creation of states for the StateMachine, which uses them for the transitions between player behaviours. I chose here to use the factory pattern for state creation as it simplifies the management of numerous states, making the StateMachine more readable. It also decouples the states from the StateMachine, allowing the architecture to be more easily reused with other state factories. PlayerBaseState is an abstract class that defines the common methods and behaviours for each state.  It provides access to the current StateMachine and StateFactory while also defining the core methods (EnterState(), UpdateState() and ExitState()) that the states need to implement for proper transitions. The state classes (Idle, Walk, Run, Jump and Grounded) are concrete implementations of PlayerBaseState. Each state contains the unique logic specific to its intended behaviour. For example, the Jump state handles the physics for the upward force and gravity during the jump. In addition, each state defines the conditions in which to transition to a neighbouring state. As mentioned previously, the states are organised in a hierarchy. Grounded and Jump are superstates while Idle, Walk and Run are substates. 
 \subsection{Movement Physics}
-In my game, I chose to use Unity's built in Character Controller for player movement rather than implementing Rigidbody based movement. The built in character controller allows you to easily implement basic movement (Walking) with collisions, but the player will not be affected by physics (Unity Technologies, 2024). In contrast, Rigidbodies put the game object under the effect of Unity's physics engine, and gravity is automatically applied and the object will react to impact from other Rigidbodies. In my game, the player needs to move around and jump across platforms, and the combat mechanics are physical. Therefore, the game requires limited use of physics beyond gravity.  This is why I have chosen the built-in Character Controller, as it avoids complex physics calculations and interactions that are not necessary. \newline
-The Character Controller component is a capsule-shaped collider that can be told to move in some direction from a script. It will stop at walls, walk up stairs and walk on slopes (Unity Technologies, 2024). The controller uses the Move() method to apply movement to the player by taking a movement vector and adjusting the player's position. I used this for the player's walking and running states, incorporating a run multiplier to differentiate between walking and running speeds. However, the Character Controller does not cover all movement aspects, so I implemented the gravity and jump mechanics seperately.  \newline
-The jump trajectory is calculated by applying an initial upward velocity and adjusting it with gravity over time. The initial velocity is calculated based on the desired maximum jump height and the time it takes to reach the apex of the jump. This ensured that the player reaches the jump height within the given time. Once the initial velocity is applied, gravity is applied continuously which decelerates the player until the apex, then accelerates them back to the ground. To calculate the initial velocity and gravity required for a parabolic jump motion, I used the following equations outlined by Kyle Pittman (2016):
+In my game, I chose to use Unity's built in Character Controller for player movement rather than implementing Rigidbody based movement. The built in character controller allows you to easily implement basic movement (Walking) with collisions, but the player will not be affected by physics \cite{unity2024_charactercontroller}. In contrast, Rigidbodies put the game object under the effect of Unity's physics engine, and gravity is automatically applied and the object will react to impact from other Rigidbodies. In my game, the player needs to move around and jump across platforms, and the combat mechanics are physical. Therefore, the game requires limited use of physics beyond gravity.  This is why I have chosen the built-in Character Controller, as it avoids complex physics calculations and interactions that are not necessary. \newline
+The Character Controller component is a capsule-shaped collider that can be told to move in some direction from a script. It will stop at walls, walk up stairs and walk on slopes \cite{unity2024_charactercontroller_reference}. The controller uses the Move() method to apply movement to the player by taking a movement vector and adjusting the player's position. I used this for the player's walking and running states, incorporating a run multiplier to differentiate between walking and running speeds. However, the Character Controller does not cover all movement aspects, so I implemented the gravity and jump mechanics seperately.  \newline
+The jump trajectory is calculated by applying an initial upward velocity and adjusting it with gravity over time. The initial velocity is calculated based on the desired maximum jump height and the time it takes to reach the apex of the jump. This ensured that the player reaches the jump height within the given time. Once the initial velocity is applied, gravity is applied continuously which decelerates the player until the apex, then accelerates them back to the ground. To calculate the initial velocity and gravity required for a parabolic jump motion, I used the following equations outlined by Kyle Pittman \cite{pittman2016_jump}:
 \begin{equation}
 \text{Gravity} = \frac{-2 \cdot \text{MaxJumpHeight}}{(\text{TimeToApex})^2}
 \end{equation}
@@ -154,20 +160,46 @@ private void SetupJumpVariables()
 \end{verbatim}
 For the gravity applied to the player while grounded, I used a smaller value of gravity to avoid unecessary gravitational calculations and to prevent the high gravity from slowing down the player's movement. \newline
 
-\section{Enemy AI \& Combat}
-Still to include : \newline
+\section{Enemy Movement and AI}
 - Strategy pattern for enemies \newline
+\section{Health and Combat}
+\subsection{CombatSystem}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=\textwidth]{UMLDiagrams/CombatUML.drawio.png}
+    \caption{UML Class digram of Health Observer Pattern}
+    \label{fig:label_observer1}
+\end{figure}
+\subsection{Health System}
+- IDamageables\newline
 
+
+\subsection{Architecture}
+
+\ref{observer}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=\textwidth]{UMLDiagrams/HealthObserverUML.drawio.png}
+    \caption{UML Class digram of Health Observer Pattern}
+    \label{fig:label_observer1}
+\end{figure}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=\textwidth]{UMLDiagrams/DefeatObserverUML.drawio.png}
+    \caption{UML Class digram of Enemy Defeat Observer Pattern.}
+    \label{fig:label_observer2}
+\end{figure}
+Still to include : \newline
 - Observer for combat system + UML \newline
 - NavMesh agents for AI pathfinding for enemies \newline
 - Coroutines  \newline
 \section{User Experience}
 Still to include: \newline
-- Player input \newline
 - Cinemachine for smooth camera movement \newline
 - Animation \newline
 - UI \newline
 - Input system : Controller and keyboard controls \newline
+- Level Design
 
 %%%%%%%%%%%%%%%%%%%%%%
 %%% Appendix#
@@ -253,25 +285,20 @@ Still to include: \newline
 \section{Submission Directory Structure}
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=0.4\textwidth]{FileStructure.png}
+    \includegraphics[width=0.4\textwidth]{OtherImages/FileStructure.png}
     \caption{Diagram of Directory Structure}
-    \label{fig:label_name}
+    \label{fig:label_name2}
 \end{figure}
 The Assets folder contains all of the work I have completed so far including the 3D models for the player, enemies, terrain etc., as well as the associated scripts and animations. The diagram hilights the most important subfolders, such as the scripts folders, where all my C\# scripts are organised. Note that not all folders are included in the diagram.
 \section{Demo Video Link}
 
 %%%% ADD YOUR BIBLIOGRAPHY HERE
 \newpage
-\begin{thebibliography}{99}
-\addcontentsline{toc}{chapter}{Bibliography}
-\subsection{Cited References}
-\item Unity Technologies. (2022) \textit{Level up your code with game programming patterns}. Available at: https://unity.com/resources/level-up-your-code-with-game-programming-patterns (Accessed: 10 October 2024)
-\item Unity Technologies. (2024) \textit{CharacterController}. Available at: https://docs.unity3d.com/6000.0/Documentation/ScriptReference/CharacterController.html (Accessed: 10 November 2024)
-\item Unity Technologies. (2024) \textit{CharacterController component reference}. Available at: https://docs.unity3d.com/6000.0/Documentation/Manual/class-CharacterController.html (Accessed: 10 November 2024)
-\item Kyle Pittman (2016): \textit{Math for Game Programmers: Building a Better Jump}, [YouTube] https://www.youtube.com/watch?v=hG9SzQxaCm8\&t=1383s.
-\subsection{Further Research and Tutorials}
-\subsection{Assets Used}
-\end{thebibliography}
+\bibliographystyle{plain}
+\bibliography{references}
+\section{Cited References}
+\section{Further Research and Tutorials}
+\section{Assets Used}
 \label{endpage}
 
 \end{document}

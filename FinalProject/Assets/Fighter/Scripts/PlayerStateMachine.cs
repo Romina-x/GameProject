@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.AI;
 
 // Handles player movement input
 public class PlayerStateMachine : MonoBehaviour
@@ -10,6 +11,7 @@ public class PlayerStateMachine : MonoBehaviour
     private PlayerInput _playerInput;
     private CharacterController _characterController;
     private Animator _animator;
+    private NavMeshAgent _agent;
 
     // Input vectors
     private Vector2 _currentMovementInput;
@@ -94,6 +96,8 @@ public class PlayerStateMachine : MonoBehaviour
         HandleRotation();
         _currentState.UpdateStates();
         MoveCharacter();
+        Vector3 newPosition = transform.position;
+        _agent.Warp(newPosition);
     }
 
     private void OnEnable()
@@ -111,6 +115,7 @@ public class PlayerStateMachine : MonoBehaviour
         _playerInput = new PlayerInput();
         _characterController = GetComponent<CharacterController>();
         _animator = GetComponent<Animator>();
+        _agent = GetComponent<NavMeshAgent>();
     }
 
     private void SetupStateMachine()

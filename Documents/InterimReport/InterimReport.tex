@@ -10,6 +10,8 @@
 \usepackage{fancyhdr}
 \usepackage{forest}
 \usepackage{cite}
+\usepackage{float}
+
 
 %%%%%%%%%%%%%%%%%%%%%%
 %%% Input project details
@@ -81,7 +83,8 @@ Signature:
 %%% Background
 \chapter{Background}
 \section{Game Engines}
-For the development of this game, I have chosen to use Unity game engine. `Game engines are platforms that make it easier to create computer games. They allow you to integrate and combine into single unit individual game elements such as animations, interaction with the user, or detection of collisions between objects' (Barczak M, Woźniak H, 2019). There are many game engines available for 3D development, with notable examples including Unity, Unreal Engine, and CryEngine. As Barczak and Wozniak (2019) explain, these engines provide reusable components, allowing developers to focus on gameplay and design rather than redeveloping fundamental systems. Unity stands out as the best choice for my project due to its powerful capabilities, user-friendly interface, and well documented resources. According to Christopoulou and Xinogalos (2017), Unreal Engine 4 and Unity are the two most developed engines, with Unreal Engine being more suited to experienced users providing remarkable graphics, while Unity is more suited to beginners with a large asset library and simpler user interface.
+For the development of this game, I have chosen to use Unity game engine. `Game engines are platforms that make it easier to create computer games. They allow you to integrate and combine into single unit individual game elements such as animations, interaction with the user, or detection of collisions between objects' \cite{Barczak2019}. There are many game engines available for 3D development, with notable examples including Unity, Unreal Engine, and CryEngine. These engines provide reusable components, allowing developers to focus on gameplay and design rather than redeveloping fundamental systems \cite{Barczak2019}. Unity stands out as the best choice for my project due to its powerful capabilities, user-friendly interface, and well documented resources. Unreal Engine 4 and Unity are the two most developed engines, with Unreal Engine being more suited to experienced users providing remarkable graphics, while Unity is more suited to beginners with a large asset library and simpler user interface. \cite{Christopoulou2017}.
+\newline - add about how unity uses c\# and it enables OOP and stuff
 \section{Design Patterns}
 As programs get larger, it is critical to write code in such a way that classes and modules can communicate with each other in an intelligent way \cite{alma997871033502671}. In the context of game development, the complexity of the code can become large very fast, making it important to ensure that the code is clean, reusable, and scalable. Design patterns provide solutions to common design problems, enabling code to be easily extended and reused. There are many patterns that are widely used across many types of games. Some specific patterns I have chosen to use for the game are the Hierarchical State Machine, Observer pattern, Strategy pattern and the Component Object Model. 
 \subsection{Hierarchical State Machine}\label{HSM}
@@ -92,6 +95,7 @@ The Observer Pattern is particularly useful in games when an event occurs and mu
 - Description \& explanation of all the concepts you used so far with citations. Best to put it into sections like '1.1' so you can reference them later on \newline
 - Game engine choice  \newline
 - What is involved in making a game  \newline
+- Strategy and COM still to go for DP \newline
  
 %%%%%%%%%%%%%%%%%%%%%%
 %%% Planning & Timeline
@@ -129,7 +133,7 @@ Week 10-11: & \textcolor{black}{|} & $\bullet$ & Work on final report \\
 \section{Player Movement}
 Creating smooth and responsive movement for the player is essential for the user experience, as 3D platformer games require precise movements to traverse the levels. The player's movement covers standing idle, walking, running and jumping. 
 \subsection{Architecture}
-The architecture for the player's movement uses a Hierarchical State Machine (HSM) , as discussed in section \ref{HSM}.  I decided specifically to use a HSM for the player's movement as there was shared behaviour that I wanted to apply across multiple states without duplicating it into each one.  For example, there is a Grounded super state that applies gravity to the Idle, Walk and Run substates. Figure 1.5 details this architecture:
+The architecture for the player's movement uses a Hierarchical State Machine (HSM) , as discussed in section \ref{HSM}.  I decided specifically to use a HSM for the player's movement as there was shared behaviour that I wanted to apply across multiple states without duplicating it into each one.  For example, there is a Grounded super state that applies gravity to the Idle, Walk and Run substates. Figure \ref{fig:label_State} details this architecture:
 \begin{figure}[h!]
     \centering
     \includegraphics[width=\textwidth]{UMLDiagrams/PlayerStateUML.drawio.png}
@@ -162,19 +166,19 @@ For the gravity applied to the player while grounded, I used a smaller value of 
 
 \section{Enemy Movement and AI}
 - Strategy pattern for enemies \newline
-\section{Health and Combat}
-\subsection{CombatSystem}
-\begin{figure}[h!]
+\subsection{Enemy Movement}
+- 
+\subsection{Combat System}
+The combat system is a core feature of the game, enabling attack and damage mechanics between the player and enemies. The design focusses on handling the damage mechanic in a consistent way across both enemies and player, while accomodating their differing attack mechanics. This was achieved by creating an IDamageable interface, which must be implemented by all game objects capable of taking damage. This design is detailed in figure  \ref{fig:label_combat}.
+\begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{UMLDiagrams/CombatUML.drawio.png}
-    \caption{UML Class digram of Health Observer Pattern}
-    \label{fig:label_observer1}
+    \caption{UML Class digram of Combat System}
+    \label{fig:label_combat}
 \end{figure}
-\subsection{Health System}
-- IDamageables\newline
-
-
-\subsection{Architecture}
+The IDamageable interface is the core of the system, which defines a TakeDamage() method which reduces the entity's health based on an incoming damage value. Both the Enemy and PlayerHealthAndDamage classes implement this interface, ensuring damage is applied in a consistent way for both entities. 
+\newline The player's combat mechanic is controlled by the WeaponAttributes class. The weapon is equipped with a box collider that calls the OnTriggerEnter() method on collision. Within OnTriggerEnter(), the TakeDamage() method is called on the enemy that entered the collider. The WeaponManager class manages the weapon's box collider, ensuring that it is only enabled during the player's attack animation. This is achieved with Unity animation events, which call the EnableWeaponCollider() method at the appropriate time during the attack animation.
+\newline The enemy's combat system differs from the player's, as it does not rely on weapon collision mechanics. Instead, the AttackRadius class manages the enemy's attack behaviour. This system uses a sphere collider that defines a radius in which the player can take damage. When the player is within this radius, the enemy periodically attacks by calling the player's TakeDamage() method. The  attacks are based on a set delay, allowing different enemy types to vary in attack speed.
 
 \ref{observer}
 \begin{figure}[h!]
@@ -291,7 +295,7 @@ Still to include: \newline
 \end{figure}
 The Assets folder contains all of the work I have completed so far including the 3D models for the player, enemies, terrain etc., as well as the associated scripts and animations. The diagram hilights the most important subfolders, such as the scripts folders, where all my C\# scripts are organised. Note that not all folders are included in the diagram.
 \section{Demo Video Link}
-
+- Maybe also add a code style thing.
 %%%% ADD YOUR BIBLIOGRAPHY HERE
 \newpage
 \bibliographystyle{plain}

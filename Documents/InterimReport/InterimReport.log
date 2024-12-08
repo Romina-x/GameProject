@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.10.1)  4 DEC 2024 18:19
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.10.1)  7 DEC 2024 20:23
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -891,7 +891,11 @@ LaTeX Info: Redefining \cite on input line 302.
 LaTeX Info: Redefining \nocite on input line 332.
 Package: cite 2015/02/27  v 5.5
 )
-(InterimReport.aux)
+(InterimReport.aux
+
+LaTeX Warning: Label `fig:label_observer1' multiply defined.
+
+)
 \openout1 = `InterimReport.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 24.
@@ -980,7 +984,7 @@ Package hyperref Info: Link coloring OFF on input line 24.
 \c@lstlisting=\count357
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
-<logo.pdf, id=70, 948.54375pt x 473.77pt>
+<logo.pdf, id=86, 948.54375pt x 473.77pt>
 File: logo.pdf Graphic file (type pdf)
 <use logo.pdf>
 Package pdftex.def Info: logo.pdf  used on input line 27.
@@ -1031,6 +1035,16 @@ Underfull \hbox (badness 10000) in paragraph at lines 75--78
 ]
 Chapter 3.
 
+LaTeX Warning: Citation `Barczak2019' on page 6 undefined on input line 84.
+
+
+LaTeX Warning: Citation `Barczak2019' on page 6 undefined on input line 84.
+
+
+LaTeX Warning: Citation `Christopoulou2017' on page 6 undefined on input line 8
+4.
+
+
 LaTeX Warning: Citation `alma997871033502671' on page 6 undefined on input line
  86.
 
@@ -1055,14 +1069,15 @@ Chapter 4.
 
 ]
 Chapter 5.
-<PlayerStateUML.drawio.png, id=147, 2270.4825pt x 1188.44pt>
-File: PlayerStateUML.drawio.png Graphic file (type png)
-<use PlayerStateUML.drawio.png>
-Package pdftex.def Info: PlayerStateUML.drawio.png  used on input line 135.
+<UMLDiagrams/PlayerStateUML.drawio.png, id=166, 2270.4825pt x 1188.44pt>
+File: UMLDiagrams/PlayerStateUML.drawio.png Graphic file (type png)
+<use UMLDiagrams/PlayerStateUML.drawio.png>
+Package pdftex.def Info: UMLDiagrams/PlayerStateUML.drawio.png  used on input l
+ine 135.
 (pdftex.def)             Requested size: 441.01773pt x 230.8291pt.
 [9
 
- <./PlayerStateUML.drawio.png>]
+ <./UMLDiagrams/PlayerStateUML.drawio.png>]
 
 LaTeX Warning: Citation `unity2024_charactercontroller' on page 10 undefined on
  input line 141.
@@ -1081,46 +1096,55 @@ Underfull \hbox (badness 10000) in paragraph at lines 161--162
  []
 
 [10]
-<HealthObserverUML.drawio.png, id=166, 2250.4075pt x 1188.44pt>
-File: HealthObserverUML.drawio.png Graphic file (type png)
-<use HealthObserverUML.drawio.png>
-Package pdftex.def Info: HealthObserverUML.drawio.png  used on input line 167.
+Underfull \hbox (badness 10000) in paragraph at lines 164--165
+
+ []
+
+<UMLDiagrams/CombatUML.drawio.png, id=184, 1595.9625pt x 1314.9125pt>
+File: UMLDiagrams/CombatUML.drawio.png Graphic file (type png)
+<use UMLDiagrams/CombatUML.drawio.png>
+Package pdftex.def Info: UMLDiagrams/CombatUML.drawio.png  used on input line 1
+69.
+(pdftex.def)             Requested size: 441.01773pt x 363.35765pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 174--175
+
+ []
+
+<UMLDiagrams/HealthObserverUML.drawio.png, id=186, 2250.4075pt x 1188.44pt>
+File: UMLDiagrams/HealthObserverUML.drawio.png Graphic file (type png)
+<use UMLDiagrams/HealthObserverUML.drawio.png>
+Package pdftex.def Info: UMLDiagrams/HealthObserverUML.drawio.png  used on inpu
+t line 182.
 (pdftex.def)             Requested size: 441.01773pt x 232.89638pt.
-<DefeatObserverUML.drawio.png, id=167, 1300.86pt x 827.09pt>
-File: DefeatObserverUML.drawio.png Graphic file (type png)
-<use DefeatObserverUML.drawio.png>
-Package pdftex.def Info: DefeatObserverUML.drawio.png  used on input line 173.
+<UMLDiagrams/DefeatObserverUML.drawio.png, id=187, 1300.86pt x 827.09pt>
+File: UMLDiagrams/DefeatObserverUML.drawio.png Graphic file (type png)
+<use UMLDiagrams/DefeatObserverUML.drawio.png>
+Package pdftex.def Info: UMLDiagrams/DefeatObserverUML.drawio.png  used on inpu
+t line 188.
 (pdftex.def)             Requested size: 441.01773pt x 280.39917pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 177--179
+Underfull \hbox (badness 10000) in paragraph at lines 179--196
 
  []
 
-[11 <./HealthObserverUML.drawio.png> <./DefeatObserverUML.drawio.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 180--183
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 184--190
-
- []
-
-[12]
+[11 <./UMLDiagrams/CombatUML.drawio.png>] [12 <./UMLDiagrams/HealthObserverUML.
+drawio.png> <./UMLDiagrams/DefeatObserverUML.drawio.png>] [13]
 Appendix A.
-[13
+[14
 
-] [14]
-<FileStructure.png, id=190, 1586.92876pt x 1866.975pt>
-File: FileStructure.png Graphic file (type png)
-<use FileStructure.png>
-Package pdftex.def Info: FileStructure.png  used on input line 275.
+] [15]
+<OtherImages/FileStructure.png, id=218, 1586.92876pt x 1866.975pt>
+File: OtherImages/FileStructure.png Graphic file (type png)
+<use OtherImages/FileStructure.png>
+Package pdftex.def Info: OtherImages/FileStructure.png  used on input line 288.
+
 (pdftex.def)             Requested size: 176.40439pt x 207.53294pt.
- [15 <./FileStructure.png>] (InterimReport.bbl
+ [16 <./OtherImages/FileStructure.png>] (InterimReport.bbl
 
 LaTeX Warning: Empty `thebibliography' environment on input line 3.
 
-) [16
+) [17
 
 ] (InterimReport.aux)
  ***********
@@ -1136,49 +1160,35 @@ LaTeX Font Warning: Size substitutions with differences
 LaTeX Warning: There were undefined references.
 
 
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+LaTeX Warning: There were multiply-defined labels.
 
-
-Package rerunfilecheck Warning: File `InterimReport.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `InterimReport.out':
-(rerunfilecheck)             Before: 30748A1A812DF5A96F217D96FEC36A03;1963
-(rerunfilecheck)             After:  5989B88FE3BB51BBC79C4686ABEA389C;2461.
+Package rerunfilecheck Info: File `InterimReport.out' has not changed.
+(rerunfilecheck)             Checksum: 38EA6898C9594204924FE2A729C7EE3C;2624.
  ) 
 Here is how much of TeX's memory you used:
- 33585 strings out of 474486
- 729416 string characters out of 5743755
+ 33600 strings out of 474486
+ 730139 string characters out of 5743755
  1941542 words of memory out of 5000000
- 55382 multiletter control sequences out of 15000+600000
+ 55394 multiletter control sequences out of 15000+600000
  566832 words of font info for 66 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  98i,12n,101p,1608b,457s stack positions out of 10000i,1000n,20000p,200000b,200000s
-
-pdfTeX warning (dest): name{subsection.3.1.1} has been referenced but does not 
-exist, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{appendix*.8} has been referenced but does not exist
-, replaced by a fixed one
-
-<C:/Users/rolop/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cm
-bx10.pfb><C:/Users/rolop/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfo
-nts/cm/cmbx12.pfb><C:/Users/rolop/AppData/Local/Programs/MiKTeX/fonts/type1/pub
-lic/amsfonts/cm/cmr10.pfb><C:/Users/rolop/AppData/Local/Programs/MiKTeX/fonts/t
-ype1/public/amsfonts/cm/cmr8.pfb><C:/Users/rolop/AppData/Local/Programs/MiKTeX/
-fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/Users/rolop/AppData/Local/Programs/
-MiKTeX/fonts/type1/public/amsfonts/cm/cmss10.pfb><C:/Users/rolop/AppData/Local/
-Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmss12.pfb><C:/Users/rolop/AppDa
-ta/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmss17.pfb><C:/Users/ro
-lop/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmssbx10.pfb><
-C:/Users/rolop/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cms
-y10.pfb><C:/Users/rolop/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfon
-ts/cm/cmtt10.pfb>
-Output written on InterimReport.pdf (17 pages, 820088 bytes).
+<C:/Users/rolop/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/
+cmbx10.pfb><C:/Users/rolop/AppData/Local/Programs/MiKTeX/fonts/type1/public/ams
+fonts/cm/cmbx12.pfb><C:/Users/rolop/AppData/Local/Programs/MiKTeX/fonts/type1/p
+ublic/amsfonts/cm/cmr10.pfb><C:/Users/rolop/AppData/Local/Programs/MiKTeX/fonts
+/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/rolop/AppData/Local/Programs/MiKTe
+X/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/Users/rolop/AppData/Local/Program
+s/MiKTeX/fonts/type1/public/amsfonts/cm/cmss10.pfb><C:/Users/rolop/AppData/Loca
+l/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmss12.pfb><C:/Users/rolop/App
+Data/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmss17.pfb><C:/Users/
+rolop/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmssbx10.pfb
+><C:/Users/rolop/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/c
+msy10.pfb><C:/Users/rolop/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsf
+onts/cm/cmtt10.pfb>
+Output written on InterimReport.pdf (18 pages, 933383 bytes).
 PDF statistics:
- 265 PDF objects out of 1000 (max. 8388607)
- 54 named destinations out of 1000 (max. 500000)
- 166 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 291 PDF objects out of 1000 (max. 8388607)
+ 57 named destinations out of 1000 (max. 500000)
+ 203 words of extra memory for PDF output out of 10000 (max. 10000000)
 

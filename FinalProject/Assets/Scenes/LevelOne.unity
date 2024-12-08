@@ -5068,7 +5068,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ab532626b409c14eaeb7a3f536ab19e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _heartHealth: 50
+  _heartHealth: 100
   collectionVFX: {fileID: 4035903591278710484, guid: aa122f157eac1c8428ae5db8a315ccd8, type: 3}
 --- !u!1001 &141821874
 PrefabInstance:
@@ -43095,7 +43095,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ab532626b409c14eaeb7a3f536ab19e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _heartHealth: 50
+  _heartHealth: 100
   collectionVFX: {fileID: 4035903591278710484, guid: aa122f157eac1c8428ae5db8a315ccd8, type: 3}
 --- !u!1001 &1989261888
 PrefabInstance:
@@ -43654,7 +43654,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ab532626b409c14eaeb7a3f536ab19e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _heartHealth: 50
+  _heartHealth: 100
   collectionVFX: {fileID: 4035903591278710484, guid: aa122f157eac1c8428ae5db8a315ccd8, type: 3}
 --- !u!1001 &2036921910
 PrefabInstance:
@@ -45957,7 +45957,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ab532626b409c14eaeb7a3f536ab19e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _heartHealth: 50
+  _heartHealth: 100
   collectionVFX: {fileID: 4035903591278710484, guid: aa122f157eac1c8428ae5db8a315ccd8, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

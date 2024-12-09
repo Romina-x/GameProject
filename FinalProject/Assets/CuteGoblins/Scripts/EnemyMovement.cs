@@ -37,7 +37,7 @@ public class EnemyMovement : MonoBehaviour
         if (FollowRadius != null) 
         {
             FollowRadius.SubscribeToPlayerEnter(OnPlayerEntered);
-            FollowRadius.SubscribeToPlayerExit(ReturnToSpawn);
+            FollowRadius.SubscribeToPlayerExit(OnPlayerExit);
         }
 
         _originalPosition = transform.position;
@@ -58,7 +58,7 @@ public class EnemyMovement : MonoBehaviour
         }
     }
 
-    private void ReturnToSpawn()
+    private void OnPlayerExit()
     {
         if (_followCoroutine != null)
         {

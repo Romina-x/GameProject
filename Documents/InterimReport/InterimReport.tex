@@ -167,15 +167,56 @@ For the gravity applied to the player while grounded, I used a smaller value of 
 
 %%%%%%%%%%%%%%%%%%%%%%
 %%% Enemies and Combat#
-\section{Enemies and Combat}
+\section{Enemy Movement}
+The enemy movement in the game is implemented dynamically based on the player's proximity. The enemies start in an idle state and begin to chase the player when they come within a specified range. Once the player moves out of this range, the enemies return back to their original starting position. To implement this behaviour with intelligent navigation I chose to use Unity's AI module, which supports AI pathfinding using NavMesh Surfaces and NavMeshAgents \cite{unity2024_AI}. 
+A NavMeshAgent is assigned to each enemy, allowing them to navigate across a NavMeshSurface while avoiding obstacles in their path. These agents are configured with properties such as movement speed, acceleration, avoidance priority, and movement radius, which control thier movement behaviour \cite{unity2024_NavAgent}. The NavMeshSurface is assigned to the level's entire terrain, defining the ground area that the enemies can move on. This approach allows enemies to intelligently avoid obstacles and dynamically chase the player while navigating complex environments. \newline
+\subsection{Architecture}
+Unlike the the player movement system, I chose not to implement the State Machine design pattern for the enemy movement states. The enemy states: Idle, Chasing and Returning are relatively simple, and using a State Machine would likely overcomplicate the system for such few states. However I may consider refactor the system if more complex enemy types are introduced later in develoopment, requiring additional states or behaviours. The current design is detailed in figure \ref{fig:label_enemyMovement}.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{UMLDiagrams/EnemyMovementUML.drawio}
+    \caption{UML Class digram of Enemy Movement System.}
+    \label{fig:label_enemyMovement}
+\end{figure}
+The FollowRadius component detcts when the player enters or exits the proximity radius. It makes use of a SphereCollider which calls OnTriggerEnter() and OnTriggerExit() when the player enters or exits the radius. It communicates this to EnemyMovement using events. 
+\begin{verbatim}
+private void OnTriggerEnter(Collider other) 
+{
+    IDamageable damageable = other.GetComponent<IDamageable>();
+    if (damageable != null)
+    {
+        PlayerEnter?.Invoke();
+    }
+}
+\end{verbatim}
+EnemyMovement subscribes to the PlayerEnter and PlayerExit events from FollowRadius and begins manages the enemy's movement coroutines based on the event. A coroutine is a method that allows you to spread tasks across several frames. It can pause execution and return control to Unity but then continue where it left off on the following frame \cite{unity2024_Coroutines}. I chose to make use of coroutines instead of the Update() method which runs every frame. This is because the enemy movement relies on constant checks for position updates such as the player's position to follow, and using a coroutine allows this behaviour to execute over time without repeatedly checking every frame. One of the coroutines from EnemyMovement is shown below:
+\begin{verbatim}
+private IEnumerator FollowTarget()
+{
+    WaitForSeconds wait = new WaitForSeconds(_updateSpeed);
+    while(enabled){
+        if (Target != null)
+        {
+            _isMoving = _agent.velocity.magnitude > 0.1f;
+            _animator.SetBool(_isMovingHash, _isMoving);
+            _agent.SetDestination(Target.position); 
+        }
+        yield return wait;
+    }
+}
+\end{verbatim}
+The Enemy class manages the overall behaviour and state of the enemies in the game. Concerning movement, it is responsible for configuring the properties of the NavMeshAgent (such as speed and stopping distance) but delegates the actual movement logic to the EnemyMovement class. This separation allows the Enemy class to keep its focus on managing overall enemy behaviours while delegating the more complex logic to other dedicated classes. For movement, it works with the EnemyMovement class, while for combat, it interacts with the AttackRadius class (Detailed in \ref{combatsystem}). 
 
-- Explain what is involved in the enemy movement and the combat system and overview of patterns\newline 
-
-\subsection{Enemy Movement}
-- NavMeshAgents
-\newline - UML for strategy
-The EnemyScriptableObject stores all the customizable parameters, such as health, attack speed, and movement speed. During runtime, the Enemy class uses the data from the assigned ScriptableObject to adjust its behavior dynamically. This approach decouples the data configuration from the core enemy logic, allowing new enemy types to be added easily by simply creating new ScriptableObjects without modifying the underlying code.
-\subsection{Combat System}
+\subsection{Configurable Enemies}
+Currently in the game there are two enemy types, Goblin Warrior and Scout. Both are short range and vary in attack speed, health and moement speed. To enable multiple enemy types I used the Strategy pattern \ref{strategy} in conjunction with Unity's ScriptableObject feature. I chose to use Strategy here to enable the Enemy class to use dfferent behaviours interchangeably without hardcoding multiple Enemy classes for different enemy types. Unity's ScriptableObject is a data container that allows you to create customisable assets in the Unity editor \cite{unity2024_ScriptableObject}. I used this along with the Strategy pattern methodology to create seperate configurable data containers for the two different enemy types. This design is detailed in figure \ref{fig:label_strategy}.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{UMLDiagrams/EnemyStrategyUML.drawio}
+    \caption{UML Class digram of Enemy Strategy Pattern.}
+    \label{fig:label_strategy}
+\end{figure}
+The EnemyScriptableObject stores all the customizable parameters, such as health, attack speed, and movement speed. The Enemy class uses the data from the assigned ScriptableObject (GoblinWarrior or GoblinScout) to adjust its behavior dynamically. This approach decouples the enemy configuration from the core enemy logic, allowing new enemy types to be added easily by creating new ScriptableObjects without modifying the Enemy class. 
+\section{Combat System}\label{combatsystem}
 The combat system is a core feature of the game, enabling attack and damage mechanics between the player and enemies. The design focusses on handling the damage mechanic in a consistent way across both enemies and player, while accomodating their differing attack mechanics. This was achieved by creating an IDamageable interface, which must be implemented by all game objects capable of taking damage. This design is detailed in figure  \ref{fig:label_combat}.
 \begin{figure}[H]
     \centering
@@ -184,8 +225,8 @@ The combat system is a core feature of the game, enabling attack and damage mech
     \label{fig:label_combat}
 \end{figure}
 The IDamageable interface is the core of the system, which defines a TakeDamage() method which reduces the entity's health based on an incoming damage value. Both the Enemy and PlayerHealthAndDamage classes implement this interface, ensuring damage is applied in a consistent way for both entities. 
-\newline The player's combat mechanic is controlled by the WeaponAttributes class. The weapon is equipped with a box collider that calls the OnTriggerEnter() method on collision. Within OnTriggerEnter(), the TakeDamage() method is called on the enemy that entered the collider. The WeaponManager class manages the weapon's box collider, ensuring that it is only enabled during the player's attack animation. This is achieved with Unity animation events, which call the EnableWeaponCollider() method at the appropriate time during the attack animation.
-\newline The enemy's combat system differs from the player's, as it does not rely on weapon collision mechanics. Instead, the AttackRadius class manages the enemy's attack behaviour. This system uses a sphere collider that defines a radius in which the player can take damage. When the player is within this radius, the enemy periodically attacks by calling the player's TakeDamage() method. The  attacks are based on a set delay, allowing different enemy types to vary in attack speed.
+\newline The player's combat mechanic is controlled by the WeaponAttributes class. The weapon is equipped with a Box Collider that calls the OnTriggerEnter() method on collision. Within OnTriggerEnter(), the TakeDamage() method is called on the enemy that entered the collider. The WeaponManager class manages the weapon's Box Collider, ensuring that it is only enabled during the player's attack animation. This is achieved with Unity animation events, which call the EnableWeaponCollider() method at the appropriate time during the attack animation.
+\newline The enemy's combat system differs from the player's, as it does not rely on weapon collision mechanics. Instead, the AttackRadius class manages the enemy's attack behaviour. This system uses a Sphere Collider that defines a radius in which the player can take damage. When the player is within this radius, the enemy periodically attacks by calling the player's TakeDamage() method. The  attacks are based on a set delay, allowing different enemy types to vary in attack speed.
 
 
 \begin{figure}[h!]
@@ -262,7 +303,7 @@ While the use of this pattern may seem overcomplex for this scenario, as there a
 \newline- Fix to jump animation bug which caused it to look like a double jump.
 \newline- Fix to bug that caused animations to get stuck when pressing jump twice.
 \newline9/11/2024
-\newline- Added a movement radius to the enemy: Now the enemy only starts following the player if the player enters it's follow radius. The Enemy returns to spawn if player exits the radius.
+\newline- Added a movement radius to the enemy: Now the enemy only starts following the player if the player enters its follow radius. The Enemy returns to spawn if player exits the radius.
 \newline6/11/2024
 \newline- Aded player attack mechanic: Enemy takes damage on collision with the player's axe.
 \newline- Situation where player dies is still unhandled.
@@ -284,7 +325,7 @@ While the use of this pattern may seem overcomplex for this scenario, as there a
 \newline23/10/2024
 \newline- Linked running animation to enemy movement.
 \newline21/10/2024
-\newline- Imported enemy prefab and configured it's movement to follow the player.
+\newline- Imported enemy prefab and configured its movement to follow the player.
 \newline- Researched Nav Meshes and applied this to the enemy so that it uses AI to navigate around obstacles towards the player.
 
 \textbf{Week 4}\newline

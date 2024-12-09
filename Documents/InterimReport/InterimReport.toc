@@ -17,15 +17,15 @@
 \contentsline {subsection}{\numberline {5.1.1}Architecture}{10}{subsection.5.1.1}%
 \contentsline {subsection}{\numberline {5.1.2}Movement Physics}{11}{subsection.5.1.2}%
 \contentsline {paragraph}{}{11}{equation.5.1.2}%
-\contentsline {section}{\numberline {5.2}Enemies and Combat}{12}{section.5.2}%
-\contentsline {subsection}{\numberline {5.2.1}Enemy Movement}{12}{subsection.5.2.1}%
-\contentsline {subsection}{\numberline {5.2.2}Combat System}{12}{subsection.5.2.2}%
-\contentsline {section}{\numberline {5.3}User Interface}{14}{section.5.3}%
-\contentsline {section}{\numberline {5.4}User Experience}{15}{section.5.4}%
-\contentsline {chapter}{\numberline {A}Appendix}{16}{appendix.A}%
-\contentsline {section}{\numberline {A.1}Development Diary}{16}{section.A.1}%
-\contentsline {section}{\numberline {A.2}Submission Directory Structure}{18}{section.A.2}%
-\contentsline {section}{\numberline {A.3}Demo Video Link}{18}{section.A.3}%
-\contentsline {section}{\numberline {A.4}Cited References}{19}{section.A.4}%
-\contentsline {section}{\numberline {A.5}Further Research and Tutorials}{19}{section.A.5}%
-\contentsline {section}{\numberline {A.6}Assets Used}{19}{section.A.6}%
+\contentsline {section}{\numberline {5.2}Enemy Movement}{12}{section.5.2}%
+\contentsline {subsection}{\numberline {5.2.1}Architecture}{12}{subsection.5.2.1}%
+\contentsline {section}{\numberline {5.3}Combat System}{13}{section.5.3}%
+\contentsline {section}{\numberline {5.4}User Interface}{15}{section.5.4}%
+\contentsline {section}{\numberline {5.5}User Experience}{17}{section.5.5}%
+\contentsline {chapter}{\numberline {A}Appendix}{18}{appendix.A}%
+\contentsline {section}{\numberline {A.1}Development Diary}{18}{section.A.1}%
+\contentsline {section}{\numberline {A.2}Submission Directory Structure}{20}{section.A.2}%
+\contentsline {section}{\numberline {A.3}Demo Video Link}{20}{section.A.3}%
+\contentsline {section}{\numberline {A.4}Cited References}{21}{section.A.4}%
+\contentsline {section}{\numberline {A.5}Further Research and Tutorials}{21}{section.A.5}%
+\contentsline {section}{\numberline {A.6}Assets Used}{21}{section.A.6}%

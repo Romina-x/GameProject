@@ -99,7 +99,7 @@ The Strategy pattern is a design pattern used to define a family of behaviours a
 Creating an engaging and intuitive user interface (UI) and user experience (UX) is important in modern game development. 
 UX in games includes the player's overall interaction with the game, including controls, interface design, camera systems, feedback mechanisms, and navigation flows \cite{Kramarzewski2023}. It focuses on ensuring that the game is enjoyable, accessible, and meets player expectations. 
 \newline Designing effective input involves adhering to the principles of ergonomics and user expectations. Ergonomics refers to creating controls that are natural for hand movement, while user expectations involve using input controls that are familiar, so players can quickly learn the controls \cite{Rogers2014}. For example, the WASD keys are commonly used for movement in PC games because they are familiar to most players, and they allow a natural position for the hand on the keyboard. Camera systems are essential in games to determine the player's perspective of the game world. Common types include first-person, third-person and top-down cameras, each providing different approaches to the gameplay design \cite{Kramarzewski2023}. 
-\section{User Interface and Level Design}
+\section{User Interface and Level Design}\label{UIandLevel}
 %%%%%%%%%%%%%%%%%%%%%%
 %%% Planning & Timeline
 \chapter{Planning \& Timeline}
@@ -198,14 +198,35 @@ The IDamageable interface is the core of the system, which defines a TakeDamage(
 %%%%%%%%%%%%%%%%%%%%%%
 %%% User Experience#
 \section{User Interface}
-- Observer for UI  + UML \newline
-\ref{observer}
-\begin{figure}[h!]
+So far in my game I have implemented a basic UI including a Game Over screen, and a HUD \ref{UIandLevel}, which displayes health bars for both the player and enemies. To design the UI components, I used Unity's built-in UI package \cite{unity2024_UI} to create multiple canvases to display various types of information to the user. For communication between the UI elements and relevant game objects, I used the Observer pattern, as discussed in section \ref{observer}. I chose to use this pattern in this context to decouple the UI components from the game logic. This allows the game objects to act as subjects, and notify the relevant UI components (observers) without needing to hold direct references to them. Currently, there are two subjects (the enemy and player), and three observers (the enemy and player's health bars and the game over screen). This design is shown in figure \ref{fig:label_observer1}.
+\begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{UMLDiagrams/HealthObserverUML.drawio.png}
     \caption{UML Class digram of Health Observer Pattern}
     \label{fig:label_observer1}
 \end{figure}
+I have implemented two interfaces to manage health changes: one for the subject and one for the observers. The IHealthSubject interface defines methods for registering, unregisternig and notifying observers about health changes. The IHealthObserver interface specifies an OnNotify() method, that passes the observer the updated health value and defines what it should do given the new value. 
+The PlayerHealthAndDamage and Enemy classes implement the IHealthSubject interface. Each holds a list of observers that are managed with the register and unregister observer methods. When a health change happens, the subjects notify their observers by calling the OnNotify() method for each observer in the list.  
+\begin{verbatim}
+public void NotifyHealthObservers()
+{
+    foreach (IHealthObserver observer in _observers)
+    {
+        observer.OnNotify(_maxHealth, _health);
+    }
+}
+\end{verbatim}
+The PlayerHealthBar, EnemyHealthBar and GameOver classes implement the IHealthObserver interface. The Game Over screen needs to observe the player's health and subsequently pop up if their health is below zero. 
+The health bars observe the player and enemies to display their current health in real time. Each observer registers itself with its associated subject by calling the subject's RegisterHealthObserver(this) method. Once registered, the subject calls the observer's OnNotify() method whenever there is a health update. For example, when an Enemy notifies the EnemyHealthBar, the following method is called:
+\begin{verbatim}
+public void OnNotify(float maxHealth, float currentHealth)
+{
+    UpdateHealthBar(maxHealth, currentHealth);
+}
+\end{verbatim}
+While the use of this pattern may seem overcomplex for this scenario, as there are very few observers, I have set it up with future development in mind. As more UI components, sound effects, and visual effects are added, these elements will need to observe the same properties. Without the observer pattern, the game objects would need to hold numerous references to these components, making the system tightly coupled and complex. 
+
+
 \section{User Experience}
 - Cinemachine for smooth camera movement \newline
 - Input system : Controller and keyboard controls \newline

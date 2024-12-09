@@ -6,6 +6,8 @@
 \contentsline {section}{\numberline {3.2}Design Patterns}{6}{section.3.2}%
 \contentsline {subsection}{\numberline {3.2.1}Hierarchical State Machine}{6}{subsection.3.2.1}%
 \contentsline {subsection}{\numberline {3.2.2}Observer}{7}{subsection.3.2.2}%
+\contentsline {subsection}{\numberline {3.2.3}Strategy}{7}{subsection.3.2.3}%
+\contentsline {section}{\numberline {3.3}User Experience}{7}{section.3.3}%
 \contentsline {chapter}{\numberline {4}Planning \& Timeline}{8}{chapter.4}%
 \contentsline {subsection}{\numberline {4.0.1}Term 1}{8}{subsection.4.0.1}%
 \contentsline {subsection}{\numberline {4.0.2}Term 2}{8}{subsection.4.0.2}%
@@ -14,16 +16,15 @@
 \contentsline {subsection}{\numberline {5.1.1}Architecture}{9}{subsection.5.1.1}%
 \contentsline {subsection}{\numberline {5.1.2}Movement Physics}{10}{subsection.5.1.2}%
 \contentsline {paragraph}{}{10}{equation.5.1.2}%
-\contentsline {section}{\numberline {5.2}Enemy Movement and AI}{11}{section.5.2}%
-\contentsline {section}{\numberline {5.3}Health and Combat}{11}{section.5.3}%
-\contentsline {subsection}{\numberline {5.3.1}CombatSystem}{11}{subsection.5.3.1}%
-\contentsline {subsection}{\numberline {5.3.2}Health System}{11}{subsection.5.3.2}%
-\contentsline {subsection}{\numberline {5.3.3}Architecture}{12}{subsection.5.3.3}%
-\contentsline {section}{\numberline {5.4}User Experience}{13}{section.5.4}%
-\contentsline {chapter}{\numberline {A}Appendix}{14}{appendix.A}%
-\contentsline {section}{\numberline {A.1}Development Diary}{14}{section.A.1}%
-\contentsline {section}{\numberline {A.2}Submission Directory Structure}{16}{section.A.2}%
-\contentsline {section}{\numberline {A.3}Demo Video Link}{16}{section.A.3}%
-\contentsline {section}{\numberline {A.4}Cited References}{17}{section.A.4}%
-\contentsline {section}{\numberline {A.5}Further Research and Tutorials}{17}{section.A.5}%
-\contentsline {section}{\numberline {A.6}Assets Used}{17}{section.A.6}%
+\contentsline {section}{\numberline {5.2}Enemies and Combat}{11}{section.5.2}%
+\contentsline {subsection}{\numberline {5.2.1}Enemy Movement}{11}{subsection.5.2.1}%
+\contentsline {subsection}{\numberline {5.2.2}Combat System}{11}{subsection.5.2.2}%
+\contentsline {section}{\numberline {5.3}User Interface}{13}{section.5.3}%
+\contentsline {section}{\numberline {5.4}User Experience}{14}{section.5.4}%
+\contentsline {chapter}{\numberline {A}Appendix}{15}{appendix.A}%
+\contentsline {section}{\numberline {A.1}Development Diary}{15}{section.A.1}%
+\contentsline {section}{\numberline {A.2}Submission Directory Structure}{17}{section.A.2}%
+\contentsline {section}{\numberline {A.3}Demo Video Link}{17}{section.A.3}%
+\contentsline {section}{\numberline {A.4}Cited References}{18}{section.A.4}%
+\contentsline {section}{\numberline {A.5}Further Research and Tutorials}{18}{section.A.5}%
+\contentsline {section}{\numberline {A.6}Assets Used}{18}{section.A.6}%

@@ -82,21 +82,24 @@ Signature:
 %%%%%%%%%%%%%%%%%%%%%%
 %%% Background
 \chapter{Background}
+Game development is a multidisciplinary process that includes areas such as creating a game concept, designing its mechanics, and creating an engaging user interface and experience. Each of these elements are equally important to create a game that is accessible, enjoyable, and polished. This section talks about some key areas of the development process that I have focused on so far, including selecting an appropriate game engine, designing code that is reusable and expandable, and developing the user interface and experience.
 \section{Game Engines}
-For the development of this game, I have chosen to use Unity game engine. `Game engines are platforms that make it easier to create computer games. They allow you to integrate and combine into single unit individual game elements such as animations, interaction with the user, or detection of collisions between objects' \cite{Barczak2019}. There are many game engines available for 3D development, with notable examples including Unity, Unreal Engine, and CryEngine. These engines provide reusable components, allowing developers to focus on gameplay and design rather than redeveloping fundamental systems \cite{Barczak2019}. Unity stands out as the best choice for my project due to its powerful capabilities, user-friendly interface, and well documented resources. Unreal Engine 4 and Unity are the two most developed engines, with Unreal Engine being more suited to experienced users providing remarkable graphics, while Unity is more suited to beginners with a large asset library and simpler user interface. \cite{Christopoulou2017}.
-\newline - add about how unity uses c\# and it enables OOP and stuff
+For the development of this game, I have chosen to use Unity game engine. `Game engines are platforms that make it easier to create computer games. They allow you to integrate and combine into single unit individual game elements such as animations, interaction with the user, or detection of collisions between objects' \cite{Barczak2019}. There are many game engines available for 3D development, with notable examples including Unity, Unreal Engine, and CryEngine. These engines provide reusable components, allowing developers to focus on gameplay and design rather than redeveloping fundamental systems \cite{Barczak2019}. Unity stands out as the best choice for my project due to its powerful capabilities, user-friendly interface, and well documented resources. Unreal Engine 4 and Unity are the two most developed engines, with Unreal Engine being more suited to experienced users providing remarkable graphics, while Unity is more suited to beginners with a large asset library and simpler user interface \cite{Christopoulou2017}.
 \section{Design Patterns}
 As programs get larger, it is critical to write code in such a way that classes and modules can communicate with each other in an intelligent way \cite{alma997871033502671}. In the context of game development, the complexity of the code can become large very fast, making it important to ensure that the code is clean, reusable, and scalable. Design patterns provide solutions to common design problems, enabling code to be easily extended and reused. There are many patterns that are widely used across many types of games. Some specific patterns I have chosen to use for the game are the Hierarchical State Machine, Observer pattern, Strategy pattern and the Component Object Model. 
 \subsection{Hierarchical State Machine}\label{HSM}
 The Hierarchical State Machine (HSM)  is a variation of the standard Finite State Machine (FSM) design pattern. The FSM pattern addresses player/object states for example, walking, idle and running and encapsulates each as an object. This pattern solves two problems: an object should change it’s behaviour when its internal state changes, and adding new states does not impact the behaviour of existing states \cite{unity2022_patterns}. I will use this for the player's movement, as the player is the most complex game object in terms of states. Using a state machine simplifies the process of adding new states without affecting existing ones.  It ensures all states are handled consistently, avoiding conflicts. A HSM builds on the concept of FSM by adding a hierarchy of states, allowing shared behaviours across multiple states. This includes super states and sub states, which can run simultaneously. Super states manage the shared behaviour across the substates, while the substates define specific actions.
 \subsection{Observer}\label{observer}
 The Observer Pattern is particularly useful in games when an event occurs and multiple objects need to be notified to perform specific actions. Without this pattern, the subject would need to reference each observer directly, resulting in high coupling between classes. The pattern involves observer and subject classes, where the observer contains a method that defines what action to take when notified by the subject, while the subject keeps a list of observers and notifies them when a specific event occurs \cite{nystrom2011game}. This decouples the objects, allowing the subject to notify multiple observers without explicitly referencing them. I have decided to use this pattern in a few places in the game's code. for example, the event of a health change in the player or enemy notifying related elements such as health bars or the game over screen.
+\subsection{Strategy}\label{strategy}
+The Strategy pattern is a design pattern used to define a family of behaviours and make them interchangeable. This pattern is commonly used in game development to handle different enemy behaviours or player mechanics. The pattern involves enapsulating a set of behaviours and having the client control the behaviour through an interface, instead of hardcoding the behaviour into the client function itself \cite{Doran2017}. This approach allows new behaviors for game objects to be added easily without duplicating the original class, as the class can dynamically swap between different behaviors. I have chosen to use this pattern in my game for creating multiple enemy types.
 \newline
-- Description \& explanation of all the concepts you used so far with citations. Best to put it into sections like '1.1' so you can reference them later on \newline
-- Game engine choice  \newline
-- What is involved in making a game  \newline
 - Strategy and COM still to go for DP \newline
- 
+\section{User Experience}
+Creating an engaging and intuitive user interface (UI) and user experience (UX) is important in modern game development. 
+UX in games includes the player's overall interaction with the game, including controls, interface design, camera systems, feedback mechanisms, and navigation flows \cite{Kramarzewski2023}. It focuses on ensuring that the game is enjoyable, accessible, and meets player expectations. 
+\newline Designing effective input involves adhering to the principles of ergonomics and user expectations. Ergonomics refers to creating controls that are natural for hand movement, while user expectations involve using input controls that are familiar, so players can quickly learn the controls \cite{Rogers2014}. For example, the WASD keys are commonly used for movement in PC games because they are familiar to most players, and they allow a natural position for the hand on the keyboard. Camera systems are essential in games to determine the player's perspective of the game world. Common types include first-person, third-person and top-down cameras, each providing different approaches to the gameplay design \cite{Kramarzewski2023}. 
+\section{User Interface and Level Design}
 %%%%%%%%%%%%%%%%%%%%%%
 %%% Planning & Timeline
 \chapter{Planning \& Timeline}
@@ -129,7 +132,6 @@ Week 10-11: & \textcolor{black}{|} & $\bullet$ & Work on final report \\
 %%%%%%%%%%%%%%%%%%%%%%
 %%% Development
 \chapter{Development}
- - Possibly info about unity engine \& why I chose it
 \section{Player Movement}
 Creating smooth and responsive movement for the player is essential for the user experience, as 3D platformer games require precise movements to traverse the levels. The player's movement covers standing idle, walking, running and jumping. 
 \subsection{Architecture}
@@ -153,7 +155,6 @@ The jump trajectory is calculated by applying an initial upward velocity and adj
 \text{Initial Jump Velocity} = \frac{2 \cdot \text{MaxJumpHeight}}{\text{TimeToApex}}
 \end{equation}
 \paragraph{}
-% Code Snippet (below)
 \begin{verbatim}
 private void SetupJumpVariables()
 {
@@ -164,10 +165,16 @@ private void SetupJumpVariables()
 \end{verbatim}
 For the gravity applied to the player while grounded, I used a smaller value of gravity to avoid unecessary gravitational calculations and to prevent the high gravity from slowing down the player's movement. \newline
 
-\section{Enemy Movement and AI}
-- Strategy pattern for enemies \newline
+%%%%%%%%%%%%%%%%%%%%%%
+%%% Enemies and Combat#
+\section{Enemies and Combat}
+
+- Explain what is involved in the enemy movement and the combat system and overview of patterns\newline 
+
 \subsection{Enemy Movement}
-- 
+- NavMeshAgents
+\newline - UML for strategy
+The EnemyScriptableObject stores all the customizable parameters, such as health, attack speed, and movement speed. During runtime, the Enemy class uses the data from the assigned ScriptableObject to adjust its behavior dynamically. This approach decouples the data configuration from the core enemy logic, allowing new enemy types to be added easily by simply creating new ScriptableObjects without modifying the underlying code.
 \subsection{Combat System}
 The combat system is a core feature of the game, enabling attack and damage mechanics between the player and enemies. The design focusses on handling the damage mechanic in a consistent way across both enemies and player, while accomodating their differing attack mechanics. This was achieved by creating an IDamageable interface, which must be implemented by all game objects capable of taking damage. This design is detailed in figure  \ref{fig:label_combat}.
 \begin{figure}[H]
@@ -180,6 +187,18 @@ The IDamageable interface is the core of the system, which defines a TakeDamage(
 \newline The player's combat mechanic is controlled by the WeaponAttributes class. The weapon is equipped with a box collider that calls the OnTriggerEnter() method on collision. Within OnTriggerEnter(), the TakeDamage() method is called on the enemy that entered the collider. The WeaponManager class manages the weapon's box collider, ensuring that it is only enabled during the player's attack animation. This is achieved with Unity animation events, which call the EnableWeaponCollider() method at the appropriate time during the attack animation.
 \newline The enemy's combat system differs from the player's, as it does not rely on weapon collision mechanics. Instead, the AttackRadius class manages the enemy's attack behaviour. This system uses a sphere collider that defines a radius in which the player can take damage. When the player is within this radius, the enemy periodically attacks by calling the player's TakeDamage() method. The  attacks are based on a set delay, allowing different enemy types to vary in attack speed.
 
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=\textwidth]{UMLDiagrams/DefeatObserverUML.drawio.png}
+    \caption{UML Class digram of Enemy Defeat Observer Pattern.}
+    \label{fig:label_observer2}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%
+%%% User Experience#
+\section{User Interface}
+- Observer for UI  + UML \newline
 \ref{observer}
 \begin{figure}[h!]
     \centering
@@ -187,21 +206,8 @@ The IDamageable interface is the core of the system, which defines a TakeDamage(
     \caption{UML Class digram of Health Observer Pattern}
     \label{fig:label_observer1}
 \end{figure}
-\begin{figure}[h!]
-    \centering
-    \includegraphics[width=\textwidth]{UMLDiagrams/DefeatObserverUML.drawio.png}
-    \caption{UML Class digram of Enemy Defeat Observer Pattern.}
-    \label{fig:label_observer2}
-\end{figure}
-Still to include : \newline
-- Observer for combat system + UML \newline
-- NavMesh agents for AI pathfinding for enemies \newline
-- Coroutines  \newline
 \section{User Experience}
-Still to include: \newline
 - Cinemachine for smooth camera movement \newline
-- Animation \newline
-- UI \newline
 - Input system : Controller and keyboard controls \newline
 - Level Design
 

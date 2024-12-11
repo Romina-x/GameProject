@@ -15,7 +15,7 @@ public class WeaponAttributes : MonoBehaviour
         IDamageable damageable = other.GetComponent<IDamageable>();
         if(damageable != null)
         {
-            // Call takedamage method on enemy gameobject
+            // Call takedamage method on enemy
             damageable.TakeDamage(damage);
         }
     }

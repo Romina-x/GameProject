@@ -6,17 +6,27 @@ Andrzej~Marian Barczak and Hubert Woźniak.
 \newblock {\em Studia Informatica. Systems and Information Technology},
   (1-2):5--24, 2019.
 
-\bibitem{Christopoulou2017}
-E.~Christopoulou and S.~Xinogalos.
-\newblock Overview and comparative analysis of game engines for desktop and
-  mobile devices.
-\newblock {\em International Journal of Serious Games}, 4(4), 2017.
-
 \bibitem{Doran2017}
 John~P. Doran and Matt Casanova.
 \newblock {\em Game development patterns and best practices : better games,
   less hassle}.
 \newblock Packt, 1st edition edition, 2017.
+
+\bibitem{eventyr_2023}
+Eventyr.
+\newblock Game development with unreal engine: Pros and cons.
+\newblock
+  \url{https://eventyr.pro/blog/game-development-with-unreal-engine-pros-and-cons/},
+  2023.
+\newblock Accessed: 2024-10-12.
+
+\bibitem{hatton_2024}
+Paul Hatton.
+\newblock Godot engine vs unity: which is right for you?
+\newblock
+  \url{https://www.creativebloq.com/3d/video-game-design/godot-engine-vs-unity-which-is-right-for-you},
+  2024.
+\newblock Accessed: 2024-10-12.
 
 \bibitem{Kramarzewski2023}
 Adam Kramarzewski and Ennio~De Nucci.
@@ -24,6 +34,14 @@ Adam Kramarzewski and Ennio~De Nucci.
   Video Game Design}.
 \newblock Packt Publishing Ltd, Birmingham, England, second edition. edition,
   2023.
+
+\bibitem{medium_2024}
+Medium.
+\newblock Advantages and disadvantages of unity 3d game development.
+\newblock
+  \url{https://medium.com/@mobileappandgameappdevelopment/advantages-and-disadvantages-of-unity-3d-game-development-4314c067d4b2},
+  2024.
+\newblock Accessed: 2024-10-12.
 
 \bibitem{nystrom2011game}
 Robert Nystrom.
@@ -65,5 +83,45 @@ Unity Technologies.
   \url{https://docs.unity3d.com/6000.0/Documentation/Manual/class-CharacterController.html},
   2024.
 \newblock Accessed: 2024-11-10.
+
+\bibitem{unity2024_NavAgent}
+Unity Technologies.
+\newblock Navmeshagent.
+\newblock
+  \url{https://docs.unity3d.com/6000.0/Documentation/ScriptReference/AI.NavMeshAgent.html},
+  2024.
+\newblock Accessed: 2024-8-12.
+
+\bibitem{unity2024_ScriptableObject}
+Unity Technologies.
+\newblock Scriptableobject.
+\newblock
+  \url{https://docs.unity3d.com/6000.0/Documentation/Manual/class-ScriptableObject.html#:~:text=A%20ScriptableObject%20is%20a%20data%20container%20that%20you,project%E2%80%99s%20memory%20usage%20by%20avoiding%20copies%20of%20values.},
+  2024.
+\newblock Accessed: 2024-8-12.
+
+\bibitem{unity2024_Coroutines}
+Unity Technologies.
+\newblock Splitting tasks across frames.
+\newblock
+  \url{https://docs.unity3d.com/6000.0/Documentation/Manual/coroutines.html},
+  2024.
+\newblock Accessed: 2024-8-12.
+
+\bibitem{unity2024_UI}
+Unity Technologies.
+\newblock Unity ui.
+\newblock
+  \url{https://docs.unity3d.com/6000.0/Documentation/Manual/com.unity.ugui.html},
+  2024.
+\newblock Accessed: 2024-8-12.
+
+\bibitem{unity2024_AI}
+Unity Technologies.
+\newblock Unityengine.aimodule.
+\newblock
+  \url{https://docs.unity3d.com/6000.0/Documentation/ScriptReference/UnityEngine.AIModule.html},
+  2024.
+\newblock Accessed: 2024-8-12.
 
 \end{thebibliography}

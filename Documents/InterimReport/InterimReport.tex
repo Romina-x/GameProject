@@ -65,12 +65,6 @@ Signature:
 
 \end{abstract}
 \newpage
-
-%%%%%%%%%%%%%%%%%%%%%%
-%%% Objectives
-
-\chapter{Objectives}
-- Objectives you agreed on from the specification of the project
 %%%%%%%%%%%%%%%%%%%%%%
 %%% Introduction
 \chapter{Introduction}
@@ -84,22 +78,37 @@ Signature:
 \chapter{Background}
 Game development is a multidisciplinary process that includes areas such as creating a game concept, designing its mechanics, and creating an engaging user interface and experience. Each of these elements are equally important to create a game that is accessible, enjoyable, and polished. This section talks about some key areas of the development process that I have focused on so far, including selecting an appropriate game engine, designing code that is reusable and expandable, and developing the user interface and experience.
 \section{Game Engines}
-For the development of this game, I have chosen to use Unity game engine. `Game engines are platforms that make it easier to create computer games. They allow you to integrate and combine into single unit individual game elements such as animations, interaction with the user, or detection of collisions between objects' \cite{Barczak2019}. There are many game engines available for 3D development, with notable examples including Unity, Unreal Engine, and CryEngine. These engines provide reusable components, allowing developers to focus on gameplay and design rather than redeveloping fundamental systems \cite{Barczak2019}. Unity stands out as the best choice for my project due to its powerful capabilities, user-friendly interface, and well documented resources. Unreal Engine 4 and Unity are the two most developed engines, with Unreal Engine being more suited to experienced users providing remarkable graphics, while Unity is more suited to beginners with a large asset library and simpler user interface \cite{Christopoulou2017}.
+Game engines are platforms that make it easier to create computer games. They allow you to integrate and combine into single unit individual game elements such as animations, interaction with the user, or detection of collisions between objects \cite{Barczak2019}. . These engines provide reusable components, allowing developers to focus on gameplay and design rather than redeveloping fundamental systems. There are many engines available, each suited to different types of projects. Popular engines for both 3D and 2D game development include Unreal Engine, Unity and Godot, while GameMaker and Construct are popular for 2D development. As I have chosen to develop a 3D game I will primarily compare 3D game engines.\newline
+
+Unreal Engine focuses on providing high-quality games with outstanding graphics and realism, thanks to its powerful graphics and rendering capabilities. Its Blueprint visual scripting system is a distinctive characteristic which allows programmers to build gameplay mechanics and events without writing any code. However Unreal Engine also provides the option to use C++ for more advanced customisation \cite{eventyr_2023}. While this engine offers many benefits, it comes with a very steep learning curve, as the interface and functionalities are intricate. Another drawback is that the software is resource intensive, requiring a more demanding system configuration for both gameplay and development \cite{eventyr_2023}. \newline
+
+Unity is a powerful engine that is used by both small and large development studios. Its most prominent features are its user friendly interface, cross-platform compatability, and powerful rendering and performance. It also provides a large asset library and extensive documentation. While Unity provides great performance and graphics, it is not an ideal choice for massive open worlds or intricate graphics as its performance is limited compared to that of Unreal Engine which is more suited to this type of game \cite{medium_2024}. Additionally, while Unity has a large user community and documentation, it can present a steep learning curve for those new to game development or programming, as it primarily uses C\# for scripting.\newline
+
+Godot is a versatile open-source game engine that offers 3D and 2D development. It offers a lightweight, user friendly interface and provides its own scripting language, GDScript which is beginner friendly. Godot also requires less power and expense to run in comparison to Unity and Unreal Engine. Some drawbacks of this engine are having a less extensive documentation and asset library in comparison to Unity and Unreal Engine, and is less suited to games that require a large range of functionality. \cite{hatton_2024}. \newline
+For this game, my requirements include good tools and support for 3D development, an interface that is relatively beginner-friendly, and access to a large asset library, as I will not be creating the 3D models from scratch. Since I have chosen a stylised visual style for the game, which gives a more cartoon-like look over realism, the project does not require an engine with advanced high-end graphics capabilities. Additionally, the decision to create contained levels instead of a large open-world environment means that the engine does not need to support expansive or highly complex environments.
+Unity stands out as the best fit for these requirements due to its powerful 3D developmentcapabilities, while being less resource intensive than Unreal Engine. Additionally, it is the most vastly documented engine of the three with a large asset store making it very accessible to learn and use.
 \section{Design Patterns}
-As programs get larger, it is critical to write code in such a way that classes and modules can communicate with each other in an intelligent way \cite{alma997871033502671}. In the context of game development, the complexity of the code can become large very fast, making it important to ensure that the code is clean, reusable, and scalable. Design patterns provide solutions to common design problems, enabling code to be easily extended and reused. There are many patterns that are widely used across many types of games. Some specific patterns I have chosen to use for the game are the Hierarchical State Machine, Observer pattern, Strategy pattern and the Component Object Model. 
+As programs get larger, it is critical to write code in such a way that classes and modules can communicate with each other in an intelligent way \cite{alma997871033502671}. In the context of game development, the complexity of the code can become large very fast, making it important to ensure that the code is clean, reusable, and scalable. Design patterns provide solutions to common design problems, enabling code to be easily extended and reused. It is important to create reusable components to reduce the amount of code that needs to be written for the game, and additionally design patterns make code easily extendable by designing it in such a way that adding new functionality does not require many changes to the existing functionality. There are many patterns that are widely used across many types of games. Some specific patterns I have chosen to use for the game are the Hierarchical State Machine, Observer pattern, Strategy pattern and the Component Object Model. 
 \subsection{Hierarchical State Machine}\label{HSM}
-The Hierarchical State Machine (HSM)  is a variation of the standard Finite State Machine (FSM) design pattern. The FSM pattern addresses player/object states for example, walking, idle and running and encapsulates each as an object. This pattern solves two problems: an object should change it’s behaviour when its internal state changes, and adding new states does not impact the behaviour of existing states \cite{unity2022_patterns}. I will use this for the player's movement, as the player is the most complex game object in terms of states. Using a state machine simplifies the process of adding new states without affecting existing ones.  It ensures all states are handled consistently, avoiding conflicts. A HSM builds on the concept of FSM by adding a hierarchy of states, allowing shared behaviours across multiple states. This includes super states and sub states, which can run simultaneously. Super states manage the shared behaviour across the substates, while the substates define specific actions.
+The Hierarchical State Machine (HSM)  is a variation of the standard Finite State Machine (FSM) design pattern. The FSM pattern addresses player/object states for example, walking, idle and running and encapsulates each as an object. This pattern solves two problems: an object should change it’s behaviour when its internal state changes, and adding new states does not impact the behaviour of existing states \cite{unity2022_patterns}. I will use this for the player's movement, as the player is the most complex game object in terms of states. Using a state machine simplifies the process of adding new states without affecting existing ones.  It ensures all states are handled consistently, avoiding conflicts. A HSM builds on the concept of FSM by adding a hierarchy of states, allowing shared behaviours across multiple states. This includes super states and sub states, which can run simultaneously. Super states manage the shared behaviour across the substates, while the substates define specific actions. This pattern is very commonly used in games for player movement states and enemy AI states as they tend to have the most complex set of behaviours. I will use this pattern for the player movement states in the game.
 \subsection{Observer}\label{observer}
-The Observer Pattern is particularly useful in games when an event occurs and multiple objects need to be notified to perform specific actions. Without this pattern, the subject would need to reference each observer directly, resulting in high coupling between classes. The pattern involves observer and subject classes, where the observer contains a method that defines what action to take when notified by the subject, while the subject keeps a list of observers and notifies them when a specific event occurs \cite{nystrom2011game}. This decouples the objects, allowing the subject to notify multiple observers without explicitly referencing them. I have decided to use this pattern in a few places in the game's code. for example, the event of a health change in the player or enemy notifying related elements such as health bars or the game over screen.
+The Observer Pattern is particularly useful in games when an event occurs and multiple objects need to be notified to perform specific actions. Without this pattern, the subject would need to reference each observer directly, resulting in high coupling between classes. The pattern involves observer and subject classes, where the observer contains a method that defines what action to take when notified by the subject, while the subject keeps a list of observers and notifies them when a specific event occurs \cite{nystrom2011game}. This decouples the objects, allowing the subject to notify multiple observers without explicitly referencing them. Observer is commonly used in games for health and damage systems, UI updates, and game event notifications. I have decided to use this pattern in a few places in the game's code. For example, the event of a health change in the player or enemy notifying related elements such as health bars or the game over screen.
 \subsection{Strategy}\label{strategy}
-The Strategy pattern is a design pattern used to define a family of behaviours and make them interchangeable. This pattern is commonly used in game development to handle different enemy behaviours or player mechanics. The pattern involves enapsulating a set of behaviours and having the client control the behaviour through an interface, instead of hardcoding the behaviour into the client function itself \cite{Doran2017}. This approach allows new behaviors for game objects to be added easily without duplicating the original class, as the class can dynamically swap between different behaviors. I have chosen to use this pattern in my game for creating multiple enemy types.
+The Strategy pattern is a design pattern used to define a family of behaviours and make them interchangeable. This pattern is commonly used in game development to handle different enemy behaviours or player mechanics. The pattern involves enapsulating a set of behaviours and having the client control the behaviour through an interface, instead of hardcoding the behaviour into the client function itself \cite{Doran2017}. This approach allows new behaviors for game objects to be added easily without duplicating the original class, as the class can dynamically swap between different behaviors. This pattern is commonly used in games for varying enemy types that are interchangeable, and for varying attack mechanics for example different weapon types. I have chosen to use this pattern in my game for creating multiple enemy types with varying behaviours.
 \newline
-- Strategy and COM still to go for DP \newline
-\section{User Experience}
+COM still to go for DP \newline
+\section{User Experience}\label{userexperience}
 Creating an engaging and intuitive user interface (UI) and user experience (UX) is important in modern game development. 
 UX in games includes the player's overall interaction with the game, including controls, interface design, camera systems, feedback mechanisms, and navigation flows \cite{Kramarzewski2023}. It focuses on ensuring that the game is enjoyable, accessible, and meets player expectations. 
-\newline Designing effective input involves adhering to the principles of ergonomics and user expectations. Ergonomics refers to creating controls that are natural for hand movement, while user expectations involve using input controls that are familiar, so players can quickly learn the controls \cite{Rogers2014}. For example, the WASD keys are commonly used for movement in PC games because they are familiar to most players, and they allow a natural position for the hand on the keyboard. Camera systems are essential in games to determine the player's perspective of the game world. Common types include first-person, third-person and top-down cameras, each providing different approaches to the gameplay design \cite{Kramarzewski2023}. 
-\section{User Interface and Level Design}\label{UIandLevel}
+\newline Designing effective input involves adhering to the principles of ergonomics and user expectations. Ergonomics refers to creating controls that are natural for hand movement, while user expectations involve using input controls that are familiar, so players can quickly learn the controls \cite{Rogers2014}. For example, the WASD keys are commonly used for movement in PC games because they are familiar to most players, and they allow a natural position for the hand on the keyboard. 3D platforming games typically use controller input rather than keyboard, as it allows smoother directional movement with a joystick as opposed to using arrow keys. I have chosen to offer both controller and keyboard input options for better user experience. \newline
+
+Camera systems are essential in games to determine the player's perspective of the game world. Common types include first-person, third-person and top-down cameras, each providing different approaches to the gameplay design \cite{Kramarzewski2023}. First person cameras show the game through the eyes of the player character, which offers a more immersive experience. This is commonly used for first-person shooter games like Call of Duty where precise aiming is important. Third person cameras are positioned slightly above and behind the player character which provides a wider view of the area with more focus on the player character. It is typically used in adventure games and 3D platforming games like The Legend of Zelda series and Super Mario Galaxy. Top down cameras are typically used in puzzle or strategy games like Stardew Valley and provides a bird's eye view of the game world. Super Mario 3D world which I am taking some inspiration from, uses a fixed third person camera and this fits with the platformer/adventure theme of my game. \newline
+
+- LEVEL DESIGN
+
+
+
+
 %%%%%%%%%%%%%%%%%%%%%%
 %%% Planning & Timeline
 \chapter{Planning \& Timeline}
@@ -129,6 +138,7 @@ Week 9-10: & \textcolor{black}{|} & $\bullet$ & Final play-testing : Bug fixing 
 & \textcolor{black}{|} & $\bullet$ & \textbf{Final game with expanded features finished by Week 10} \\
 Week 10-11: & \textcolor{black}{|} & $\bullet$ & Work on final report \\
 \end{tabular}
+
 %%%%%%%%%%%%%%%%%%%%%%
 %%% Development
 \chapter{Development}
@@ -225,16 +235,47 @@ The combat system is a core feature of the game, enabling attack and damage mech
     \label{fig:label_combat}
 \end{figure}
 The IDamageable interface is the core of the system, which defines a TakeDamage() method which reduces the entity's health based on an incoming damage value. Both the Enemy and PlayerHealthAndDamage classes implement this interface, ensuring damage is applied in a consistent way for both entities. 
-\newline The player's combat mechanic is controlled by the WeaponAttributes class. The weapon is equipped with a Box Collider that calls the OnTriggerEnter() method on collision. Within OnTriggerEnter(), the TakeDamage() method is called on the enemy that entered the collider. The WeaponManager class manages the weapon's Box Collider, ensuring that it is only enabled during the player's attack animation. This is achieved with Unity animation events, which call the EnableWeaponCollider() method at the appropriate time during the attack animation.
-\newline The enemy's combat system differs from the player's, as it does not rely on weapon collision mechanics. Instead, the AttackRadius class manages the enemy's attack behaviour. This system uses a Sphere Collider that defines a radius in which the player can take damage. When the player is within this radius, the enemy periodically attacks by calling the player's TakeDamage() method. The  attacks are based on a set delay, allowing different enemy types to vary in attack speed.
+\newline The player's combat mechanic is controlled by the WeaponAttributes class. The weapon is equipped with a Box Collider that calls the OnTriggerEnter() method on collision. Within OnTriggerEnter(), the TakeDamage() method is called on the enemy that entered the collider. 
+\begin{verbatim}
+private void OnTriggerEnter(Collider other)
+{
+    IDamageable damageable = other.GetComponent<IDamageable>();
+    if(damageable != null)
+    {
+        // Call takedamage method on enemy
+        damageable.TakeDamage(damage);
+    }
+}
+\end{verbatim}
+The WeaponManager class manages the weapon's Box Collider, ensuring that it is only enabled during the player's attack animation. This is achieved with Unity animation events, which call the EnableWeaponCollider() method at the appropriate time during the attack animation.\newline 
+The enemy's combat system differs from the player's, as it does not rely on weapon collision mechanics. Instead, the AttackRadius class manages the enemy's attack behaviour. This system uses a Sphere Collider that defines a radius in which the player can take damage. When the player is within this radius, the enemy periodically attacks by calling the player's TakeDamage() method. The  attacks are based on a set delay, allowing different enemy types to vary in attack speed. The Attack coroutine from AttackRadius is shown below:
+\begin{verbatim}
+private IEnumerator Attack()
+{
+    // Delay between attacks
+    WaitForSeconds wait = new WaitForSeconds(_attackDelay);
+    yield return wait;
+
+    // Continue attacking while there are damageables in the radius
+    while (_damageables.Count > 0)
+    {
+        if(closestDamageable != null)
+        {
+            OnAttack?.Invoke(closestDamageable);
+	  // Player takes damage
+            closestDamageable.TakeDamage(_damage);
+        }
+
+        // Delay between each attack
+        yield return wait;
+        _damageables.RemoveAll(DisabledDamageables);
+    }
+    _attackCoroutine = null;
+}
+\end{verbatim}
 
 
-\begin{figure}[h!]
-    \centering
-    \includegraphics[width=\textwidth]{UMLDiagrams/DefeatObserverUML.drawio.png}
-    \caption{UML Class digram of Enemy Defeat Observer Pattern.}
-    \label{fig:label_observer2}
-\end{figure}
+
 
 %%%%%%%%%%%%%%%%%%%%%%
 %%% User Experience#
@@ -267,11 +308,14 @@ public void OnNotify(float maxHealth, float currentHealth)
 \end{verbatim}
 While the use of this pattern may seem overcomplex for this scenario, as there are very few observers, I have set it up with future development in mind. As more UI components, sound effects, and visual effects are added, these elements will need to observe the same properties. Without the observer pattern, the game objects would need to hold numerous references to these components, making the system tightly coupled and complex. 
 
-
 \section{User Experience}
+User experience focuses on ensuring that the game is enjoyable and accessible for the player, which includes considerations for controls, camera movement, feedback mechanisms and interface design, as discussed in section \ref{userexperience}. I have selected and begun implementing the camera movement, input options, and a prototype for the level design.
+For the camera movement I implemented a fixed third-person perspective. The camera stays positioned behind the player and and follows their movements without allowing the player to control its angle or view. To achieve smooth camera movement for this scenario I made use of Unity's Cinemacine package.
 - Cinemachine for smooth camera movement \newline
 - Input system : Controller and keyboard controls \newline
 - Level Design
+
+\chapter{Testing and Code Style}
 
 %%%%%%%%%%%%%%%%%%%%%%
 %%% Appendix#
@@ -371,6 +415,12 @@ The Assets folder contains all of the work I have completed so far including the
 \section{Cited References}
 \section{Further Research and Tutorials}
 \section{Assets Used}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=\textwidth]{UMLDiagrams/DefeatObserverUML.drawio.png}
+    \caption{UML Class digram of Enemy Defeat Observer Pattern (not used yet).}
+    \label{fig:label_observer2}
+\end{figure}
 \label{endpage}
 
 \end{document}

@@ -1,31 +1,31 @@
 \contentsline {chapter}{Abstract}{3}{chapter*.2}%
-\contentsline {chapter}{\numberline {1}Objectives}{4}{chapter.1}%
-\contentsline {chapter}{\numberline {2}Introduction}{5}{chapter.2}%
-\contentsline {chapter}{\numberline {3}Background}{6}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Game Engines}{6}{section.3.1}%
-\contentsline {section}{\numberline {3.2}Design Patterns}{6}{section.3.2}%
-\contentsline {subsection}{\numberline {3.2.1}Hierarchical State Machine}{6}{subsection.3.2.1}%
-\contentsline {subsection}{\numberline {3.2.2}Observer}{7}{subsection.3.2.2}%
-\contentsline {subsection}{\numberline {3.2.3}Strategy}{7}{subsection.3.2.3}%
-\contentsline {section}{\numberline {3.3}User Experience}{7}{section.3.3}%
-\contentsline {section}{\numberline {3.4}User Interface and Level Design}{8}{section.3.4}%
-\contentsline {chapter}{\numberline {4}Planning \& Timeline}{9}{chapter.4}%
-\contentsline {subsection}{\numberline {4.0.1}Term 1}{9}{subsection.4.0.1}%
-\contentsline {subsection}{\numberline {4.0.2}Term 2}{9}{subsection.4.0.2}%
-\contentsline {chapter}{\numberline {5}Development}{10}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Player Movement}{10}{section.5.1}%
-\contentsline {subsection}{\numberline {5.1.1}Architecture}{10}{subsection.5.1.1}%
-\contentsline {subsection}{\numberline {5.1.2}Movement Physics}{11}{subsection.5.1.2}%
-\contentsline {paragraph}{}{11}{equation.5.1.2}%
-\contentsline {section}{\numberline {5.2}Enemy Movement}{12}{section.5.2}%
-\contentsline {subsection}{\numberline {5.2.1}Architecture}{12}{subsection.5.2.1}%
-\contentsline {section}{\numberline {5.3}Combat System}{13}{section.5.3}%
-\contentsline {section}{\numberline {5.4}User Interface}{15}{section.5.4}%
-\contentsline {section}{\numberline {5.5}User Experience}{17}{section.5.5}%
-\contentsline {chapter}{\numberline {A}Appendix}{18}{appendix.A}%
-\contentsline {section}{\numberline {A.1}Development Diary}{18}{section.A.1}%
-\contentsline {section}{\numberline {A.2}Submission Directory Structure}{20}{section.A.2}%
-\contentsline {section}{\numberline {A.3}Demo Video Link}{20}{section.A.3}%
-\contentsline {section}{\numberline {A.4}Cited References}{21}{section.A.4}%
-\contentsline {section}{\numberline {A.5}Further Research and Tutorials}{21}{section.A.5}%
-\contentsline {section}{\numberline {A.6}Assets Used}{21}{section.A.6}%
+\contentsline {chapter}{\numberline {1}Introduction}{4}{chapter.1}%
+\contentsline {chapter}{\numberline {2}Background}{5}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Game Engines}{5}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Design Patterns}{6}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}Hierarchical State Machine}{6}{subsection.2.2.1}%
+\contentsline {subsection}{\numberline {2.2.2}Observer}{6}{subsection.2.2.2}%
+\contentsline {subsection}{\numberline {2.2.3}Strategy}{7}{subsection.2.2.3}%
+\contentsline {section}{\numberline {2.3}User Experience}{7}{section.2.3}%
+\contentsline {chapter}{\numberline {3}Planning \& Timeline}{9}{chapter.3}%
+\contentsline {subsection}{\numberline {3.0.1}Term 1}{9}{subsection.3.0.1}%
+\contentsline {subsection}{\numberline {3.0.2}Term 2}{9}{subsection.3.0.2}%
+\contentsline {chapter}{\numberline {4}Development}{10}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Player Movement}{10}{section.4.1}%
+\contentsline {subsection}{\numberline {4.1.1}Architecture}{10}{subsection.4.1.1}%
+\contentsline {subsection}{\numberline {4.1.2}Movement Physics}{11}{subsection.4.1.2}%
+\contentsline {paragraph}{}{11}{equation.4.1.2}%
+\contentsline {section}{\numberline {4.2}Enemy Movement}{12}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Architecture}{12}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}Configurable Enemies}{13}{subsection.4.2.2}%
+\contentsline {section}{\numberline {4.3}Combat System}{14}{section.4.3}%
+\contentsline {section}{\numberline {4.4}User Interface}{16}{section.4.4}%
+\contentsline {section}{\numberline {4.5}User Experience}{18}{section.4.5}%
+\contentsline {chapter}{\numberline {5}Testing and Code Style}{19}{chapter.5}%
+\contentsline {chapter}{\numberline {A}Appendix}{20}{appendix.A}%
+\contentsline {section}{\numberline {A.1}Development Diary}{20}{section.A.1}%
+\contentsline {section}{\numberline {A.2}Submission Directory Structure}{22}{section.A.2}%
+\contentsline {section}{\numberline {A.3}Demo Video Link}{22}{section.A.3}%
+\contentsline {section}{\numberline {A.4}Cited References}{24}{section.A.4}%
+\contentsline {section}{\numberline {A.5}Further Research and Tutorials}{24}{section.A.5}%
+\contentsline {section}{\numberline {A.6}Assets Used}{24}{section.A.6}%

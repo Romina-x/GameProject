@@ -7,7 +7,7 @@
 \usepackage{listings}
 \usepackage{amsmath}
 \usepackage{caption}
-\usepackage{fancyhdr}
+
 \usepackage{forest}
 \usepackage{cite}
 \usepackage{float}
@@ -153,7 +153,7 @@ The architecture for the player's movement uses a Hierarchical State Machine (HS
     \label{fig:label_State}
 \end{figure}
 \newline The PlayerStateMachine is the core component which manages the players states and transitions. This script is attached to the player game object and it's Update() method is called every frame to handle the player movement and state changes. PlayerStateFactory handles the creation of states for the StateMachine, which uses them for the transitions between player behaviours. I chose here to use the factory pattern for state creation as it simplifies the management of numerous states, making the StateMachine more readable. It also decouples the states from the StateMachine, allowing the architecture to be more easily reused with other state factories. PlayerBaseState is an abstract class that defines the common methods and behaviours for each state.  It provides access to the current StateMachine and StateFactory while also defining the core methods (EnterState(), UpdateState() and ExitState()) that the states need to implement for proper transitions. The state classes (Idle, Walk, Run, Jump and Grounded) are concrete implementations of PlayerBaseState. Each state contains the unique logic specific to its intended behaviour. For example, the Jump state handles the physics for the upward force and gravity during the jump. In addition, each state defines the conditions in which to transition to a neighbouring state. As mentioned previously, the states are organised in a hierarchy. Grounded and Jump are superstates while Idle, Walk and Run are substates. 
-\subsection{Movement Physics}
+\subsection{Movement Physics}\label{physics}
 In my game, I chose to use Unity's built in Character Controller for player movement rather than implementing Rigidbody based movement. The built in character controller allows you to easily implement basic movement (Walking) with collisions, but the player will not be affected by physics \cite{unity2024_charactercontroller}. In contrast, Rigidbodies put the game object under the effect of Unity's physics engine, and gravity is automatically applied and the object will react to impact from other Rigidbodies. In my game, the player needs to move around and jump across platforms, and the combat mechanics are physical. Therefore, the game requires limited use of physics beyond gravity.  This is why I have chosen the built-in Character Controller, as it avoids complex physics calculations and interactions that are not necessary. \newline
 The Character Controller component is a capsule-shaped collider that can be told to move in some direction from a script. It will stop at walls, walk up stairs and walk on slopes \cite{unity2024_charactercontroller_reference}. The controller uses the Move() method to apply movement to the player by taking a movement vector and adjusting the player's position. I used this for the player's walking and running states, incorporating a run multiplier to differentiate between walking and running speeds. However, the Character Controller does not cover all movement aspects, so I implemented the gravity and jump mechanics seperately.  \newline
 The jump trajectory is calculated by applying an initial upward velocity and adjusting it with gravity over time. The initial velocity is calculated based on the desired maximum jump height and the time it takes to reach the apex of the jump. This ensured that the player reaches the jump height within the given time. Once the initial velocity is applied, gravity is applied continuously which decelerates the player until the apex, then accelerates them back to the ground. To calculate the initial velocity and gravity required for a parabolic jump motion, I used the following equations outlined by Kyle Pittman \cite{pittman2016_jump}:
@@ -310,9 +310,26 @@ While the use of this pattern may seem overcomplex for this scenario, as there a
 
 \section{User Experience}
 User experience focuses on ensuring that the game is enjoyable and accessible for the player, which includes considerations for controls, camera movement, feedback mechanisms and interface design, as discussed in section \ref{userexperience}. I have selected and begun implementing the camera movement, input options, and a prototype for the level design.
-For the camera movement I implemented a fixed third-person perspective. The camera stays positioned behind the player and and follows their movements without allowing the player to control its angle or view. To achieve smooth camera movement for this scenario I made use of Unity's Cinemacine package.
-- Cinemachine for smooth camera movement \newline
-- Input system : Controller and keyboard controls \newline
+For the camera movement I implemented a fixed third-person perspective. The camera stays positioned behind the player and and follows their movements without allowing the player to control its angle or view. To achieve smooth and dynamic camera movement for this scenario I made use of Unity's Cinemacine package. Cinemachine allows you to create professional looking camera movement with automatic damping and target tracking \cite{onewheelstudio_2021}. I used the FreeLook camera to create the third person camera as shown in figure \ref{fig:label_camera}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{OtherImages/PlayerCamera.png}
+    \caption{FreeLook Camera on Player}
+    \label{fig:label_camera}
+\end{figure}
+Using cinemachine, I could define different camera properties such as follow speed and field of view to achieve the best perspective that would show a sufficient view of the world within the camera. \newline
+As discussed in \ref{userexperience}, player controls are an important factor towards offering a great user experience. To allow the player to use either keyboard inputs or game controller inputs, I made use of Unity's new Input System. The input system allows players to control the game in a variety of ways including external devices, touch screen or gestures \cite{unity_2024_inputsystem}. This is done by setting up 'Actions' such as running, which can have multiple input options linked to it. For example the run action is linked to both the Left Shift key on the keyboard, and the Left Trigger button on a controller. Below is an example of how the directional movement input is read using the corresponding input action:
+\begin{verbatim}
+private void OnMovementInput(InputAction.CallbackContext context)
+{
+    Vector2 input = context.ReadValue<Vector2>();
+    _currentMovementInput = input;
+    _isMovementPressed = input != Vector2.zero;
+}
+\end{verbatim}
+OnMovementInput is triggered when the movement input action is performed (Joystick or WASD key movements) and provides 'context' of the action. In this case we read the input as a two dimensional vector in the direction that the player is pressing, which is then used for the Move() method of the Character Controller \ref{physics}. 
+
+
 - Level Design
 
 \chapter{Testing and Code Style}
@@ -407,7 +424,6 @@ For the camera movement I implemented a fixed third-person perspective. The came
 \end{figure}
 The Assets folder contains all of the work I have completed so far including the 3D models for the player, enemies, terrain etc., as well as the associated scripts and animations. The diagram hilights the most important subfolders, such as the scripts folders, where all my C\# scripts are organised. Note that not all folders are included in the diagram.
 \section{Demo Video Link}
-- Maybe also add a code style thing.
 %%%% ADD YOUR BIBLIOGRAPHY HERE
 \newpage
 \bibliographystyle{plain}

@@ -21,11 +21,11 @@
 \contentsline {section}{\numberline {4.3}Combat System}{14}{section.4.3}%
 \contentsline {section}{\numberline {4.4}User Interface}{16}{section.4.4}%
 \contentsline {section}{\numberline {4.5}User Experience}{18}{section.4.5}%
-\contentsline {chapter}{\numberline {5}Testing and Code Style}{19}{chapter.5}%
-\contentsline {chapter}{\numberline {A}Appendix}{20}{appendix.A}%
-\contentsline {section}{\numberline {A.1}Development Diary}{20}{section.A.1}%
-\contentsline {section}{\numberline {A.2}Submission Directory Structure}{22}{section.A.2}%
-\contentsline {section}{\numberline {A.3}Demo Video Link}{22}{section.A.3}%
-\contentsline {section}{\numberline {A.4}Cited References}{24}{section.A.4}%
-\contentsline {section}{\numberline {A.5}Further Research and Tutorials}{24}{section.A.5}%
-\contentsline {section}{\numberline {A.6}Assets Used}{24}{section.A.6}%
+\contentsline {chapter}{\numberline {5}Testing and Code Style}{20}{chapter.5}%
+\contentsline {chapter}{\numberline {A}Appendix}{21}{appendix.A}%
+\contentsline {section}{\numberline {A.1}Development Diary}{21}{section.A.1}%
+\contentsline {section}{\numberline {A.2}Submission Directory Structure}{23}{section.A.2}%
+\contentsline {section}{\numberline {A.3}Demo Video Link}{23}{section.A.3}%
+\contentsline {section}{\numberline {A.4}Cited References}{25}{section.A.4}%
+\contentsline {section}{\numberline {A.5}Further Research and Tutorials}{25}{section.A.5}%
+\contentsline {section}{\numberline {A.6}Assets Used}{25}{section.A.6}%

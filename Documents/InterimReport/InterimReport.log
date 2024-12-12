@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.10.1)  12 DEC 2024 11:26
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.10.1)  12 DEC 2024 11:46
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -900,7 +900,7 @@ Appendix A.
 <OtherImages/FileStructure.png, id=314, 1586.92876pt x 1866.975pt>
 File: OtherImages/FileStructure.png Graphic file (type png)
 <use OtherImages/FileStructure.png>
-Package pdftex.def Info: OtherImages/FileStructure.png  used on input line 421.
+Package pdftex.def Info: OtherImages/FileStructure.png  used on input line 435.
 (pdftex.def)             Requested size: 176.40439pt x 207.53294pt.
  [23 <./OtherImages/FileStructure.png>] (InterimReport.bbl
 Underfull \hbox (badness 1048) in paragraph at lines 16--22
@@ -983,7 +983,7 @@ Underfull \hbox (badness 1838) in paragraph at lines 134--140
 <UMLDiagrams/DefeatObserverUML.drawio.png, id=354, 1300.86pt x 827.09pt>
 File: UMLDiagrams/DefeatObserverUML.drawio.png Graphic file (type png)
 <use UMLDiagrams/DefeatObserverUML.drawio.png>
-Package pdftex.def Info: UMLDiagrams/DefeatObserverUML.drawio.png  used on input line 436.
+Package pdftex.def Info: UMLDiagrams/DefeatObserverUML.drawio.png  used on input line 450.
 (pdftex.def)             Requested size: 441.01773pt x 280.39917pt.
  [25 <./UMLDiagrams/DefeatObserverUML.drawio.png>] (InterimReport.aux)
  ***********
@@ -1010,7 +1010,7 @@ Here is how much of TeX's memory you used:
  1141 hyphenation exceptions out of 8191
  98i,13n,101p,1661b,593s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/rolop/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/rolop/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/rolop/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/rolop/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/rolop/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/Users/rolop/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmss10.pfb><C:/Users/rolop/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmss12.pfb><C:/Users/rolop/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmss17.pfb><C:/Users/rolop/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmssbx10.pfb><C:/Users/rolop/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/rolop/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Users/rolop/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on InterimReport.pdf (26 pages, 2067686 bytes).
+Output written on InterimReport.pdf (26 pages, 2068062 bytes).
 PDF statistics:
  438 PDF objects out of 1000 (max. 8388607)
  89 named destinations out of 1000 (max. 500000)

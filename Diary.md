@@ -1,4 +1,10 @@
 # Week 11
+### 06/12/2024
+- Bugfix to player's NavMeshAgent which was causing the agent to not relocate to the player when they leave the NavMeshSurface.
+- Bugfix to the heart idle animation which was overriding the positions of all hearts in the scene.
+- Finalised level one layout
+### 04/12/2024
+- Refactored the UI system to use the observer pattern.
 ### 03/12/2024
 - Added collectible hearts which increase the player's health.
 ### 02/12/2024

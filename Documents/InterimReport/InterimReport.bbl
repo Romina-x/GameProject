@@ -35,6 +35,12 @@ Adam Kramarzewski and Ennio~De Nucci.
 \newblock Packt Publishing Ltd, Birmingham, England, second edition. edition,
   2023.
 
+\bibitem{marchand2013value}
+André Marchand and Thorsten Hennig-Thurau.
+\newblock Value creation in the video game industry: Industry economics,
+  consumer benefits, and research opportunities.
+\newblock {\em Journal of Interactive Marketing}, 27(3):141--157, 2013.
+
 \bibitem{medium_2024}
 Medium.
 \newblock Advantages and disadvantages of unity 3d game development.
@@ -137,5 +143,16 @@ Unity Technologies.
   \url{https://docs.unity3d.com/6000.0/Documentation/ScriptReference/UnityEngine.AIModule.html},
   2024.
 \newblock Accessed: 2024-8-12.
+
+\bibitem{zackariasson2012video}
+Peter Zackariasson and Timothy~L. Wilson.
+\newblock {\em The Video Game Industry: Formation, Present State, and Future}.
+\newblock Routledge, New York, 2012.
+
+\bibitem{zhao2022dynamic}
+Yi~Zhao and et~al.
+\newblock A dynamic model of player level-progression decisions in online
+  gaming.
+\newblock {\em Management Science}, 68(11):8062--8082, 2022.
 
 \end{thebibliography}

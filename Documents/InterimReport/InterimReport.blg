@@ -7,45 +7,45 @@ Reallocating 'name_of_file' (item size: 1) to 11 items.
 Database file #1: references.bib
 Warning--I didn't find a database entry for "alma997871033502671"
 Warning--there's a number but no volume in Barczak2019
-You've used 19 entries,
+You've used 22 entries,
             2118 wiz_defined-function locations,
-            594 strings with 7049 characters,
-and the built_in function-call counts, 4321 in all, are:
-= -- 427
-> -- 151
+            615 strings with 7553 characters,
+and the built_in function-call counts, 5264 in all, are:
+= -- 522
+> -- 190
 < -- 0
-+ -- 63
-- -- 44
-* -- 158
-:= -- 747
-add.period$ -- 70
-call.type$ -- 19
-change.case$ -- 78
++ -- 80
+- -- 56
+* -- 225
+:= -- 904
+add.period$ -- 79
+call.type$ -- 22
+change.case$ -- 92
 chr.to.int$ -- 0
-cite$ -- 20
-duplicate$ -- 157
-empty$ -- 421
-format.name$ -- 44
-if$ -- 938
+cite$ -- 23
+duplicate$ -- 191
+empty$ -- 499
+format.name$ -- 56
+if$ -- 1132
 int.to.chr$ -- 0
-int.to.str$ -- 19
-missing$ -- 9
-newline$ -- 111
-num.names$ -- 38
-pop$ -- 146
+int.to.str$ -- 22
+missing$ -- 13
+newline$ -- 126
+num.names$ -- 44
+pop$ -- 160
 preamble$ -- 1
-purify$ -- 60
+purify$ -- 72
 quote$ -- 0
-skip$ -- 116
+skip$ -- 139
 stack$ -- 0
-substring$ -- 111
-swap$ -- 19
+substring$ -- 184
+swap$ -- 22
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 68
+type$ -- 78
 warning$ -- 1
-while$ -- 40
-width$ -- 21
-write$ -- 224
+while$ -- 50
+width$ -- 24
+write$ -- 257
 (There were 2 warnings)

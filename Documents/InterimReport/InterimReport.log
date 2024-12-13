@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.10.1)  12 DEC 2024 11:46
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.10.1)  12 DEC 2024 14:04
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -787,122 +787,117 @@ Underfull \hbox (badness 10000) in paragraph at lines 63--65
 
 ]
 Chapter 1.
-
-Underfull \hbox (badness 10000) in paragraph at lines 71--74
-
- []
-
 [4
 
-]
+] [5]
 Chapter 2.
 
-Underfull \hbox (badness 10000) in paragraph at lines 81--82
+Underfull \hbox (badness 10000) in paragraph at lines 91--92
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 83--84
+Underfull \hbox (badness 10000) in paragraph at lines 93--94
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 85--86
+Underfull \hbox (badness 10000) in paragraph at lines 95--96
 
  []
 
-[5
+[6
 
 ]
 
-LaTeX Warning: Citation `alma997871033502671' on page 6 undefined on input line 91.
+LaTeX Warning: Citation `alma997871033502671' on page 7 undefined on input line 101.
 
-[6]
-Underfull \hbox (badness 10000) in paragraph at lines 97--100
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 101--104
+[7]
+Underfull \hbox (badness 10000) in paragraph at lines 107--110
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 105--106
+Underfull \hbox (badness 10000) in paragraph at lines 111--114
 
  []
 
-[7] [8]
+
+Underfull \hbox (badness 10000) in paragraph at lines 115--116
+
+ []
+
+[8] [9]
 Chapter 3.
-[9
+[10
 
 ]
 Chapter 4.
-<UMLDiagrams/PlayerStateUML.drawio.png, id=202, 2270.4825pt x 1188.44pt>
+<UMLDiagrams/PlayerStateUML.drawio.png, id=212, 2270.4825pt x 1188.44pt>
 File: UMLDiagrams/PlayerStateUML.drawio.png Graphic file (type png)
 <use UMLDiagrams/PlayerStateUML.drawio.png>
-Package pdftex.def Info: UMLDiagrams/PlayerStateUML.drawio.png  used on input line 151.
+Package pdftex.def Info: UMLDiagrams/PlayerStateUML.drawio.png  used on input line 161.
 (pdftex.def)             Requested size: 441.01773pt x 230.8291pt.
-[10
+[11
 
  <./UMLDiagrams/PlayerStateUML.drawio.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 176--177
+Underfull \hbox (badness 10000) in paragraph at lines 186--187
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 181--183
+Underfull \hbox (badness 10000) in paragraph at lines 191--193
 
  []
 
-[11]
-<UMLDiagrams/EnemyMovementUML.drawio.png, id=229, 1065.9825pt x 624.3325pt>
+[12]
+<UMLDiagrams/EnemyMovementUML.drawio.png, id=240, 1065.9825pt x 624.3325pt>
 File: UMLDiagrams/EnemyMovementUML.drawio.png Graphic file (type png)
 <use UMLDiagrams/EnemyMovementUML.drawio.png>
-Package pdftex.def Info: UMLDiagrams/EnemyMovementUML.drawio.png  used on input line 187.
+Package pdftex.def Info: UMLDiagrams/EnemyMovementUML.drawio.png  used on input line 197.
 (pdftex.def)             Requested size: 441.01773pt x 258.29292pt.
- [12 <./UMLDiagrams/EnemyMovementUML.drawio.png>]
-<UMLDiagrams/EnemyStrategyUML.drawio.png, id=245, 1266.7325pt x 564.1075pt>
+ [13 <./UMLDiagrams/EnemyMovementUML.drawio.png>]
+<UMLDiagrams/EnemyStrategyUML.drawio.png, id=255, 1266.7325pt x 564.1075pt>
 File: UMLDiagrams/EnemyStrategyUML.drawio.png Graphic file (type png)
 <use UMLDiagrams/EnemyStrategyUML.drawio.png>
-Package pdftex.def Info: UMLDiagrams/EnemyStrategyUML.drawio.png  used on input line 224.
+Package pdftex.def Info: UMLDiagrams/EnemyStrategyUML.drawio.png  used on input line 234.
 (pdftex.def)             Requested size: 441.01773pt x 196.39044pt.
- [13]
-<UMLDiagrams/CombatUML.drawio.png, id=255, 1595.9625pt x 1314.9125pt>
+ [14]
+<UMLDiagrams/CombatUML.drawio.png, id=265, 1595.9625pt x 1314.9125pt>
 File: UMLDiagrams/CombatUML.drawio.png Graphic file (type png)
 <use UMLDiagrams/CombatUML.drawio.png>
-Package pdftex.def Info: UMLDiagrams/CombatUML.drawio.png  used on input line 233.
+Package pdftex.def Info: UMLDiagrams/CombatUML.drawio.png  used on input line 243.
 (pdftex.def)             Requested size: 441.01773pt x 363.35765pt.
- [14 <./UMLDiagrams/EnemyStrategyUML.drawio.png>] [15 <./UMLDiagrams/CombatUML.drawio.png>]
+ [15 <./UMLDiagrams/EnemyStrategyUML.drawio.png>] [16 <./UMLDiagrams/CombatUML.drawio.png>]
 
-LaTeX Warning: Reference `UIandLevel' on page 16 undefined on input line 283.
+LaTeX Warning: Reference `UIandLevel' on page 17 undefined on input line 293.
 
-<UMLDiagrams/HealthObserverUML.drawio.png, id=270, 2250.4075pt x 1188.44pt>
+<UMLDiagrams/HealthObserverUML.drawio.png, id=280, 2250.4075pt x 1188.44pt>
 File: UMLDiagrams/HealthObserverUML.drawio.png Graphic file (type png)
 <use UMLDiagrams/HealthObserverUML.drawio.png>
-Package pdftex.def Info: UMLDiagrams/HealthObserverUML.drawio.png  used on input line 286.
+Package pdftex.def Info: UMLDiagrams/HealthObserverUML.drawio.png  used on input line 296.
 (pdftex.def)             Requested size: 441.01773pt x 232.89638pt.
-[16] [17 <./UMLDiagrams/HealthObserverUML.drawio.png>]
-<OtherImages/PlayerCamera.png, id=285, 1113.15875pt x 553.06625pt>
+[17] [18 <./UMLDiagrams/HealthObserverUML.drawio.png>]
+<OtherImages/PlayerCamera.png, id=296, 1113.15875pt x 553.06625pt>
 File: OtherImages/PlayerCamera.png Graphic file (type png)
 <use OtherImages/PlayerCamera.png>
-Package pdftex.def Info: OtherImages/PlayerCamera.png  used on input line 316.
+Package pdftex.def Info: OtherImages/PlayerCamera.png  used on input line 326.
 (pdftex.def)             Requested size: 441.01773pt x 219.12125pt.
- [18 <./OtherImages/PlayerCamera.png>] [19]
+ [19 <./OtherImages/PlayerCamera.png>] [20]
 Chapter 5.
-[20
+[21
 
 ]
 Appendix A.
-[21
+[22
 
-] [22]
-<OtherImages/FileStructure.png, id=314, 1586.92876pt x 1866.975pt>
+] [23]
+<OtherImages/FileStructure.png, id=324, 1586.92876pt x 1866.975pt>
 File: OtherImages/FileStructure.png Graphic file (type png)
 <use OtherImages/FileStructure.png>
-Package pdftex.def Info: OtherImages/FileStructure.png  used on input line 435.
+Package pdftex.def Info: OtherImages/FileStructure.png  used on input line 445.
 (pdftex.def)             Requested size: 176.40439pt x 207.53294pt.
- [23 <./OtherImages/FileStructure.png>] (InterimReport.bbl
+ [24 <./OtherImages/FileStructure.png>] (InterimReport.bbl
 Underfull \hbox (badness 1048) in paragraph at lines 16--22
 \OT1/cmtt/m/n/10.95 blog / game-[]development-[]with-[]unreal-[]engine-[]pros-[]and-[]cons/$[]\OT1/cmr/m/n/10.95 , 2023.  Ac-cessed:
  []
@@ -918,74 +913,78 @@ Underfull \hbox (badness 10000) in paragraph at lines 24--30
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 39--45
+Underfull \hbox (badness 10000) in paragraph at lines 45--51
 []\OT1/cmr/m/n/10.95 Medium.  Ad-van-tages and dis-ad-van-tages of unity 3d game de-vel-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 39--45
+Underfull \hbox (badness 10000) in paragraph at lines 45--51
 \OT1/cmr/m/n/10.95 op-ment.  []$\OT1/cmtt/m/n/10.95 https : / / medium . com / @mobileappandgameappdevelopment /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 39--45
+Underfull \hbox (badness 10000) in paragraph at lines 45--51
 \OT1/cmtt/m/n/10.95 advantages-[]and-[]disadvantages-[]of-[]unity-[]3d-[]game-[]development-[]4314c067d4b2$[]\OT1/cmr/m/n/10.95 ,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 70--76
+Underfull \hbox (badness 10000) in paragraph at lines 76--82
 \OT1/cmtt/m/n/10.95 / / unity . com / resources / level-[]up-[]your-[]code-[]with-[]game-[]programming-[]patterns$[]\OT1/cmr/m/n/10.95 ,
  []
 
 
-Underfull \hbox (badness 2065) in paragraph at lines 78--84
+Underfull \hbox (badness 2065) in paragraph at lines 84--90
 []\OT1/cmr/m/n/10.95 Unity Tech-nolo-gies.  Char-ac-ter-con-troller.  []$\OT1/cmtt/m/n/10.95 https : / / docs . unity3d . com / 6000 . 0 /
  []
 
 
-Underfull \hbox (badness 3884) in paragraph at lines 78--84
+Underfull \hbox (badness 3884) in paragraph at lines 84--90
 \OT1/cmtt/m/n/10.95 Documentation / ScriptReference / CharacterController . html$[]\OT1/cmr/m/n/10.95 , 2024.  Ac-cessed:
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 102--108
+Underfull \hbox (badness 10000) in paragraph at lines 108--114
 []\OT1/cmr/m/n/10.95 Unity Tech-nolo-gies.  Navme-sha-gent.  []$\OT1/cmtt/m/n/10.95 https : / / docs . unity3d . com / 6000 . 0 /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 110--116
+Underfull \hbox (badness 10000) in paragraph at lines 116--122
 []\OT1/cmr/m/n/10.95 Unity Tech-nolo-gies.  Script-ableob-ject.  []$\OT1/cmtt/m/n/10.95 https : / / docs . unity3d . com /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 110--116
+Underfull \hbox (badness 10000) in paragraph at lines 116--122
 \OT1/cmtt/m/n/10.95 6000 . 0 / Documentation / Manual / class-[]ScriptableObject . html# : [] : text = A %
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 110--116
+Underfull \hbox (badness 10000) in paragraph at lines 116--122
 \OT1/cmtt/m/n/10.95 20ScriptableObject % 20is % 20a % 20data % 20container % 20that % 20you ,[] project %
  []
 
 
-Underfull \hbox (badness 3492) in paragraph at lines 110--116
+Underfull \hbox (badness 3492) in paragraph at lines 116--122
 \OT1/cmtt/m/n/10.95 E2 % 80 % 99s % 20memory % 20usage % 20by % 20avoiding % 20copies % 20of % 20values.$[]\OT1/cmr/m/n/10.95 , 2024.
  []
 
-[24
+[25
 
 ]
-Underfull \hbox (badness 1838) in paragraph at lines 134--140
+Underfull \hbox (badness 1838) in paragraph at lines 140--146
 \OT1/cmtt/m/n/10.95 Documentation / ScriptReference / UnityEngine . AIModule . html$[]\OT1/cmr/m/n/10.95 , 2024.  Ac-cessed:
  []
 
 )
-<UMLDiagrams/DefeatObserverUML.drawio.png, id=354, 1300.86pt x 827.09pt>
+<UMLDiagrams/DefeatObserverUML.drawio.png, id=361, 1300.86pt x 827.09pt>
 File: UMLDiagrams/DefeatObserverUML.drawio.png Graphic file (type png)
 <use UMLDiagrams/DefeatObserverUML.drawio.png>
-Package pdftex.def Info: UMLDiagrams/DefeatObserverUML.drawio.png  used on input line 450.
+Package pdftex.def Info: UMLDiagrams/DefeatObserverUML.drawio.png  used on input line 460.
 (pdftex.def)             Requested size: 441.01773pt x 280.39917pt.
- [25 <./UMLDiagrams/DefeatObserverUML.drawio.png>] (InterimReport.aux)
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[26] [27 <./UMLDiagrams/DefeatObserverUML.drawio.png>] (InterimReport.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-04>
@@ -1002,17 +1001,17 @@ Package rerunfilecheck Info: File `InterimReport.out' has not changed.
 (rerunfilecheck)             Checksum: 49F410BFD8688D12A69BFC67E6E18F80;2890.
  ) 
 Here is how much of TeX's memory you used:
- 33749 strings out of 474486
- 733552 string characters out of 5743755
- 1942542 words of memory out of 5000000
- 55504 multiletter control sequences out of 15000+600000
+ 33758 strings out of 474486
+ 733701 string characters out of 5743755
+ 1941542 words of memory out of 5000000
+ 55508 multiletter control sequences out of 15000+600000
  567178 words of font info for 67 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  98i,13n,101p,1661b,593s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/rolop/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/rolop/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/rolop/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/rolop/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/rolop/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/Users/rolop/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmss10.pfb><C:/Users/rolop/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmss12.pfb><C:/Users/rolop/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmss17.pfb><C:/Users/rolop/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmssbx10.pfb><C:/Users/rolop/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/rolop/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Users/rolop/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on InterimReport.pdf (26 pages, 2068062 bytes).
+Output written on InterimReport.pdf (28 pages, 2074375 bytes).
 PDF statistics:
- 438 PDF objects out of 1000 (max. 8388607)
- 89 named destinations out of 1000 (max. 500000)
+ 450 PDF objects out of 1000 (max. 8388607)
+ 94 named destinations out of 1000 (max. 500000)
  234 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -1,4 +1,4 @@
-# Final Year Project
+# Final Year Project - Building a Game
 
 This repository has been created to store your final year project.
 

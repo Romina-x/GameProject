@@ -1,6 +1,5 @@
 \documentclass[]{final_report}
 \usepackage{graphicx}
-\usepackage{hyperref}
 \usepackage{array}
 \usepackage{xcolor} % Added package for text coloring
 \usepackage{titlesec}
@@ -10,6 +9,9 @@
 \usepackage{forest}
 \usepackage{cite}
 \usepackage{float}
+\usepackage{url}
+\usepackage[breaklinks=true]{hyperref}
+\usepackage{breakurl}
 
 
 %%%%%%%%%%%%%%%%%%%%%%
@@ -530,10 +532,30 @@ Files relevant to animal rescue:
 %%%% ADD YOUR BIBLIOGRAPHY HERE
 \newpage
 \bibliographystyle{plain}
+\raggedright
 \bibliography{references}
-\section{Cited References}
-\section{Further Research and Tutorials}
-\section{Assets Used}
+
+\renewcommand{\bibname}{Assets Used}
+\begin{thebibliography}{99}
+
+\bibitem[25]{skybox} Key Mouse. Customizable Skybox. Available at: \url{https://assetstore.unity.com/packages/2d/textures-materials/sky/customizable-skybox-174576}
+
+\bibitem[26]{forest_textures} Proxy Games. Stylized Nature Kit Lite. Available at: \url{https://assetstore.unity.com/packages/3d/environments/stylized-nature-kit-lite-176906}. 
+
+\bibitem[27]{VFX} Lana Studio. Hyper Casual FX. Available at: \url{https://assetstore.unity.com/packages/vfx/particles/hyper-casual-fx-200333}.
+
+\bibitem[28]{player} SEMA Game Studio. Modular Cute Fantasy Character Pack \#1. Available at: \url{https://assetstore.unity.com/packages/3d/characters/humanoids/fantasy/modular-cute-fantasy-character-pack-1-293865}
+
+\bibitem[29]{sound_effects} SURIYUN. Monsters Forest Pack 2. Available at: \url{https://assetstore.unity.com/packages/3d/characters/creatures/monsters-forest-pack-2-251936}. 
+
+\bibitem[30]{sound_effects} Meshtint Studio. Forest Ruins Pack Cute Series. Available at: \url{https://assetstore.unity.com/packages/3d/environments/fantasy/forest-ruins-pack-cute-series-182412}. 
+
+\bibitem[31]{sound_effects} Lost Panda Games. Low Poly Cartoon Item Pack - 3D. Available at: \url{https://assetstore.unity.com/packages/3d/props/low-poly-cartoon-item-pack-3d-274991}. 
+
+\bibitem[32]{sound_effects} SURIYUN. Cute Goblin. Available at: \url{https://assetstore.unity.com/packages/3d/characters/creatures/cute-goblin-225492}. 
+
+\end{thebibliography}
+
 \label{endpage}
 
 \end{document}

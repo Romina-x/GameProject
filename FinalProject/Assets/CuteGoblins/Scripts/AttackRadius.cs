@@ -73,6 +73,7 @@ public class AttackRadius : MonoBehaviour
         float closestDistance = float.MaxValue;
         while (_damageables.Count > 0)
         {
+            // Determine closest damageable
             for (int i = 0; i < _damageables.Count; i++)
             {
                 Transform damageableTransform = _damageables[i].GetTransform();
@@ -85,15 +86,18 @@ public class AttackRadius : MonoBehaviour
                 }
             }
 
+            // Call TakeDamage on damageable and invoke OnAttack event 
             if(closestDamageable != null)
             {
                 OnAttack?.Invoke(closestDamageable);
                 closestDamageable.TakeDamage(_damage);
             }
 
+            // Reset closest
             closestDamageable = null;
             closestDistance = float.MaxValue;
 
+            // Wait between each attack for the set delay
             yield return wait;
             _damageables.RemoveAll(DisabledDamageables);
         }

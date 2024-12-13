@@ -28,6 +28,7 @@ public abstract class PlayerBaseState
     public abstract void CheckSwitchStates();
     public abstract void InitialiseSubState();
 
+    // Calls UpdateState() on this state and the substate if it is active
     public void UpdateStates()
     {
         UpdateState();
@@ -37,6 +38,7 @@ public abstract class PlayerBaseState
         }
     }
 
+    // Exits the current state and enters a new one, updating the state machine context
     protected void SwitchState(PlayerBaseState newState)
     {
         ExitState();
@@ -50,10 +52,12 @@ public abstract class PlayerBaseState
             _currentSuperState.SetSubState(newState);
         } 
     }
+
     protected void SetSuperState(PlayerBaseState newSuperState)
     {
         _currentSuperState = newSuperState;
     }
+    
     protected void SetSubState(PlayerBaseState newSubState)
     {
         _currentSubState = newSubState;

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Subject interface for enemy defeats
 public interface IDefeatSubject
 {
 

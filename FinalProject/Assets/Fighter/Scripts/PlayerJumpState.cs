@@ -31,6 +31,7 @@ public class PlayerJumpState : PlayerBaseState
             Ctx.RequireNewJumpPress = true;
         }       
     }
+    
     public override void CheckSwitchStates()
     {
         if (Ctx.CharacterController.isGrounded)
@@ -38,6 +39,7 @@ public class PlayerJumpState : PlayerBaseState
             SwitchState(Factory.Grounded());
         }
     }
+
     public override void InitialiseSubState(){}
 
     private void HandleJump(){

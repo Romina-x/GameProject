@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
+// Subject interface for health changes
 public interface IHealthSubject
 {
     public void RegisterHealthObserver(IHealthObserver observer);

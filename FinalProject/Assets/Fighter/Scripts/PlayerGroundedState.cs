@@ -12,6 +12,7 @@ public class PlayerGroundedState : PlayerBaseState
         IsRootState = true;
         InitialiseSubState();
     }
+
     public override void EnterState(){}
 
     public override void UpdateState()
@@ -19,7 +20,9 @@ public class PlayerGroundedState : PlayerBaseState
         CheckSwitchStates();
         ApplyGroundedGravity();
     }
+
     public override void ExitState(){}
+
     public override void CheckSwitchStates()
     {
         if(Ctx.IsJumpPressed && !Ctx.RequireNewJumpPress)
@@ -27,6 +30,8 @@ public class PlayerGroundedState : PlayerBaseState
             SwitchState(Factory.Jump());
         }
     }
+
+    // Sets the substate based on the player's input
     public override void InitialiseSubState()
     {
         if(!Ctx.IsMovementPressed && !Ctx.IsRunPressed)
@@ -42,6 +47,7 @@ public class PlayerGroundedState : PlayerBaseState
             SetSubState(Factory.Run());
         }
     }
+
     void ApplyGroundedGravity() 
     {
         if (Ctx.CharacterController.isGrounded) 

@@ -39,7 +39,6 @@ public class PlayerHealthAndDamage : MonoBehaviour, IDamageable, IHealthSubject
 
         // Subscribe to attack input action
         _playerInput.CharacterControls.Attack.performed += OnAttack;
-        //_healthBar.UpdateHealthBar(_maxHealth, _health);
     }
 
     void OnAttack(InputAction.CallbackContext context)

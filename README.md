@@ -1,6 +1,8 @@
 # Final Year Project - Building a Game
 
-This repository has been created to store your final year project.
+This repository stores the Unity project for a 3D adventure game.
 
-You may edit it as you like, but please do not remove the default topics or the project members list. These need to stay as currently defined in order for your supervisor to be able to find your project.
-
+### How To Run:
+- Download the latest version of the Unity editor from : <https://unity.com/download>
+- Open 'FinalYearProject' in the editor
+- Press the play button to run

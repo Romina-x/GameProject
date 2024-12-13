@@ -485,6 +485,7 @@ Below is the code style I decided on, following Unity's guidelines \cite{unity_2
 \newline- Began gathering 3D assets.
 
 \newpage
+
 \section{Submission Directory Structure}
 \begin{figure}[h!]
     \centering
@@ -492,7 +493,37 @@ Below is the code style I decided on, following Unity's guidelines \cite{unity_2
     \caption{Diagram of Directory Structure}
     \label{fig:label_name2}
 \end{figure}
-The Assets folder contains all of the work I have completed so far including the 3D models for the player, enemies, terrain etc., as well as the associated scripts and animations. The diagram highlights the most important subfolders, such as the scripts folders, where all my C\# scripts are organised. Note that not all folders are included in the diagram.
+The Assets folder contains all of the work I have completed so far including the 3D models for the player, enemies, terrain etc., as well as the associated scripts and animations. The diagram highlights the most important subfolders, such as the scripts folders, where all my C\# scripts are organised. Note that not all folders are included in the diagram. \newline
+
+Files Relevant to the Player State Machine (Assets/Fighter/Scripts):
+\begin{itemize}
+    \item \texttt{ PlayerBaseState.cs, PlayerRunState,cs, PlayerJumpState.cs, PlayerStateMachine.cs, PlayerStateFactory.cs} (There are other state files within this folder, Jump and Run are just two examples)
+\end{itemize}
+
+Files relevant to the combat system:
+\begin{itemize}
+    \item \texttt{IDamageable.cs} (Assets/Interfaces)
+    \item \texttt{PlayerHealthAndDamage.cs, WeaponManager.cs, WeaponAttributes.cs} (Assets/Fighter/Scripts)
+    \item \texttt{Enemy.cs, AttackRadius.cs} (Assets/CuteGoblins/Scripts)
+\end{itemize}
+Files relevant to enemy movement:
+\begin{itemize}
+    \item \texttt{Enemy.cs, FollowRadius.cs, EnemyMovement.cs, EnemyScriptableObject.cs} (Assets/CuteGoblins/Scripts)
+\end{itemize}
+Files relevant to the user interface:
+\begin{itemize}
+    \item \texttt{IHealthSubject, IHealthObserver} (Assets/Interfaces)
+    \item \texttt{PlayerHealthBar.cs, EnemyHealthBar.cs, GameOver.cs} (Assets/UI/Scripts)
+\end{itemize}
+Files relevant to animal rescue:
+\begin{itemize}
+    \item \texttt{Cage.cs} (Assets/CuteRaccoons/Scripts)
+    \item \texttt{IDefeatSubject.cs, IDefeatObserver.cs} (Assets/Interfaces)
+\end{itemize}
+
+
+
+
 \section{Demo Video Link}
 \url{https://youtu.be/4mPIEk5YFJI}
 

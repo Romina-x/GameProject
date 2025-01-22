@@ -68,9 +68,9 @@ public class Cage : MonoBehaviour, IDefeatObserver
         }
 
         // Tell the freed animal to start following the player
-        if (CagedAnimal != null)
+        if (AssociatedAnimal != null)
         {
-            CagedAnimal.StartFollowing();
+            AssociatedAnimal.StartFollowing();
         }
 
         // Destroy this game object

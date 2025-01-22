@@ -3,14 +3,17 @@ using UnityEngine.AI; // For NavMeshAgent if used for movement
 
 public class Animal : MonoBehaviour
 {
-    public Transform PlayerTarget; // Assigned when the animal is freed
-    private NavMeshAgent _navMeshAgent; // Optional for smoother movement
+    // Components 
+    public Transform PlayerTarget; 
+    private NavMeshAgent _navMeshAgent; 
+    private Animator _animator;
 
     private bool _isFollowing = false;
 
     void Awake()
     {
         _navMeshAgent = GetComponent<NavMeshAgent>();
+        _animator = GetComponent<Animator>();
     }
 
     void Update()
@@ -19,21 +22,14 @@ public class Animal : MonoBehaviour
         {
             // Follow player by updating destination to the player's position
             _navMeshAgent.SetDestination(PlayerTarget.position);
+
+            float speed = _navMeshAgent.velocity.magnitude; // Current movement speed
+            _animator.SetBool("walk", speed > 0.1f);
         }
     }
 
-    public void StartFollowing(Transform player)
+    public void StartFollowing()
     {
-        PlayerTarget = player;
         _isFollowing = true;
     }
-
-    // public void StopFollowing()
-    // {
-    //     _isFollowing = false;
-    //     if (_navMeshAgent != null)
-    //     {
-    //         _navMeshAgent.ResetPath();
-    //     }
-    // }
 }

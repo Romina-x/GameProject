@@ -945,6 +945,41 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2812642506823349867, guid: c954bea9dfcb9b94f852cfe93d77cf85, type: 3}
   m_PrefabInstance: {fileID: 98587791}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &45187450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 45187444}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5540bc7311ae1f47a59d687353ff7bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerTarget: {fileID: 1504346263}
+--- !u!195 &45187451
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 45187444}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1001 &45354427
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4283,6 +4318,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3189485155298241745, guid: c954bea9dfcb9b94f852cfe93d77cf85, type: 3}
       insertIndex: -1
       addedObject: {fileID: 45187447}
+    - targetCorrespondingSourceObject: {fileID: 3189485155298241745, guid: c954bea9dfcb9b94f852cfe93d77cf85, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 45187450}
+    - targetCorrespondingSourceObject: {fileID: 3189485155298241745, guid: c954bea9dfcb9b94f852cfe93d77cf85, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 45187451}
   m_SourcePrefab: {fileID: 100100000, guid: c954bea9dfcb9b94f852cfe93d77cf85, type: 3}
 --- !u!1001 &100500574
 PrefabInstance:
@@ -10036,6 +10077,7 @@ MonoBehaviour:
   - {fileID: 76941743}
   - {fileID: 1517201473}
   PoofEffect: {fileID: 8919484260529707532, guid: 2c27f6103c8348844a3cc636de15052a, type: 3}
+  AssociatedAnimal: {fileID: 0}
 --- !u!4 &415875178 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7605426715356279294, guid: db4677f9b0ce5bd4b95b2be5e4a67031, type: 3}
@@ -22631,6 +22673,7 @@ MonoBehaviour:
   - {fileID: 2115978526}
   - {fileID: 1904982506}
   PoofEffect: {fileID: 8919484260529707532, guid: 2c27f6103c8348844a3cc636de15052a, type: 3}
+  AssociatedAnimal: {fileID: 0}
 --- !u!4 &1005407236 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7605426715356279294, guid: db4677f9b0ce5bd4b95b2be5e4a67031, type: 3}
@@ -32559,6 +32602,7 @@ MonoBehaviour:
   AssociatedEnemies:
   - {fileID: 1630618015}
   PoofEffect: {fileID: 8919484260529707532, guid: 2c27f6103c8348844a3cc636de15052a, type: 3}
+  AssociatedAnimal: {fileID: 45187450}
 --- !u!4 &1479595143 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7605426715356279294, guid: db4677f9b0ce5bd4b95b2be5e4a67031, type: 3}

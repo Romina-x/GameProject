@@ -4314,6 +4314,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Raccoon1
       objectReference: {fileID: 0}
+    - target: {fileID: 3189485155298241745, guid: c954bea9dfcb9b94f852cfe93d77cf85, type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -19749,7 +19753,7 @@ GameObject:
   m_Component:
   - component: {fileID: 879656191}
   - component: {fileID: 879656192}
-  m_Layer: 6
+  m_Layer: 12
   m_Name: AnimalTeleportRadius
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26098,6 +26102,10 @@ PrefabInstance:
     - target: {fileID: 8441956799380271662, guid: 8e03b2a4cedd446459e71fe8cf0be007, type: 3}
       propertyPath: m_Name
       value: Raccoon3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8441956799380271662, guid: 8e03b2a4cedd446459e71fe8cf0be007, type: 3}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 9109667518648248468, guid: 8e03b2a4cedd446459e71fe8cf0be007, type: 3}
       propertyPath: m_LocalScale.x
@@ -32805,6 +32813,10 @@ PrefabInstance:
     - target: {fileID: 4965999344089902418, guid: 4363e3f4e0625ff44981ba9434f73284, type: 3}
       propertyPath: m_Name
       value: Raccoon2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4965999344089902418, guid: 4363e3f4e0625ff44981ba9434f73284, type: 3}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 5056339543714679490, guid: 4363e3f4e0625ff44981ba9434f73284, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

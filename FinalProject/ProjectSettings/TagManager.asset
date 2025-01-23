@@ -17,8 +17,8 @@ TagManager:
   - EnemyAttackRadius
   - EnemyFollowRadius
   - Collectible
-  - 
-  - 
+  - AnimalTeleportRadius
+  - Animal
   - 
   - 
   - 

@@ -24,7 +24,7 @@ public class Animal : MonoBehaviour
             _navMeshAgent.SetDestination(PlayerTarget.position);
 
             float speed = _navMeshAgent.velocity.magnitude; // Current movement speed
-            _animator.SetBool("walk", speed > 0.2f);
+            _animator.SetBool("walk", speed > 0.3f);
         }
     }
 

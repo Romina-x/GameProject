@@ -9,6 +9,7 @@ public class Cage : MonoBehaviour, IDefeatObserver
     // Components that are assigned in the unity editor
     public List<Enemy> AssociatedEnemies;
     public GameObject PoofEffect;
+    public Animal AssociatedAnimal;
     
     private bool _isFreed = false;
 
@@ -65,6 +66,13 @@ public class Cage : MonoBehaviour, IDefeatObserver
         {
             Instantiate(PoofEffect, transform.position, Quaternion.identity);
         }
+
+        // Tell the freed animal to start following the player
+        if (AssociatedAnimal != null)
+        {
+            AssociatedAnimal.StartFollowing();
+        }
+
         // Destroy this game object
         Destroy(gameObject);
         _isFreed = true;

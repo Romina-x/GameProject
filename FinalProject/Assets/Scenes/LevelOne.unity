@@ -945,6 +945,41 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2812642506823349867, guid: c954bea9dfcb9b94f852cfe93d77cf85, type: 3}
   m_PrefabInstance: {fileID: 98587791}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &45187450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 45187444}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5540bc7311ae1f47a59d687353ff7bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerTarget: {fileID: 1504346263}
+--- !u!195 &45187451
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 45187444}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1001 &45354427
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3239,7 +3274,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 725135483988574, guid: dbe979a9d4b5f6a49b75cbccbf7cd9e6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 879656191}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dbe979a9d4b5f6a49b75cbccbf7cd9e6, type: 3}
 --- !u!4 &50623708 stripped
@@ -4276,6 +4314,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Raccoon1
       objectReference: {fileID: 0}
+    - target: {fileID: 3189485155298241745, guid: c954bea9dfcb9b94f852cfe93d77cf85, type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4283,6 +4325,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3189485155298241745, guid: c954bea9dfcb9b94f852cfe93d77cf85, type: 3}
       insertIndex: -1
       addedObject: {fileID: 45187447}
+    - targetCorrespondingSourceObject: {fileID: 3189485155298241745, guid: c954bea9dfcb9b94f852cfe93d77cf85, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 45187450}
+    - targetCorrespondingSourceObject: {fileID: 3189485155298241745, guid: c954bea9dfcb9b94f852cfe93d77cf85, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 45187451}
   m_SourcePrefab: {fileID: 100100000, guid: c954bea9dfcb9b94f852cfe93d77cf85, type: 3}
 --- !u!1001 &100500574
 PrefabInstance:
@@ -10036,6 +10084,7 @@ MonoBehaviour:
   - {fileID: 76941743}
   - {fileID: 1517201473}
   PoofEffect: {fileID: 8919484260529707532, guid: 2c27f6103c8348844a3cc636de15052a, type: 3}
+  AssociatedAnimal: {fileID: 1960126631}
 --- !u!4 &415875178 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7605426715356279294, guid: db4677f9b0ce5bd4b95b2be5e4a67031, type: 3}
@@ -19694,6 +19743,72 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f8b9902f8c1266a44aa452830a96d079, type: 3}
+--- !u!1 &879656190
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 879656191}
+  - component: {fileID: 879656192}
+  - component: {fileID: 879656193}
+  m_Layer: 12
+  m_Name: AnimalTeleportRadius
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &879656191
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 879656190}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1504346263}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &879656192
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 879656190}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 6
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &879656193
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 879656190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57b1c506c7472954a855f20c8623b67c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &886554441
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22631,6 +22746,7 @@ MonoBehaviour:
   - {fileID: 2115978526}
   - {fileID: 1904982506}
   PoofEffect: {fileID: 8919484260529707532, guid: 2c27f6103c8348844a3cc636de15052a, type: 3}
+  AssociatedAnimal: {fileID: 1485022855}
 --- !u!4 &1005407236 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7605426715356279294, guid: db4677f9b0ce5bd4b95b2be5e4a67031, type: 3}
@@ -26000,6 +26116,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Raccoon3
       objectReference: {fileID: 0}
+    - target: {fileID: 8441956799380271662, guid: 8e03b2a4cedd446459e71fe8cf0be007, type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: 9109667518648248468, guid: 8e03b2a4cedd446459e71fe8cf0be007, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.2755035
@@ -26055,7 +26175,16 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8441956799380271662, guid: 8e03b2a4cedd446459e71fe8cf0be007, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1960126631}
+    - targetCorrespondingSourceObject: {fileID: 8441956799380271662, guid: 8e03b2a4cedd446459e71fe8cf0be007, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1960126630}
+    - targetCorrespondingSourceObject: {fileID: 8441956799380271662, guid: 8e03b2a4cedd446459e71fe8cf0be007, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1960126632}
   m_SourcePrefab: {fileID: 100100000, guid: 8e03b2a4cedd446459e71fe8cf0be007, type: 3}
 --- !u!1001 &1166805247
 PrefabInstance:
@@ -32559,6 +32688,7 @@ MonoBehaviour:
   AssociatedEnemies:
   - {fileID: 1630618015}
   PoofEffect: {fileID: 8919484260529707532, guid: 2c27f6103c8348844a3cc636de15052a, type: 3}
+  AssociatedAnimal: {fileID: 45187450}
 --- !u!4 &1479595143 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7605426715356279294, guid: db4677f9b0ce5bd4b95b2be5e4a67031, type: 3}
@@ -32700,6 +32830,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Raccoon2
       objectReference: {fileID: 0}
+    - target: {fileID: 4965999344089902418, guid: 4363e3f4e0625ff44981ba9434f73284, type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: 5056339543714679490, guid: 4363e3f4e0625ff44981ba9434f73284, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 11.444567
@@ -32831,6 +32965,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4965999344089902418, guid: 4363e3f4e0625ff44981ba9434f73284, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1485022850}
+    - targetCorrespondingSourceObject: {fileID: 4965999344089902418, guid: 4363e3f4e0625ff44981ba9434f73284, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1485022855}
+    - targetCorrespondingSourceObject: {fileID: 4965999344089902418, guid: 4363e3f4e0625ff44981ba9434f73284, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1485022854}
   m_SourcePrefab: {fileID: 100100000, guid: 4363e3f4e0625ff44981ba9434f73284, type: 3}
 --- !u!1 &1485022849 stripped
 GameObject:
@@ -32865,6 +33005,41 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5737892393500112872, guid: 4363e3f4e0625ff44981ba9434f73284, type: 3}
   m_PrefabInstance: {fileID: 1485022848}
   m_PrefabAsset: {fileID: 0}
+--- !u!195 &1485022854
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1485022849}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
+--- !u!114 &1485022855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1485022849}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5540bc7311ae1f47a59d687353ff7bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerTarget: {fileID: 1504346263}
 --- !u!1001 &1493063199
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -42384,6 +42559,69 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 04054a3651be51d4193414f850cf6bde, type: 3}
+--- !u!1 &1960126628 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8441956799380271662, guid: 8e03b2a4cedd446459e71fe8cf0be007, type: 3}
+  m_PrefabInstance: {fileID: 1166680984}
+  m_PrefabAsset: {fileID: 0}
+--- !u!195 &1960126630
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1960126628}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
+--- !u!114 &1960126631
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1960126628}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5540bc7311ae1f47a59d687353ff7bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerTarget: {fileID: 1504346263}
+--- !u!136 &1960126632
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1960126628}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.3
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1963126278
 PrefabInstance:
   m_ObjectHideFlags: 0

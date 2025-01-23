@@ -32,4 +32,25 @@ public class Animal : MonoBehaviour
     {
         _isFollowing = true;
     }
+
+    public void TeleportToPlayer()
+    {
+        if (!_isFollowing)
+    {
+        // Prevent teleporting if the animal is still in the cage
+        return;
+    }
+        if (PlayerTarget == null) return;
+
+        // Teleport the animal directly to the player's position
+        Vector3 teleportPosition = PlayerTarget.position;
+
+        // Optional: Offset the teleport position slightly behind or to the side of the player
+        teleportPosition += PlayerTarget.forward * -1.5f;
+
+        // Use NavMeshAgent.Warp to instantly move the agent
+        _navMeshAgent.Warp(teleportPosition);
+
+        Debug.Log($"{name} teleported to the player.");
+    }
 }

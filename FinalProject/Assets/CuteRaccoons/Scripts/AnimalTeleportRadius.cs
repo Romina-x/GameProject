@@ -1,18 +1,22 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class AnimalTeleportRadius : MonoBehaviour
+public class TeleportRadius : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    private Transform _playerTransform; 
 
-    // Update is called once per frame
-    void Update()
+    void Awake()
     {
-        
+        // Get the player's transform from parent object
+        _playerTransform = transform.parent;
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        // Check if the exiting object is an animal
+        Animal animal = other.GetComponent<Animal>();
+        if (animal != null)
+        {
+            animal.TeleportToPlayer(); // Trigger the teleport behavior
+        }
     }
 }
+

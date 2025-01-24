@@ -94,6 +94,7 @@ public class Enemy : MonoBehaviour, IDamageable, IHealthSubject, IDefeatSubject
         if (_health <= 0)
         {
             _isDefeated = true;
+            _canAttack = false;
             _animator.SetTrigger(_diedTriggerHash);
             _movement.StopFollowingOnDeath();
             AttackRadius.UnsubscribeFromAttackEvent(OnAttack);

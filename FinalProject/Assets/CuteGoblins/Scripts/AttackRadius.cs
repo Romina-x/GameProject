@@ -87,7 +87,7 @@ public class AttackRadius : MonoBehaviour
             }
 
             // Call TakeDamage on damageable and invoke OnAttack event 
-            if(closestDamageable != null)
+            if(closestDamageable != null && GetComponentInParent<Enemy>().CanAttack())
             {
                 OnAttack?.Invoke(closestDamageable);
                 closestDamageable.TakeDamage(_damage);

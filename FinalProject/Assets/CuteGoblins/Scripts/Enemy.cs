@@ -22,6 +22,7 @@ public class Enemy : MonoBehaviour, IDamageable, IHealthSubject, IDefeatSubject
     private int _maxHealth = 100;
     private int _health;
     private bool _isDefeated = false;
+    private bool _canAttack = true;
 
     // Observers
     private List<IHealthObserver> _healthObservers = new List<IHealthObserver>();
@@ -87,6 +88,7 @@ public class Enemy : MonoBehaviour, IDamageable, IHealthSubject, IDefeatSubject
         if (_health > 0) 
         {
             _animator.SetTrigger(_gotHitTriggerHash);
+            StartCoroutine(DisableAttackDuringAnimation());
         }
         // Handle death when health below 0
         if (_health <= 0)
@@ -127,6 +129,25 @@ public class Enemy : MonoBehaviour, IDamageable, IHealthSubject, IDefeatSubject
         NotifyDefeatObservers();
         Destroy(gameObject);
     }
+
+    // Attack disable
+    private IEnumerator DisableAttackDuringAnimation()
+    {
+        _canAttack = false; // Disable attacks
+        
+        // Wait for the length of the "get hit" animation
+        AnimatorStateInfo stateInfo = _animator.GetCurrentAnimatorStateInfo(0);
+        float animationLength = stateInfo.length;
+        yield return new WaitForSeconds(animationLength);
+        
+        _canAttack = true; // Re-enable attacks
+    }
+
+    public bool CanAttack()
+    {
+        return _canAttack;
+    }
+
 
     // IHealthSubject interface methods
     public void RegisterHealthObserver(IHealthObserver observer)

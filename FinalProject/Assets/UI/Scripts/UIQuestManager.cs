@@ -4,58 +4,67 @@ using UnityEngine;
 
 public class QuestUIManager : MonoBehaviour, IRescueObserver
 {
-    [SerializeField] private GameObject _questBox1; // "Find the animals!" 
-    [SerializeField] private GameObject _questBox2; // "Reach the goal!" 
-    private Animator _quest1Animator;
-    private Animator _quest2Animator;
+    
+    [SerializeField] private GameObject _questBox1; 
+    [SerializeField] private GameObject _questBox2; 
 
+    [SerializeField] private GameObject goalVFXPrefab;  
+    [SerializeField] private Transform goalTransform;
+    [SerializeField] private GameObject goalTrigger; // Reference to the pre-made collider
 
-    private List<Animal> _animals; 
+    private List<Animal> _animals;
     private int _rescuedAnimals = 0;
     public int TotalAnimalsToRescue = 3;
     private bool _allAnimalsRescued = false;
+    private GameObject _spawnedVFX;
 
     private void Awake()
     {
-        _quest1Animator = _questBox1.GetComponent<Animator>();
-        _quest2Animator = _questBox2.GetComponent<Animator>();
-
-        // Find all animals in the scene and register as observer
         _animals = new List<Animal>(FindObjectsOfType<Animal>());
         foreach (var animal in _animals)
         {
             animal.RegisterRescueObserver(this);
+        }
+
+        // Ensure the goal trigger is disabled initially
+        if (goalTrigger != null)
+        {
+            goalTrigger.SetActive(false);
         }
     }
 
     public void OnAnimalRescued()
     {
         _rescuedAnimals++;
-        Debug.Log($"Animals Rescued: {_rescuedAnimals}/{TotalAnimalsToRescue}");
 
         if (_rescuedAnimals >= TotalAnimalsToRescue)
         {
             _allAnimalsRescued = true;
-            Debug.Log("All animals rescued! Head to the goal!");
             StartCoroutine(TransitionToSecondQuest());
+            ActivateGoal();
         }
-
-        
     }
 
     private IEnumerator TransitionToSecondQuest()
     {
-        // Play first quest's "hide" animation
-        _quest1Animator.SetTrigger("Hide");
-        
-        // Wait for the animation to finish
-        yield return new WaitForSeconds(2f); // Adjust based on animation length
-
-        // Disable the orignal quest
+        _questBox1.GetComponent<Animator>().SetTrigger("Hide");
+        yield return new WaitForSeconds(2f);
         _questBox1.SetActive(false);
-
-        // Play second quest's "show" animation
         _questBox2.SetActive(true);
+        _questBox2.GetComponent<Animator>().SetTrigger("Show");
+    }
+
+    private void ActivateGoal()
+    {
+        if (goalVFXPrefab != null && goalTransform != null)
+        {
+            _spawnedVFX = Instantiate(goalVFXPrefab, goalTransform.position, Quaternion.identity);
+        }
+
+        if (goalTrigger != null)
+        {
+            goalTrigger.SetActive(true); // Enable the pre-made collider
+            Debug.Log("Goal is now active!");
+        }
     }
 }
-

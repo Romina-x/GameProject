@@ -46,7 +46,7 @@ public class GoalIndicator : MonoBehaviour
         boundedPosition.x = Mathf.Clamp(boundedPosition.x, 10, Screen.width - 10);
 
         // Set the arrow's new position
-        arrowRect.position = clampedPosition;
+        arrowRect.position = boundedPosition;
 
         // Rotate the arrow to point toward the goal
         float angle = Mathf.Atan2(direction.z, direction.x) * Mathf.Rad2Deg;

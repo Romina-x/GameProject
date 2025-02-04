@@ -8,8 +8,8 @@ public class LevelCleared : MonoBehaviour
 {
     public void Setup()
     {
-        Debug.Log("Setting up");
         gameObject.SetActive(true);
+        LevelManager.Instance.SetGameState(LevelState.LevelCleared);
     }
 
     public void RestartButton()

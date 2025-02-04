@@ -7,14 +7,8 @@ public class LevelManager : MonoBehaviour
 {
     public static LevelManager Instance { get; private set; } // Single instance of this class to be accessed
 
-    // Level states
-    public enum LevelState {
-        Playing, 
-        Paused, 
-        LevelComplete, 
-        GameOver 
-    }
-
+    [SerializeField]
+    private PlayerStateMachine _player;
     private LevelState _currentState;
 
     public LevelState CurrentState { get { return _currentState; } }
@@ -35,29 +29,29 @@ public class LevelManager : MonoBehaviour
     private void Start()
     {
         // Initial state at the start of each level is playing
-        SetGameState(GameState.Playing);
+        SetGameState(LevelState.Playing);
     }
 
-    public void SetGameState(GameState newState)
+    public void SetGameState(LevelState newState)
     {
         _currentState = newState;
         Debug.Log("Game State changed to: " + _currentState);
 
         switch (_currentState)
         {
-            case GameState.Playing:
+            case LevelState.Playing:
                 EnableGameplay(true);
                 break;
 
-            case GameState.Paused:
+            case LevelState.Paused:
                 EnableGameplay(false);
                 break;
 
-            case GameState.LevelComplete:
+            case LevelState.LevelCleared:
                 EnableGameplay(false);
                 break;
 
-            case GameState.GameOver:
+            case LevelState.GameOver:
                 EnableGameplay(false);
                 break;
         }
@@ -68,7 +62,7 @@ public class LevelManager : MonoBehaviour
         // Disable player movement & enemy AI
         _player.EnableMovement(isEnabled);
 
-        foreach (Enemy enemy in FindObjectsOfType<Enemy>())
+        foreach (EnemyMovement enemy in FindObjectsOfType<EnemyMovement>())
         {
             enemy.EnableMovement(isEnabled);
         }

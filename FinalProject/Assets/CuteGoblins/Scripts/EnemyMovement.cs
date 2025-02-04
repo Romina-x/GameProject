@@ -108,4 +108,8 @@ public class EnemyMovement : MonoBehaviour
         }
         _agent.isStopped = true;  // Stop the NavMeshAgent from moving
     }
+
+    public void EnableMovement(bool isEnabled){
+        _agent.isStopped = isEnabled;
+    }
 }

@@ -53,8 +53,12 @@ public class Animal : MonoBehaviour
 
         // Use NavMeshAgent.Warp to instantly move the agent
         _navMeshAgent.Warp(teleportPosition);
+    }
 
-        Debug.Log($"{name} teleported to the player.");
+    public void EnableMovement(bool isEnabled){
+        _agent.isStopped = !isEnabled;
+        _animator.speed = isEnabled ? 1 : 0;
+        _agent.velocity = Vector3.zero;
     }
 
     // IRescueSubject interface methods

@@ -10,7 +10,8 @@ public class QuestUIManager : MonoBehaviour, IRescueObserver
 
     [SerializeField] private GameObject _goalVFXPrefab;  
     [SerializeField] private Transform _goalTransform;
-    [SerializeField] private GameObject _goalRadius; // Reference to the pre-made collider
+    [SerializeField] private GameObject _goalRadius; 
+    [SerializeField] private GameObject _goalIndicator;
 
     private List<Animal> _animals;
     private int _rescuedAnimals = 0;
@@ -26,10 +27,15 @@ public class QuestUIManager : MonoBehaviour, IRescueObserver
             animal.RegisterRescueObserver(this);
         }
 
-        // Ensure the goal trigger is disabled initially
+        // Ensure the goal trigger and indicator are disabled initially
         if (_goalRadius != null)
         {
             _goalRadius.SetActive(false);
+        }
+
+        if(_goalIndicator != null)
+        {
+           // _goalIndicator.SetActive(false);
         }
     }
 
@@ -56,15 +62,19 @@ public class QuestUIManager : MonoBehaviour, IRescueObserver
 
     private void ActivateGoal()
     {
+        // Instantiate the goal VFX
         if (_goalVFXPrefab != null && _goalTransform != null)
         {
             _spawnedVFX = Instantiate(_goalVFXPrefab, _goalTransform.position, Quaternion.identity);
         }
 
+        // Enable the goal collider
         if (_goalRadius != null)
         {
             _goalRadius.SetActive(true); // Enable the pre-made collider
-            Debug.Log("Active");
         }
+
+        // Enable the goal indicator
+        //_goalIndicator.SetActive(true);
     }
 }

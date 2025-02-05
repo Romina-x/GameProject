@@ -12327,11 +12327,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5316609513351239561, guid: 4db940c31d61ac149801c850fc645d68, type: 3}
   m_PrefabInstance: {fileID: 1646466202}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &504276540 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2485342667372923388, guid: f37720bd03e87464f869ff395bf5ddb5, type: 3}
-  m_PrefabInstance: {fileID: 1698709777}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &506202621
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21905,18 +21900,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2969672400369800006, guid: f37720bd03e87464f869ff395bf5ddb5, type: 3}
   m_PrefabInstance: {fileID: 1698709777}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &939065278
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 504276540}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ccba2180ea6f50e42bab59c449ed5071, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &942898439
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -33392,6 +33375,7 @@ MonoBehaviour:
   _goalVFXPrefab: {fileID: 6532625474870085665, guid: 07a977963523b3b4dbcaa27119f6b469, type: 3}
   _goalTransform: {fileID: 939065274}
   _goalRadius: {fileID: 1871004209}
+  _goalIndicator: {fileID: 362155764}
   TotalAnimalsToRescue: 3
 --- !u!114 &1473028701
 MonoBehaviour:
@@ -38573,10 +38557,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2969672400369800006, guid: f37720bd03e87464f869ff395bf5ddb5, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1871004210}
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 2485342667372923388, guid: f37720bd03e87464f869ff395bf5ddb5, type: 3}
-      insertIndex: 2
-      addedObject: {fileID: 939065278}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f37720bd03e87464f869ff395bf5ddb5, type: 3}
 --- !u!4 &1699601779 stripped
 Transform:
@@ -40238,7 +40219,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1783400707
 MonoBehaviour:
   m_ObjectHideFlags: 0

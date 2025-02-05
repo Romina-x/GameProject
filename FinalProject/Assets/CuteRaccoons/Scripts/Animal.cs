@@ -56,9 +56,9 @@ public class Animal : MonoBehaviour
     }
 
     public void EnableMovement(bool isEnabled){
-        _agent.isStopped = !isEnabled;
+        _navMeshAgent.isStopped = !isEnabled;
         _animator.speed = isEnabled ? 1 : 0;
-        _agent.velocity = Vector3.zero;
+        _navMeshAgent.velocity = Vector3.zero;
     }
 
     // IRescueSubject interface methods

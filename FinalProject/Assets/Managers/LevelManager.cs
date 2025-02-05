@@ -69,7 +69,7 @@ public class LevelManager : MonoBehaviour
             enemy.EnableMovement(isEnabled);
         }
 
-        foreach (Animal animals in FindObjectsOfType<Animal>())
+        foreach (Animal animal in FindObjectsOfType<Animal>())
         {
             animal.EnableMovement(isEnabled);
         }

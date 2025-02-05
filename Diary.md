@@ -1,4 +1,23 @@
+# Week 14
+### 04/02/2025
+- Began refactoring scripts to use a LevelManager which controls the states of the level. (Playing, GameOver etc)
+
+# Week 13
+### 31/01/2025
+- Created a collider to detect the player entering the goal area.
+- Configured the goal scripts to activate the level cleared UI screen on collision.
+- Created a goal indicator arrow to direct the player towards the goal after rescuing all the animals.
+### 30/01/2025
+- Redesign of quest UI based on user feedback.
+### 29/01/2025
+- Refactored animal script to use observer pattern.
+- Created UI elements for questlines and created basic show and hide animations for them.
+- Configured the quest animations and UI to show based on whether the animals are rescued or not.
+
 # Week 12 - Start of Term 2
+### 24/01/2025
+- Improved the enemy combat mechanics based on user feedback by disabling enemies from being able to attack while stunned.
+- Bugfix to prevent enemies from attacking during their death animation.
 ### 23/01/2025
 - Created teleport mechanic for when animals get stuck too far away from the player.
 - Set up new physics layers for the animals and teleport radius and configured them in the collision matrix.

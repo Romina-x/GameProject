@@ -9387,7 +9387,6 @@ GameObject:
   - component: {fileID: 362155765}
   - component: {fileID: 362155768}
   - component: {fileID: 362155767}
-  - component: {fileID: 362155769}
   m_Layer: 5
   m_Name: Arrow
   m_TagString: Untagged
@@ -9452,27 +9451,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 362155764}
   m_CullTransparentMesh: 1
---- !u!95 &362155769
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 362155764}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 79edab47b3e905046bbf33d9845a7b92, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &365780474
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -37619,6 +37597,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1657834468}
   - component: {fileID: 1657834469}
+  - component: {fileID: 1657834470}
   m_Layer: 5
   m_Name: GoalIndicator
   m_TagString: Untagged
@@ -37662,6 +37641,27 @@ MonoBehaviour:
   goal: {fileID: 939065274}
   mainCamera: {fileID: 963194227}
   arrow: {fileID: 362155764}
+--- !u!95 &1657834470
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1657834467}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 568b4f43cd7584b47b6464fd82b58f88, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &1660004071
 PrefabInstance:
   m_ObjectHideFlags: 0

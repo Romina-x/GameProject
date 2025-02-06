@@ -54,7 +54,7 @@ public class QuestUIManager : MonoBehaviour, IRescueObserver
     private IEnumerator TransitionToSecondQuest()
     {
         _questBox1.GetComponent<Animator>().SetTrigger("Hide");
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(2.5f);
         _questBox1.SetActive(false);
         
         _questBox2.SetActive(true);

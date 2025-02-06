@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
 public class PlayerHealthBar : MonoBehaviour, IHealthObserver
 {
-    [SerializeField] private Image _healthBarSprite;
+    [SerializeField] private Slider _healthBarSlider; // Reference to the Slider component
 
     // Player to observe
     [SerializeField] private PlayerHealthAndDamage _playerHealth;
@@ -16,10 +17,11 @@ public class PlayerHealthBar : MonoBehaviour, IHealthObserver
         _cam = Camera.main ?? FindObjectOfType<Camera>();
     }
 
-    // Update the fill of the bar based on health
+    // Update the value of the slider based on health
     public void UpdateHealthBar(float maxHealth, float currentHealth)
     {
-        _healthBarSprite.fillAmount = currentHealth / maxHealth;
+        // Set the slider's value between 0 and 1
+        _healthBarSlider.value = currentHealth / maxHealth;
     }
 
     // Make sure the bar updates to stay facing the camera

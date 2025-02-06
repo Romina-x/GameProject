@@ -39,6 +39,8 @@ public class PlayerHealthAndDamage : MonoBehaviour, IDamageable, IHealthSubject
 
         // Subscribe to attack input action
         _playerInput.CharacterControls.Attack.performed += OnAttack;
+
+        NotifyHealthObservers();
     }
 
     void OnAttack(InputAction.CallbackContext context)

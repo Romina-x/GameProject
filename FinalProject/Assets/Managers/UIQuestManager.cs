@@ -56,6 +56,7 @@ public class QuestUIManager : MonoBehaviour, IRescueObserver
         _questBox1.GetComponent<Animator>().SetTrigger("Hide");
         yield return new WaitForSeconds(2f);
         _questBox1.SetActive(false);
+        
         _questBox2.SetActive(true);
         _questBox2.GetComponent<Animator>().SetTrigger("Show");
     }

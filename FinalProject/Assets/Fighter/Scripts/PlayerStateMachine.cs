@@ -188,4 +188,10 @@ public class PlayerStateMachine : MonoBehaviour
         Vector3 movement = _isRunPressed ? _currentRunMovement : _currentMovement;
         _characterController.Move(movement * Time.deltaTime);
     }
+
+    public void EnableMovement(bool isEnabled)
+    {
+        this.enabled = isEnabled; // Disables state machine updates
+        _characterController.enabled = isEnabled; // Prevents movement
+    }
 }

@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.AI; // For NavMeshAgent if used for movement
+using System.Collections.Generic;
 
 public class Animal : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class Animal : MonoBehaviour
     private Animator _animator;
 
     private bool _isFollowing = false;
+    private List<IRescueObserver> _rescueObservers = new List<IRescueObserver>();
 
     void Awake()
     {
@@ -31,6 +33,7 @@ public class Animal : MonoBehaviour
     public void StartFollowing()
     {
         _isFollowing = true;
+        NotifyRescueObservers();
     }
 
     public void TeleportToPlayer()
@@ -50,7 +53,30 @@ public class Animal : MonoBehaviour
 
         // Use NavMeshAgent.Warp to instantly move the agent
         _navMeshAgent.Warp(teleportPosition);
+    }
 
-        Debug.Log($"{name} teleported to the player.");
+    public void EnableMovement(bool isEnabled){
+        _navMeshAgent.isStopped = !isEnabled;
+        _animator.speed = isEnabled ? 1 : 0;
+        _navMeshAgent.velocity = Vector3.zero;
+    }
+
+    // IRescueSubject interface methods
+    public void RegisterRescueObserver(IRescueObserver observer)
+    {
+        _rescueObservers.Add(observer);
+    }
+
+    public void UnregisterRescueObserver(IRescueObserver observer)
+    {
+        _rescueObservers.Remove(observer);
+    }
+
+    public void NotifyRescueObservers()
+    {
+        foreach (var observer in _rescueObservers)
+        {
+            observer.OnAnimalRescued();
+        }
     }
 }

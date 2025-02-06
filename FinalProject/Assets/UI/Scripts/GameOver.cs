@@ -11,6 +11,7 @@ public class GameOver : MonoBehaviour, IHealthObserver
     public void Setup()
     {
         gameObject.SetActive(true);
+        LevelManager.Instance.SetGameState(LevelState.GameOver);
     }
 
     public void RestartButton()

@@ -191,7 +191,7 @@ public class PlayerStateMachine : MonoBehaviour
 
     public void EnableMovement(bool isEnabled)
     {
-        this.enabled = isEnabled; // Disables state machine updates
         _characterController.enabled = isEnabled; // Prevents movement
+        this.enabled = isEnabled; // Disables state machine updates
     }
 }

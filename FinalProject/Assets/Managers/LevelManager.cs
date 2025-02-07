@@ -69,6 +69,11 @@ public class LevelManager : MonoBehaviour
             enemy.EnableMovement(isEnabled);
         }
 
+        foreach (AttackRadius enemyAttack in FindObjectsOfType<AttackRadius>())
+        {
+            enemyAttack.EnableAttackCoroutine(isEnabled);
+        }
+
         foreach (Animal animal in FindObjectsOfType<Animal>())
         {
             animal.EnableMovement(isEnabled);

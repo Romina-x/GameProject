@@ -105,19 +105,6 @@ public class AttackRadius : MonoBehaviour
         _attackCoroutine = null;
     }
 
-    public void EnableAttackCoroutine(bool isEnabled)
-    {
-        if (_attackCoroutine != null && isEnabled == false) 
-        {
-            StopCoroutine(_attackCoroutine);
-            _attackCoroutine = null;
-            Collider.enabled = false;
-        } else {
-            _attackCoroutine = StartCoroutine(Attack());
-            Collider.enabled = true;
-        }
-    } 
-
     private bool DisabledDamageables(IDamageable damageable)
     {
         return damageable != null && !damageable.GetTransform().gameObject.activeSelf;

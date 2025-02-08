@@ -5,5 +5,5 @@ using UnityEngine;
 // Observer interface for entities observing enemy defeats
 public interface IDefeatObserver
 {
-    public void OnNotify();
+    public void OnNotify(int score);
 }

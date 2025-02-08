@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class QuestUIManager : MonoBehaviour, IRescueObserver
 {
@@ -12,6 +13,8 @@ public class QuestUIManager : MonoBehaviour, IRescueObserver
     [SerializeField] private Transform _goalTransform;
     [SerializeField] private GameObject _goalRadius; 
     [SerializeField] private GameObject _goalIndicator;
+
+    [SerializeField] private TextMeshProUGUI _rescuedAnimalsText;
 
     private List<Animal> _animals;
     private int _rescuedAnimals = 0;
@@ -33,15 +36,18 @@ public class QuestUIManager : MonoBehaviour, IRescueObserver
             _goalRadius.SetActive(false);
         }
 
-        if(_goalIndicator != null)
+        if (_goalIndicator != null)
         {
-           // _goalIndicator.SetActive(false);
+            // _goalIndicator.SetActive(false);
         }
+        
+        _rescuedAnimalsText.text = $"{_rescuedAnimals}/{TotalAnimalsToRescue}"; // Update the HUD display
     }
 
     public void OnAnimalRescued()
     {
         _rescuedAnimals++;
+        _rescuedAnimalsText.text = $"{_rescuedAnimals}/{TotalAnimalsToRescue}"; // Update the HUD display
 
         if (_rescuedAnimals >= TotalAnimalsToRescue)
         {

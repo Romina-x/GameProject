@@ -38,7 +38,7 @@ public class QuestUIManager : MonoBehaviour, IRescueObserver
 
         if (_goalIndicator != null)
         {
-            // _goalIndicator.SetActive(false);
+            _goalIndicator.SetActive(false);
         }
         
         _rescuedAnimalsText.text = $"{_rescuedAnimals}/{TotalAnimalsToRescue}"; // Update the HUD display
@@ -82,6 +82,6 @@ public class QuestUIManager : MonoBehaviour, IRescueObserver
         }
 
         // Enable the goal indicator
-        //_goalIndicator.SetActive(true);
+        _goalIndicator.SetActive(true);
     }
 }

@@ -1,4 +1,12 @@
 # Week 14
+### 08/02/2025
+- Implemented a score system which shows a final score for the player on the Level Cleared screen.
+### 07/02/2025
+- Created a pause button and pause menu for the level.
+- Created an in game timer element for the HUD.
+### 06/02/2025
+- Redesigned the current UI elements with new UI assets.
+- Updated Game Over, Level Cleared screens and the Player's Health Bar.
 ### 04/02/2025
 - Began refactoring scripts to use a LevelManager which controls the states of the level. (Playing, GameOver etc)
 

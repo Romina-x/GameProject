@@ -13,6 +13,7 @@ public class EnemyScriptableObject : ScriptableObject
     public int damage;
     public float attackRadius;
     public int score;
+    public bool isRanged;
 
     // Navmesh agent configs
     public float AIUpdateInterval;

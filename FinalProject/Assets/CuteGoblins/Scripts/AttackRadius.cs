@@ -11,8 +11,8 @@ public class AttackRadius : MonoBehaviour
     // Components
     public SphereCollider Collider;
 
-    // List of damageable game objects in the radius
-    private List<IDamageable> _damageables = new List<IDamageable>();
+    // Player object
+    private IDamageable _damageable;
 
     // Attack settings
     private float _attackDelay = 0.5f;
@@ -34,12 +34,11 @@ public class AttackRadius : MonoBehaviour
     // Triggered when something enters the radius
     private void OnTriggerEnter(Collider other) 
     {
-        IDamageable damageable = other.GetComponent<IDamageable>();
+        _damageable = other.GetComponent<IDamageable>();
 
         // If object is a damageable
-        if (damageable != null)
+        if (_damageable != null)
         {
-            _damageables.Add(damageable);
             // Begin attacking
             if(_attackCoroutine == null)
             {
@@ -51,12 +50,14 @@ public class AttackRadius : MonoBehaviour
     // Triggered when something leaves the radius
     private void OnTriggerExit(Collider other) 
     {
-        IDamageable damageable = other.GetComponent<IDamageable>();
-        if (damageable != null)
+        _damageable = other.GetComponent<IDamageable>();
+
+        if (_damageable != null)
         {
-            _damageables.Remove(damageable);
-            // Stop attacking
-            if(_damageables.Count == 0){
+            _damageable = null;
+
+            if (_attackCoroutine != null)
+            {
                 StopCoroutine(_attackCoroutine);
                 _attackCoroutine = null;
             }
@@ -65,49 +66,20 @@ public class AttackRadius : MonoBehaviour
 
     private IEnumerator Attack()
     {
-        // Delay between attacks
         WaitForSeconds wait = new WaitForSeconds(_attackDelay);
-        yield return wait;
-
-        IDamageable closestDamageable = null;
-        float closestDistance = float.MaxValue;
-        while (_damageables.Count > 0)
+        
+        // Keep attacking as long as the player is within the radius and the enemy can attack
+        while (_damageable != null)
         {
-            // Determine closest damageable
-            for (int i = 0; i < _damageables.Count; i++)
+            if (GetComponentInParent<Enemy>().CanAttack())
             {
-                Transform damageableTransform = _damageables[i].GetTransform();
-                float distance = Vector3.Distance(transform.position, damageableTransform.position);
-
-                if(distance < closestDistance)
-                {
-                    closestDistance = distance;
-                    closestDamageable = _damageables[i];
-                }
+                OnAttack?.Invoke(_damageable);
+                _damageable.TakeDamage(_damage);
             }
-
-            // Call TakeDamage on damageable and invoke OnAttack event 
-            if(closestDamageable != null && GetComponentInParent<Enemy>().CanAttack())
-            {
-                OnAttack?.Invoke(closestDamageable);
-                closestDamageable.TakeDamage(_damage);
-            }
-
-            // Reset closest
-            closestDamageable = null;
-            closestDistance = float.MaxValue;
-
-            // Wait between each attack for the set delay
-            yield return wait;
-            _damageables.RemoveAll(DisabledDamageables);
+            yield return wait; // Wait before the next attack
         }
 
         _attackCoroutine = null;
-    }
-
-    private bool DisabledDamageables(IDamageable damageable)
-    {
-        return damageable != null && !damageable.GetTransform().gameObject.activeSelf;
     }
 
     public void SubscribeToAttackEvent(System.Action<IDamageable> handler)

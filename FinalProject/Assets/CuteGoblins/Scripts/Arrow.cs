@@ -3,19 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-[RequireComponent(typeof(RigidBody))]
+[RequireComponent(typeof(Rigidbody))]
 public class Arrow : PoolableObject
 {
     private float _autoDestroyTime = 5f;
     [SerializeField] private float _moveSpeed = 2f;
     [SerializeField] private int _damage = 10;
-    private RigidBody _rigidBody;
+    private Rigidbody _rigidBody;
 
     private const string DISABLE_METHOD_NAME = "Disable";
 
     private void Awake()
     {
-        _rigidBody = GetComponent<RigidBody>();
+        _rigidBody = GetComponent<Rigidbody>();
     }
 
     private void OnEnable()

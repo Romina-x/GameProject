@@ -189,9 +189,4 @@ public class PlayerStateMachine : MonoBehaviour
         _characterController.Move(movement * Time.deltaTime);
     }
 
-    public void EnableMovement(bool isEnabled)
-    {
-        this.enabled = isEnabled; // Disables state machine updates
-        _characterController.enabled = isEnabled; // Prevents movement
-    }
 }

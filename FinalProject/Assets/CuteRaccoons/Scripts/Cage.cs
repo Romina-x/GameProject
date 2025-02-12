@@ -38,7 +38,7 @@ public class Cage : MonoBehaviour, IDefeatObserver
     }
 
     // Cage is notified when an associated enemy dies and subsequently checks if all are dead
-    public void OnNotify()
+    public void OnNotify(int score)
     {
         if (!_isFreed && AreAllEnemiesDefeated())
         {

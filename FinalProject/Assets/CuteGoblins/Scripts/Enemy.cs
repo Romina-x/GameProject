@@ -23,6 +23,7 @@ public class Enemy : MonoBehaviour, IDamageable, IHealthSubject, IDefeatSubject
     private int _health;
     private bool _isDefeated = false;
     private bool _canAttack = true;
+    private int _score;
 
     // Observers
     private List<IHealthObserver> _healthObservers = new List<IHealthObserver>();
@@ -72,9 +73,11 @@ public class Enemy : MonoBehaviour, IDamageable, IHealthSubject, IDefeatSubject
 
         _health = EnemyData.health;
         _maxHealth = EnemyData.health;
+        _score = EnemyData.score;
         AttackRadius.Collider.radius = EnemyData.attackRadius;
         AttackRadius.AttackDelay = EnemyData.attackDelay;
         AttackRadius.Damage = EnemyData.damage;
+
     }
 
     // IDamageable interface methods
@@ -182,7 +185,7 @@ public class Enemy : MonoBehaviour, IDamageable, IHealthSubject, IDefeatSubject
     {
         foreach (IDefeatObserver observer in _defeatObservers)
         {
-            observer.OnNotify();
+            observer.OnNotify(_score);
         }
     }
 

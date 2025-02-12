@@ -16,6 +16,7 @@ MonoBehaviour:
   attackDelay: 2
   damage: 40
   attackRadius: 1
+  score: 100
   AIUpdateInterval: 0.1
   acceleration: 8
   angularSpeed: 120

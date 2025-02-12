@@ -60,18 +60,14 @@ public class LevelManager : MonoBehaviour
     // Enables or disables movement of all entities in the level
     private void EnableGameplay(bool isEnabled)
     {
-        // Disable or enable player movement
-        _player.EnableMovement(isEnabled);
-
-        // Disable or enable enemies and animals from moving
-        foreach (EnemyMovement enemy in FindObjectsOfType<EnemyMovement>())
+        // Pause the level by setting the timescale to 0
+        if (isEnabled)
         {
-            enemy.EnableMovement(isEnabled);
+            Time.timeScale = 1;
         }
-
-        foreach (Animal animal in FindObjectsOfType<Animal>())
+        else
         {
-            animal.EnableMovement(isEnabled);
+            Time.timeScale = 0;
         }
     }
 }

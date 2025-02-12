@@ -12,27 +12,27 @@ public class AttackRadius : MonoBehaviour
     public SphereCollider Collider;
 
     // Player object
-    private IDamageable _damageable;
+    protected IDamageable _damageable;
 
     // Attack settings
-    private float _attackDelay = 0.5f;
-    private int _damage = 10;
+    protected float _attackDelay = 0.5f;
+    protected int _damage = 10;
 
     // Attack event
-    public event Action<IDamageable> OnAttack;
-    private Coroutine _attackCoroutine;
+    protected event Action<IDamageable> OnAttack;
+    protected Coroutine _attackCoroutine;
 
     // Properties
     public float AttackDelay { set { _attackDelay = value; } }
     public int Damage { set { _damage = value; } }
 
-    private void Awake()
+    protected virtual void Awake()
     {
         Collider = GetComponent<SphereCollider>();
     }
 
     // Triggered when something enters the radius
-    private void OnTriggerEnter(Collider other) 
+    protected virtual void OnTriggerEnter(Collider other) 
     {
         _damageable = other.GetComponent<IDamageable>();
 
@@ -48,7 +48,7 @@ public class AttackRadius : MonoBehaviour
     }
 
     // Triggered when something leaves the radius
-    private void OnTriggerExit(Collider other) 
+    protected virtual void OnTriggerExit(Collider other) 
     {
         _damageable = other.GetComponent<IDamageable>();
 
@@ -64,7 +64,7 @@ public class AttackRadius : MonoBehaviour
         }
     }
 
-    private IEnumerator Attack()
+    protected virtual IEnumerator Attack()
     {
         WaitForSeconds wait = new WaitForSeconds(_attackDelay);
         
@@ -80,6 +80,11 @@ public class AttackRadius : MonoBehaviour
         }
 
         _attackCoroutine = null;
+    }
+
+    protected void InvokeOnAttack(IDamageable target)
+    {
+        OnAttack?.Invoke(target);
     }
 
     public void SubscribeToAttackEvent(System.Action<IDamageable> handler)

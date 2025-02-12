@@ -13,6 +13,12 @@ public class Arrow : PoolableObject
 
     private const string DISABLE_METHOD_NAME = "Disable";
 
+    // Properties
+    public int Damage { get; set; }
+    public Rigidbody Rigidbody { get; set; }
+    public float AutoDestroyTime { get; set; }
+    public float MoveSpeed { get; set; }
+
     private void Awake()
     {
         _rigidBody = GetComponent<Rigidbody>();

@@ -7,7 +7,7 @@ public class RangedAttackRadius : AttackRadius
 {
     [SerializeField] private NavMeshAgent _agent;
     [SerializeField] private Arrow _arrowPrefab;
-    private Vector3 _arrowSpawnOffset = new Vector3(0, 0, 0);
+    private Vector3 _arrowSpawnOffset = new Vector3(0, 0.5f , 0);
     [SerializeField] private LayerMask Mask;
     private ObjectPool _arrowPool;
 

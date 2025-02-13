@@ -5,10 +5,10 @@ using UnityEngine.AI;
 
 public class RangedAttackRadius : AttackRadius
 {
-    private NavMeshAgent _agent;
-    private Arrow _arrowPrefab;
-    private Vector3 _arrowSpawnOffset = new Vector3(0, 1, 0);
-    private LayerMask Mask;
+    [SerializeField] private NavMeshAgent _agent;
+    [SerializeField] private Arrow _arrowPrefab;
+    private Vector3 _arrowSpawnOffset = new Vector3(0, 0, 0);
+    [SerializeField] private LayerMask Mask;
     private ObjectPool _arrowPool;
 
     [SerializeField] private float SpherecastRadius = 0.1f;
@@ -31,17 +31,19 @@ public class RangedAttackRadius : AttackRadius
 
         yield return Wait;
 
-        while (_target != null)
+        while (_damageable != null)
         {
-            if (HasLineOfSightTo(_target.GetTransform()))
+            Debug.Log("While");
+            if (HasLineOfSightTo(_damageable.GetTransform()))
             {
-                InvokeOnAttack(_target);
+                Debug.Log("Invoking Onattack");
+                InvokeOnAttack(_damageable);
                 _agent.enabled = false;
-                break;
             }
 
-            if (_target != null)
+            if (_damageable != null)
             {
+                
                 PoolableObject poolableObject = _arrowPool.GetObject();
                 if (poolableObject != null)
                 {
@@ -60,7 +62,7 @@ public class RangedAttackRadius : AttackRadius
 
             yield return Wait;
 
-            if (_target == null || !HasLineOfSightTo(_target.GetTransform()))
+            if (_damageable == null || !HasLineOfSightTo(_damageable.GetTransform()))
             {
                 _agent.enabled = true;
             }

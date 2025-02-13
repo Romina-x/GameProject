@@ -6,28 +6,31 @@ using UnityEngine.AI;
 [RequireComponent(typeof(Rigidbody))]
 public class Arrow : PoolableObject
 {
-    private float _autoDestroyTime = 5f;
+    private float _autoDestroyTime = 8f;
     [SerializeField] private float _moveSpeed = 2f;
     [SerializeField] private int _damage = 10;
-    private Rigidbody _rigidBody;
+    public Rigidbody Rigidbody;
 
     private const string DISABLE_METHOD_NAME = "Disable";
 
     // Properties
-    public int Damage { get; set; }
-    public Rigidbody Rigidbody { get; set; }
-    public float AutoDestroyTime { get; set; }
-    public float MoveSpeed { get; set; }
+    public int Damage { get { return _damage; } set { _damage = value; } }
+
+    public float MoveSpeed { get { return _moveSpeed; } set { _moveSpeed = value; } }
+
+
+    public float AutoDestroyTime { get { return _autoDestroyTime; } set { _autoDestroyTime = value; } }
+
 
     private void Awake()
     {
-        _rigidBody = GetComponent<Rigidbody>();
+        Rigidbody = GetComponent<Rigidbody>();
     }
 
     private void OnEnable()
     {
         CancelInvoke(DISABLE_METHOD_NAME);
-        Invoke(DISABLE_METHOD_NAME, _autoDestroyTime);
+        Invoke(DISABLE_METHOD_NAME, AutoDestroyTime);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -44,8 +47,12 @@ public class Arrow : PoolableObject
 
     private void Disable()
     {
+        if (Parent == null)
+        {
+            Debug.LogError($"{gameObject.name} has no Parent assigned!");
+        }
         CancelInvoke(DISABLE_METHOD_NAME);
-        _rigidBody.velocity = Vector3.zero;
+        Rigidbody.velocity = Vector3.zero;
         gameObject.SetActive(false);
     }
 }

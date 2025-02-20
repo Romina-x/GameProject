@@ -7,7 +7,7 @@ public class RangedAttackRadius : AttackRadius
 {
     [SerializeField] private NavMeshAgent _agent;
     [SerializeField] private Arrow _arrowPrefab;
-    private Vector3 _arrowSpawnOffset = new Vector3(0, 0.5f , 0);
+    private Vector3 _arrowSpawnOffset = new Vector3(0.27f, 0.25f , 0);
     [SerializeField] private LayerMask Mask;
     private ObjectPool _arrowPool;
 
@@ -38,7 +38,7 @@ public class RangedAttackRadius : AttackRadius
             {
                 Debug.Log("Invoking Onattack");
                 InvokeOnAttack(_damageable);
-                _agent.enabled = false;
+                _agent.isStopped = true;
             }
 
             if (_damageable != null)
@@ -57,18 +57,18 @@ public class RangedAttackRadius : AttackRadius
             }
             else
             {
-                _agent.enabled = true;
+                _agent.isStopped = false;
             }
 
             yield return Wait;
 
             if (_damageable == null || !HasLineOfSightTo(_damageable.GetTransform()))
             {
-                _agent.enabled = true;
+                _agent.isStopped = false;
             }
         }
 
-        _agent.enabled = true;
+        _agent.isStopped = false;
         _attackCoroutine = null;
 
     }

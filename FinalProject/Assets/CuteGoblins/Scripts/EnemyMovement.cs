@@ -78,6 +78,16 @@ public class EnemyMovement : MonoBehaviour
                 _isMoving = _agent.velocity.magnitude > 0.1f;
                 _animator.SetBool(_isMovingHash, _isMoving);
                 _agent.SetDestination(Target.position);  // Update enemy movement towards target
+
+                if (_agent.isStopped) 
+                {
+                    Vector3 direction = (Target.position - transform.position).normalized;
+                    direction.y = 0; // Keep rotation flat
+                    Quaternion targetRotation = Quaternion.LookRotation(direction);
+                    
+                    // Smoothly rotate towards the target rotation
+                    transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 5f);
+                }
             }
             yield return wait;
         }

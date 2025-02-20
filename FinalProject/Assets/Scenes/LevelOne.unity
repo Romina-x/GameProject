@@ -26153,8 +26153,20 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5012911727412550180, guid: 8ad5e8dd1cacc8f449b0bd882a919514, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.1985332
+      objectReference: {fileID: 0}
+    - target: {fileID: 5012911727412550180, guid: 8ad5e8dd1cacc8f449b0bd882a919514, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.1985332
+      objectReference: {fileID: 0}
+    - target: {fileID: 5012911727412550180, guid: 8ad5e8dd1cacc8f449b0bd882a919514, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.1985332
+      objectReference: {fileID: 0}
+    - target: {fileID: 5012911727412550180, guid: 8ad5e8dd1cacc8f449b0bd882a919514, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.000033154
       objectReference: {fileID: 0}
     - target: {fileID: 5012911727412550180, guid: 8ad5e8dd1cacc8f449b0bd882a919514, type: 3}
       propertyPath: m_LocalPosition.y
@@ -26162,7 +26174,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5012911727412550180, guid: 8ad5e8dd1cacc8f449b0bd882a919514, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.204
+      value: 0.17819
       objectReference: {fileID: 0}
     - target: {fileID: 5012911727412550180, guid: 8ad5e8dd1cacc8f449b0bd882a919514, type: 3}
       propertyPath: m_LocalRotation.w
@@ -42146,7 +42158,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 1620052500}
   m_Enabled: 1
   m_AgentTypeID: -334000983
-  m_Radius: 0.3
+  m_Radius: 0.2
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
@@ -42192,7 +42204,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Target: {fileID: 1504346263}
-  FollowRadius: {fileID: 0}
+  FollowRadius: {fileID: 47159704}
 --- !u!1 &1622232408
 GameObject:
   m_ObjectHideFlags: 0

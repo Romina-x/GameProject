@@ -1,3 +1,16 @@
+# Week 16
+### 20/02/2025
+- Configured the archer goblin movement.
+- Synced arrow's position and shot timing with the position of the enemy and attack animation.
+
+# Week 15
+### 13/02/2025
+- Created an arrow prefab and configured the enemy to shoot them with object pooling.
+### 12/02/2025
+- Began prototyping the archer goblin.
+- Removed redundant functionality for basic enemy attack script.
+- Created a new animator for archer goblin.
+
 # Week 14
 ### 08/02/2025
 - Implemented a score system which shows a final score for the player on the Level Cleared screen.

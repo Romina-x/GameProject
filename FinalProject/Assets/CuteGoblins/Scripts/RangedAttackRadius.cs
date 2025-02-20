@@ -9,7 +9,9 @@ public class RangedAttackRadius : AttackRadius
     [SerializeField] private Arrow _arrowPrefab;
     private Vector3 _arrowSpawnOffset = new Vector3(0.27f, 0.25f , 0);
     [SerializeField] private LayerMask Mask;
+    [SerializeField] private float _arrowSpawnDelay;
     private ObjectPool _arrowPool;
+    
 
     [SerializeField] private float SpherecastRadius = 0.1f;
     private RaycastHit _hit;
@@ -21,7 +23,6 @@ public class RangedAttackRadius : AttackRadius
         base.Awake();
         {
             _arrowPool = ObjectPool.CreateInstance(_arrowPrefab, Mathf.CeilToInt((1 / _attackDelay) * _arrowPrefab.AutoDestroyTime));
-
         }
     }
 
@@ -37,22 +38,27 @@ public class RangedAttackRadius : AttackRadius
             if (HasLineOfSightTo(_damageable.GetTransform()))
             {
                 Debug.Log("Invoking Onattack");
-                InvokeOnAttack(_damageable);
+                
                 _agent.isStopped = true;
             }
 
             if (_damageable != null)
             {
-                
+
                 PoolableObject poolableObject = _arrowPool.GetObject();
                 if (poolableObject != null)
                 {
+
+
                     _arrow = poolableObject.GetComponent<Arrow>();
 
                     _arrow.Damage = _damage;
-                    _arrow.transform.position = transform.position + _arrowSpawnOffset;
+                    //_arrow.transform.position = transform.position + _arrowSpawnOffset;
+                    _arrow.transform.position = transform.TransformPoint(_arrowSpawnOffset);
+
                     _arrow.transform.rotation = _agent.transform.rotation;
                     _arrow.Rigidbody.AddForce(_agent.transform.forward * _arrowPrefab.MoveSpeed, ForceMode.VelocityChange);
+                    InvokeOnAttack(_damageable);
                 }
             }
             else

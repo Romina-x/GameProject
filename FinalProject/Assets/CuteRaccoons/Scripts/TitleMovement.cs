@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TitleScreenRunner : MonoBehaviour
+// Class to control the circular player/animal movement and animation for the title screen 
+public class TitleMovement : MonoBehaviour
 {
-    [SerializeField] private Transform centerPoint; // The point they will run around
+    [SerializeField] private Transform centerPoint; // Center point of the circle
     [SerializeField] private float radius = 3f; // Distance from the center
     [SerializeField] private float speed = 2f; // Speed of movement
 
@@ -17,17 +18,9 @@ public class TitleScreenRunner : MonoBehaviour
         animator = GetComponent<Animator>();
         if (animator != null)
         {
-            animator.SetBool("isWalking", true);
-            animator.SetBool("isRunning", true); // Adjust based on your animation parameters
-            animator.SetTrigger("walk");
-        }
-
-        // If no center is assigned, use world origin
-        if (centerPoint == null)
-        {
-            Debug.LogWarning($"{gameObject.name} has no center point assigned! Using world origin.");
-            centerPoint = new GameObject("DefaultCenterPoint").transform;
-            centerPoint.position = Vector3.zero;
+            animator.SetBool("isWalking", true); //
+            animator.SetBool("isRunning", true); // Player
+            animator.SetTrigger("walk"); // Raccoon
         }
 
         // Calculate the initial angle based on current position

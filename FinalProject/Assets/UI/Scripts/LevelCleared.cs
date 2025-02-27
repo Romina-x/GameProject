@@ -35,7 +35,7 @@ public class LevelCleared : MonoBehaviour
     }
     public void ExitButton()
     {
-        Application.Quit();
+        SceneManager.LoadScene("LevelSelect");
     }
     
     private void Start()

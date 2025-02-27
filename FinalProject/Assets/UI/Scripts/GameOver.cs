@@ -20,7 +20,7 @@ public class GameOver : MonoBehaviour, IHealthObserver
     }
     public void ExitButton()
     {
-        Application.Quit();
+        SceneManager.LoadScene("LevelSelect");
     }
     
     // IHealthObserver interface methods

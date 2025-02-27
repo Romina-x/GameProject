@@ -19,7 +19,7 @@ public class PauseMenu : MonoBehaviour
     }
     public void ExitButton()
     {
-        Application.Quit();
+        SceneManager.LoadScene("LevelSelect");
     }
 
     public void ContinueButton()

@@ -1,3 +1,14 @@
+# Week 17
+### 27/02/2025
+- Created the level select menu scene.
+- Linked all scenes together (TitleScreen, LevelSelect, LevelOne) through button presses.
+- Created scene transition animations and a SceneLoader script to enable them when buttons are pressed.
+### 26/02/2025
+- Added all UI elements to title screen (non functional).
+- Created a movement script to move and animate the player and enemies in a circle.
+### 25/02/2025
+- Created a scene for the game title screen.
+
 # Week 16
 ### 20/02/2025
 - Configured the archer goblin movement.

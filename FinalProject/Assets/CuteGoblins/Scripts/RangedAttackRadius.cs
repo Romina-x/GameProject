@@ -34,37 +34,39 @@ public class RangedAttackRadius : AttackRadius
 
         while (_damageable != null)
         {
+            
             Debug.Log("While");
+            
             if (HasLineOfSightTo(_damageable.GetTransform()))
             {
-                Debug.Log("Invoking Onattack");
-                
                 _agent.isStopped = true;
-            }
+                Debug.Log("Invoking Onattack");
 
-            if (_damageable != null)
-            {
-
-                PoolableObject poolableObject = _arrowPool.GetObject();
-                if (poolableObject != null)
+                if (_damageable != null)
                 {
 
+                    PoolableObject poolableObject = _arrowPool.GetObject();
+                    if (poolableObject != null)
+                    {
 
-                    _arrow = poolableObject.GetComponent<Arrow>();
 
-                    _arrow.Damage = _damage;
-                    //_arrow.transform.position = transform.position + _arrowSpawnOffset;
-                    _arrow.transform.position = transform.TransformPoint(_arrowSpawnOffset);
+                        _arrow = poolableObject.GetComponent<Arrow>();
 
-                    _arrow.transform.rotation = _agent.transform.rotation;
-                    _arrow.Rigidbody.AddForce(_agent.transform.forward * _arrowPrefab.MoveSpeed, ForceMode.VelocityChange);
-                    InvokeOnAttack(_damageable);
+                        _arrow.Damage = _damage;
+                        //_arrow.transform.position = transform.position + _arrowSpawnOffset;
+                        _arrow.transform.position = transform.TransformPoint(_arrowSpawnOffset);
+
+                        _arrow.transform.rotation = _agent.transform.rotation;
+                        _arrow.Rigidbody.AddForce(_agent.transform.forward * _arrowPrefab.MoveSpeed, ForceMode.VelocityChange);
+                        InvokeOnAttack(_damageable);
+                    }
+                }
+                else
+                {
+                    _agent.isStopped = false;
                 }
             }
-            else
-            {
-                _agent.isStopped = false;
-            }
+
 
             yield return Wait;
 

@@ -10,24 +10,24 @@ public class EnemyMovement : MonoBehaviour
     public Transform Target;
     public FollowRadius FollowRadius;
 
-    private UnityEngine.AI.NavMeshAgent _agent;
-    private Animator _animator;
+    protected UnityEngine.AI.NavMeshAgent _agent;
+    protected Animator _animator;
 
     // Settings
-    private float _updateSpeed = 0.1f;
-    private float _returnThreshold = 0.5f;
+    protected float _updateSpeed = 0.1f;
+    protected float _returnThreshold = 0.5f;
 
     // Animation state  
-    private int _isMovingHash;
-    private bool _isMoving = false;
+    protected int _isMovingHash;
+    protected bool _isMoving = false;
 
-    private Coroutine _followCoroutine;
-    private Vector3 _originalPosition;
+    protected Coroutine _followCoroutine;
+    protected Vector3 _originalPosition;
 
     // Properties
     public float UpdateSpeed { set { _updateSpeed = value; } }
 
-    private void Awake() 
+    protected virtual void Awake() 
     {
         _agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
         _animator = GetComponent<Animator>();
@@ -43,7 +43,7 @@ public class EnemyMovement : MonoBehaviour
         _originalPosition = transform.position;
     }
 
-    private void OnPlayerEntered()
+    protected virtual void OnPlayerEntered()
     {
         StartFollowing();
     }
@@ -58,7 +58,7 @@ public class EnemyMovement : MonoBehaviour
         }
     }
 
-    private void OnPlayerExit()
+    protected virtual void OnPlayerExit()
     {
         if (_followCoroutine != null)
         {
@@ -69,7 +69,7 @@ public class EnemyMovement : MonoBehaviour
         StartCoroutine(ReturnToOrigin());
     }
 
-    private IEnumerator FollowTarget()
+    protected IEnumerator FollowTarget()
     {
         WaitForSeconds wait = new WaitForSeconds(_updateSpeed);
         while(enabled){
@@ -79,21 +79,12 @@ public class EnemyMovement : MonoBehaviour
                 _animator.SetBool(_isMovingHash, _isMoving);
                 _agent.SetDestination(Target.position);  // Update enemy movement towards target
 
-                if (_agent.isStopped) 
-                {
-                    Vector3 direction = (Target.position - transform.position).normalized;
-                    direction.y = 0; // Keep rotation flat
-                    Quaternion targetRotation = Quaternion.LookRotation(direction);
-                    
-                    // Smoothly rotate towards the target rotation
-                    transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 5f);
-                }
             }
             yield return wait;
         }
     }
 
-    private IEnumerator ReturnToOrigin()
+    protected IEnumerator ReturnToOrigin()
     {
         _agent.SetDestination(_originalPosition);
         // Wait until the enemy is close enough to the original position

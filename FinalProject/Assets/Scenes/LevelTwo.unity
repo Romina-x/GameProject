@@ -3843,7 +3843,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 1
+  m_Radius: 0.5
   m_Center: {x: 0.00000017881395, y: 0, z: -0.0000009536743}
 --- !u!4 &104073794
 Transform:
@@ -6216,7 +6216,7 @@ PrefabInstance:
       objectReference: {fileID: 1504346264}
     - target: {fileID: 5299598467571160000, guid: ccdc041b7fd72a64f977b34c6c6bca0e, type: 3}
       propertyPath: m_Radius
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6166983638026539716, guid: ccdc041b7fd72a64f977b34c6c6bca0e, type: 3}
       propertyPath: PoofPrefab
@@ -8544,7 +8544,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 418735142}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a95002f9d8c82243a1d7bcdd873e53d, type: 3}
+  m_Script: {fileID: 11500000, guid: 48cbfcce6c6a0104b9dc84f802870d4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Target: {fileID: 1504346263}
@@ -21650,7 +21650,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 1
+  m_Radius: 0.5
   m_Center: {x: 0.00000017881395, y: 0, z: -0.0000009536743}
 --- !u!4 &1441135342
 Transform:
@@ -23775,7 +23775,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1620052500}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a95002f9d8c82243a1d7bcdd873e53d, type: 3}
+  m_Script: {fileID: 11500000, guid: 48cbfcce6c6a0104b9dc84f802870d4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Target: {fileID: 1504346263}

@@ -1,3 +1,8 @@
+# Week 18
+### 05/03/2025
+- Created new levels: level one and two.
+- Changed the original level to be level three so that level one and two are easier and more introductory for beginners.
+- Linked all relevant UI buttons to new level scenes.
 # Week 17
 ### 27/02/2025
 - Created the level select menu scene.

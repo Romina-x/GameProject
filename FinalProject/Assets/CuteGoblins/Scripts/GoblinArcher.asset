@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9a3d27a5a96d6e45b23f62575e149d5, type: 3}
   m_Name: GoblinArcher
   m_EditorClassIdentifier: 
-  health: 50
+  health: 80
   attackDelay: 3
-  damage: 10
+  damage: 20
   attackRadius: 7
   score: 150
   isRanged: 1

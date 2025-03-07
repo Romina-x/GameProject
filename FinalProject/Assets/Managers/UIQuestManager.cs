@@ -5,13 +5,13 @@ using TMPro;
 
 public class QuestUIManager : MonoBehaviour, IRescueObserver
 {
-    
-    [SerializeField] private GameObject _questBox1; 
-    [SerializeField] private GameObject _questBox2; 
 
-    [SerializeField] private GameObject _goalVFXPrefab;  
+    [SerializeField] private GameObject _questBox1;
+    [SerializeField] private GameObject _questBox2;
+
+    [SerializeField] private GameObject _goalVFXPrefab;
     [SerializeField] private Transform _goalTransform;
-    [SerializeField] private GameObject _goalRadius; 
+    [SerializeField] private GameObject _goalRadius;
     [SerializeField] private GameObject _goalIndicator;
 
     [SerializeField] private TextMeshProUGUI _rescuedAnimalsText;
@@ -40,8 +40,9 @@ public class QuestUIManager : MonoBehaviour, IRescueObserver
         {
             _goalIndicator.SetActive(false);
         }
-        
+
         _rescuedAnimalsText.text = $"{_rescuedAnimals}/{TotalAnimalsToRescue}"; // Update the HUD display
+        Debug.Log($"QuestUIManager Created in scene: {gameObject.scene.name} | Instance Count: {FindObjectsOfType<QuestUIManager>().Length}");
     }
 
     public void OnAnimalRescued()
@@ -62,7 +63,7 @@ public class QuestUIManager : MonoBehaviour, IRescueObserver
         _questBox1.GetComponent<Animator>().SetTrigger("Hide");
         yield return new WaitForSeconds(2.5f);
         _questBox1.SetActive(false);
-        
+
         _questBox2.SetActive(true);
         _questBox2.GetComponent<Animator>().SetTrigger("Show");
     }
@@ -84,4 +85,10 @@ public class QuestUIManager : MonoBehaviour, IRescueObserver
         // Enable the goal indicator
         _goalIndicator.SetActive(true);
     }
+    
+    private void OnDestroy()
+    {
+        Debug.Log($"QuestUIManager Destroyed in scene: {gameObject.scene.name}");
+    }
+
 }

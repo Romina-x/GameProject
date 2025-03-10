@@ -48,6 +48,9 @@ public class PlayerStateMachine : MonoBehaviour
     private PlayerBaseState _currentState;
     private PlayerStateFactory _states;
 
+    // Sound FX
+    [SerializeField] private AudioClip _runningSound;
+
     // Properties
     public Animator Animator { get { return _animator; } }
     public CharacterController CharacterController { get { return _characterController; } }
@@ -80,6 +83,8 @@ public class PlayerStateMachine : MonoBehaviour
     public float InitialJumpVelocity { get { return _initialJumpVelocity; } }
 
     public PlayerBaseState CurrentState { get { return _currentState; } set { _currentState = value; } }
+
+    public AudioClip RunningSound { get { return _runningSound; } }
 
     // Monobehaviour methods
     private void Awake()

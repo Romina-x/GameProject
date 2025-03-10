@@ -4848,8 +4848,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1646816371}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -0.0040893555, y: 0.00018882751}
   m_SizeDelta: {x: 78, y: 73.03262}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -5045,8 +5045,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 596857543}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.331, y: 0}
+  m_AnchorMax: {x: 0.331, y: 1}
   m_AnchoredPosition: {x: -0.0040893555, y: 0.00018882751}
   m_SizeDelta: {x: 78, y: 73.03262}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -6240,8 +6240,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 892331689}
-  - component: {fileID: 892331692}
   - component: {fileID: 892331691}
+  - component: {fileID: 892331693}
   - component: {fileID: 892331690}
   m_Layer: 5
   m_Name: Settings_Popup
@@ -6249,7 +6249,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &892331689
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6308,7 +6308,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 892331688}
   m_CullTransparentMesh: 1
---- !u!114 &892331692
+--- !u!114 &892331693
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -6317,10 +6317,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 892331688}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c35e4c4007206a648982bd2f892cdaa3, type: 3}
+  m_Script: {fileID: 11500000, guid: 9fd3132ebd2251c4a839f7b2b6b49ccd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerHealth: {fileID: 0}
 --- !u!4 &896805869 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6987928883966674464, guid: 3f8eda438d8aeab4d9223c5b53f5ef62, type: 3}
@@ -6564,8 +6563,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 2062396301}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.331, y: 0}
+  m_AnchorMax: {x: 0.331, y: 1}
   m_AnchoredPosition: {x: -0.0040893555, y: 0.00018882751}
   m_SizeDelta: {x: 78, y: 73.03262}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -7122,7 +7121,7 @@ RectTransform:
   m_Father: {fileID: 1652254528}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: -0.0000019073486}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -9057,7 +9056,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1380607314}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 892331693}
+        m_TargetAssemblyTypeName: SettingsMenu, Assembly-CSharp
+        m_MethodName: ExitButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1380607314
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11507,6 +11518,51 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4db940c31d61ac149801c850fc645d68, type: 3}
+--- !u!1 &1851381749
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1851381751}
+  - component: {fileID: 1851381750}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1851381750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1851381749}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e2259cab71975c40b3300cf67974586, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _player: {fileID: 0}
+--- !u!4 &1851381751
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1851381749}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -8.070117, y: 6.6094193, z: 27.646055}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1891834078
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11684,13 +11740,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+      - m_Target: {fileID: 892331693}
+        m_TargetAssemblyTypeName: SettingsMenu, Assembly-CSharp
+        m_MethodName: Setup
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -11987,7 +12043,7 @@ RectTransform:
   m_Father: {fileID: 1913807036}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0.331, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: -0.0000019073486}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -12475,7 +12531,7 @@ RectTransform:
   m_Father: {fileID: 1726314870}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0.331, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: -0.0000019073486}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -12723,3 +12779,4 @@ SceneRoots:
   - {fileID: 979723620}
   - {fileID: 928379334}
   - {fileID: 5137240682007012783}
+  - {fileID: 1851381751}

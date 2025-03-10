@@ -26,6 +26,9 @@ public class PlayerHealthAndDamage : MonoBehaviour, IDamageable, IHealthSubject
     private int _health = 300;
     private int _maxHealth = 300;
 
+    // Sound
+    [SerializeField] private AudioClip _axeSwingClip;
+
     void Awake()
     {
         // Retrieve components
@@ -47,6 +50,7 @@ public class PlayerHealthAndDamage : MonoBehaviour, IDamageable, IHealthSubject
     {
         Debug.Log("Attack button pressed");
         _animator.SetTrigger(_attackTriggerHash);
+        SoundFXManager.instance.PlaySoundFX(_axeSwingClip, transform, 1f);
     }
 
     // Called when the player collects a heart 

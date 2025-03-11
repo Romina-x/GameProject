@@ -10032,7 +10032,7 @@ MonoBehaviour:
   m_MinValue: 0.0001
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 1
+  m_Value: 0.7
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -11370,6 +11370,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _soundFXObject: {fileID: 8832887936406798529, guid: d8f81395ba3b8364d9d12f9131b0a933, type: 3}
+  _loopingSoundFXObject: {fileID: 0}
 --- !u!4 &1791828383
 Transform:
   m_ObjectHideFlags: 0

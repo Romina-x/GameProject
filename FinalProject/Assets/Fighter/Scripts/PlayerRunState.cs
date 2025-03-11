@@ -13,7 +13,7 @@ public class PlayerRunState : PlayerBaseState
     {
         Ctx.Animator.SetBool(Ctx.IsWalkingHash, true);
         Ctx.Animator.SetBool(Ctx.IsRunningHash, true);
-        SoundFXManager.instance.StartLoopingSoundFX("Running", Ctx.RunningSound, Ctx.transform, 2f);
+        SoundFXManager.instance.StartLoopingSoundFX("Running", Ctx.RunningSound, Ctx.transform, 1f);
     }
 
     public override void UpdateState()

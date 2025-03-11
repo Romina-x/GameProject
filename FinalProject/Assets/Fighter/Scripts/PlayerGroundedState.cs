@@ -13,7 +13,19 @@ public class PlayerGroundedState : PlayerBaseState
         InitialiseSubState();
     }
 
-    public override void EnterState(){}
+    public override void EnterState()
+    {
+        PlayerBaseState subState = this.CurrentSubState;
+
+        if (subState is PlayerRunState)
+        {
+            SoundFXManager.instance.StartLoopingSoundFX("Running", Ctx.RunningSound, Ctx.transform, 1f);
+        }
+        else if (subState is PlayerWalkState)
+        {
+            SoundFXManager.instance.StartLoopingSoundFX("Walking", Ctx.WalkingSound, Ctx.transform, 1f);
+        }
+    }
 
     public override void UpdateState()
     {

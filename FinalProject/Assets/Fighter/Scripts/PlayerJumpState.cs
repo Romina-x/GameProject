@@ -16,6 +16,8 @@ public class PlayerJumpState : PlayerBaseState
     public override void EnterState()
     {
         HandleJump();
+        SoundFXManager.instance.StopLoopingSoundFX("Running");
+        SoundFXManager.instance.StopLoopingSoundFX("Walking");
     }
 
     public override void UpdateState()
@@ -29,7 +31,7 @@ public class PlayerJumpState : PlayerBaseState
         if (Ctx.IsJumpPressed)
         {
             Ctx.RequireNewJumpPress = true;
-        }       
+        }
     }
     
     public override void CheckSwitchStates()

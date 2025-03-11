@@ -1301,10 +1301,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1207443070}
     - target: {fileID: 2559126427904331707, guid: dbe979a9d4b5f6a49b75cbccbf7cd9e6, type: 3}
-      propertyPath: _axeSwingClip
-      value: 
-      objectReference: {fileID: 8300000, guid: d46323e22e74e46baa241cbf48c85671, type: 3}
-    - target: {fileID: 2559126427904331707, guid: dbe979a9d4b5f6a49b75cbccbf7cd9e6, type: 3}
       propertyPath: _gameOverScreen
       value: 
       objectReference: {fileID: 1434867713}
@@ -2740,14 +2736,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -7.549289
       objectReference: {fileID: 0}
-    - target: {fileID: 7832228513617560784, guid: dbe979a9d4b5f6a49b75cbccbf7cd9e6, type: 3}
-      propertyPath: _runningSound
-      value: 
-      objectReference: {fileID: 8300000, guid: d7b4a1898d43a6943a331162e4e9637a, type: 3}
-    - target: {fileID: 7832228513617560784, guid: dbe979a9d4b5f6a49b75cbccbf7cd9e6, type: 3}
-      propertyPath: _walkingSound
-      value: 
-      objectReference: {fileID: 8300000, guid: 5eb2002c68f3c39449cfc2ad6d5761ff, type: 3}
     - target: {fileID: 7851236567238004747, guid: dbe979a9d4b5f6a49b75cbccbf7cd9e6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: -84.56709

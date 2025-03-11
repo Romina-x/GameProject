@@ -51,6 +51,7 @@ public class PlayerStateMachine : MonoBehaviour
     // Sound FX
     [SerializeField] private AudioClip _runningSound;
     [SerializeField] private AudioClip _walkingSound;
+    [SerializeField] private AudioClip _jumpSound;
 
     // Properties
     public Animator Animator { get { return _animator; } }
@@ -87,6 +88,7 @@ public class PlayerStateMachine : MonoBehaviour
 
     public AudioClip RunningSound { get { return _runningSound; } }
     public AudioClip WalkingSound { get { return _walkingSound; } }
+    public AudioClip JumpSound { get { return _jumpSound; } }
 
     // Monobehaviour methods
     private void Awake()

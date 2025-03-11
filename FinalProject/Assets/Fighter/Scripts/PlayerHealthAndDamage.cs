@@ -28,11 +28,12 @@ public class PlayerHealthAndDamage : MonoBehaviour, IDamageable, IHealthSubject
 
     // Sound
     [SerializeField] private AudioClip _axeSwingClip;
+    [SerializeField] private AudioClip _getHitClip;
 
     void Awake()
     {
         // Retrieve components
-        _animator = GetComponent<Animator>();     
+        _animator = GetComponent<Animator>();
         _playerInput = new PlayerInput();
 
         // Setup animator hashes
@@ -48,9 +49,8 @@ public class PlayerHealthAndDamage : MonoBehaviour, IDamageable, IHealthSubject
 
     void OnAttack(InputAction.CallbackContext context)
     {
-        Debug.Log("Attack button pressed");
         _animator.SetTrigger(_attackTriggerHash);
-        SoundFXManager.instance.PlaySoundFX(_axeSwingClip, transform, 1f);
+        //SoundFXManager.instance.PlaySoundFX(_axeSwingClip, transform, 1f);
     }
 
     // Called when the player collects a heart 
@@ -83,8 +83,9 @@ public class PlayerHealthAndDamage : MonoBehaviour, IDamageable, IHealthSubject
         _health -= damage;
         NotifyHealthObservers(); // Notify all observers of health change
 
+        SoundFXManager.instance.PlaySoundFX(_getHitClip, transform, 1f);
 
-        if (_health > 0) 
+        if (_health > 0)
         {
             _animator.SetTrigger(_gotHitTriggerHash);
         }
@@ -124,4 +125,10 @@ public class PlayerHealthAndDamage : MonoBehaviour, IDamageable, IHealthSubject
             observer.OnNotify(_maxHealth, _health);
         }
     }
+    
+    public void PlayAxeSwingSound()
+    {
+        SoundFXManager.instance.PlaySoundFX(_axeSwingClip, transform, 1f);
+    }
+
 }

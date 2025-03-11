@@ -18,6 +18,7 @@ public class PlayerJumpState : PlayerBaseState
         HandleJump();
         SoundFXManager.instance.StopLoopingSoundFX("Running");
         SoundFXManager.instance.StopLoopingSoundFX("Walking");
+        SoundFXManager.instance.PlaySoundFX(Ctx.JumpSound, Ctx.transform, 1f);
     }
 
     public override void UpdateState()

@@ -7720,7 +7720,6 @@ MonoBehaviour:
   _goalVFXPrefab: {fileID: 6532625474870085665, guid: 07a977963523b3b4dbcaa27119f6b469, type: 3}
   _goalTransform: {fileID: 905325787}
   _goalRadius: {fileID: 1858518067}
-  _goalIndicator: {fileID: 362155764}
   _rescuedAnimalsText: {fileID: 910537671}
   TotalAnimalsToRescue: 3
 --- !u!4 &371687330
@@ -11627,7 +11626,7 @@ MonoBehaviour:
   _timer: {fileID: 865809407}
   _timeText: {fileID: 224474917}
   _scoreText: {fileID: 1110607011}
-  _levelClearedClip: {fileID: 0}
+  _levelClearedClip: {fileID: 8300000, guid: 143fe9e3e16e025408e6a75de59c579d, type: 3}
 --- !u!114 &737521762
 MonoBehaviour:
   m_ObjectHideFlags: 0

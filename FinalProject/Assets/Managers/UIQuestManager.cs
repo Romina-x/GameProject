@@ -12,7 +12,6 @@ public class QuestUIManager : MonoBehaviour, IRescueObserver
     [SerializeField] private GameObject _goalVFXPrefab;
     [SerializeField] private Transform _goalTransform;
     [SerializeField] private GameObject _goalRadius;
-    [SerializeField] private GameObject _goalIndicator;
 
     [SerializeField] private TextMeshProUGUI _rescuedAnimalsText;
 
@@ -34,11 +33,6 @@ public class QuestUIManager : MonoBehaviour, IRescueObserver
         if (_goalRadius != null)
         {
             _goalRadius.SetActive(false);
-        }
-
-        if (_goalIndicator != null)
-        {
-            _goalIndicator.SetActive(false);
         }
 
         _rescuedAnimalsText.text = $"{_rescuedAnimals}/{TotalAnimalsToRescue}"; // Update the HUD display
@@ -81,9 +75,6 @@ public class QuestUIManager : MonoBehaviour, IRescueObserver
         {
             _goalRadius.SetActive(true); // Enable the pre-made collider
         }
-
-        // Enable the goal indicator
-        _goalIndicator.SetActive(true);
     }
     
     private void OnDestroy()

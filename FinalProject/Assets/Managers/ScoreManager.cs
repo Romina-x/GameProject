@@ -37,5 +37,6 @@ public class ScoreManager : MonoBehaviour, IDefeatObserver
     public void OnNotify(int score)
     {
         _score += score;
+        Debug.Log(_score);
     }
 }

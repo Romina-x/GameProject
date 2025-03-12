@@ -11,6 +11,8 @@ public class Cage : MonoBehaviour, IDefeatObserver
     public GameObject PoofEffect;
     public Animal AssociatedAnimal;
     
+    [SerializeField] private AudioClip _releaseClip;
+    
     private bool _isFreed = false;
 
 
@@ -66,6 +68,8 @@ public class Cage : MonoBehaviour, IDefeatObserver
         {
             Instantiate(PoofEffect, transform.position, Quaternion.identity);
         }
+
+        SoundFXManager.instance.PlaySoundFX(_releaseClip, transform, 1f);
 
         // Tell the freed animal to start following the player
         if (AssociatedAnimal != null)

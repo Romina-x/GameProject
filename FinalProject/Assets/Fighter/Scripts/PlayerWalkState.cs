@@ -13,6 +13,7 @@ public class PlayerWalkState : PlayerBaseState
     {
         Ctx.Animator.SetBool(Ctx.IsWalkingHash, true);
         Ctx.Animator.SetBool(Ctx.IsRunningHash, false);
+        SoundFXManager.instance.StartLoopingSoundFX("Walking", Ctx.WalkingSound, Ctx.transform, 1f);
     }
 
     public override void UpdateState()
@@ -24,7 +25,8 @@ public class PlayerWalkState : PlayerBaseState
 
     public override void ExitState()
     {
-        Ctx.Animator.SetBool(Ctx.IsWalkingHash, false);        
+        Ctx.Animator.SetBool(Ctx.IsWalkingHash, false);  
+        SoundFXManager.instance.StopLoopingSoundFX("Walking");      
     }
 
     public override void CheckSwitchStates()

@@ -2620,7 +2620,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c0cbf81ecbf1df46824045fd4526a82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 300
+  _axeSwingClip: {fileID: 8300000, guid: d46323e22e74e46baa241cbf48c85671, type: 3}
+  _getHitClip: {fileID: 8300000, guid: b95cd97de53c4ae4bb7f51d1916f4ca2, type: 3}
 --- !u!114 &7832228513617560784
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2633,6 +2634,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bcca87fde960fb4da251cdff414d1ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _runningSound: {fileID: 8300000, guid: d7b4a1898d43a6943a331162e4e9637a, type: 3}
+  _walkingSound: {fileID: 8300000, guid: 5eb2002c68f3c39449cfc2ad6d5761ff, type: 3}
+  _jumpSound: {fileID: 8300000, guid: d2d1db6f5cb5eaa46aba7c5bcd568cd3, type: 3}
 --- !u!114 &4057998833081291324
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2645,7 +2649,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f65c42db703afa043b20f66400834fc6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weapon: {fileID: 3222418146980662441}
+  Weapon: {fileID: 0}
 --- !u!143 &2432053098496739652
 CharacterController:
   m_ObjectHideFlags: 0

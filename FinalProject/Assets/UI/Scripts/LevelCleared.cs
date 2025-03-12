@@ -10,6 +10,7 @@ public class LevelCleared : MonoBehaviour
     [SerializeField] private GameTimer _timer;
     [SerializeField] private TextMeshProUGUI _timeText;
     [SerializeField] private TextMeshProUGUI _scoreText;
+    [SerializeField] private AudioClip _levelClearedClip;
 
 
     public void Setup()
@@ -17,6 +18,9 @@ public class LevelCleared : MonoBehaviour
         // Activate the UI screen and change the game state
         gameObject.SetActive(true);
         LevelManager.Instance.SetGameState(LevelState.LevelCleared);
+
+        // Play sound effect
+        SoundFXManager.instance.PlaySoundFX(_levelClearedClip, transform, 1f);
 
         // Get the time from the game timer and convert it to minutes and seconds
         float elapsedTime = _timer.ElapsedTime;
@@ -37,10 +41,15 @@ public class LevelCleared : MonoBehaviour
     {
         SceneManager.LoadScene("LevelSelect");
     }
-    
+
     private void Start()
     {
         gameObject.SetActive(false);
+    }
+    
+    private void OnDisable()
+    {
+        LevelManager.Instance.SetGameState(LevelState.Playing);
     }
 
 }

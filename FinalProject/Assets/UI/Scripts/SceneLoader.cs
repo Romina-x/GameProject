@@ -8,13 +8,16 @@ public class SceneLoader : MonoBehaviour
 {
     [SerializeField] private Animator _animator;
     [SerializeField] private float _transitionTime;
+    [SerializeField] private AudioClip _buttonClip;
     public void LoadScene(string sceneName)
     {
         StartCoroutine(LoadSceneTransition(sceneName));
+        SoundFXManager.instance.PlaySoundFX(_buttonClip, transform, 1f);
     }
 
     public void ExitGame()
     {
+        SoundFXManager.instance.PlaySoundFX(_buttonClip, transform, 1f);
         Application.Quit();
     }
 

@@ -171,6 +171,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _animator: {fileID: 6681721229315672808}
   _transitionTime: 1
+  _buttonClip: {fileID: 8300000, guid: 29bde6326b4c34ad8a12da475f79b50a, type: 3}
 --- !u!1 &7030482476678016107
 GameObject:
   m_ObjectHideFlags: 0

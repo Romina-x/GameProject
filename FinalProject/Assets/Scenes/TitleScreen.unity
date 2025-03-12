@@ -6496,6 +6496,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fd3132ebd2251c4a839f7b2b6b49ccd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _buttonClip: {fileID: 8300000, guid: 29bde6326b4c34ad8a12da475f79b50a, type: 3}
 --- !u!4 &896805869 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6987928883966674464, guid: 3f8eda438d8aeab4d9223c5b53f5ef62, type: 3}

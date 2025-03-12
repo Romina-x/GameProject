@@ -37,10 +37,15 @@ public class LevelCleared : MonoBehaviour
     {
         SceneManager.LoadScene("LevelSelect");
     }
-    
+
     private void Start()
     {
         gameObject.SetActive(false);
+    }
+    
+    private void OnDisable()
+    {
+        LevelManager.Instance.SetGameState(LevelState.Playing);
     }
 
 }

@@ -42,5 +42,6 @@ public class GameOver : MonoBehaviour, IHealthObserver
     private void OnDisable()
     {
         _playerHealth.UnregisterHealthObserver(this);
+        LevelManager.Instance.SetGameState(LevelState.Playing);
     }
 }

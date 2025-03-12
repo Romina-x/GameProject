@@ -37037,6 +37037,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerHealth: {fileID: 1504346264}
+  _gameOverClip: {fileID: 8300000, guid: 52a371dda6a83e74381041ccf10ff223, type: 3}
 --- !u!4 &1439426436 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7746927824541037661, guid: 1f9036ec905b920479091aca9ba81305, type: 3}

@@ -7,11 +7,13 @@ using UnityEngine.SceneManagement;
 public class GameOver : MonoBehaviour, IHealthObserver
 {
     [SerializeField] private PlayerHealthAndDamage _playerHealth;
+    [SerializeField] private AudioClip _gameOverClip;
 
     public void Setup()
     {
         gameObject.SetActive(true);
         LevelManager.Instance.SetGameState(LevelState.GameOver);
+        SoundFXManager.instance.PlaySoundFX(_gameOverClip, transform, 1f);
     }
 
     public void RestartButton()

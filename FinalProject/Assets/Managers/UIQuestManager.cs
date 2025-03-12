@@ -1,50 +1,43 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class QuestUIManager : MonoBehaviour, IRescueObserver
+public class QuestUIManager : MonoBehaviour
 {
-
     [SerializeField] private GameObject _questBox1;
     [SerializeField] private GameObject _questBox2;
-
     [SerializeField] private GameObject _goalVFXPrefab;
     [SerializeField] private Transform _goalTransform;
     [SerializeField] private GameObject _goalRadius;
-
     [SerializeField] private TextMeshProUGUI _rescuedAnimalsText;
 
-    private List<Animal> _animals;
     private int _rescuedAnimals = 0;
     public int TotalAnimalsToRescue = 3;
     private bool _allAnimalsRescued = false;
     private GameObject _spawnedVFX;
 
-    private void Awake()
+    private void OnEnable()
     {
-        _animals = new List<Animal>(FindObjectsOfType<Animal>());
-        foreach (var animal in _animals)
-        {
-            animal.RegisterRescueObserver(this);
-        }
-
-        // Ensure the goal trigger and indicator are disabled initially
-        if (_goalRadius != null)
-        {
-            _goalRadius.SetActive(false);
-        }
-
-        _rescuedAnimalsText.text = $"{_rescuedAnimals}/{TotalAnimalsToRescue}"; // Update the HUD display
-        Debug.Log($"QuestUIManager Created in scene: {gameObject.scene.name} | Instance Count: {FindObjectsOfType<QuestUIManager>().Length}");
+        Animal.OnAnimalRescued += OnAnimalRescued; // Subscribe to event
     }
 
-    public void OnAnimalRescued()
+    private void OnDisable()
+    {
+        Animal.OnAnimalRescued -= OnAnimalRescued; // Unsubscribe to prevent memory leaks
+    }
+
+    private void Awake()
+    {
+        _rescuedAnimalsText.text = $"{_rescuedAnimals}/{TotalAnimalsToRescue}"; // Initialize UI
+        if (_goalRadius != null) _goalRadius.SetActive(false); // Hide goal at start
+    }
+
+    private void OnAnimalRescued()
     {
         _rescuedAnimals++;
-        _rescuedAnimalsText.text = $"{_rescuedAnimals}/{TotalAnimalsToRescue}"; // Update the HUD display
+        _rescuedAnimalsText.text = $"{_rescuedAnimals}/{TotalAnimalsToRescue}"; 
 
-        if (_rescuedAnimals >= TotalAnimalsToRescue)
+        if (_rescuedAnimals >= TotalAnimalsToRescue && !_allAnimalsRescued)
         {
             _allAnimalsRescued = true;
             StartCoroutine(TransitionToSecondQuest());
@@ -64,22 +57,9 @@ public class QuestUIManager : MonoBehaviour, IRescueObserver
 
     private void ActivateGoal()
     {
-        // Instantiate the goal VFX
         if (_goalVFXPrefab != null && _goalTransform != null)
-        {
             _spawnedVFX = Instantiate(_goalVFXPrefab, _goalTransform.position, Quaternion.identity);
-        }
 
-        // Enable the goal collider
-        if (_goalRadius != null)
-        {
-            _goalRadius.SetActive(true); // Enable the pre-made collider
-        }
+        if (_goalRadius != null) _goalRadius.SetActive(true);
     }
-    
-    private void OnDestroy()
-    {
-        Debug.Log($"QuestUIManager Destroyed in scene: {gameObject.scene.name}");
-    }
-
 }

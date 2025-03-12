@@ -1,16 +1,17 @@
 using UnityEngine;
-using UnityEngine.AI; // For NavMeshAgent if used for movement
-using System.Collections.Generic;
+using UnityEngine.AI;
+using System;
 
 public class Animal : MonoBehaviour
 {
-    // Components 
-    public Transform PlayerTarget; 
-    private NavMeshAgent _navMeshAgent; 
-    private Animator _animator;
+    // Event triggered when an animal is rescued
+    public static event Action OnAnimalRescued;
 
+    // Components
+    public Transform PlayerTarget;
+    private NavMeshAgent _navMeshAgent;
+    private Animator _animator;
     private bool _isFollowing = false;
-    private List<IRescueObserver> _rescueObservers = new List<IRescueObserver>();
 
     void Awake()
     {
@@ -22,55 +23,24 @@ public class Animal : MonoBehaviour
     {
         if (_isFollowing && PlayerTarget != null)
         {
-            // Follow player by updating destination to the player's position
             _navMeshAgent.SetDestination(PlayerTarget.position);
-
-            float speed = _navMeshAgent.velocity.magnitude; // Current movement speed
+            float speed = _navMeshAgent.velocity.magnitude;
             _animator.SetBool("walk", speed > 0.3f);
         }
     }
 
     public void StartFollowing()
     {
+        if (_isFollowing) return; // Prevent duplicate calls
         _isFollowing = true;
-        NotifyRescueObservers();
+        OnAnimalRescued?.Invoke(); // Notify all subscribers
     }
 
     public void TeleportToPlayer()
     {
-        if (!_isFollowing)
-    {
-        // Prevent teleporting if the animal is still in the cage
-        return;
-    }
-        if (PlayerTarget == null) return;
+        if (!_isFollowing || PlayerTarget == null) return;
 
-        // Teleport the animal directly to the player's position
-        Vector3 teleportPosition = PlayerTarget.position;
-
-        // Optional: Offset the teleport position slightly behind or to the side of the player
-        teleportPosition += PlayerTarget.forward * -1.5f;
-
-        // Use NavMeshAgent.Warp to instantly move the agent
+        Vector3 teleportPosition = PlayerTarget.position + PlayerTarget.forward * -1.5f;
         _navMeshAgent.Warp(teleportPosition);
-    }
-
-    // IRescueSubject interface methods
-    public void RegisterRescueObserver(IRescueObserver observer)
-    {
-        _rescueObservers.Add(observer);
-    }
-
-    public void UnregisterRescueObserver(IRescueObserver observer)
-    {
-        _rescueObservers.Remove(observer);
-    }
-
-    public void NotifyRescueObservers()
-    {
-        foreach (var observer in _rescueObservers)
-        {
-            observer.OnAnimalRescued();
-        }
     }
 }

@@ -1,8 +1,27 @@
+# Week 19
+### 12/03/2025
+- Added all remaining sound effects to the game.
+- Bugfix to LevelCleared and GameOver scripts not changing the level state back to play mode once disabled which caused title screen movement to stop.
+### 11/03/2025
+- Finished adding player sound effects
+- Changed sound settings menu script to save user preferences.
+### 10/03/2025
+- Created SoundFXManager script to easily play sound effects from within the code.
+- Created SoundMixerManager script along with a sound settings menu to enable volume to be controlled with an audio mixer.
+- Added background music for all scenes.
+- Began adding sound effects for player.
+
 # Week 18
+### 07/03/2025
+- Fixed bug that was causing game to crash when playing a level a second time.
+### 06/03/2025
+- Started balancing enemy stats for difficulty.
+- Changed archer enemy to stay standing in place.
 ### 05/03/2025
 - Created new levels: level one and two.
 - Changed the original level to be level three so that level one and two are easier and more introductory for beginners.
 - Linked all relevant UI buttons to new level scenes.
+
 # Week 17
 ### 27/02/2025
 - Created the level select menu scene.

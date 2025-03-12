@@ -28,7 +28,11 @@ public class Enemy : MonoBehaviour, IDamageable, IHealthSubject, IDefeatSubject
     // Observers
     private List<IHealthObserver> _healthObservers = new List<IHealthObserver>();
     private List<IDefeatObserver> _defeatObservers = new List<IDefeatObserver>();
-    
+
+    // Sound FX
+    [SerializeField] private AudioClip _getHitClip;
+    [SerializeField] private AudioClip _attackClip;
+    [SerializeField] private AudioClip _vanishClip;
 
     // Properties
     public bool IsDefeated { get { return _isDefeated; } }
@@ -55,6 +59,7 @@ public class Enemy : MonoBehaviour, IDamageable, IHealthSubject, IDefeatSubject
     private void OnAttack(IDamageable target)
     {
         _animator.SetTrigger(_attackTriggerHash);
+        SoundFXManager.instance.PlaySoundFX(_attackClip, transform, 1f);
     }
 
     void SetupEnemyFromData()
@@ -86,9 +91,10 @@ public class Enemy : MonoBehaviour, IDamageable, IHealthSubject, IDefeatSubject
         // Take damage
         _health -= damage;
         NotifyHealthObservers(); // Notify observers of health change
-
+        SoundFXManager.instance.PlaySoundFX(_getHitClip, transform, 1f);
+        
         // Get hit if not dead
-        if (_health > 0) 
+        if (_health > 0)
         {
             _animator.SetTrigger(_gotHitTriggerHash);
             StartCoroutine(DisableAttackDuringAnimation());
@@ -130,6 +136,7 @@ public class Enemy : MonoBehaviour, IDamageable, IHealthSubject, IDefeatSubject
             // Instantiate the poof effect at the enemy's position
             Instantiate(PoofPrefab, transform.position, Quaternion.identity);
         }
+        SoundFXManager.instance.PlaySoundFX(_vanishClip, transform, 1f);
         NotifyDefeatObservers();
         Destroy(gameObject);
     }

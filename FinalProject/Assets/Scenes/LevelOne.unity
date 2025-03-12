@@ -17076,7 +17076,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _healthBarSprite: {fileID: 700029290}
-  _enemyHealth: {fileID: 2114493084}
+  _enemyHealth: {fileID: 2114493090}
 --- !u!1 &962547616
 GameObject:
   m_ObjectHideFlags: 0
@@ -19337,7 +19337,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AssociatedEnemies:
   - {fileID: 1781966193}
-  - {fileID: 2114493084}
+  - {fileID: 2114493090}
   PoofEffect: {fileID: 8919484260529707532, guid: 2c27f6103c8348844a3cc636de15052a, type: 3}
   AssociatedAnimal: {fileID: 1908836243}
 --- !u!1001 &1105134012
@@ -27603,6 +27603,9 @@ MonoBehaviour:
   AttackRadius: {fileID: 370766750}
   EnemyData: {fileID: 11400000, guid: 03ff92cd819e62844a136740fa84ec61, type: 2}
   PoofPrefab: {fileID: 6073891735194678028, guid: 064c608c3a271334299e1fa22913842f, type: 3}
+  _getHitClip: {fileID: 8300000, guid: b95cd97de53c4ae4bb7f51d1916f4ca2, type: 3}
+  _attackClip: {fileID: 8300000, guid: 80e397195ea2940b69ee7bdbded856a5, type: 3}
+  _vanishClip: {fileID: 8300000, guid: 7bef0064f8567430cac22499c6b93d4f, type: 3}
 --- !u!114 &1620052507
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28158,6 +28161,18 @@ PrefabInstance:
       propertyPath: PoofPrefab
       value: 
       objectReference: {fileID: 6073891735194678028, guid: 064c608c3a271334299e1fa22913842f, type: 3}
+    - target: {fileID: 6166983638026539716, guid: ccdc041b7fd72a64f977b34c6c6bca0e, type: 3}
+      propertyPath: _attackClip
+      value: 
+      objectReference: {fileID: 8300000, guid: d46323e22e74e46baa241cbf48c85671, type: 3}
+    - target: {fileID: 6166983638026539716, guid: ccdc041b7fd72a64f977b34c6c6bca0e, type: 3}
+      propertyPath: _getHitClip
+      value: 
+      objectReference: {fileID: 8300000, guid: b95cd97de53c4ae4bb7f51d1916f4ca2, type: 3}
+    - target: {fileID: 6166983638026539716, guid: ccdc041b7fd72a64f977b34c6c6bca0e, type: 3}
+      propertyPath: _vanishClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 7bef0064f8567430cac22499c6b93d4f, type: 3}
     m_RemovedComponents:
     - {fileID: 5262602707864525511, guid: ccdc041b7fd72a64f977b34c6c6bca0e, type: 3}
     m_RemovedGameObjects: []
@@ -30731,6 +30746,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1276879013438304743, guid: 770885cf592687b45b720e3ab4a5190f, type: 3}
+      propertyPath: _vanishClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 7bef0064f8567430cac22499c6b93d4f, type: 3}
+    - target: {fileID: 1276879013438304743, guid: 770885cf592687b45b720e3ab4a5190f, type: 3}
+      propertyPath: AttackRadius
+      value: 
+      objectReference: {fileID: 1441135340}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -30745,14 +30768,11 @@ PrefabInstance:
       addedObject: {fileID: 841895076}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 855626974963989658, guid: 770885cf592687b45b720e3ab4a5190f, type: 3}
-      insertIndex: -1
+      insertIndex: 2
       addedObject: {fileID: 1781966197}
     - targetCorrespondingSourceObject: {fileID: 855626974963989658, guid: 770885cf592687b45b720e3ab4a5190f, type: 3}
-      insertIndex: -1
+      insertIndex: 3
       addedObject: {fileID: 1781966196}
-    - targetCorrespondingSourceObject: {fileID: 855626974963989658, guid: 770885cf592687b45b720e3ab4a5190f, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1781966193}
     - targetCorrespondingSourceObject: {fileID: 855626974963989658, guid: 770885cf592687b45b720e3ab4a5190f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1781966195}
@@ -30770,11 +30790,10 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 855626974963989658, guid: 770885cf592687b45b720e3ab4a5190f, type: 3}
   m_PrefabInstance: {fileID: 1781966190}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1781966193
+--- !u!114 &1781966193 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 1276879013438304743, guid: 770885cf592687b45b720e3ab4a5190f, type: 3}
+  m_PrefabInstance: {fileID: 1781966190}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1781966192}
   m_Enabled: 1
@@ -30782,9 +30801,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad08a5e86558f6a40935746d56a82d07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AttackRadius: {fileID: 1441135340}
-  EnemyData: {fileID: 11400000, guid: a7d31482d1d095346abafd928befa2f0, type: 2}
-  PoofPrefab: {fileID: 6073891735194678028, guid: 064c608c3a271334299e1fa22913842f, type: 3}
 --- !u!136 &1781966194
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -35500,6 +35516,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1276879013438304743, guid: 770885cf592687b45b720e3ab4a5190f, type: 3}
+      propertyPath: _vanishClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 7bef0064f8567430cac22499c6b93d4f, type: 3}
+    - target: {fileID: 1276879013438304743, guid: 770885cf592687b45b720e3ab4a5190f, type: 3}
+      propertyPath: AttackRadius
+      value: 
+      objectReference: {fileID: 1713058660}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -35521,9 +35545,6 @@ PrefabInstance:
       addedObject: {fileID: 2114493087}
     - targetCorrespondingSourceObject: {fileID: 855626974963989658, guid: 770885cf592687b45b720e3ab4a5190f, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 2114493084}
-    - targetCorrespondingSourceObject: {fileID: 855626974963989658, guid: 770885cf592687b45b720e3ab4a5190f, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 2114493086}
     - targetCorrespondingSourceObject: {fileID: 855626974963989658, guid: 770885cf592687b45b720e3ab4a5190f, type: 3}
       insertIndex: -1
@@ -35539,21 +35560,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 855626974963989658, guid: 770885cf592687b45b720e3ab4a5190f, type: 3}
   m_PrefabInstance: {fileID: 2114493081}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2114493084
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2114493083}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad08a5e86558f6a40935746d56a82d07, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  AttackRadius: {fileID: 1713058660}
-  EnemyData: {fileID: 11400000, guid: a7d31482d1d095346abafd928befa2f0, type: 2}
-  PoofPrefab: {fileID: 6073891735194678028, guid: 064c608c3a271334299e1fa22913842f, type: 3}
 --- !u!136 &2114493085
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -35640,6 +35646,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Target: {fileID: 1504346263}
   FollowRadius: {fileID: 51155987}
+--- !u!114 &2114493090 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1276879013438304743, guid: 770885cf592687b45b720e3ab4a5190f, type: 3}
+  m_PrefabInstance: {fileID: 2114493081}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2114493083}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad08a5e86558f6a40935746d56a82d07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &2134000697 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5316609513351239561, guid: 4db940c31d61ac149801c850fc645d68, type: 3}

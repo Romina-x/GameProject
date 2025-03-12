@@ -3363,36 +3363,13 @@ PrefabInstance:
     - {fileID: 385429619215651764, guid: 09ea4866d2125f341a2f4a96ecbd8569, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 3048555868624090989, guid: 09ea4866d2125f341a2f4a96ecbd8569, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 55479590}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 09ea4866d2125f341a2f4a96ecbd8569, type: 3}
 --- !u!4 &55479588 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3940967425679875173, guid: 09ea4866d2125f341a2f4a96ecbd8569, type: 3}
   m_PrefabInstance: {fileID: 55479587}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &55479589 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3048555868624090989, guid: 09ea4866d2125f341a2f4a96ecbd8569, type: 3}
-  m_PrefabInstance: {fileID: 55479587}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &55479590
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 55479589}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ab532626b409c14eaeb7a3f536ab19e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _heartHealth: 100
-  collectionVFX: {fileID: 4035903591278710484, guid: aa122f157eac1c8428ae5db8a315ccd8, type: 3}
-  _collectClip: {fileID: 0}
 --- !u!1 &58411427
 GameObject:
   m_ObjectHideFlags: 3
@@ -7664,7 +7641,7 @@ MonoBehaviour:
   - {fileID: 1620052504}
   PoofEffect: {fileID: 8919484260529707532, guid: 2c27f6103c8348844a3cc636de15052a, type: 3}
   AssociatedAnimal: {fileID: 685625071}
-  _releaseClip: {fileID: 0}
+  _releaseClip: {fileID: 8300000, guid: 7d09ff28fd4688d4b8f49ae5cd5afd95, type: 3}
 --- !u!4 &323785679 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5316609513351239561, guid: 4db940c31d61ac149801c850fc645d68, type: 3}
@@ -19343,7 +19320,7 @@ MonoBehaviour:
   - {fileID: 2114493090}
   PoofEffect: {fileID: 8919484260529707532, guid: 2c27f6103c8348844a3cc636de15052a, type: 3}
   AssociatedAnimal: {fileID: 1908836243}
-  _releaseClip: {fileID: 0}
+  _releaseClip: {fileID: 8300000, guid: 7d09ff28fd4688d4b8f49ae5cd5afd95, type: 3}
 --- !u!1001 &1105134012
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -25348,7 +25325,7 @@ MonoBehaviour:
   - {fileID: 1630618015}
   PoofEffect: {fileID: 8919484260529707532, guid: 2c27f6103c8348844a3cc636de15052a, type: 3}
   AssociatedAnimal: {fileID: 45187450}
-  _releaseClip: {fileID: 0}
+  _releaseClip: {fileID: 8300000, guid: 7d09ff28fd4688d4b8f49ae5cd5afd95, type: 3}
 --- !u!4 &1479595143 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7605426715356279294, guid: db4677f9b0ce5bd4b95b2be5e4a67031, type: 3}
@@ -35843,36 +35820,13 @@ PrefabInstance:
     - {fileID: 385429619215651764, guid: 09ea4866d2125f341a2f4a96ecbd8569, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 3048555868624090989, guid: 09ea4866d2125f341a2f4a96ecbd8569, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 5572060914624715385}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 09ea4866d2125f341a2f4a96ecbd8569, type: 3}
 --- !u!4 &5572060914624715376 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3940967425679875173, guid: 09ea4866d2125f341a2f4a96ecbd8569, type: 3}
   m_PrefabInstance: {fileID: 5572060914624715375}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &5572060914624715379 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3048555868624090989, guid: 09ea4866d2125f341a2f4a96ecbd8569, type: 3}
-  m_PrefabInstance: {fileID: 5572060914624715375}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &5572060914624715385
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5572060914624715379}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ab532626b409c14eaeb7a3f536ab19e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _heartHealth: 100
-  collectionVFX: {fileID: 4035903591278710484, guid: aa122f157eac1c8428ae5db8a315ccd8, type: 3}
-  _collectClip: {fileID: 8300000, guid: 825591aef716e674c8a945bc0109225b, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

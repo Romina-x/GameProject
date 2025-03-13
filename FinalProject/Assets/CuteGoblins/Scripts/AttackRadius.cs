@@ -3,8 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// Manages the enemy attack radius
-// When player is close enough (in this radius) the enemy attacks
+/// <summary>
+/// Manages the enemy attack radius.
+/// When the player enters this radius, the enemy begins attacking.
+/// </summary>
 [RequireComponent(typeof(SphereCollider))]
 public class AttackRadius : MonoBehaviour
 {
@@ -31,7 +33,11 @@ public class AttackRadius : MonoBehaviour
         Collider = GetComponent<SphereCollider>();
     }
 
-    // Triggered when something enters the radius
+    /// <summary>
+    /// Called when an object enters the attack radius.
+    /// If the object is damageable, it starts the attack coroutine.
+    /// </summary>
+    /// <param name="other">The collider that entered the attack radius.</param>
     protected virtual void OnTriggerEnter(Collider other) 
     {
         _damageable = other.GetComponent<IDamageable>();
@@ -47,15 +53,19 @@ public class AttackRadius : MonoBehaviour
         }
     }
 
-    // Triggered when something leaves the radius
+    /// <summary>
+    /// Called when an object exits the attack radius.
+    /// Stops attacking if the exiting object was the current target.
+    /// </summary>
+    /// <param name="other">The collider that exited the attack radius.</param>
     protected virtual void OnTriggerExit(Collider other) 
     {
         _damageable = other.GetComponent<IDamageable>();
 
         if (_damageable != null)
         {
+            // Set damageable to null and stop the attack coroutine
             _damageable = null;
-
             if (_attackCoroutine != null)
             {
                 StopCoroutine(_attackCoroutine);
@@ -64,14 +74,19 @@ public class AttackRadius : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Continuously attacks the target while they remain in range.
+    /// Waits for a specified delay between attacks.
+    /// </summary>
+    /// <returns>Attack coroutine</returns>
     protected virtual IEnumerator Attack()
     {
         WaitForSeconds wait = new WaitForSeconds(_attackDelay);
-        
+
         // Keep attacking as long as the player is within the radius and the enemy can attack
         while (_damageable != null)
         {
-            if (GetComponentInParent<Enemy>().CanAttack())
+            if (GetComponentInParent<Enemy>().CanAttack)
             {
                 OnAttack?.Invoke(_damageable);
                 _damageable.TakeDamage(_damage);

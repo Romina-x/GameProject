@@ -3,9 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// Main controller for enemy movement and combat
+/// <summary>
+/// Main controller for enemy movement and combat.
+/// Handles the enemy's health, attack, movement, and death logic.
+/// </summary>
 public class Enemy : MonoBehaviour, IDamageable, IHealthSubject
-{   
+{
     // Components assigned in unity editor
     public AttackRadius AttackRadius;
     public EnemyScriptableObject EnemyData;
@@ -22,7 +25,6 @@ public class Enemy : MonoBehaviour, IDamageable, IHealthSubject
 
     private int _maxHealth = 100;
     private int _health;
-    private bool _isDefeated = false;
     private bool _canAttack = true;
     private int _score;
 
@@ -37,9 +39,8 @@ public class Enemy : MonoBehaviour, IDamageable, IHealthSubject
     // Event for enemy defeat
     public event Action<int> OnDefeated;
 
-
-    // Properties
-    public bool IsDefeated { get { return _isDefeated; } }
+    //Properties
+    public bool CanAttack { get { return _canAttack; } }
 
     private void Awake()
     {
@@ -60,12 +61,19 @@ public class Enemy : MonoBehaviour, IDamageable, IHealthSubject
         NotifyHealthObservers(); // Put health bars to the start health
     }
 
+    /// <summary>
+    /// Event triggered in attack radius. Plays the sound and animation for attack.
+    /// </summary>
+    /// <param name="target">The target to be attacked.</param>
     private void OnAttack(IDamageable target)
     {
         _animator.SetTrigger(_attackTriggerHash);
         SoundFXManager.instance.PlaySoundFX(_attackClip, transform, 1f);
     }
 
+    /// <summary>
+    /// Configures the enemy's properties using data from the ScriptableObject.
+    /// </summary>
     void SetupEnemyFromData()
     {
         // Configure NavMeshAgent using ScriptableObject data
@@ -89,14 +97,17 @@ public class Enemy : MonoBehaviour, IDamageable, IHealthSubject
 
     }
 
-    // IDamageable interface methods
+    /// <summary>
+    /// Reduces the enemy's health by the given amount and handles death if health drops to zero.
+    /// </summary>
+    /// <param name="damage">The amount of damage to apply to the enemy.</param>
     public void TakeDamage(int damage)
     {
         // Take damage
         _health -= damage;
         NotifyHealthObservers(); // Notify observers of health change
         SoundFXManager.instance.PlaySoundFX(_getHitClip, transform, 1f);
-        
+
         // Get hit if not dead
         if (_health > 0)
         {
@@ -106,7 +117,6 @@ public class Enemy : MonoBehaviour, IDamageable, IHealthSubject
         // Handle death when health below 0
         if (_health <= 0)
         {
-            _isDefeated = true;
             _canAttack = false;
             _animator.SetTrigger(_diedTriggerHash);
             _movement.StopFollowingOnDeath();
@@ -115,55 +125,42 @@ public class Enemy : MonoBehaviour, IDamageable, IHealthSubject
         }
     }
 
-    public Transform GetTransform()
-    {
-        return transform;
-    }
-
-    public string GetName()
-    {
-        return "Enemy";
-    }
-
-    // Death sequence 
+    /// <summary>
+    /// Delays the death process by a set amount of time before destroying the enemy.
+    /// </summary>
+    /// <returns>A coroutine that delays the death sequence.</returns>
     private IEnumerator DelayedDeath()
     {
         // Delay between the enemy falling and them disappearing
-        yield return new WaitForSeconds(1.8f); 
-        Die();
-    }
+        yield return new WaitForSeconds(1.8f);
 
-    public void Die()
-    {
         if (PoofPrefab != null)
         {
             // Instantiate the poof effect at the enemy's position
             Instantiate(PoofPrefab, transform.position, Quaternion.identity);
         }
         SoundFXManager.instance.PlaySoundFX(_vanishClip, transform, 1f);
-        
+
         // Raise the event for enemy defeat
         OnDefeated?.Invoke(_score);
 
         Destroy(gameObject);
     }
 
-    // Attack disable
+    /// <summary>
+    /// Prevents enemies from attackin while they have been hit.
+    /// </summary>
+    /// <returns>Attack disable coroutine.</returns>
     private IEnumerator DisableAttackDuringAnimation()
     {
         _canAttack = false; // Disable attacks
-        
+
         // Wait for the length of the "get hit" animation
         AnimatorStateInfo stateInfo = _animator.GetCurrentAnimatorStateInfo(0);
         float animationLength = stateInfo.length;
         yield return new WaitForSeconds(animationLength);
-        
-        _canAttack = true; // Re-enable attacks
-    }
 
-    public bool CanAttack()
-    {
-        return _canAttack;
+        _canAttack = true; // Re-enable attacks
     }
 
     // IHealthSubject interface methods
@@ -183,5 +180,15 @@ public class Enemy : MonoBehaviour, IDamageable, IHealthSubject
         {
             observer.OnNotify(_maxHealth, _health);
         }
+    }
+    
+    public Transform GetTransform()
+    {
+        return transform;
+    }
+
+    public string GetName()
+    {
+        return "Enemy";
     }
 }

@@ -4,11 +4,14 @@ using UnityEngine;
 
 [CreateAssetMenu(fileName = "EnemyData", menuName = "ScriptableObjects/Enemy")]
 
-// Enemy configurations: Stats and NavMeshAgent settings
+/// <summary>
+/// A ScriptableObject that holds enemy configuration data. 
+/// NavMeshAgent settings and enemy statistics.
+/// </summary>
 public class EnemyScriptableObject : ScriptableObject
 {
     // Enemy stats
-    public int health ;
+    public int health;
     public float attackDelay;
     public int damage;
     public float attackRadius;

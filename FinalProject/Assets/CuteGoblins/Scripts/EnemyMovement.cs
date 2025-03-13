@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-[RequireComponent(typeof(UnityEngine.AI.NavMeshAgent))]
 
-// Controller for enemy movement input
+/// <summary>
+/// Controls enemy movement and animation, including following the player and returning to its spawn point. 
+/// </summary>
+[RequireComponent(typeof(UnityEngine.AI.NavMeshAgent))]
 public class EnemyMovement : MonoBehaviour
 {
     // Components assigned in the unity editor
@@ -36,28 +38,30 @@ public class EnemyMovement : MonoBehaviour
         
         if (FollowRadius != null) 
         {
-            FollowRadius.SubscribeToPlayerEnter(OnPlayerEntered);
-            FollowRadius.SubscribeToPlayerExit(OnPlayerExit);
+            FollowRadius.PlayerEnter += OnPlayerEntered;
+            FollowRadius.PlayerExit += OnPlayerExit;
         }
 
         _originalPosition = transform.position;
     }
 
+    /// <summary>
+    /// Event triggered from FollowRadius collider when the player enters.
+    /// Starts the follow player coroutine.
+    /// </summary>
     protected virtual void OnPlayerEntered()
     {
-        StartFollowing();
-    }
-
-    // Method to start following the target
-    public void StartFollowing() 
-    {
-        if (_followCoroutine == null) 
+        if (_followCoroutine == null)
         {
             _followCoroutine = StartCoroutine(FollowTarget());
             _agent.isStopped = false;  // Allow the NavMeshAgent to move
         }
     }
 
+    /// <summary>
+    /// Event triggered from FollowRadius collider when the player exits.
+    /// Stops the follow player coroutine and starts return to origin.
+    /// </summary>
     protected virtual void OnPlayerExit()
     {
         if (_followCoroutine != null)
@@ -69,10 +73,14 @@ public class EnemyMovement : MonoBehaviour
         StartCoroutine(ReturnToOrigin());
     }
 
+    /// <summary>
+    /// Coroutine that makes the enemy follow the player.
+    /// </summary>
     protected IEnumerator FollowTarget()
     {
         WaitForSeconds wait = new WaitForSeconds(_updateSpeed);
-        while(enabled){
+        while (enabled)
+        {
             if (Target != null)
             {
                 _isMoving = _agent.velocity.magnitude > 0.1f;
@@ -84,6 +92,9 @@ public class EnemyMovement : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Coroutine to return the enemy to its original position once the player is out of range.
+    /// </summary>
     protected IEnumerator ReturnToOrigin()
     {
         _agent.SetDestination(_originalPosition);
@@ -100,7 +111,10 @@ public class EnemyMovement : MonoBehaviour
         _animator.SetBool(_isMovingHash, false);
     }
 
-    public void StopFollowingOnDeath() 
+    /// <summary>
+    /// Stops enemy movement during the death sequence.
+    /// </summary>
+    public void StopFollowingOnDeath()
     {
         if (_followCoroutine != null)
         {

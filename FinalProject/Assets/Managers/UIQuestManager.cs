@@ -2,6 +2,10 @@ using System.Collections;
 using UnityEngine;
 using TMPro;
 
+
+/// <summary>
+/// Manages the UI for the game's quest system, tracking rescued animals and unlocking the goal.
+/// </summary>
 public class QuestUIManager : MonoBehaviour
 {
     [SerializeField] private GameObject _questBox1;
@@ -18,25 +22,29 @@ public class QuestUIManager : MonoBehaviour
 
     private void OnEnable()
     {
-        Animal.OnAnimalRescued += OnAnimalRescued; // Subscribe to event
+        Animal.OnAnimalRescued += OnAnimalRescued; // Subscribe to animal rescued event
     }
 
     private void OnDisable()
     {
-        Animal.OnAnimalRescued -= OnAnimalRescued; // Unsubscribe to prevent memory leaks
+        Animal.OnAnimalRescued -= OnAnimalRescued; // Unsubscribe to animal rescued event
     }
 
     private void Awake()
     {
-        _rescuedAnimalsText.text = $"{_rescuedAnimals}/{TotalAnimalsToRescue}"; // Initialize UI
-        if (_goalRadius != null) _goalRadius.SetActive(false); // Hide goal at start
+        _rescuedAnimalsText.text = $"{_rescuedAnimals}/{TotalAnimalsToRescue}"; // Change UI to display number of animals to rescue
+        if (_goalRadius != null) _goalRadius.SetActive(false); // Disable goal
     }
 
+    /// <summary>
+    /// Called when an animal is rescued, updating the UI and checking if the quest is completed.
+    /// </summary>
     private void OnAnimalRescued()
     {
         _rescuedAnimals++;
-        _rescuedAnimalsText.text = $"{_rescuedAnimals}/{TotalAnimalsToRescue}"; 
+        _rescuedAnimalsText.text = $"{_rescuedAnimals}/{TotalAnimalsToRescue}"; // Update UI
 
+        // If all animals have been rescued, show new quest and activate the goal
         if (_rescuedAnimals >= TotalAnimalsToRescue && !_allAnimalsRescued)
         {
             _allAnimalsRescued = true;
@@ -47,6 +55,7 @@ public class QuestUIManager : MonoBehaviour
 
     private IEnumerator TransitionToSecondQuest()
     {
+        // Animate quest box transition to new quest
         _questBox1.GetComponent<Animator>().SetTrigger("Hide");
         yield return new WaitForSeconds(2.5f);
         _questBox1.SetActive(false);
@@ -57,6 +66,7 @@ public class QuestUIManager : MonoBehaviour
 
     private void ActivateGoal()
     {
+        // Spawn goal VFX and enable the goal collider
         if (_goalVFXPrefab != null && _goalTransform != null)
             _spawnedVFX = Instantiate(_goalVFXPrefab, _goalTransform.position, Quaternion.identity);
 

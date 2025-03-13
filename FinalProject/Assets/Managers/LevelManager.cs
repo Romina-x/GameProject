@@ -2,15 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// Class to manage the transition between states of a level: GameOver, Playing etc.
+/// <summary>
+/// Singleton to manage the transitions between states of a level: GameOver, Playing etc.
+/// </summary>
 public class LevelManager : MonoBehaviour
 {
-    public static LevelManager Instance { get; private set; } // Single instance of this class to be accessed
+    public static LevelManager Instance { get; private set; } // Singleton instance of this class to be accessed
 
-    [SerializeField]
-    private PlayerStateMachine _player;
+    [SerializeField] private PlayerStateMachine _player;
     private LevelState _currentState;
 
+    // Properties
     public LevelState CurrentState { get { return _currentState; } }
 
     private void Awake()
@@ -32,6 +34,10 @@ public class LevelManager : MonoBehaviour
         SetGameState(LevelState.Playing);
     }
 
+    /// <summary>
+    /// Changes the game state and enables or disables gameplay accordingly.
+    /// </summary>
+    /// <param name="newState">The new level state to transition to.</param>
     public void SetGameState(LevelState newState)
     {
         _currentState = newState;
@@ -57,7 +63,10 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    // Enables or disables movement of all entities in the level
+    /// <summary>
+    /// Enables or disables gameplay by adjusting the time scale.
+    /// </summary>
+    /// <param name="isEnabled">True to enable gameplay, false to pause it.</param>
     private void EnableGameplay(bool isEnabled)
     {
         // Pause the level by setting the timescale to 0

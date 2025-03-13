@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// Manages the game over UI screen, which activates when the player's health is 0.
+/// </summary>
 public class GameOver : MonoBehaviour, IHealthObserver
 {
     [SerializeField] private PlayerHealthAndDamage _playerHealth;
@@ -16,29 +19,20 @@ public class GameOver : MonoBehaviour, IHealthObserver
         SoundFXManager.instance.PlaySoundFX(_gameOverClip, transform, 1f);
     }
 
-    public void RestartButton()
-    {
-        SceneManager.LoadScene("LevelOne");
-    }
-    public void ExitButton()
-    {
-        SceneManager.LoadScene("LevelSelect");
-    }
-    
     // IHealthObserver interface methods
     public void OnNotify(float maxHealth, float currentHealth)
     {
-        if (currentHealth <= 0) 
+        if (currentHealth <= 0)
         {
             Setup();
         }
     }
-    
+
     // Register this as an observer of player health
     private void Start()
     {
         gameObject.SetActive(false);
-        _playerHealth.RegisterHealthObserver(this); 
+        _playerHealth.RegisterHealthObserver(this);
     }
 
     private void OnDisable()

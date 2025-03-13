@@ -5,6 +5,9 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
 
+/// <summary>
+/// Manages the level cleared screen which displays the player's score and time.
+/// </summary>
 public class LevelCleared : MonoBehaviour
 {
     [SerializeField] private GameTimer _timer;
@@ -33,20 +36,11 @@ public class LevelCleared : MonoBehaviour
         _scoreText.text = $"{finalScore:N0}";
     }
 
-    public void RestartButton()
-    {
-        SceneManager.LoadScene("LevelOne");
-    }
-    public void ExitButton()
-    {
-        SceneManager.LoadScene("LevelSelect");
-    }
-
     private void Start()
     {
         gameObject.SetActive(false);
     }
-    
+
     private void OnDisable()
     {
         LevelManager.Instance.SetGameState(LevelState.Playing);

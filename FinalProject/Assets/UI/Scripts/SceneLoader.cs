@@ -3,12 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-// Class to load scenes from buttons across the game
+/// <summary>
+/// Handles scene transitions and game exits, including animations and sound effects.
+/// </summary>
 public class SceneLoader : MonoBehaviour
 {
     [SerializeField] private Animator _animator;
     [SerializeField] private float _transitionTime;
     [SerializeField] private AudioClip _buttonClip;
+
+    /// <summary>
+    /// Loads a new scene with a transition animation and sound effect.
+    /// </summary>
+    /// <param name="sceneName">The name of the scene to load.</param>
     public void LoadScene(string sceneName)
     {
         StartCoroutine(LoadSceneTransition(sceneName));
@@ -25,7 +32,7 @@ public class SceneLoader : MonoBehaviour
     {
         _animator.SetTrigger("Start");
         
-
+        // Wait with real time instead if the game is in a paused state, which stops animations
         bool useRealTime = LevelManager.Instance != null && 
                    (LevelManager.Instance.CurrentState == LevelState.Paused || 
                     LevelManager.Instance.CurrentState == LevelState.LevelCleared || 

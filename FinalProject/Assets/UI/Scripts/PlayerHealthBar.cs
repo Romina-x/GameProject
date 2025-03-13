@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Manages the player's health bar display on the UI.
+/// </summary>
 public class PlayerHealthBar : MonoBehaviour, IHealthObserver
 {
-    [SerializeField] private Slider _healthBarSlider; // Reference to the Slider component
+    [SerializeField] private Slider _healthBarSlider; 
 
     // Player to observe
     [SerializeField] private PlayerHealthAndDamage _playerHealth;
@@ -17,7 +20,11 @@ public class PlayerHealthBar : MonoBehaviour, IHealthObserver
         _cam = Camera.main ?? FindObjectOfType<Camera>();
     }
 
-    // Update the value of the slider based on health
+    /// <summary>
+    /// Updates the health bar UI based on the player's current health.
+    /// </summary>
+    /// <param name="maxHealth">The maximum health of the player.</param>
+    /// <param name="currentHealth">The current health of the player.</param>
     public void UpdateHealthBar(float maxHealth, float currentHealth)
     {
         // Set the slider's value between 0 and 1

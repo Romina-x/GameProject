@@ -1,9 +1,12 @@
 using UnityEngine;
 using TMPro;
 
+/// <summary>
+/// Tracks and displays the elapsed game time in a MM:SS format.
+/// </summary>
 public class GameTimer : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI _timerText;
+    [SerializeField] private TextMeshProUGUI _timerText; // UI element to display the timer text
     private float _elapsedTime = 0f; // Total elapsed time in seconds
 
     public float ElapsedTime => _elapsedTime;

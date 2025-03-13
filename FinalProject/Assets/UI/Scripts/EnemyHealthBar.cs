@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
+/// <summary>
+/// Manages the health bar display for an enemy.
+/// </summary>
 public class EnemyHealthBar : MonoBehaviour, IHealthObserver
 {
     [SerializeField] private Image _healthBarSprite;
@@ -16,7 +20,11 @@ public class EnemyHealthBar : MonoBehaviour, IHealthObserver
         _cam = Camera.main ?? FindObjectOfType<Camera>();
     }
 
-    // Update the fill of the bar based on health
+    /// <summary>
+    /// Updates the health bar's fill amount based on the enemy's current health.
+    /// </summary>
+    /// <param name="maxHealth">The maximum health of the enemy.</param>
+    /// <param name="currentHealth">The current health of the enemy.</param>
     public void UpdateHealthBar(float maxHealth, float currentHealth)
     {
         _healthBarSprite.fillAmount = currentHealth / maxHealth;

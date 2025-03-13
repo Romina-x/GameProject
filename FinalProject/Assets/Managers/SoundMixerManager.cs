@@ -4,9 +4,15 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
 
+/// <summary>
+/// Manages the game's audio mixer settings, including master, sound effects, and music volumes.
+/// </summary>
 public class SoundMixerManager : MonoBehaviour
 {
+    // Main mixer 
     [SerializeField] private AudioMixer _audioMixer;
+
+    // UI sliders that control the volumes
     [SerializeField] private Slider masterSlider;
     [SerializeField] private Slider sfxSlider;
     [SerializeField] private Slider musicSlider;
@@ -17,18 +23,30 @@ public class SoundMixerManager : MonoBehaviour
         LoadVolumeSettings();
     }
 
+    /// <summary>
+    /// Sets the master volume level and saves it to PlayerPrefs.
+    /// </summary>
+    /// <param name="level">The volume level (expected range: 0.0001 to 1.0).</param>
     public void SetMasterVolume(float level)
     {
         _audioMixer.SetFloat("masterVolume", Mathf.Log10(level) * 20f);
         PlayerPrefs.SetFloat("MasterVolume", level);
     }
 
+    /// <summary>
+    /// Sets the sound effects volume level and saves it to PlayerPrefs.
+    /// </summary>
+    /// <param name="level">The volume level (expected range: 0.0001 to 1.0).</param>
     public void SetSoundFXVolume(float level)
     {
         _audioMixer.SetFloat("soundFXVolume", Mathf.Log10(level) * 20f);
         PlayerPrefs.SetFloat("SFXVolume", level);
     }
 
+    /// <summary>
+    /// Sets the music volume level and saves it to PlayerPrefs.
+    /// </summary>
+    /// <param name="level">The volume level (expected range: 0.0001 to 1.0).</param>
     public void SetMusicVolume(float level)
     {
         _audioMixer.SetFloat("musicVolume", Mathf.Log10(level) * 20f);

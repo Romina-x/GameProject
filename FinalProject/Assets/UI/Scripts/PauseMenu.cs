@@ -4,20 +4,18 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// Manages the pause menu screen.
+/// </summary>
 public class PauseMenu : MonoBehaviour
 {
     [SerializeField] private AudioClip _buttonClip;
+
     public void Setup()
     {
-        Debug.Log("Setting up pause menu");
         gameObject.SetActive(true);
         LevelManager.Instance.SetGameState(LevelState.Paused);
         SoundFXManager.instance.PlaySoundFX(_buttonClip, transform, 1f);
-    }
-
-    public void RestartButton()
-    {
-        SceneManager.LoadScene("LevelOne");
     }
 
     public void ContinueButton()
@@ -25,7 +23,7 @@ public class PauseMenu : MonoBehaviour
         SoundFXManager.instance.PlaySoundFX(_buttonClip, transform, 1f);
         gameObject.SetActive(false);
     }
-    
+
     private void Start()
     {
         gameObject.SetActive(false);

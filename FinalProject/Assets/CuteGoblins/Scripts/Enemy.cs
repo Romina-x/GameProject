@@ -1,9 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 // Main controller for enemy movement and combat
-public class Enemy : MonoBehaviour, IDamageable, IHealthSubject, IDefeatSubject
+public class Enemy : MonoBehaviour, IDamageable, IHealthSubject
 {   
     // Components assigned in unity editor
     public AttackRadius AttackRadius;
@@ -27,12 +28,15 @@ public class Enemy : MonoBehaviour, IDamageable, IHealthSubject, IDefeatSubject
 
     // Observers
     private List<IHealthObserver> _healthObservers = new List<IHealthObserver>();
-    private List<IDefeatObserver> _defeatObservers = new List<IDefeatObserver>();
 
     // Sound FX
     [SerializeField] private AudioClip _getHitClip;
     [SerializeField] private AudioClip _attackClip;
     [SerializeField] private AudioClip _vanishClip;
+
+    // Event for enemy defeat
+    public event Action<int> OnDefeated;
+
 
     // Properties
     public bool IsDefeated { get { return _isDefeated; } }
@@ -137,7 +141,10 @@ public class Enemy : MonoBehaviour, IDamageable, IHealthSubject, IDefeatSubject
             Instantiate(PoofPrefab, transform.position, Quaternion.identity);
         }
         SoundFXManager.instance.PlaySoundFX(_vanishClip, transform, 1f);
-        NotifyDefeatObservers();
+        
+        // Raise the event for enemy defeat
+        OnDefeated?.Invoke(_score);
+
         Destroy(gameObject);
     }
 
@@ -159,7 +166,6 @@ public class Enemy : MonoBehaviour, IDamageable, IHealthSubject, IDefeatSubject
         return _canAttack;
     }
 
-
     // IHealthSubject interface methods
     public void RegisterHealthObserver(IHealthObserver observer)
     {
@@ -178,22 +184,4 @@ public class Enemy : MonoBehaviour, IDamageable, IHealthSubject, IDefeatSubject
             observer.OnNotify(_maxHealth, _health);
         }
     }
-
-    // IDefeatSubject interface methods
-    public void RegisterDefeatObserver(IDefeatObserver observer)
-    {
-        _defeatObservers.Add(observer);
-    }
-    public void UnregisterDefeatObserver(IDefeatObserver observer)
-    {
-        _defeatObservers.Remove(observer);
-    }
-    public void NotifyDefeatObservers()
-    {
-        foreach (IDefeatObserver observer in _defeatObservers)
-        {
-            observer.OnNotify(_score);
-        }
-    }
-
 }

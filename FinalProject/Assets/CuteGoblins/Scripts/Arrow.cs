@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+/// <summary>
+/// Represents an arrow projectile that deals damage upon collision.
+/// This class extends <see cref="PoolableObject"/> to allow object pooling.
+/// </summary>
 [RequireComponent(typeof(Rigidbody))]
 public class Arrow : PoolableObject
 {
@@ -10,15 +14,11 @@ public class Arrow : PoolableObject
     [SerializeField] private float _moveSpeed = 2f;
     [SerializeField] private int _damage = 10;
     public Rigidbody Rigidbody;
-
     private const string DISABLE_METHOD_NAME = "Disable";
 
     // Properties
     public int Damage { get { return _damage; } set { _damage = value; } }
-
     public float MoveSpeed { get { return _moveSpeed; } set { _moveSpeed = value; } }
-
-
     public float AutoDestroyTime { get { return _autoDestroyTime; } set { _autoDestroyTime = value; } }
 
 

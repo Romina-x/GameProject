@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ScoreManager : MonoBehaviour, IDefeatObserver
+public class ScoreManager : MonoBehaviour
 {
     public static ScoreManager Instance { get; private set; }
     private int _score = 0;
@@ -11,7 +11,6 @@ public class ScoreManager : MonoBehaviour, IDefeatObserver
 
     private void Awake()
     {
-        // Destroy other instances of this class
         if (Instance == null)
         {
             Instance = this;
@@ -22,21 +21,23 @@ public class ScoreManager : MonoBehaviour, IDefeatObserver
             Destroy(gameObject);
         }
 
-        // Find all enemies in the scene and register as an observer
-        foreach (var enemy in FindObjectsOfType<Enemy>())
+        foreach (Enemy enemy in FindObjectsOfType<Enemy>())
         {
-            if (enemy != null)
-            {
-                enemy.RegisterDefeatObserver(this);
-            }
+            enemy.OnDefeated += OnEnemyDefeated;
         }
     }
 
-    // IDefeatObserver method
-    // Recieves the score of defeated enemy and adds to the total
-    public void OnNotify(int score)
+    private void OnDestroy()
+    {
+        foreach (Enemy enemy in FindObjectsOfType<Enemy>())
+        {
+            enemy.OnDefeated -= OnEnemyDefeated;
+        }
+    }
+
+    private void OnEnemyDefeated(int score)
     {
         _score += score;
-        Debug.Log(_score);
+        Debug.Log("New Score: " + _score);
     }
 }

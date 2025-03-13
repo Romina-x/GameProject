@@ -1,4 +1,6 @@
-// Factory to create player states
+/// <summary>
+/// Factory to create player states
+/// </summary>
 public class PlayerStateFactory
 {
     // Reference to the current context

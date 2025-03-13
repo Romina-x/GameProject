@@ -2,7 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// Root state for player jump movement
+/// <summary>
+/// Root state for player jump movement. Handles the player's jump logic and gravity application.
+/// </summary>
 public class PlayerJumpState : PlayerBaseState
 {
     // Constructor
@@ -16,6 +18,7 @@ public class PlayerJumpState : PlayerBaseState
     public override void EnterState()
     {
         HandleJump();
+        // Stop running or walking sounds while in the air and play jump sound
         SoundFXManager.instance.StopLoopingSoundFX("Running");
         SoundFXManager.instance.StopLoopingSoundFX("Walking");
         SoundFXManager.instance.PlaySoundFX(Ctx.JumpSound, Ctx.transform, 1f);
@@ -45,18 +48,26 @@ public class PlayerJumpState : PlayerBaseState
 
     public override void InitialiseSubState(){}
 
-    private void HandleJump(){
+    /// <summary>
+    /// Handles the jump logic, applying the initial jump velocity to the player.
+    /// </summary>
+    private void HandleJump()
+    {
         Ctx.Animator.SetTrigger(Ctx.JumpTriggerHash);
         Ctx.IsJumping = true;
         Ctx.CurrentMovementY = Ctx.InitialJumpVelocity;
         Ctx.CurrentRunMovementY = Ctx.InitialJumpVelocity;
     }
 
-    private void HandleGravity(){
+    /// <summary>
+    /// Applies gravity to the player every frame to fall back down.
+    /// </summary>
+    private void HandleGravity()
+    {
         if (!Ctx.CharacterController.isGrounded)
         {
             Ctx.CurrentMovementY += Ctx.Gravity * Time.deltaTime;
             Ctx.CurrentRunMovementY += Ctx.Gravity * Time.deltaTime;
-        } 
+        }
     }
 }

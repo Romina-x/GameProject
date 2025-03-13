@@ -4,7 +4,9 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.AI;
 
-// Handles player movement input
+/// <summary>
+/// State machine to manage transitions between player movement states based on inputs.
+/// </summary>
 public class PlayerStateMachine : MonoBehaviour
 {
     // Player components
@@ -78,7 +80,6 @@ public class PlayerStateMachine : MonoBehaviour
     public float WalkMultiplier { get { return _walkMultiplier; } }
     public float RunMultiplier { get { return _runMultiplier; } }
 
-
     public bool IsJumpPressed { get { return _isJumpPressed; } }
     public bool RequireNewJumpPress { get { return _requireNewJumpPress; } set { _requireNewJumpPress = value; } }
     public bool IsJumping { set { _isJumping = value; } }
@@ -90,7 +91,6 @@ public class PlayerStateMachine : MonoBehaviour
     public AudioClip WalkingSound { get { return _walkingSound; } }
     public AudioClip JumpSound { get { return _jumpSound; } }
 
-    // Monobehaviour methods
     private void Awake()
     {
         InitializeComponents();
@@ -100,13 +100,16 @@ public class PlayerStateMachine : MonoBehaviour
         SetupJumpVariables();
     }
 
+    /// <summary>
+    /// Called once per frame. Handles character rotation, state updates, and movement.
+    /// </summary>
     private void Update()
     {
         HandleRotation();
         _currentState.UpdateStates();
         MoveCharacter();
         Vector3 newPosition = transform.position;
-        _agent.Warp(newPosition);
+        _agent.Warp(newPosition); // Makes sure NavMeshAgent stays in the correct position when the player leaves a NavMeshSurface
     }
 
     private void OnEnable()
@@ -119,6 +122,7 @@ public class PlayerStateMachine : MonoBehaviour
         _playerInput.CharacterControls.Disable();
     }
 
+    // Methods called in Awake
     private void InitializeComponents()
     {
         _playerInput = new PlayerInput();
@@ -160,7 +164,9 @@ public class PlayerStateMachine : MonoBehaviour
         _gravity = (-2 * _maxJumpHeight) / Mathf.Pow(timeToApex, 2);
         _initialJumpVelocity = (2 * _maxJumpHeight) / timeToApex;
     }
+    //
 
+    // Input handling
     private void OnMovementInput(InputAction.CallbackContext context)
     {
         _currentMovementInput = context.ReadValue<Vector2>();
@@ -177,7 +183,11 @@ public class PlayerStateMachine : MonoBehaviour
         _isJumpPressed = context.ReadValueAsButton();
         _requireNewJumpPress = false;
     }
+    //
 
+    /// <summary>
+    /// Rotates the player based on movement direction.
+    /// </summary>
     private void HandleRotation()
     {
         if (!_isMovementPressed) return;
@@ -192,6 +202,9 @@ public class PlayerStateMachine : MonoBehaviour
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, _rotationFactorPerFrame * Time.deltaTime);
     }
 
+    /// <summary>
+    /// Moves the character based on the current movement state (walking or running).
+    /// </summary>
     private void MoveCharacter()
     {
         Vector3 movement = _isRunPressed ? _currentRunMovement : _currentMovement;

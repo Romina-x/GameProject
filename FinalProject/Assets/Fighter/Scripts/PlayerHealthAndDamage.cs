@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-// Handles player attack behaviour and damage taking.
+/// <summary>
+/// Handles player attack behaviour and damage taking.
+/// </summary>
 public class PlayerHealthAndDamage : MonoBehaviour, IDamageable, IHealthSubject
 {
     // Player components
@@ -44,16 +46,18 @@ public class PlayerHealthAndDamage : MonoBehaviour, IDamageable, IHealthSubject
         // Subscribe to attack input action
         _playerInput.CharacterControls.Attack.performed += OnAttack;
 
-        NotifyHealthObservers();
+        NotifyHealthObservers(); // with start health
     }
 
     void OnAttack(InputAction.CallbackContext context)
     {
         _animator.SetTrigger(_attackTriggerHash);
-        //SoundFXManager.instance.PlaySoundFX(_axeSwingClip, transform, 1f);
     }
 
-    // Called when the player collects a heart 
+    /// <summary>
+    /// Adds health to the player when collecting a heart, makign sure it doesn't exceed the maximum.
+    /// </summary>
+    /// <param name="amount">The amount of health to add.</param> 
     public void AddHealth(int amount)
     {
         if (_isDead) return; // Don't add health if the player is dead
@@ -74,7 +78,10 @@ public class PlayerHealthAndDamage : MonoBehaviour, IDamageable, IHealthSubject
 
     // IDamageable interface methods
 
-    // Called every time the player gets hit by an enemy
+    /// <summary>
+    /// Handles the player taking damage. This will subtract health and check if the player dies.
+    /// </summary>
+    /// <param name="damage">The amount of damage to apply to the player's health.</param>
     public void TakeDamage(int damage)
     {
         if (_isDead) return;
@@ -85,11 +92,11 @@ public class PlayerHealthAndDamage : MonoBehaviour, IDamageable, IHealthSubject
 
         SoundFXManager.instance.PlaySoundFX(_getHitClip, transform, 1f);
 
+        // Choose which animation to play if the player is alive or has died
         if (_health > 0)
         {
             _animator.SetTrigger(_gotHitTriggerHash);
         }
-
         if (_health <= 0)
         {
             _isDead = true;
@@ -126,6 +133,7 @@ public class PlayerHealthAndDamage : MonoBehaviour, IDamageable, IHealthSubject
         }
     }
     
+    // Animator event to play axe swing at the correct point in the animation
     public void PlayAxeSwingSound()
     {
         SoundFXManager.instance.PlaySoundFX(_axeSwingClip, transform, 1f);

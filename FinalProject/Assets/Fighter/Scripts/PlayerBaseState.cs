@@ -1,4 +1,6 @@
-// Base class for all player states
+/// <summary>
+/// Base class for all player states in the state machine.
+/// </summary>
 public abstract class PlayerBaseState
 {
     // Current context (state machine)

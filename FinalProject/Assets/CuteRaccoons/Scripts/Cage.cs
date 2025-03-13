@@ -2,8 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// Manages cage that holds trapped animal
-// Cage should disappear when associated enemies are defeated
+/// <summary>
+/// Manages a cage that holds a trapped animal. 
+/// The cage disappears when all associated enemies are defeated.
+/// </summary>
 public class Cage : MonoBehaviour
 {
     public List<Enemy> AssociatedEnemies;
@@ -17,7 +19,7 @@ public class Cage : MonoBehaviour
 
     void Awake()
     {
-        // Subscribe only to the `OnDefeated` event of associated enemies
+        // Subscribe to the OnDefeated event of associated enemies
         foreach (Enemy enemy in AssociatedEnemies)
         {
             if (enemy != null)
@@ -29,7 +31,7 @@ public class Cage : MonoBehaviour
 
     private void OnDestroy()
     {
-        // Unsubscribe from associated enemies' `OnDefeated` event
+        // Unsubscribe from ondefeated event of associated enemies
         foreach (Enemy enemy in AssociatedEnemies)
         {
             if (enemy != null)
@@ -39,6 +41,9 @@ public class Cage : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Called when an enemy is defeated. If all enemies are defeated, it frees the animal.
+    /// </summary>
     private void OnEnemyDefeated(int score)
     {
         _defeatedEnemiesCount++; // Increase defeated enemy count
@@ -49,6 +54,9 @@ public class Cage : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Frees the animal, plays the sound and visual effect for cage release, and destroys the cage object.
+    /// </summary>
     private void FreeAnimal()
     {
         if (PoofEffect != null)
@@ -60,7 +68,7 @@ public class Cage : MonoBehaviour
 
         if (AssociatedAnimal != null)
         {
-            AssociatedAnimal.StartFollowing();
+            AssociatedAnimal.StartFollowing(); // Get released animal to start following the player
         }
 
         Destroy(gameObject);

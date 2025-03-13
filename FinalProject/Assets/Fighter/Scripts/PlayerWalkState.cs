@@ -2,7 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// State for player walk input
+/// <summary>
+/// State for player walking movement.
+/// </summary>
 public class PlayerWalkState : PlayerBaseState
 {
     // Consructor

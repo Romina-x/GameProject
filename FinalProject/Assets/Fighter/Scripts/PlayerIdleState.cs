@@ -2,17 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// State for idle movement (no input detected)
+/// <summary>
+/// State for idle movement (no input detected).
+/// </summary>
 public class PlayerIdleState : PlayerBaseState
 {
     public PlayerIdleState(PlayerStateMachine currentContext, PlayerStateFactory playerStateFactory)
     : base (currentContext, playerStateFactory){}
+
     public override void EnterState()
     {
         Ctx.Animator.SetBool(Ctx.IsWalkingHash, false);
     }
     public override void UpdateState()
     {
+        // Make sure player stays still
         CheckSwitchStates();
         Ctx.CurrentMovementX = 0;
         Ctx.CurrentMovementZ = 0;

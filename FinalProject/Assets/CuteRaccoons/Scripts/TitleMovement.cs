@@ -2,14 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// Class to control the circular player/animal movement and animation for the title screen 
+/// <summary>
+/// Controls the circular movement and animation of the player/animals for the title screen.
+/// </summary>
 public class TitleMovement : MonoBehaviour
 {
-    [SerializeField] private Transform centerPoint; // Center point of the circle
-    [SerializeField] private float radius = 3f; // Distance from the center
+    [SerializeField] private Transform centerPoint; 
+    [SerializeField] private float radius = 3f; 
     [SerializeField] private float speed = 2f; // Speed of movement
-
     private float currentAngle;
+
     private Animator animator;
 
     private void Start()
@@ -28,6 +30,9 @@ public class TitleMovement : MonoBehaviour
         currentAngle = Mathf.Atan2(direction.z, direction.x);
     }
 
+    /// <summary>
+    /// Updates the object's position and rotation to move in a circular path.
+    /// </summary>
     private void Update()
     {
         // Update angle over time

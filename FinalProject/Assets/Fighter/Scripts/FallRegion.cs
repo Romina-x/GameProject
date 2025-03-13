@@ -2,8 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// Class to manage player death from falling off the map
-// This collider determines the point that the player dies once they fall off
+/// <summary>
+/// Class to manage player death from falling off the map.
+/// This collider determines the point that the player dies once they fall off.
+/// </summary>
 public class FallRegion : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)

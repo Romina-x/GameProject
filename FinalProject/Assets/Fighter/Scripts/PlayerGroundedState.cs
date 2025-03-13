@@ -2,7 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// Root state for player on the ground
+/// <summary>
+/// Root state for the player when grounded. It also applies gravity when grounded or in the air.
+/// </summary>
 public class PlayerGroundedState : PlayerBaseState
 {
     // Constructor
@@ -13,6 +15,9 @@ public class PlayerGroundedState : PlayerBaseState
         InitialiseSubState();
     }
 
+    /// <summary>
+    /// Called when the state is entered. Sets up sound effects based on the sub-state (running or walking).
+    /// </summary>
     public override void EnterState()
     {
         PlayerBaseState subState = this.CurrentSubState;
@@ -43,7 +48,9 @@ public class PlayerGroundedState : PlayerBaseState
         }
     }
 
-    // Sets the substate based on the player's input
+    /// <summary>
+    /// Initializes the sub-state based on the player's current input (idle, walking, or running).
+    /// </summary
     public override void InitialiseSubState()
     {
         if(!Ctx.IsMovementPressed && !Ctx.IsRunPressed)
@@ -60,6 +67,9 @@ public class PlayerGroundedState : PlayerBaseState
         }
     }
 
+    /// <summary>
+    /// Applies gravity to the player based on whether they are grounded or in the air.
+    /// </summary>
     void ApplyGroundedGravity() 
     {
         if (Ctx.CharacterController.isGrounded) 

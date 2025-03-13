@@ -2,7 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// Defines strength of player's weapon
+/// <summary>
+/// Represents the weapon collider and defines the strength of the player's weapon.
+/// </summary>
 public class WeaponAttributes : MonoBehaviour
 {
     // Weapon damage, can be changed from the unity editor

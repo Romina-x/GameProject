@@ -2,7 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// State for player run input
+/// <summary>
+/// State for player running movement.
+/// </summary>
 public class PlayerRunState : PlayerBaseState
 {
     // Constructor

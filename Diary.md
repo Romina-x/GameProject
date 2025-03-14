@@ -1,4 +1,7 @@
 # Week 19
+### 13/03/2025
+- Tidied up code files to remove redundant code and made sure XML documentation has been added to all files.
+- Removed observer pattern from animal rescue logic because it was overcomplicated for the scenario (only one observer).
 ### 12/03/2025
 - Added all remaining sound effects to the game.
 - Bugfix to LevelCleared and GameOver scripts not changing the level state back to play mode once disabled which caused title screen movement to stop.

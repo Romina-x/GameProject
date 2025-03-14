@@ -53,6 +53,8 @@ public class PlayerJumpState : PlayerBaseState
     /// </summary>
     private void HandleJump()
     {
+        //Ctx.Animator.SetTrigger(Ctx.JumpTriggerHash);
+        Ctx.Animator.ResetTrigger(Ctx.JumpTriggerHash); // Reset first
         Ctx.Animator.SetTrigger(Ctx.JumpTriggerHash);
         Ctx.IsJumping = true;
         Ctx.CurrentMovementY = Ctx.InitialJumpVelocity;

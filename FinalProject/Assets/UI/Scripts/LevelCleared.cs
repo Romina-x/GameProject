@@ -32,7 +32,7 @@ public class LevelCleared : MonoBehaviour
         _timeText.text = $"{minutes:D2}:{seconds:D2}";
 
         // Get score from the score manager and add on the elapsed time
-        float finalScore = ScoreManager.Instance.Score + elapsedTime;
+        float finalScore = (ScoreManager.Instance.Score + elapsedTime) * 10;
         _scoreText.text = $"{finalScore:N0}";
     }
 

@@ -1,3 +1,4 @@
+using UnityEngine;
 /// <summary>
 /// Base class for all player states in the state machine.
 /// </summary>
@@ -46,21 +47,22 @@ public abstract class PlayerBaseState
     {
         ExitState();
         newState.EnterState();
-        if(_isRootState)
+        if (_isRootState)
         {
             _ctx.CurrentState = newState;
-        } 
+        }
         else if (_currentSuperState != null)
         {
             _currentSuperState.SetSubState(newState);
-        } 
+        }
+        Debug.Log(newState);
     }
 
     protected void SetSuperState(PlayerBaseState newSuperState)
     {
         _currentSuperState = newSuperState;
     }
-    
+
     protected void SetSubState(PlayerBaseState newSubState)
     {
         _currentSubState = newSubState;

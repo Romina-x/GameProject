@@ -13,6 +13,7 @@ public class PlayerIdleState : PlayerBaseState
     public override void EnterState()
     {
         Ctx.Animator.SetBool(Ctx.IsWalkingHash, false);
+        Ctx.Animator.SetBool(Ctx.IsRunningHash, false);
     }
     public override void UpdateState()
     {

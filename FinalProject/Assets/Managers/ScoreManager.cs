@@ -19,7 +19,6 @@ public class ScoreManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -31,6 +30,7 @@ public class ScoreManager : MonoBehaviour
         {
             enemy.OnDefeated += OnEnemyDefeated;
         }
+        Debug.Log(_score);
     }
 
     private void OnDestroy()
@@ -49,5 +49,6 @@ public class ScoreManager : MonoBehaviour
     private void OnEnemyDefeated(int score)
     {
         _score += score;
+        Debug.Log(_score);
     }
 }

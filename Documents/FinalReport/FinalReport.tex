@@ -1,0 +1,540 @@
+\documentclass[]{final_report}
+\usepackage{graphicx}
+\usepackage{array}
+\usepackage{xcolor} % Added package for text coloring
+\usepackage{titlesec}
+\usepackage{listings}
+\usepackage{amsmath}
+\usepackage{caption}
+\usepackage{forest}
+\usepackage{cite}
+\usepackage{float}
+\usepackage{url}
+\usepackage[breaklinks=true]{hyperref}
+\usepackage{breakurl}
+
+
+%%%%%%%%%%%%%%%%%%%%%%
+%%% Input project details
+\def\studentname{Romina Petrozzi}
+\def\reportyear{2024}
+\def\projecttitle{Building a Game}
+\def\supervisorname{Julien Lange}
+\def\degree{BSc (Hons) in Computer Science}
+\def\fullOrHalfUnit{Full Unit} % indicate if you are doing the project as a Full Unit or Half Unit
+\def\finalOrInterim{Final Report} % indicate if this document is your Final Report or Interim Report
+
+\begin{document}
+
+\maketitle
+
+%%%%%%%%%%%%%%%%%%%%%%
+%%% Declaration
+
+\chapter*{Declaration}
+
+This report has been prepared on the basis of my own work. Where other published and unpublished source materials have been used, these have been acknowledged.
+
+\vskip3em
+
+Word Count: 5800
+
+\vskip3em
+
+Student Name: \studentname
+
+\vskip3em
+
+Date of Submission: 13/12/2024
+
+\vskip3em
+
+Signature: Romina Petrozzi
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%
+%%% Table of Contents
+\tableofcontents\pdfbookmark[0]{Table of Contents}{toc}\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%
+%%% Your Abstract here
+
+\begin{abstract}
+This report details the development of a 3D platformer game created using Unity, exploring concepts in game design and software engineering. The game features a fantasy forest world where the player controls a hero tasked with rescuing animals while battling goblin enemies. The report provides an overview of game engines, design patterns for video game development, and user experience considerations. It details the development process so far, including justifications for key design decisions. Additionally, the report focusses on the application of software engineering principles, such as design patterns, testing methodologies, and adherence to a consistent code style. A timeline is also included, detailing the features achieved so far and the adjustments made to the original plan.
+\end{abstract}
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%
+%%% Introduction
+\chapter{Introduction}
+The video game industry has grown into one of the largest sectors in the entertainment industry, with video game sales being about five times higher than global music revenues, higher than consumer book sales, and similar to movie revenues \cite{marchand2013value}. This growth has been driven by many factors, including the growth of software, improvement of internet technology, and innovation \cite{zackariasson2012video} . Video games have evolved significantly over the years, progressing from simple 2D graphics to immersive 3D experiences, and with the oncoming development of virtual reality (VR) and artificial intelligence (AI) technology, they are set to become even more immersive and engaging. Creating video games is a very complex process involving many interconnected systems such as gameplay mechanics, graphics, AI, sound, animation and gameplay design. \newline
+
+My motivation for this project stems from my interest in the VR industry. By working on this game with Unity 3D, I will gain experience using one of the most widely used engines for VR development and practice working with 3D environments. These skills will transition well into VR development, providing a good foundation for future projects in that field. Additionally, I am aiming to improve my software engineering skills, as creating large games requires solid software engineering principles. To keep up with evolving requirements and user expectations, it is important that the code stays maintainable, efficient and scalable.\newline
+
+The genre of game I am developing is a mix between 3D platformers and action-adventure games. It is set in a fantasy forest, where the player controls an axe-wielding hero tasked with rescuing trapped animals guarded by goblin enemies. There will be a set number of levels, each with increasing difficulty that the player must traverse through. They will explore each level to find and rescue each animal, with simple platforming and obstacles. Once each animal is rescued, they will follow the player around until they take them to the goal point. Points are awarded based on the number of enemies defeated in a level, and to clear each level the player must rescue all the animals being guarded by returning them to the goal. In addition, there will be extra collectibles hidden throughout the levels which will grant the player bonus health and temporary power ups. This level design aims to cater to both ``segments of players labelled as `experiencers' versus `achievers''' \cite{zhao2022dynamic} by offering contained, linear levels which also encourage exploration. A highly successful example of this design is Super Mario 3D World, which my level designs will take some inspiration from.\newline
+
+For the project, I have chosen to use Unity game engine, which provides the necessary tools and functions for 3D environments, assets and physics required for the game. I explored and compared several game engines that offer 3D capabilities, such as Unreal Engine, Unity and Godot. These engines vary in features, ease of use, and capabilities, and Unity was the best fit for the game's requirements. To ensure maintainable and scalable code for the project, I have also incorporated common design patterns for game development such as Observer and State Machines which promote extendable and reusable code. Additionally, a large focus of this term was making decisions for good user experience by setting up user friendly controls, camera movement and prototyping the level design.
+\section{Objectives}
+My main objectives for the project include:
+\begin{itemize}
+    \item Player Movement System
+    \begin{itemize}
+	\item{Create smooth movement mechanics including walking, running and jumping with proper animation blending.}
+    \end{itemize}
+    \item Combat System
+    \begin{itemize}
+	\item{Implement a basic combat system for player-enemy interactions including damage mechanics and animations for attacks, hits and deaths.}
+    \end{itemize}
+    \item Full User Interface
+    \begin{itemize}
+	\item{Implement a menu system with level selection, and a full heads up display during levels.}
+    \end{itemize}
+    \item Three Enemy Types
+    \begin{itemize}
+	\item{Create at least three types of enemies that have some variation in attack behaviours.}
+    \end{itemize}
+    \item Level Completion and Scoring system
+    \begin{itemize}
+	\item{Create scoring system based on defeated enemies, and implement end of level mechanic.}
+    \end{itemize}
+    \item Three Levels
+    \begin{itemize}
+	\item{Design three unique level layouts, increasing in difficulty.}
+    \end{itemize}
+    \item Testing and Optimisation
+    \begin{itemize}
+	\item{Playtest the game with a few users to find and fix bugs, and optimise performance for smoother gameplay.}
+    \end{itemize}
+    \item Design Patterns
+    \begin{itemize}
+	\item{Refactor code into common design patterns where appropriate.}
+    \end{itemize}
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%
+%%% Background
+\chapter{Background}
+Game development is a multidisciplinary process that includes areas such as creating a game concept, designing its mechanics, and creating an engaging user interface and experience. Each of these elements are equally important to create a game that is accessible, enjoyable, and polished. This section talks about some key areas of the development process that I have focused on so far, including selecting an appropriate game engine, designing code that is reusable and expandable, and developing the user interface and experience.
+\section{Game Engines}
+Game engines are platforms that make it easier to create computer games. They allow you to integrate and combine into single unit individual game elements such as animations, interaction with the user, or detection of collisions between objects \cite{Barczak2019}. These engines provide reusable components, allowing developers to focus on gameplay and design rather than redeveloping fundamental systems. There are many engines available, each suited to different types of projects. Popular engines for both 3D and 2D game development include Unreal Engine, Unity and Godot, while GameMaker and Construct are popular for 2D development. As I have chosen to develop a 3D game I will primarily compare 3D game engines.\newline
+
+Unreal Engine focuses on providing high-quality games with outstanding graphics and realism, thanks to its powerful graphics and rendering capabilities. Its Blueprint visual scripting system is a distinctive characteristic which allows programmers to build gameplay mechanics and events without writing any code. However Unreal Engine also provides the option to use C++ for more advanced customisation \cite{eventyr_2023}. While this engine offers many benefits, it comes with a very steep learning curve, as the interface and functionalities are intricate. Another drawback is that the software is resource intensive, requiring a more demanding system configuration for both gameplay and development \cite{eventyr_2023}. \newline
+
+Unity is a powerful engine that is used by both small and large development studios. Its most prominent features are its user friendly interface, cross-platform compatibility, and powerful rendering and performance. It also provides a large asset library and extensive documentation. While Unity provides great performance and graphics, it is not an ideal choice for massive open worlds or intricate graphics as its performance is limited compared to that of Unreal Engine which is more suited to this type of game \cite{medium_2024}. Additionally, while Unity has a large user community and documentation, it can present a steep learning curve for those new to game development or programming, as it primarily uses C\# for scripting.\newline
+
+Godot is a versatile open-source game engine that offers 3D and 2D development. It offers a lightweight, user friendly interface and provides its own scripting language, GDScript which is beginner friendly. Godot also requires less power and expense to run in comparison to Unity and Unreal Engine. Some drawbacks of this engine are having a less extensive documentation and asset library in comparison to Unity and Unreal Engine, and is less suited to games that require a large range of functionality. \cite{hatton_2024}. \newline
+For this game, my requirements include good tools and support for 3D development, an interface that is relatively beginner-friendly, and access to a large asset library, as I will not be creating the 3D models from scratch. Since I have chosen a stylised visual style for the game, which gives a more cartoon-like look over realism, the project does not require an engine with advanced high-end graphics capabilities. Additionally, the decision to create contained levels instead of a large open-world environment means that the engine does not need to support expansive or highly complex environments.
+Unity stands out as the best fit for these requirements due to its powerful 3D development capabilities, while being less resource intensive than Unreal Engine. Additionally, it is the most vastly documented engine of the three with a large asset store making it very accessible to learn and use.
+\section{Design Patterns}
+As programs get larger, it is critical to write code in such a way that classes and modules can communicate with each other in an intelligent way \cite{Doran2017}. In the context of game development, the complexity of the code can become large very fast, making it important to ensure that the code is clean, reusable, and scalable. Design patterns provide solutions to common design problems, enabling code to be easily extended and reused. It is important to create reusable components to reduce the amount of code that needs to be written for the game, and additionally design patterns make code easily extendable by designing it in such a way that adding new functionality does not require many changes to the existing functionality. There are many patterns that are widely used across many types of games. Some specific patterns I have chosen to use for the game are the Hierarchical State Machine, Observer, and Strategy patterns. 
+\subsection{Hierarchical State Machine}\label{HSM}
+The Hierarchical State Machine (HSM)  is a variation of the standard Finite State Machine (FSM) design pattern. The FSM pattern addresses player/object states for example, walking, idle and running and encapsulates each as an object. This pattern solves two problems: an object should change it’s behaviour when its internal state changes, and adding new states does not impact the behaviour of existing states \cite{unity2022_patterns}. I will use this for the player's movement, as the player is the most complex game object in terms of states. Using a state machine simplifies the process of adding new states without affecting existing ones.  It ensures all states are handled consistently, avoiding conflicts. A HSM builds on the concept of FSM by adding a hierarchy of states, allowing shared behaviours across multiple states. This includes super states and sub states, which can run simultaneously. Super states manage the shared behaviour across the substates, while the substates define specific actions. This pattern is very commonly used in games for player movement states and enemy AI states as they tend to have the most complex set of behaviours. I will use this pattern for the player movement states in the game.
+\subsection{Observer}\label{observer}
+The Observer Pattern is particularly useful in games when an event occurs and multiple objects need to be notified to perform specific actions. Without this pattern, the subject would need to reference each observer directly, resulting in high coupling between classes. The pattern involves observer and subject classes, where the observer contains a method that defines what action to take when notified by the subject, while the subject keeps a list of observers and notifies them when a specific event occurs \cite{nystrom2011game}. This decouples the objects, allowing the subject to notify multiple observers without explicitly referencing them. Observer is commonly used in games for health and damage systems, UI updates, and game event notifications. I have decided to use this pattern in a few places in the game's code. For example, the event of a health change in the player or enemy notifying related elements such as health bars or the game over screen.
+\subsection{Strategy}\label{strategy}
+The Strategy pattern is a design pattern used to define a family of behaviours and make them interchangeable. This pattern is commonly used in game development to handle different enemy behaviours or player mechanics. The pattern involves encapsulating a set of behaviours and having the client control the behaviour through an interface, instead of hardcoding the behaviour into the client function itself \cite{Doran2017}. This approach allows new behaviours for game objects to be added easily without duplicating the original class, as the class can dynamically swap between different behaviours. This pattern is commonly used in games for varying enemy types that are interchangeable, and for varying attack mechanics for example different weapon types. I have chosen to use this pattern in my game for creating multiple enemy types with varying behaviours.
+\section{Game Mechanics}
+- Discuss different combat mechanics / ways of doing it i could have done \& same for player movement maybe.
+\section{Optimisation Techniques}
+- Discuss other techniques beyond what i did (LOD) and why i chose what i did.
+\section{User Experience}\label{userexperience}
+Creating an engaging and intuitive user interface (UI) and user experience (UX) is important in modern game development. 
+UX in games includes the player's overall interaction with the game, including controls, interface design, camera systems, feedback mechanisms, and navigation flows \cite{Kramarzewski2023}. It focuses on ensuring that the game is enjoyable, accessible, and meets player expectations. 
+\newline Designing effective input involves adhering to the principles of ergonomics and user expectations. Ergonomics refers to creating controls that are natural for hand movement, while user expectations involve using input controls that are familiar, so players can quickly learn the controls \cite{Rogers2014}. For example, the WASD keys are commonly used for movement in PC games because they are familiar to most players, and they allow a natural position for the hand on the keyboard. 3D platforming games typically use controller input rather than keyboard, as it allows smoother directional movement with a joystick as opposed to using arrow keys. I have chosen to offer both controller and keyboard input options for better user experience. \newline
+
+Camera systems are essential in games to determine the player's perspective of the game world. Common types include first-person, third-person and top-down cameras, each providing different approaches to the gameplay design \cite{Kramarzewski2023}. First person cameras show the game through the eyes of the player character, which offers a more immersive experience. This is commonly used for first-person shooter games like Call of Duty where precise aiming is important. Third person cameras are positioned slightly above and behind the player character which provides a wider view of the area with more focus on the player character. It is typically used in adventure games and 3D platforming games like The Legend of Zelda series and Super Mario Galaxy. Top down cameras are typically used in puzzle or strategy games like Stardew Valley and provides a bird's eye view of the game world. Super Mario 3D world which I am taking some inspiration from, uses a fixed third person camera and this fits with the platformer/adventure theme of my game. \newline
+Level design is an important aspect of creating a compelling user experience in video games. It involves the structure and layout of the game world, including the placement of obstacles, collectibles and enemies, to provide an engaging and challenging experience for players. A well-designed level should balance challenge and accessibility, encouraging exploration and rewarding players for their progress \cite{Kramarzewski2023}. In 3D platformers and action-adventure games, levels are often designed to cater to both "achievers" and "experiencers", players who prefer completing tasks vs players who prefer exploration \cite{zhao2022dynamic}.  My game will attempt to implement this approach by encouraging exploration even in fairly small levels.
+
+
+%%%%%%%%%%%%%%%%%%%%%%
+%%% Development
+\chapter{Development}
+\section{Player Movement}
+Creating smooth and responsive movement for the player is essential for the user experience, as 3D platformer games require precise movements to traverse the levels. The player's movement covers standing idle, walking, running and jumping. 
+\subsection{Architecture}
+The architecture for the player's movement uses a Hierarchical State Machine (HSM) , as discussed in section \ref{HSM}.  I decided specifically to use a HSM for the player's movement as there was shared behaviour that I wanted to apply across multiple states without duplicating it into each one. For example, there is a Grounded super state that applies gravity to the Idle, Walk and Run substates. Figure \ref{fig:label_State} details this architecture:
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=\textwidth]{UMLDiagrams/PlayerStateUML.drawio.png}
+    \caption{UML Class digram of Player State Machine.}
+    \label{fig:label_State}
+\end{figure}
+\newline The PlayerStateMachine is the core component which manages the players states and transitions. This script is attached to the player game object and it's Update() method is called every frame to handle the player movement and state changes. PlayerStateFactory handles the creation of states for the StateMachine, which uses them for the transitions between player behaviours. I chose here to use the factory pattern for state creation as it simplifies the management of numerous states, making the StateMachine more readable. It also decouples the states from the StateMachine, allowing the architecture to be more easily reused with other state factories. PlayerBaseState is an abstract class that defines the common methods and behaviours for each state.  It provides access to the current StateMachine and StateFactory while also defining the core methods (EnterState(), UpdateState() and ExitState()) that the states need to implement for proper transitions. The state classes (Idle, Walk, Run, Jump and Grounded) are concrete implementations of PlayerBaseState. Each state contains the unique logic specific to its intended behaviour. For example, the Jump state handles the physics for the upward force and gravity during the jump. In addition, each state defines the conditions in which to transition to a neighbouring state. As mentioned previously, the states are organised in a hierarchy. Grounded and Jump are superstates while Idle, Walk and Run are substates. 
+\subsection{Movement Physics}\label{physics}
+In my game, I chose to use Unity's built in Character Controller for player movement rather than implementing Rigidbody based movement. The built in character controller allows you to easily implement basic movement (Walking) with collisions, but the player will not be affected by physics \cite{unity2024_charactercontroller}. In contrast, Rigidbodies put the game object under the effect of Unity's physics engine, and gravity is automatically applied and the object will react to impact from other Rigidbodies. In my game, the player needs to move around and jump across platforms, and the combat mechanics are physical. Therefore, the game requires limited use of physics beyond gravity.  This is why I have chosen the built-in Character Controller, as it avoids complex physics calculations and interactions that are not necessary. \newline
+The Character Controller component is a capsule-shaped collider that can be told to move in some direction from a script. It will stop at walls, walk upstairs and walk on slopes \cite{unity2024_charactercontroller_reference}. The controller uses the Move() method to apply movement to the player by taking a movement vector and adjusting the player's position. I used this for the player's walking and running states, incorporating a run multiplier to differentiate between walking and running speeds. However, the Character Controller does not cover all movement aspects, so I implemented the gravity and jump mechanics separately.  \newline
+The jump trajectory is calculated by applying an initial upward velocity and adjusting it with gravity over time. The initial velocity is calculated based on the desired maximum jump height and the time it takes to reach the apex of the jump. This ensured that the player reaches the jump height within the given time. Once the initial velocity is applied, gravity is applied continuously which decelerates the player until the apex, then accelerates them back to the ground. To calculate the initial velocity and gravity required for a parabolic jump motion, I used the following equations outlined by Kyle Pittman \cite{pittman2016_jump}:
+\begin{equation}
+\text{Gravity} = \frac{-2 \cdot \text{MaxJumpHeight}}{(\text{TimeToApex})^2}
+\end{equation}
+
+\begin{equation}
+\text{Initial Jump Velocity} = \frac{2 \cdot \text{MaxJumpHeight}}{\text{TimeToApex}}
+\end{equation}
+\paragraph{}
+\begin{verbatim}
+private void SetupJumpVariables()
+{
+    float timeToApex = _maxJumpTime / 2;
+    _gravity = (-2 * _maxJumpHeight) / Mathf.Pow(timeToApex, 2);
+    _initialJumpVelocity = (2 * _maxJumpHeight) / timeToApex;
+}
+\end{verbatim}
+For the gravity applied to the player while grounded, I used a smaller value of gravity to avoid unnecessary gravitational calculations and to prevent the high gravity from slowing down the player's movement. \newline
+
+%%%%%%%%%%%%%%%%%%%%%%
+%%% Enemies and Combat#
+\section{Enemy Movement}
+The enemy movement in the game is implemented dynamically based on the player's proximity. The enemies start in an idle state and begin to chase the player when they come within a specified range. Once the player moves out of this range, the enemies return back to their original starting position. To implement this behaviour with intelligent navigation I chose to use Unity's AI module, which supports AI pathfinding using NavMesh Surfaces and NavMeshAgents \cite{unity2024_AI}. 
+A NavMeshAgent is assigned to each enemy, allowing them to navigate across a NavMeshSurface while avoiding obstacles in their path. These agents are configured with properties such as movement speed, acceleration, avoidance priority, and movement radius, which control their movement behaviour \cite{unity2024_NavAgent}. The NavMeshSurface is assigned to the level's entire terrain, defining the ground area that the enemies can move on. This approach allows enemies to intelligently avoid obstacles and dynamically chase the player while navigating complex environments. \newline
+\subsection{Architecture}
+Unlike the player movement system, I chose not to implement the State Machine design pattern for the enemy movement states. The enemy states: Idle, Chasing and Returning are relatively simple, and using a State Machine would likely overcomplicate the system for such few states. However I may consider refactor the system if more complex enemy types are introduced later in development, requiring additional states or behaviours. The current design is detailed in figure \ref{fig:label_enemyMovement}.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{UMLDiagrams/EnemyMovementUML.drawio}
+    \caption{UML Class digram of Enemy Movement System}
+    \label{fig:label_enemyMovement}
+\end{figure}
+The FollowRadius component detects when the player enters or exits the proximity radius. It makes use of a SphereCollider which calls OnTriggerEnter() and OnTriggerExit() when the player enters or exits the radius. It communicates this to EnemyMovement using events. 
+\begin{verbatim}
+private void OnTriggerEnter(Collider other) 
+{
+    IDamageable damageable = other.GetComponent<IDamageable>();
+    if (damageable != null)
+    {
+        PlayerEnter?.Invoke();
+    }
+}
+\end{verbatim}
+EnemyMovement subscribes to the PlayerEnter and PlayerExit events from FollowRadius and begins manages the enemy's movement coroutines based on the event. A coroutine is a method that allows you to spread tasks across several frames. It can pause execution and return control to Unity but then continue where it left off on the following frame \cite{unity2024_Coroutines}. I chose to make use of coroutines instead of the Update() method which runs every frame. This is because the enemy movement relies on constant checks for position updates such as the player's position to follow, and using a coroutine allows this behaviour to execute over time without repeatedly checking every frame. One of the coroutines from EnemyMovement is shown below:
+\begin{verbatim}
+private IEnumerator FollowTarget()
+{
+    WaitForSeconds wait = new WaitForSeconds(_updateSpeed);
+    while(enabled){
+        if (Target != null)
+        {
+            _isMoving = _agent.velocity.magnitude > 0.1f;
+            _animator.SetBool(_isMovingHash, _isMoving);
+            _agent.SetDestination(Target.position); 
+        }
+        yield return wait;
+    }
+}
+\end{verbatim}
+The Enemy class manages the overall behaviour and state of the enemies in the game. Concerning movement, it is responsible for configuring the properties of the NavMeshAgent (such as speed and stopping distance) but delegates the actual movement logic to the EnemyMovement class. This separation allows the Enemy class to keep its focus on managing overall enemy behaviours while delegating the more complex logic to other dedicated classes. For movement, it works with the EnemyMovement class, while for combat, it interacts with the AttackRadius class (Detailed in \ref{combatsystem}). 
+
+\subsection{Configurable Enemies}
+Currently in the game there are two enemy types, Goblin Warrior and Scout. Both are short range and vary in attack speed, health and movement speed. To enable multiple enemy types I used the Strategy pattern \ref{strategy} in conjunction with Unity's ScriptableObject feature. I chose to use Strategy here to enable the Enemy class to use different behaviours interchangeably without hardcoding multiple Enemy classes for different enemy types. Unity's ScriptableObject is a data container that allows you to create customisable assets in the Unity editor \cite{unity2024_ScriptableObject}. I used this along with the Strategy pattern methodology to create separate configurable data containers for the two different enemy types. This design is detailed in figure \ref{fig:label_strategy}.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{UMLDiagrams/EnemyStrategyUML.drawio}
+    \caption{UML Class diagram of Enemy Strategy Pattern.}
+    \label{fig:label_strategy}
+\end{figure}
+The EnemyScriptableObject stores all the customizable parameters, such as health, attack speed, and movement speed. The Enemy class uses the data from the assigned ScriptableObject (GoblinWarrior or GoblinScout) to adjust its behaviour dynamically. This approach decouples the enemy configuration from the core enemy logic, allowing new enemy types to be added easily by creating new ScriptableObjects without modifying the Enemy class. 
+\section{Combat System}\label{combatsystem}
+The combat system is a core feature of the game, enabling attack and damage mechanics between the player and enemies. The design focusses on handling the damage mechanic in a consistent way across both enemies and player, while accommodating their differing attack mechanics. This was achieved by creating an IDamageable interface, which must be implemented by all game objects capable of taking damage. This design is detailed in figure  \ref{fig:label_combat}.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{UMLDiagrams/CombatUML.drawio.png}
+    \caption{UML Class diagram of Combat System}
+    \label{fig:label_combat}
+\end{figure}
+The IDamageable interface is the core of the system, which defines a TakeDamage() method which reduces the entity's health based on an incoming damage value. Both the Enemy and PlayerHealthAndDamage classes implement this interface, ensuring damage is applied in a consistent way for both entities. 
+\newline The player's combat mechanic is controlled by the WeaponAttributes class. The weapon is equipped with a Box Collider that calls the OnTriggerEnter() method on collision. Within OnTriggerEnter(), the TakeDamage() method is called on the enemy that entered the collider. 
+\begin{verbatim}
+private void OnTriggerEnter(Collider other)
+{
+    IDamageable damageable = other.GetComponent<IDamageable>();
+    if(damageable != null)
+    {
+        // Call takedamage method on enemy
+        damageable.TakeDamage(damage);
+    }
+}
+\end{verbatim}
+The WeaponManager class manages the weapon's Box Collider, ensuring that it is only enabled during the player's attack animation. This is achieved with Unity animation events, which call the EnableWeaponCollider() method at the appropriate time during the attack animation.\newline 
+The enemy's combat system differs from the player's, as it does not rely on weapon collision mechanics. Instead, the AttackRadius class manages the enemy's attack behaviour. This system uses a Sphere Collider that defines a radius in which the player can take damage. When the player is within this radius, the enemy periodically attacks by calling the player's TakeDamage() method. The  attacks are based on a set delay, allowing different enemy types to vary in attack speed. The Attack coroutine from AttackRadius is shown below:
+\begin{verbatim}
+private IEnumerator Attack()
+{
+    // Delay between attacks
+    WaitForSeconds wait = new WaitForSeconds(_attackDelay);
+    yield return wait;
+
+    // Continue attacking while there are damageables in the radius
+    while (_damageables.Count > 0)
+    {
+        if(closestDamageable != null)
+        {
+            OnAttack?.Invoke(closestDamageable);
+	  // Player takes damage
+            closestDamageable.TakeDamage(_damage);
+        }
+
+        // Delay between each attack
+        yield return wait;
+        _damageables.RemoveAll(DisabledDamageables);
+    }
+    _attackCoroutine = null;
+}
+\end{verbatim}
+\section{Animals and Cages}
+%%%%%%%%%%%%%%%%%%%%%%
+%%% User Experience#
+\section{User Interface}
+So far in my game I have implemented a basic UI including a Game Over screen, and a HUD (Heads Up Display), which displays health bars for both the player and enemies. To design the UI components, I used Unity's built-in UI package \cite{unity2024_UI} to create multiple canvases to display various types of information to the user. For communication between the UI elements and relevant game objects, I used the Observer pattern, as discussed in section \ref{observer}. I chose to use this pattern in this context to decouple the UI components from the game logic. This allows the game objects to act as subjects, and notify the relevant UI components (observers) without needing to hold direct references to them. Currently, there are two subjects (the enemy and player), and three observers (the enemy and player's health bars and the game over screen). This design is shown in figure \ref{fig:label_observer1}.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{UMLDiagrams/HealthObserverUML.drawio.png}
+    \caption{UML Class diagram of Health Observer Pattern}
+    \label{fig:label_observer1}
+\end{figure}
+I have implemented two interfaces to manage health changes: one for the subject and one for the observers. The IHealthSubject interface defines methods for registering, unregistering and notifying observers about health changes. The IHealthObserver interface specifies an OnNotify() method, that passes the observer the updated health value and defines what it should do given the new value. 
+The PlayerHealthAndDamage and Enemy classes implement the IHealthSubject interface. Each holds a list of observers that are managed with the register and unregister observer methods. When a health change happens, the subjects notify their observers by calling the OnNotify() method for each observer in the list.  
+\begin{verbatim}
+public void NotifyHealthObservers()
+{
+    foreach (IHealthObserver observer in _observers)
+    {
+        observer.OnNotify(_maxHealth, _health);
+    }
+}
+\end{verbatim}
+The PlayerHealthBar, EnemyHealthBar and GameOver classes implement the IHealthObserver interface. The Game Over screen needs to observe the player's health and subsequently pop up if their health is below zero. 
+The health bars observe the player and enemies to display their current health in real time. Each observer registers itself with its associated subject by calling the subject's RegisterHealthObserver(this) method. Once registered, the subject calls the observer's OnNotify() method whenever there is a health update. For example, when an Enemy notifies the EnemyHealthBar, the following method is called:
+\begin{verbatim}
+public void OnNotify(float maxHealth, float currentHealth)
+{
+    UpdateHealthBar(maxHealth, currentHealth);
+}
+\end{verbatim}
+While the use of this pattern may seem overcomplex for this scenario, as there are very few observers, I have set it up with future development in mind. As more UI components, sound effects, and visual effects are added, these elements will need to observe the same properties. Without the observer pattern, the game objects would need to hold numerous references to these components, making the system tightly coupled and complex. 
+
+\section{User Experience}
+User experience focuses on ensuring that the game is enjoyable and accessible for the player, which includes considerations for controls, camera movement, feedback mechanisms and interface design, as discussed in section \ref{userexperience}. I have selected and begun implementing the camera movement, input options, and a prototype for the level design.
+For the camera movement I implemented a fixed third-person perspective. The camera stays positioned behind the player and follows their movements without allowing the player to control its angle or view. To achieve smooth and dynamic camera movement for this scenario I made use of Unity's Cinemachine package. Cinemachine allows you to create professional looking camera movement with automatic damping and target tracking \cite{onewheelstudio_2021}. I used the FreeLook camera to create the third person camera as shown in figure \ref{fig:label_camera}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{OtherImages/PlayerCamera.png}
+    \caption{FreeLook Camera on Player}
+    \label{fig:label_camera}
+\end{figure}
+Using Cinemachine, I could define different camera properties such as follow speed and field of view to achieve the best perspective that would show a sufficient view of the world within the camera. \newline
+As discussed in \ref{userexperience}, player controls are an important factor towards offering a great user experience. To allow the player to use either keyboard inputs or game controller inputs, I made use of Unity's new Input System. The input system allows players to control the game in a variety of ways including external devices, touch screen or gestures \cite{unity_2024_inputsystem}. This is done by setting up 'Actions' such as running, which can have multiple input options linked to it. For example the run action is linked to both the Left Shift key on the keyboard, and the Left Trigger button on a controller. Below is an example of how the directional movement input is read using the corresponding input action:
+\begin{verbatim}
+private void OnMovementInput(InputAction.CallbackContext context)
+{
+    Vector2 input = context.ReadValue<Vector2>();
+    _currentMovementInput = input;
+    _isMovementPressed = input != Vector2.zero;
+}
+\end{verbatim}
+OnMovementInput is triggered when the movement input action is performed (Joystick or WASD key movements) and provides 'context' of the action. In this case we read the input as a two dimensional vector in the direction that the player is pressing, which is then used for the Move() method of the Character Controller \ref{physics}.  \newline
+
+This term I began prototyping the layout for the first level. As discussed in section \ref{userexperience}, a key aspect of level design is to keep a balance between challenge and accessibility for all levels of players. The level features four enemy camps (groups of enemies), three of which guard cages. By adding extra enemies, players are incentivised to explore the entire level and defeat all enemies, rather than only focusing on those required to progress to earn a better score. The enemy camps are strategically placed, with easier camps closer to the start, and more difficult ones located in hard to reach areas. This approach ensures that players are gradually introduced to increasing difficulty, allowing them to learn the controls as they progress. Additionally, collectible hearts are placed throughout the level to help players recover health if needed, which further encourages exploration when the player is close to dying. Figure \ref{fig:label_level} shows an overview of the current layout for the first level.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{OtherImages/LevelOne.png}
+    \caption{Level One Overview}
+    \label{fig:label_level}
+\end{figure}
+
+\section{Testing}
+User testing is crucial in game development, as it provides real-world feedback on gameplay mechanics, usability and player satisfaction. This helps developers find and fix bugs, refine mechanics and enhance the user interface \cite{flashjungle_2022}. This term, I focused on conducting playtesting, a type of user testing that evaluates gameplay mechanics. Other types of user testing include usability testing and beta testing. Usability testing assesses how easily players can navigate the game and understand it's UI, and Beta testing involves testing a nearly complete version of the game in real world conditions to address bugs \cite{flashjungle_2022}. Since the game is still in development, with an incomplete user interface, I will not conduct usability or beta testing until term two. To conduct playtesting I asked different people to play the game and get feedback on what could be better about the gameplay mechanics like the player's movement and combat system. From this I received feedback that helped me better the player's jump, and refine different enemy statistics.
+%%%%%%%%%%%%%%%%%%%%%%
+%%% Reflection and Evaluation
+\chapter{Reflection and Evaluation}
+
+%%%%%%%%%%%%%%%%%%%%%%
+%%% Professional Issues
+\chapter{Professional Issues}
+
+%%%%%%%%%%%%%%%%%%%%%%
+%%% Appendix#
+\appendix
+\chapter{Appendix}
+\section{Code Style}
+Below is the code style I decided on, following Unity's guidelines \cite{unity_2022_codestyle}.
+\begin{table}[H]
+\centering
+\begin{tabular}{|p{4cm}|p{8cm}|}
+\hline
+\textbf{Aspect}              & \textbf{Chosen Convention}                                                                                   \\ \hline
+\textbf{Field Naming}        & Private fields use camelCase with a leading underscore (e.g., \texttt{\_health}, \texttt{\_animator}). Public fields use PascalCase. \\ \hline
+\textbf{Property Naming}     & Public properties use PascalCase (e.g., \texttt{Health}, \texttt{MaxHealthReadOnly}).                         \\ \hline
+\textbf{Interface Naming}    & Interface names start with "I" and describe behavior (e.g., \texttt{IDamageable}, \texttt{IHealthSubject}).   \\ \hline
+\textbf{Event Naming}        & Events are named with verb phrases and often follow "OnEventName" format (e.g., \texttt{DoorOpened}).         \\ \hline
+\textbf{Method Naming}       & Methods use  PascalCase (e.g., \texttt{TakeDamage}, \texttt{AddHealth}).                    \\ \hline
+\textbf{Braces Style}        & Always include braces even for single-line conditional statements (e.g., \texttt{if (condition) \{ DoSomething(); \}}). \\ \hline
+\textbf{Files per Class}     & Each class resides in its own file, and file names match MonoBehaviour class names (e.g., \texttt{PlayerHealthAndDamage.cs}). \\ \hline
+\end{tabular}
+\caption{Code Style Conventions Followed in the Project}
+\label{tab:codestyle}
+\end{table}
+
+\section{Development Diary}
+\textbf{Week 11}\newline
+06/12/2024
+\newline- Bugfix to player's NavMeshAgent which was causing the agent to not relocate to the player when they leave the NavMeshSurface.
+\newline- Bugfix to the heart idle animation which was overriding the positions of all hearts in the scene.
+\newline- Finalised level one layout
+\newline04/12/2024
+\newline- Refactored the UI system to use the observer pattern.
+\newline03/12/2024
+\newline- Added collectible hearts which increase the player's health.
+\newline02/12/2024
+\newline Redesigned layout and environment for level one.
+
+\textbf{Week 10}\newline
+27/11/2024
+\newline- Created a second melee enemy which is faster and does less damage.
+\newline25/11/2024
+\newline- Created the HUD (Heads Up Display) for the player which includes player and enemy health bars.
+\newline- Created game over screen with restart level button, which is triggered when the player's health is below zero.
+ 
+\textbf{Week 9}\newline
+20/11/2024
+\newline- Reconfigured NavMeshSurface to fit the new terrain so that enemies can move around the new level area.
+\newline- Refactored code style on all files to follow unity guidelines for readability.
+\newline19/11/2024
+\newline- Continued building level one terrain.
+
+\textbf{Week 8}\newline
+16/11/2024
+\newline- Began constructing level one terrain and features.
+\newline11/11/2024
+\newline- Added cage with trapped animal for rescue mechanic: Enemies guard a cage and when they are defeated the cage disappears and the animal is released.
+
+\textbf{Week 7}\newline
+10/11/2024
+\newline- Extra bug fixing for player movement:
+\newline- Fix to jump animation bug which caused it to look like a double jump.
+\newline- Fix to bug that caused animations to get stuck when pressing jump twice.
+\newline9/11/2024
+\newline- Added a movement radius to the enemy: Now the enemy only starts following the player if the player enters its follow radius. The Enemy returns to spawn if player exits the radius.
+\newline6/11/2024
+\newline- Aded player attack mechanic: Enemy takes damage on collision with the player's axe.
+\newline- Situation where player dies is still unhandled.
+\newline5/11/2024
+\newline- Added death animation for player.
+\newline- Fixed bug where enemy continues to follow player when dead.
+\newline4/11/2024
+\newline- Implemented enemy attack mechanic: Enemy auto attacks when the player is in range (Within the attack radius).
+
+\textbf{Week 6}\newline
+29/10/2024
+\newline- Refactored all the states out into their respective classes.
+\newline- Fixed gravity and running bugs from refactored code.
+
+\textbf{Week 5}\newline
+25/20/2024
+\newline- Began refactoring player class into a hierarchical state machine.
+\newline- Created all state classes and state factory.
+\newline23/10/2024
+\newline- Linked running animation to enemy movement.
+\newline21/10/2024
+\newline- Imported enemy prefab and configured its movement to follow the player.
+\newline- Researched Nav Meshes and applied this to the enemy so that it uses AI to navigate around obstacles towards the player.
+
+\textbf{Week 4}\newline
+16/10/2024
+\newline- Fixed the jump movement and added the jump animation to it.
+\newline15/10/2024
+\newline- Researched animation layering for attack movement.
+\newline- Added attack animation that layers over walking and running.
+
+\textbf{Week 3}\newline
+13/10/2024
+\newline- First attempt at jump physics / movement. Not fixed.
+\newline- Added basic terrain / skybox.
+\newline12/10/2024
+\newline- Added walk and run movement, and linked them to their corresponding animations.
+\newline08/10/2024
+\newline- Began prototyping player character.
+\newline- Tied idle, walking and running animations to the keyboard keys.
+
+\textbf{Week 2}\newline
+05/10/2024
+\newline- Finished gathering 3D assets.
+\newline- Researched player movement in unity.
+\newline03/10/2024
+\newline- Finalised game idea and mechanics and documented them.
+\newline- Began gathering 3D assets.
+
+\newpage
+
+\section{Submission Directory Structure}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.4\textwidth]{OtherImages/FileStructure.png}
+    \caption{Diagram of Directory Structure}
+    \label{fig:label_name2}
+\end{figure}
+The Assets folder contains all of the work I have completed so far including the 3D models for the player, enemies, terrain etc., as well as the associated scripts and animations. The diagram highlights the most important subfolders, such as the scripts folders, where all my C\# scripts are organised. Note that not all folders are included in the diagram. \newline
+
+Files Relevant to the Player State Machine (Assets/Fighter/Scripts):
+\begin{itemize}
+    \item \texttt{ PlayerBaseState.cs, PlayerRunState,cs, PlayerJumpState.cs, PlayerStateMachine.cs, PlayerStateFactory.cs} (There are other state files within this folder, Jump and Run are just two examples)
+\end{itemize}
+
+Files relevant to the combat system:
+\begin{itemize}
+    \item \texttt{IDamageable.cs} (Assets/Interfaces)
+    \item \texttt{PlayerHealthAndDamage.cs, WeaponManager.cs, WeaponAttributes.cs} (Assets/Fighter/Scripts)
+    \item \texttt{Enemy.cs, AttackRadius.cs} (Assets/CuteGoblins/Scripts)
+\end{itemize}
+Files relevant to enemy movement:
+\begin{itemize}
+    \item \texttt{Enemy.cs, FollowRadius.cs, EnemyMovement.cs, EnemyScriptableObject.cs} (Assets/CuteGoblins/Scripts)
+\end{itemize}
+Files relevant to the user interface:
+\begin{itemize}
+    \item \texttt{IHealthSubject, IHealthObserver} (Assets/Interfaces)
+    \item \texttt{PlayerHealthBar.cs, EnemyHealthBar.cs, GameOver.cs} (Assets/UI/Scripts)
+\end{itemize}
+Files relevant to animal rescue:
+\begin{itemize}
+    \item \texttt{Cage.cs} (Assets/CuteRaccoons/Scripts)
+    \item \texttt{IDefeatSubject.cs, IDefeatObserver.cs} (Assets/Interfaces)
+\end{itemize}
+
+
+
+
+\section{Demo Video Link}
+\url{https://youtu.be/4mPIEk5YFJI}
+
+%%%% ADD YOUR BIBLIOGRAPHY HERE
+\newpage
+\bibliographystyle{plain}
+\raggedright
+\bibliography{references}
+
+\renewcommand{\bibname}{Assets Used}
+\begin{thebibliography}{99}
+
+\bibitem[25]{skybox} Key Mouse. Customizable Skybox. Available at: \url{https://assetstore.unity.com/packages/2d/textures-materials/sky/customizable-skybox-174576}
+
+\bibitem[26]{forest_textures} Proxy Games. Stylized Nature Kit Lite. Available at: \url{https://assetstore.unity.com/packages/3d/environments/stylized-nature-kit-lite-176906}. 
+
+\bibitem[27]{VFX} Lana Studio. Hyper Casual FX. Available at: \url{https://assetstore.unity.com/packages/vfx/particles/hyper-casual-fx-200333}.
+
+\bibitem[28]{player} SEMA Game Studio. Modular Cute Fantasy Character Pack \#1. Available at: \url{https://assetstore.unity.com/packages/3d/characters/humanoids/fantasy/modular-cute-fantasy-character-pack-1-293865}
+
+\bibitem[29]{sound_effects} SURIYUN. Monsters Forest Pack 2. Available at: \url{https://assetstore.unity.com/packages/3d/characters/creatures/monsters-forest-pack-2-251936}. 
+
+\bibitem[30]{sound_effects} Meshtint Studio. Forest Ruins Pack Cute Series. Available at: \url{https://assetstore.unity.com/packages/3d/environments/fantasy/forest-ruins-pack-cute-series-182412}. 
+
+\bibitem[31]{sound_effects} Lost Panda Games. Low Poly Cartoon Item Pack - 3D. Available at: \url{https://assetstore.unity.com/packages/3d/props/low-poly-cartoon-item-pack-3d-274991}. 
+
+\bibitem[32]{sound_effects} SURIYUN. Cute Goblin. Available at: \url{https://assetstore.unity.com/packages/3d/characters/creatures/cute-goblin-225492}. 
+
+\end{thebibliography}
+
+\label{endpage}
+
+\end{document}
+
+\end{article}

@@ -1,0 +1,158 @@
+\begin{thebibliography}{10}
+
+\bibitem{Barczak2019}
+Andrzej~Marian Barczak and Hubert Woźniak.
+\newblock Comparative study on game engines.
+\newblock {\em Studia Informatica. Systems and Information Technology},
+  (1-2):5--24, 2019.
+
+\bibitem{Doran2017}
+John~P. Doran and Matt Casanova.
+\newblock {\em Game development patterns and best practices : better games,
+  less hassle}.
+\newblock Packt, 1st edition edition, 2017.
+
+\bibitem{eventyr_2023}
+Eventyr.
+\newblock Game development with unreal engine: Pros and cons.
+\newblock
+  \url{https://eventyr.pro/blog/game-development-with-unreal-engine-pros-and-cons/},
+  2023.
+\newblock Accessed: 2024-10-12.
+
+\bibitem{hatton_2024}
+Paul Hatton.
+\newblock Godot engine vs unity: which is right for you?
+\newblock
+  \url{https://www.creativebloq.com/3d/video-game-design/godot-engine-vs-unity-which-is-right-for-you},
+  2024.
+\newblock Accessed: 2024-10-12.
+
+\bibitem{Kramarzewski2023}
+Adam Kramarzewski and Ennio~De Nucci.
+\newblock {\em Practical Game Design : A Modern and Comprehensive Guide to
+  Video Game Design}.
+\newblock Packt Publishing Ltd, Birmingham, England, second edition. edition,
+  2023.
+
+\bibitem{marchand2013value}
+André Marchand and Thorsten Hennig-Thurau.
+\newblock Value creation in the video game industry: Industry economics,
+  consumer benefits, and research opportunities.
+\newblock {\em Journal of Interactive Marketing}, 27(3):141--157, 2013.
+
+\bibitem{medium_2024}
+Medium.
+\newblock Advantages and disadvantages of unity 3d game development.
+\newblock
+  \url{https://medium.com/@mobileappandgameappdevelopment/advantages-and-disadvantages-of-unity-3d-game-development-4314c067d4b2},
+  2024.
+\newblock Accessed: 2024-10-12.
+
+\bibitem{nystrom2011game}
+Robert Nystrom.
+\newblock {\em Game Programming Patterns}.
+\newblock gb, 2011.
+
+\bibitem{pittman2016_jump}
+Kyle Pittman.
+\newblock Math for game programmers: Building a better jump, 2016.
+\newblock Available on YouTube:
+  \url{https://www.youtube.com/watch?v=hG9SzQxaCm8\&t=1383s}.
+
+\bibitem{Rogers2014}
+Scott Rogers.
+\newblock {\em Level up! : the guide to great video game design}.
+\newblock John Wiley and Sons, Chichester, West Sussex, second edition.
+  edition, 2014.
+
+\bibitem{onewheelstudio_2021}
+One~Wheel Studio.
+\newblock Cinemachine. if you're not. you should.
+\newblock \url{https://onewheelstudio.com/blog/2021/9/11/cinemachine}, 2021.
+\newblock Accessed: 2024-10-12.
+
+\bibitem{unity2022_patterns}
+Unity Technologies.
+\newblock Level up your code with game programming patterns.
+\newblock
+  \url{https://unity.com/resources/level-up-your-code-with-game-programming-patterns},
+  2022.
+\newblock Accessed: 2024-10-10.
+
+\bibitem{unity2024_charactercontroller}
+Unity Technologies.
+\newblock Charactercontroller.
+\newblock
+  \url{https://docs.unity3d.com/6000.0/Documentation/ScriptReference/CharacterController.html},
+  2024.
+\newblock Accessed: 2024-11-10.
+
+\bibitem{unity2024_charactercontroller_reference}
+Unity Technologies.
+\newblock Charactercontroller component reference.
+\newblock
+  \url{https://docs.unity3d.com/6000.0/Documentation/Manual/class-CharacterController.html},
+  2024.
+\newblock Accessed: 2024-11-10.
+
+\bibitem{unity_2024_inputsystem}
+Unity Technologies.
+\newblock Input system.
+\newblock
+  \url{https://docs.unity3d.com/Packages/com.unity.inputsystem@1.8/manual/index.html},
+  2024.
+\newblock Accessed: 2024-10-12.
+
+\bibitem{unity2024_NavAgent}
+Unity Technologies.
+\newblock Navmeshagent.
+\newblock
+  \url{https://docs.unity3d.com/6000.0/Documentation/ScriptReference/AI.NavMeshAgent.html},
+  2024.
+\newblock Accessed: 2024-8-12.
+
+\bibitem{unity2024_ScriptableObject}
+Unity Technologies.
+\newblock Scriptableobject.
+\newblock
+  \url{https://docs.unity3d.com/6000.0/Documentation/Manual/class-ScriptableObject.html#:~:text=A%20ScriptableObject%20is%20a%20data%20container%20that%20you,project%E2%80%99s%20memory%20usage%20by%20avoiding%20copies%20of%20values.},
+  2024.
+\newblock Accessed: 2024-8-12.
+
+\bibitem{unity2024_Coroutines}
+Unity Technologies.
+\newblock Splitting tasks across frames.
+\newblock
+  \url{https://docs.unity3d.com/6000.0/Documentation/Manual/coroutines.html},
+  2024.
+\newblock Accessed: 2024-8-12.
+
+\bibitem{unity2024_UI}
+Unity Technologies.
+\newblock Unity ui.
+\newblock
+  \url{https://docs.unity3d.com/6000.0/Documentation/Manual/com.unity.ugui.html},
+  2024.
+\newblock Accessed: 2024-8-12.
+
+\bibitem{unity2024_AI}
+Unity Technologies.
+\newblock Unityengine.aimodule.
+\newblock
+  \url{https://docs.unity3d.com/6000.0/Documentation/ScriptReference/UnityEngine.AIModule.html},
+  2024.
+\newblock Accessed: 2024-8-12.
+
+\bibitem{zackariasson2012video}
+Peter Zackariasson and Timothy~L. Wilson.
+\newblock {\em The Video Game Industry: Formation, Present State, and Future}.
+\newblock Routledge, New York, 2012.
+
+\bibitem{zhao2022dynamic}
+Yi~Zhao and et~al.
+\newblock A dynamic model of player level-progression decisions in online
+  gaming.
+\newblock {\em Management Science}, 68(11):8062--8082, 2022.
+
+\end{thebibliography}

@@ -8,8 +8,6 @@ using UnityEngine;
 public class LevelManager : MonoBehaviour
 {
     public static LevelManager Instance { get; private set; } // Singleton instance of this class to be accessed
-
-    [SerializeField] private PlayerStateMachine _player;
     private LevelState _currentState;
 
     // Properties

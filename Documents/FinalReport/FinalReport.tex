@@ -241,6 +241,7 @@ Currently in the game there are two enemy types, Goblin Warrior and Scout. Both 
     \label{fig:label_strategy}
 \end{figure}
 The EnemyScriptableObject stores all the customizable parameters, such as health, attack speed, and movement speed. The Enemy class uses the data from the assigned ScriptableObject (GoblinWarrior or GoblinScout) to adjust its behaviour dynamically. This approach decouples the enemy configuration from the core enemy logic, allowing new enemy types to be added easily by creating new ScriptableObjects without modifying the Enemy class. 
+
 \section{Combat System}\label{combatsystem}
 The combat system is a core feature of the game, enabling attack and damage mechanics between the player and enemies. The design focusses on handling the damage mechanic in a consistent way across both enemies and player, while accommodating their differing attack mechanics. This was achieved by creating an IDamageable interface, which must be implemented by all game objects capable of taking damage. This design is detailed in figure  \ref{fig:label_combat}.
 \begin{figure}[H]
@@ -288,6 +289,13 @@ private IEnumerator Attack()
     _attackCoroutine = null;
 }
 \end{verbatim}
+- Archer enemy stuff
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{UMLDiagrams/ArrowPoolUML.drawio.png}
+    \caption{UML Class diagram of Object Pool Pattern}
+    \label{fig:label_objpool}
+\end{figure}
 \section{Animals and Cages}
 %%%%%%%%%%%%%%%%%%%%%%
 %%% User Experience#
@@ -320,6 +328,13 @@ public void OnNotify(float maxHealth, float currentHealth)
 \end{verbatim}
 While the use of this pattern may seem overcomplex for this scenario, as there are very few observers, I have set it up with future development in mind. As more UI components, sound effects, and visual effects are added, these elements will need to observe the same properties. Without the observer pattern, the game objects would need to hold numerous references to these components, making the system tightly coupled and complex. 
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{UMLDiagrams/LevelManagerSingletonUML.drawio.png}
+    \caption{UML Class diagram of Singleton Pattern}
+    \label{fig:label_singletonLevelManager}
+\end{figure}
+
 \section{User Experience}
 User experience focuses on ensuring that the game is enjoyable and accessible for the player, which includes considerations for controls, camera movement, feedback mechanisms and interface design, as discussed in section \ref{userexperience}. I have selected and begun implementing the camera movement, input options, and a prototype for the level design.
 For the camera movement I implemented a fixed third-person perspective. The camera stays positioned behind the player and follows their movements without allowing the player to control its angle or view. To achieve smooth and dynamic camera movement for this scenario I made use of Unity's Cinemachine package. Cinemachine allows you to create professional looking camera movement with automatic damping and target tracking \cite{onewheelstudio_2021}. I used the FreeLook camera to create the third person camera as shown in figure \ref{fig:label_camera}
@@ -348,6 +363,16 @@ This term I began prototyping the layout for the first level. As discussed in se
     \caption{Level One Overview}
     \label{fig:label_level}
 \end{figure}
+
+- Sound FX stuff
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{UMLDiagrams/SoundFXSingletonUML.drawio.png}
+    \caption{UML Class diagram of Singleton Pattern}
+    \label{fig:label_singletonSoundFX}
+\end{figure}
+
+
 \section{Optimisation}
 \color{red}
 - Frustum Culling\newline

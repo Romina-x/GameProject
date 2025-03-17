@@ -133,10 +133,18 @@ The Hierarchical State Machine (HSM)  is a variation of the standard Finite Stat
 The Observer Pattern is particularly useful in games when an event occurs and multiple objects need to be notified to perform specific actions. Without this pattern, the subject would need to reference each observer directly, resulting in high coupling between classes. The pattern involves observer and subject classes, where the observer contains a method that defines what action to take when notified by the subject, while the subject keeps a list of observers and notifies them when a specific event occurs \cite{nystrom2011game}. This decouples the objects, allowing the subject to notify multiple observers without explicitly referencing them. Observer is commonly used in games for health and damage systems, UI updates, and game event notifications. I have decided to use this pattern in a few places in the game's code. For example, the event of a health change in the player or enemy notifying related elements such as health bars or the game over screen.
 \subsection{Strategy}\label{strategy}
 The Strategy pattern is a design pattern used to define a family of behaviours and make them interchangeable. This pattern is commonly used in game development to handle different enemy behaviours or player mechanics. The pattern involves encapsulating a set of behaviours and having the client control the behaviour through an interface, instead of hardcoding the behaviour into the client function itself \cite{Doran2017}. This approach allows new behaviours for game objects to be added easily without duplicating the original class, as the class can dynamically swap between different behaviours. This pattern is commonly used in games for varying enemy types that are interchangeable, and for varying attack mechanics for example different weapon types. I have chosen to use this pattern in my game for creating multiple enemy types with varying behaviours.
+
 \section{Game Mechanics}
 - Discuss different combat mechanics / ways of doing it i could have done \& same for player movement maybe.
+
 \section{Optimisation Techniques}
-- Discuss other techniques beyond what i did (LOD) and why i chose what i did.
+\color{red}
+Optimisation techniques are crucial in game development, as performance lag can significantly impact the player's gameplay experience in many game genres. In particular, 3D platformers require precise movement and jumps for navigating levels and obstacles, and experiencing frame drops can make the gameplay frustrating for the player. Some of the main optimisation techniques used for games are level of detail (LOD) management, occlusion culling and frustum culling. \newline
+Occlusion Culling ‘is the mechanism by which Unity avoids rendering computations for GameObjects that are fully hidden from view by other GameObjects’ \cite{Singh2022}. This means that if an object is within the camera's view but fully blocked by another object, it will not be rendered. By doing this, performance is significantly improved as resources are not wasted on elements outside of the player's immediate view. This technique is most beneficial in 3D games with large open world environments, indoor navigation, and densely structured shooter maps, where many objects may be hidden from view at any given time.
+----------------------------------------------- ADD FRUSTUM CULLING ---------------------------------------------------------
+LOD management is an optimization technique that dynamically adjusts the complexity of an object's geometry based on its distance from the camera. In Unity, this is done by using LOD levels, which specify amount of detail of an object’s geometry to be rendered based on the object’s distance from the camera \cite{Unity2024LOD}. When an object is far from the player, a lower-detail version with fewer polygons is rendered, whereas a higher-detail version is used when the object is closer. This approach decreases the GPU's workload, freeing up resources for closer objects. This technique is particularly useful in expansive 3D environments, such as open-world games or any game featuring a vast, open map \cite{IndieGamesDevel}.
+\color{black}
+
 \section{User Experience}\label{userexperience}
 Creating an engaging and intuitive user interface (UI) and user experience (UX) is important in modern game development. 
 UX in games includes the player's overall interaction with the game, including controls, interface design, camera systems, feedback mechanisms, and navigation flows \cite{Kramarzewski2023}. It focuses on ensuring that the game is enjoyable, accessible, and meets player expectations. 
@@ -340,7 +348,14 @@ This term I began prototyping the layout for the first level. As discussed in se
     \caption{Level One Overview}
     \label{fig:label_level}
 \end{figure}
-
+\section{Optimisation}
+\color{red}
+- Frustum Culling\newline
+- LOD groups for terrain\newline
+- NavMesh for pathfinding (preset data rather than realtime pathfinding)\newline
+- Object pooling\newline
+- Reduced physics calculations with collision matrix\newline
+\color{black}
 \section{Testing}
 User testing is crucial in game development, as it provides real-world feedback on gameplay mechanics, usability and player satisfaction. This helps developers find and fix bugs, refine mechanics and enhance the user interface \cite{flashjungle_2022}. This term, I focused on conducting playtesting, a type of user testing that evaluates gameplay mechanics. Other types of user testing include usability testing and beta testing. Usability testing assesses how easily players can navigate the game and understand it's UI, and Beta testing involves testing a nearly complete version of the game in real world conditions to address bugs \cite{flashjungle_2022}. Since the game is still in development, with an incomplete user interface, I will not conduct usability or beta testing until term two. To conduct playtesting I asked different people to play the game and get feedback on what could be better about the gameplay mechanics like the player's movement and combat system. From this I received feedback that helped me better the player's jump, and refine different enemy statistics.
 %%%%%%%%%%%%%%%%%%%%%%

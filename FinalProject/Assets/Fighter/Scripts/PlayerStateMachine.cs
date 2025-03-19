@@ -63,8 +63,8 @@ public class PlayerStateMachine : MonoBehaviour
     public int IsRunningHash { get { return _isRunningHash; } }
     public int IsWalkingHash { get { return _isWalkingHash; } }
 
-    public bool IsMovementPressed { get { return _isMovementPressed; } }
-    public bool IsRunPressed { get { return _isRunPressed; } }
+    public bool IsMovementPressed { get { return _isMovementPressed; } set { _isMovementPressed = value; } }
+    public bool IsRunPressed { get { return _isRunPressed; } set { _isRunPressed = value; } }
 
     public float CurrentMovementY { get { return _currentMovement.y; } set { _currentMovement.y = value; } }
     public float CurrentRunMovementY { get { return _currentRunMovement.y; } set { _currentRunMovement.y = value; } }
@@ -80,7 +80,7 @@ public class PlayerStateMachine : MonoBehaviour
     public float WalkMultiplier { get { return _walkMultiplier; } }
     public float RunMultiplier { get { return _runMultiplier; } }
 
-    public bool IsJumpPressed { get { return _isJumpPressed; } }
+    public bool IsJumpPressed { get { return _isJumpPressed; } set { _isJumpPressed = value; } }
     public bool RequireNewJumpPress { get { return _requireNewJumpPress; } set { _requireNewJumpPress = value; } }
     public bool IsJumping { set { _isJumping = value; } }
     public float InitialJumpVelocity { get { return _initialJumpVelocity; } }
@@ -93,7 +93,7 @@ public class PlayerStateMachine : MonoBehaviour
 
     private void Awake()
     {
-        InitializeComponents();
+        InitialiseComponents();
         SetupStateMachine();
         SetupAnimatorHashes();
         SetupInputCallbacks();
@@ -123,7 +123,7 @@ public class PlayerStateMachine : MonoBehaviour
     }
 
     // Methods called in Awake
-    private void InitializeComponents()
+    public void InitialiseComponents()
     {
         _playerInput = new PlayerInput();
         _characterController = GetComponent<CharacterController>();

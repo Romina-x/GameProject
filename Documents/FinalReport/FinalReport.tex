@@ -133,6 +133,7 @@ The Hierarchical State Machine (HSM)  is a variation of the standard Finite Stat
 The Observer Pattern is particularly useful in games when an event occurs and multiple objects need to be notified to perform specific actions. Without this pattern, the subject would need to reference each observer directly, resulting in high coupling between classes. The pattern involves observer and subject classes, where the observer contains a method that defines what action to take when notified by the subject, while the subject keeps a list of observers and notifies them when a specific event occurs \cite{nystrom2011game}. This decouples the objects, allowing the subject to notify multiple observers without explicitly referencing them. Observer is commonly used in games for health and damage systems, UI updates, and game event notifications. I have decided to use this pattern in a few places in the game's code. For example, the event of a health change in the player or enemy notifying related elements such as health bars or the game over screen.
 \subsection{Strategy}\label{strategy}
 The Strategy pattern is a design pattern used to define a family of behaviours and make them interchangeable. This pattern is commonly used in game development to handle different enemy behaviours or player mechanics. The pattern involves encapsulating a set of behaviours and having the client control the behaviour through an interface, instead of hardcoding the behaviour into the client function itself \cite{Doran2017}. This approach allows new behaviours for game objects to be added easily without duplicating the original class, as the class can dynamically swap between different behaviours. This pattern is commonly used in games for varying enemy types that are interchangeable, and for varying attack mechanics for example different weapon types. I have chosen to use this pattern in my game for creating multiple enemy types with varying behaviours.
+\subsection{ObjectPool}\label{objectpool}
 
 \section{Game Mechanics}
 - Discuss different combat mechanics / ways of doing it i could have done \& same for player movement maybe.
@@ -193,7 +194,7 @@ For the gravity applied to the player while grounded, I used a smaller value of 
 %%%%%%%%%%%%%%%%%%%%%%
 %%% Enemies and Combat#
 \section{Enemy Movement}
-The enemy movement in the game is implemented dynamically based on the player's proximity. The enemies start in an idle state and begin to chase the player when they come within a specified range. Once the player moves out of this range, the enemies return back to their original starting position. To implement this behaviour with intelligent navigation I chose to use Unity's AI module, which supports AI pathfinding using NavMesh Surfaces and NavMeshAgents \cite{unity2024_AI}. 
+The enemy movement in the game is implemented dynamically based on the player's proximity. \color{red} There are two enemy types, long range and short range which both exhibit different movement behaviours. Short ranged enemies start in an idle state and begin to chase the player when they come within a specified range. Once the player moves out of this range, the enemies return back to their original starting position. Long ranged enemies that shoot the player from a distance stand still, and dynamically rotate to face and aim at the player. \color{black} To implement this behaviour with intelligent navigation I chose to use Unity's AI module, which supports AI pathfinding using NavMesh Surfaces and NavMeshAgents \cite{unity2024_AI}. 
 A NavMeshAgent is assigned to each enemy, allowing them to navigate across a NavMeshSurface while avoiding obstacles in their path. These agents are configured with properties such as movement speed, acceleration, avoidance priority, and movement radius, which control their movement behaviour \cite{unity2024_NavAgent}. The NavMeshSurface is assigned to the level's entire terrain, defining the ground area that the enemies can move on. This approach allows enemies to intelligently avoid obstacles and dynamically chase the player while navigating complex environments. \newline
 \subsection{Architecture}
 Unlike the player movement system, I chose not to implement the State Machine design pattern for the enemy movement states. The enemy states: Idle, Chasing and Returning are relatively simple, and using a State Machine would likely overcomplicate the system for such few states. However I may consider refactor the system if more complex enemy types are introduced later in development, requiring additional states or behaviours. The current design is detailed in figure \ref{fig:label_enemyMovement}.
@@ -230,17 +231,18 @@ private IEnumerator FollowTarget()
     }
 }
 \end{verbatim}
-The Enemy class manages the overall behaviour and state of the enemies in the game. Concerning movement, it is responsible for configuring the properties of the NavMeshAgent (such as speed and stopping distance) but delegates the actual movement logic to the EnemyMovement class. This separation allows the Enemy class to keep its focus on managing overall enemy behaviours while delegating the more complex logic to other dedicated classes. For movement, it works with the EnemyMovement class, while for combat, it interacts with the AttackRadius class (Detailed in \ref{combatsystem}). 
+\color{red} RangedEnemyMovement inherits from EnemyMovement, allowing different movement behaviour for long ranged enemies. It overrides the OnPlayerEntered and OnPlayerExit methods from EnemyMovement to start and stop an aiming coroutine when the player enters or exits the FollowRadius. This enables the Enemy class to use two different movement types interchangeably depending on the enemy type, similarly to the strategy pattern.  \color{black}
+The Enemy class manages the overall behaviour and state of the enemies in the game. Concerning movement, it is responsible for configuring the properties of the NavMeshAgent (such as speed and stopping distance) but delegates the actual movement logic to the EnemyMovement \color{red} or RangedEnemyMovement classes \color{black}. This separation allows the Enemy class to keep its focus on managing overall enemy behaviours while delegating the more complex logic to other dedicated classes. For movement, it works with the EnemyMovement class, while for combat, it interacts with the AttackRadius class (Detailed in \ref{combatsystem}). 
 
 \subsection{Configurable Enemies}
-Currently in the game there are two enemy types, Goblin Warrior and Scout. Both are short range and vary in attack speed, health and movement speed. To enable multiple enemy types I used the Strategy pattern \ref{strategy} in conjunction with Unity's ScriptableObject feature. I chose to use Strategy here to enable the Enemy class to use different behaviours interchangeably without hardcoding multiple Enemy classes for different enemy types. Unity's ScriptableObject is a data container that allows you to create customisable assets in the Unity editor \cite{unity2024_ScriptableObject}. I used this along with the Strategy pattern methodology to create separate configurable data containers for the two different enemy types. This design is detailed in figure \ref{fig:label_strategy}.
+Currently in the game there are \color{red} three \color{black} enemy types, Goblin Warrior, Scout \color{red}and Archer. Warrior and Scout are both \color{black} short range and vary in attack speed, health and movement speed. \color{red} Archer is a long ranged enemy with differing attack speed, health and movement properties to Warrior and Scout. \color{black} To enable multiple enemy types I used the Strategy pattern \ref{strategy} in conjunction with Unity's ScriptableObject feature. I chose to use Strategy here to enable the Enemy class to use different behaviours interchangeably without hardcoding multiple Enemy classes for different enemy types. Unity's ScriptableObject is a data container that allows you to create customisable assets in the Unity editor \cite{unity2024_ScriptableObject}. I used this along with the Strategy pattern methodology to create separate configurable data containers for the \color{red}three \color{black} different enemy types. This design is detailed in figure \ref{fig:label_strategy}.
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{UMLDiagrams/EnemyStrategyUML.drawio}
     \caption{UML Class diagram of Enemy Strategy Pattern.}
     \label{fig:label_strategy}
 \end{figure}
-The EnemyScriptableObject stores all the customizable parameters, such as health, attack speed, and movement speed. The Enemy class uses the data from the assigned ScriptableObject (GoblinWarrior or GoblinScout) to adjust its behaviour dynamically. This approach decouples the enemy configuration from the core enemy logic, allowing new enemy types to be added easily by creating new ScriptableObjects without modifying the Enemy class. 
+The EnemyScriptableObject stores all the customizable parameters, such as health, attack speed, and movement speed. The Enemy class uses the data from the assigned ScriptableObject (GoblinWarrior, GoblinScout \color{red}or GoblinArcher\color{black}) to adjust its behaviour dynamically. This approach decouples the enemy configuration from the core enemy logic, allowing new enemy types to be added easily by creating new ScriptableObjects without modifying the Enemy class. 
 
 \section{Combat System}\label{combatsystem}
 The combat system is a core feature of the game, enabling attack and damage mechanics between the player and enemies. The design focusses on handling the damage mechanic in a consistent way across both enemies and player, while accommodating their differing attack mechanics. This was achieved by creating an IDamageable interface, which must be implemented by all game objects capable of taking damage. This design is detailed in figure  \ref{fig:label_combat}.
@@ -266,37 +268,75 @@ private void OnTriggerEnter(Collider other)
 The WeaponManager class manages the weapon's Box Collider, ensuring that it is only enabled during the player's attack animation. This is achieved with Unity animation events, which call the EnableWeaponCollider() method at the appropriate time during the attack animation.\newline 
 The enemy's combat system differs from the player's, as it does not rely on weapon collision mechanics. Instead, the AttackRadius class manages the enemy's attack behaviour. This system uses a Sphere Collider that defines a radius in which the player can take damage. When the player is within this radius, the enemy periodically attacks by calling the player's TakeDamage() method. The  attacks are based on a set delay, allowing different enemy types to vary in attack speed. The Attack coroutine from AttackRadius is shown below:
 \begin{verbatim}
-private IEnumerator Attack()
+protected virtual IEnumerator Attack()
 {
-    // Delay between attacks
     WaitForSeconds wait = new WaitForSeconds(_attackDelay);
-    yield return wait;
 
-    // Continue attacking while there are damageables in the radius
-    while (_damageables.Count > 0)
+    // Keep attacking as long as the player is within the radius and the enemy can attack
+    while (_damageable != null)
     {
-        if(closestDamageable != null)
+        if (GetComponentInParent<Enemy>().CanAttack)
         {
-            OnAttack?.Invoke(closestDamageable);
-	  // Player takes damage
-            closestDamageable.TakeDamage(_damage);
+            OnAttack?.Invoke(_damageable);
+            _damageable.TakeDamage(_damage);
         }
-
-        // Delay between each attack
-        yield return wait;
-        _damageables.RemoveAll(DisabledDamageables);
+        yield return wait; // Wait before the next attack
     }
+
     _attackCoroutine = null;
 }
 \end{verbatim}
-- Archer enemy stuff
+\color{red} All enemy types in the game can be stunned after being hit by the player. When stunned, enemies are unable to attack until the 'get hit' animation has ended. This is controlled by a CanAttack variable defined in the Enemy class, which is checked in the Attack coroutine to determine when the enemy can attack. RangedAttackRadius provides the attack logic for the Archer enemy, which inherits from AttackRadius. This enemy begins firing arrows periodically while aiming at the player when the player has entered the RangedAttackRadius, and stops when they've left the radius. To achieve this behaviour, the Object Pool pattern \ref{objectpool} was used to manage the creation of arrows. This pattern avoids repeatedly creating and destroying arrows, improving performance. The architecture for this is shown in \ref{fig:label_objpool} below:
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{UMLDiagrams/ArrowPoolUML.drawio.png}
     \caption{UML Class diagram of Object Pool Pattern}
     \label{fig:label_objpool}
 \end{figure}
+The ObjectPool class manages a pool of reusable objects, which in this case would be the arrows. It keeps a list (\_availableObjectsPool) of available objects to be used, and provides methods for creating a pool of objects, getting an available object to use from that pool and returning already used objects back to the pool. PoolableObject represents an object to be used in the object pool, defining a method to ensure objects that inherit from this class are returned to the object pool once disabled. The Arrow class manages the arrow prefab that will be used in the object pool, which inherits from PoolableObject. It defines all of the arrow's properties and handles dealing damage to the player on collision. RangedAttackRadius overrides the Attack coroutine from AttackRadius to implement this new behaviour shown below:
+\begin{verbatim}
+protected override IEnumerator Attack()
+{
+    WaitForSeconds Wait = new WaitForSeconds(_attackDelay);
+    yield return Wait;
+
+    // Continue attacking while there is still a target
+    while (_damageable != null)
+    {
+        _agent.isStopped = true;
+
+        // Get an available arrow from the pool
+        PoolableObject poolableObject = _arrowPool.GetObject();
+        if (poolableObject != null)
+        {
+            // Set up the arrow's properties
+            _arrow = poolableObject.GetComponent<Arrow>();
+            _arrow.Damage = _damage;
+            _arrow.transform.position = transform.TransformPoint(_arrowSpawnOffset);
+            _arrow.transform.rotation = _agent.transform.rotation;
+
+            // Apply force to the arrow in the direction that the enemy is facing
+            _arrow.Rigidbody.AddForce(_agent.transform.forward * _arrowPrefab.MoveSpeed, ForceMode.VelocityChange);
+            InvokeOnAttack(_damageable);
+        }
+            
+        yield return Wait;
+    }
+
+    _attackCoroutine = null;
+}
+\end{verbatim}
+Each time the ranged enemy attacks, it gets a new available arrow from the object pool using GetObject(). Then the properties of the arrow are confgured, including the damage it does and its spawn position in relation to the enemy. The Arrow prefab uses a Rigidbody component, as discussed in section \ref{physics}, which allows it to use and react to physics. This allows for a force to be applied to the arrow, shooting it in the direction of the player at a specific speed. 
+\color{black}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%
+%%% Animals and Cages
 \section{Animals and Cages}
+
+
 %%%%%%%%%%%%%%%%%%%%%%
 %%% User Experience#
 \section{User Interface}

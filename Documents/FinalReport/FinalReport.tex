@@ -1,7 +1,7 @@
 \documentclass[]{final_report}
 \usepackage{graphicx}
 \usepackage{array}
-\usepackage{xcolor} % Added package for text coloring
+\usepackage{xcolor} 
 \usepackage{titlesec}
 \usepackage{listings}
 \usepackage{amsmath}
@@ -134,6 +134,8 @@ The Observer Pattern is particularly useful in games when an event occurs and mu
 \subsection{Strategy}\label{strategy}
 The Strategy pattern is a design pattern used to define a family of behaviours and make them interchangeable. This pattern is commonly used in game development to handle different enemy behaviours or player mechanics. The pattern involves encapsulating a set of behaviours and having the client control the behaviour through an interface, instead of hardcoding the behaviour into the client function itself \cite{Doran2017}. This approach allows new behaviours for game objects to be added easily without duplicating the original class, as the class can dynamically swap between different behaviours. This pattern is commonly used in games for varying enemy types that are interchangeable, and for varying attack mechanics for example different weapon types. I have chosen to use this pattern in my game for creating multiple enemy types with varying behaviours.
 \subsection{ObjectPool}\label{objectpool}
+
+\subsection{Singleton}\label{singleton}
 
 \section{Game Mechanics}
 - Discuss different combat mechanics / ways of doing it i could have done \& same for player movement maybe.
@@ -338,7 +340,7 @@ Each time the ranged enemy attacks, it gets a new available arrow from the objec
 \color{red} The main gameplay mechanic of the game is rescuing animals around the map. In each level there are three animals stuck within cages that are guarded by enemies for the player to find and rescue. To rescue an animal the player has to defeat the enemies that surround the animal's cage. The amount of enemies surrounding each cage varies to increase/decrease the difficulty of the parts of each level. Once the player rescues an animal they break free from the cage and follow the player around the map. The architechture of this mechanic is detailed in figure \ref{fig:label_rescue} below. 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{UMLDiagrams/AnimalRescueUML.drawio.png}
+    \includegraphics[width=0.7\textwidth]{UMLDiagrams/AnimalRescueUML.drawio.png}
     \caption{UML Class diagram of Animal Rescue Mechanic}
     \label{fig:label_rescue}
 \end{figure}
@@ -349,8 +351,9 @@ The Cage class controls the logic for freeing animals once all assigned enemies 
 %%%%%%%%%%%%%%%%%%%%%%
 %%% User Experience#
 \section{User Interface}
-\color{red} The design of the user interface (UI) is an important part of enhancing the overall user experience for the game, as discussed in section \ref{userexperience}. Therefore creating a full UI was a large focus of the development to achieve a complete and professional looking game that is intuitive for the player to use. The UI includes a title screen, level selection menu, settings and pause menus and a HUD (Heads Up Display) for the levels.  
-To set up the UI components,  \color{black} I used Unity's built-in UI package \cite{unity2024_UI} to create multiple canvases to display various types of information to the user. For communication between the UI elements and relevant game objects, I used the Observer pattern, as discussed in section \ref{observer}. I chose to use this pattern in this context to decouple the UI components from the game logic. This allows the game objects to act as subjects, and notify the relevant UI components (observers) without needing to hold direct references to them. Currently, there are two subjects (the enemy and player), and three observers (the enemy and player's health bars and the game over screen). This design is shown in figure \ref{fig:label_observer1}.
+\color{red} The design of the user interface (UI) is an important part of enhancing the overall user experience for the game, as discussed in section \ref{userexperience}. Therefore creating a full UI was a large focus of the development to achieve a complete and professional looking game that is intuitive for the player to use. The UI includes a title screen, level selection menu, settings and pause menus and a HUD (Heads Up Display) for the levels.  \newline
+To set up the UI components, \color{black} I made use of Unity's built-in UI package \cite{unity2024_UI} to create multiple canvases to display various types of information to the user. 
+For communication between the UI elements involving health changes and relevant game objects, the Observer pattern was used, as discussed in section \ref{observer}. \color{red} The pattern was used \color{black} in this context to decouple the UI components from the game logic. This allows the game objects to act as subjects, and notify the relevant UI components (observers) without needing to hold direct references to them. Currently, there are two subjects (the enemy and player), and three observers (the enemy and player's health bars and the game over screen). This design is shown in figure \ref{fig:label_observer1}.
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{UMLDiagrams/HealthObserverUML.drawio.png}
@@ -376,13 +379,92 @@ public void OnNotify(float maxHealth, float currentHealth)
     UpdateHealthBar(maxHealth, currentHealth);
 }
 \end{verbatim}
-While the use of this pattern may seem overcomplex for this scenario, as there are very few observers, I have set it up with future development in mind. As more UI components, sound effects, and visual effects are added, these elements will need to observe the same properties. Without the observer pattern, the game objects would need to hold numerous references to these components, making the system tightly coupled and complex. 
+\color{red} Beyond the player and enemy health bars, there are some other UI elements displayed on the HUD. The progression of the level is shown to the user through the UI, with the HUD and level cleared screen. When the player begins the level, the current quest, (find and rescue the animals) is displayed on the HUD. As each animal is rescued the HUD is updated to display how many animals have been rescued, and once they all have, a new quest (reach the goal) is displayed and the goal becomes activated, shown through visual effects surrounding the goal. Once the player walks into the goal, a level complete screen is shown with the player's time and score, this is shown in figures \ref{fig:label_goal} and  \ref{fig:label_levelcleared} below:
+
+Beyond the player and enemy health bars, additional UI elements are displayed on the HUD to communicate the player's progression through the level. At the start of a level, the HUD displays the current objective: "Rescue the animals". Then, as animals are rescued, the HUD updates dynamically to display the number rescued out of the total. Once all animals have been freed, the objective changes to "Get to the goal," and the goal is activated with a collider and visual effects to highlight its location. When the player walks into the goal collider, a level cleared screen appears, displaying the player's time and score. These events are shown in Figures \ref{fig:label_goal} and \ref{fig:label_levelcleared}. 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{OtherImages/Goal.png}
+    \caption{Goal Activated}
+    \label{fig:label_goal}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{OtherImages/LevelComplete.png}
+    \caption{Level Cleared Screen}
+    \label{fig:label_levelcleared}
+\end{figure}
+
+The architecture for the level progression is detailed in figure \ref{fig:label_levelprogression} below:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{UMLDiagrams/LevelProgressionUML.drawio.png}
+    \caption{UML Class diagram of Level Progression}
+    \label{fig:label_levelprogression}
+\end{figure}
+
+The UIQuestManager manages the quest system by tracking the number of rescued animals, updating the quest dialog, and activating the goal when all animals have been freed. The Animal class defines an OnRescued event, which UIQuestManager subscribes to in order to be notified whenever an animal is rescued. Each time UIQuestManager is notified of this event, it updates the count on the HUD and checks whether all animals have been rescued. If so, it changes the quest dialog and activates the goal. The OnAnimalRescued method, which handles this logic, is shown below:
+\begin{verbatim}
+private void OnAnimalRescued()
+{
+    _rescuedAnimals++;
+    _rescuedAnimalsText.text = $"{_rescuedAnimals}/{TotalAnimalsToRescue}"; // Update UI
+
+    // If all animals have been rescued, show new quest and activate the goal
+    if (_rescuedAnimals >= _totalAnimalsToRescue && !_allAnimalsRescued)
+    {
+        _allAnimalsRescued = true;
+        StartCoroutine(TransitionToSecondQuest());
+        ActivateGoal();
+    }
+}
+\end{verbatim}
+The ActivateGoal() method enables the GoalRadius object and instantiates the visual effect that signals the goal’s activation. GoalRadius represents the collider that the player must enter to complete the level. When the player collides with it, the OnTriggerEnter() method triggers the Setup() method in the LevelCleared class, which manages the level completion screen.
+LevelCleared retrieves the elapsed time from GameTimer and the total score from the ScoreManager to display them on the UI. The ScoreManager tracks the player’s score throughout the level by subscribing to the Enemy class's OnDefeat event. Each time an enemy is defeated, its score is added to the total. When LevelCleared retrieves this value, it combines it with the completion time and applies a score multiplier, rewarding players for defeating more enemies and finishing the level quickly. The Setup() method from LevelCleared, which handles this logic, is shown below:
+\begin{verbatim}
+public void Setup()
+{
+    // Activate the UI screen and change the game state
+    gameObject.SetActive(true);
+    LevelManager.Instance.SetGameState(LevelState.LevelCleared);
+
+    // Play sound effect
+    SoundFXManager.instance.PlaySoundFX(_levelClearedClip, transform, 1f);
+
+    // Get the time from the game timer and convert it to minutes and seconds
+    float elapsedTime = _timer.ElapsedTime;
+    int minutes = Mathf.FloorToInt(elapsedTime / 60);
+    int seconds = Mathf.FloorToInt(elapsedTime % 60);
+    _timeText.text = $"{minutes:D2}:{seconds:D2}";
+
+    // Get score from the score manager and add on the elapsed time
+    float finalScore = (_score.Score + elapsedTime) * 10;
+    _scoreText.text = $"{finalScore:N0}";
+}
+\end{verbatim}
+
+Another important aspect of the UI is managing gameplay pausing during specific UI screens, such as the pause menu or game over screen, and allowing different classes to respond based on the current game state. To achieve this, the LevelManager class handles transitions between the key game states: Playing, Paused, LevelCleared, and GameOver.
+This class uses the Singleton pattern, as discussed in Section \ref{singleton}, ensuring that the game state can be read globally without requiring direct references in multiple classes. Additionally, it guarantees that only one instance of LevelManager exists per level. The architecture of this system is illustrated in Figure \ref{fig:label_singletonLevelManager}.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{UMLDiagrams/LevelManagerSingletonUML.drawio.png}
     \caption{UML Class diagram of Singleton Pattern}
     \label{fig:label_singletonLevelManager}
+\end{figure}
+
+The LevelManager implements a simplified version of the State pattern, managing game states using a LevelState enum instead of full state classes, as each state requires minimal behavior. The SetGameState() method transitions the game to a new LevelState when called, typically triggered by UI screens associated with those states. For example, when the pause menu is activated, it calls \texttt{LevelManager.Instance.SetGameState(LevelState.Paused)}, and the LevelManager handles pausing the game accordingly. Within SetGameState(), the method determines the new state and executes the appropriate logic. For instance, in the Paused state, EnableGameplay() is called to stop gameplay. Additionally, other classes can query the LevelManager to check the current game state, allowing them to execute state-specific logic only when necessary.
+
+\color{black}
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{UMLDiagrams/SceneLoaderUML.drawio.png}
+    \caption{UML Class diagram of SceneLoader class}
+    \label{fig:label_SceneLoader}
 \end{figure}
 
 \section{User Experience}
@@ -417,12 +499,18 @@ This term I began prototyping the layout for the first level. As discussed in se
 - Sound FX stuff
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{UMLDiagrams/SoundFXSingletonUML.drawio.png}
+    \includegraphics[width=0.7\textwidth]{UMLDiagrams/SoundFXSingletonUML.drawio.png}
     \caption{UML Class diagram of Singleton Pattern}
     \label{fig:label_singletonSoundFX}
 \end{figure}
 
-
+- UI
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{OtherImages/HUD.png}
+    \caption{Heads Up Display}
+    \label{fig:label_HUD}
+\end{figure}
 \section{Optimisation}
 \color{red}
 - Frustum Culling\newline

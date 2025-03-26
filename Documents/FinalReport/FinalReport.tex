@@ -193,7 +193,7 @@ For the gravity applied to the player while grounded, I used a smaller value of 
 
 %%%%%%%%%%%%%%%%%%%%%%
 %%% Enemies and Combat#
-\section{Enemy Movement}
+\section{Enemy Movement}\label{enemy_movement}
 The enemy movement in the game is implemented dynamically based on the player's proximity. \color{red} There are two enemy types, long range and short range which both exhibit different movement behaviours. Short ranged enemies start in an idle state and begin to chase the player when they come within a specified range. Once the player moves out of this range, the enemies return back to their original starting position. Long ranged enemies that shoot the player from a distance stand still, and dynamically rotate to face and aim at the player. \color{black} To implement this behaviour with intelligent navigation I chose to use Unity's AI module, which supports AI pathfinding using NavMesh Surfaces and NavMeshAgents \cite{unity2024_AI}. 
 A NavMeshAgent is assigned to each enemy, allowing them to navigate across a NavMeshSurface while avoiding obstacles in their path. These agents are configured with properties such as movement speed, acceleration, avoidance priority, and movement radius, which control their movement behaviour \cite{unity2024_NavAgent}. The NavMeshSurface is assigned to the level's entire terrain, defining the ground area that the enemies can move on. This approach allows enemies to intelligently avoid obstacles and dynamically chase the player while navigating complex environments. \newline
 \subsection{Architecture}
@@ -335,17 +335,22 @@ Each time the ranged enemy attacks, it gets a new available arrow from the objec
 %%%%%%%%%%%%%%%%%%%%%%
 %%% Animals and Cages
 \section{Animals and Cages}
-
+\color{red} The main gameplay mechanic of the game is rescuing animals around the map. In each level there are three animals stuck within cages that are guarded by enemies for the player to find and rescue. To rescue an animal the player has to defeat the enemies that surround the animal's cage. The amount of enemies surrounding each cage varies to increase/decrease the difficulty of the parts of each level. Once the player rescues an animal they break free from the cage and follow the player around the map. The architechture of this mechanic is detailed in figure \ref{fig:label_rescue} below. 
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{UMLDiagrams/AnimalRescueUML.drawio.png}
     \caption{UML Class diagram of Animal Rescue Mechanic}
     \label{fig:label_rescue}
 \end{figure}
+The Cage class controls the logic for freeing animals once all assigned enemies have been defeated. Each cage has a list of associated Enemy objects that are assigned to each specific cage in the Unity editor. The class subscribes to the OnDefeated event of each of it's associated enemies, allowing it to be notified when one of them dies. Each time OnEnemyDefeated is triggered, the cage checks if all assigned enemies in the list have been defeated. Once this condition is met, the FreeAnimal() method is called, which handles the visual and sound effects for the cage's destruction and prompts the animal to start moving. The Animal class manages this movement behavior which includes staying idle inside the cage until freed. Once freed, the Cage script calls the Animal's StartFollowing() method which allows the Animal to follow the player. The follow movement uses the same logic that the Enemy movement uses to chase the player, discussed in section \ref{enemy_movement}. To prevent animals from getting stuck around the map far from the player, a teleportation system ensures they remain near the player. The TeleportRadius class represents a sphere collider around the player for this system. If an animal exits this radius, it calls the Animal's TeleportToPlayer() method, ensuring they stay within a reasonable distance of the player.
+\color{black}
+
+
 %%%%%%%%%%%%%%%%%%%%%%
 %%% User Experience#
 \section{User Interface}
-So far in my game I have implemented a basic UI including a Game Over screen, and a HUD (Heads Up Display), which displays health bars for both the player and enemies. To design the UI components, I used Unity's built-in UI package \cite{unity2024_UI} to create multiple canvases to display various types of information to the user. For communication between the UI elements and relevant game objects, I used the Observer pattern, as discussed in section \ref{observer}. I chose to use this pattern in this context to decouple the UI components from the game logic. This allows the game objects to act as subjects, and notify the relevant UI components (observers) without needing to hold direct references to them. Currently, there are two subjects (the enemy and player), and three observers (the enemy and player's health bars and the game over screen). This design is shown in figure \ref{fig:label_observer1}.
+\color{red} The design of the user interface (UI) is an important part of enhancing the overall user experience for the game, as discussed in section \ref{userexperience}. Therefore creating a full UI was a large focus of the development to achieve a complete and professional looking game that is intuitive for the player to use. The UI includes a title screen, level selection menu, settings and pause menus and a HUD (Heads Up Display) for the levels.  
+To set up the UI components,  \color{black} I used Unity's built-in UI package \cite{unity2024_UI} to create multiple canvases to display various types of information to the user. For communication between the UI elements and relevant game objects, I used the Observer pattern, as discussed in section \ref{observer}. I chose to use this pattern in this context to decouple the UI components from the game logic. This allows the game objects to act as subjects, and notify the relevant UI components (observers) without needing to hold direct references to them. Currently, there are two subjects (the enemy and player), and three observers (the enemy and player's health bars and the game over screen). This design is shown in figure \ref{fig:label_observer1}.
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{UMLDiagrams/HealthObserverUML.drawio.png}

@@ -4,30 +4,32 @@
 \contentsline {chapter}{\numberline {2}Background}{7}{chapter.2}%
 \contentsline {section}{\numberline {2.1}Game Engines}{7}{section.2.1}%
 \contentsline {section}{\numberline {2.2}Design Patterns}{8}{section.2.2}%
-\contentsline {subsection}{\numberline {2.2.1}Hierarchical State Machine}{8}{subsection.2.2.1}%
-\contentsline {subsection}{\numberline {2.2.2}Observer}{8}{subsection.2.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}State Machines}{8}{subsection.2.2.1}%
+\contentsline {subsection}{\numberline {2.2.2}Observer}{9}{subsection.2.2.2}%
 \contentsline {subsection}{\numberline {2.2.3}Strategy}{9}{subsection.2.2.3}%
+\contentsline {subsection}{\numberline {2.2.4}ObjectPool}{9}{subsection.2.2.4}%
+\contentsline {subsection}{\numberline {2.2.5}Singleton}{9}{subsection.2.2.5}%
 \contentsline {section}{\numberline {2.3}Game Mechanics}{9}{section.2.3}%
 \contentsline {section}{\numberline {2.4}Optimisation Techniques}{9}{section.2.4}%
 \contentsline {section}{\numberline {2.5}User Experience}{10}{section.2.5}%
-\contentsline {chapter}{\numberline {3}Development}{11}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Player Movement}{11}{section.3.1}%
-\contentsline {subsection}{\numberline {3.1.1}Architecture}{11}{subsection.3.1.1}%
-\contentsline {subsection}{\numberline {3.1.2}Movement Physics}{12}{subsection.3.1.2}%
-\contentsline {paragraph}{}{12}{paragraph*.4}%
-\contentsline {section}{\numberline {3.2}Enemy Movement}{13}{section.3.2}%
-\contentsline {subsection}{\numberline {3.2.1}Architecture}{13}{subsection.3.2.1}%
-\contentsline {subsection}{\numberline {3.2.2}Configurable Enemies}{14}{subsection.3.2.2}%
-\contentsline {section}{\numberline {3.3}Combat System}{15}{section.3.3}%
-\contentsline {section}{\numberline {3.4}Animals and Cages}{17}{section.3.4}%
-\contentsline {section}{\numberline {3.5}User Interface}{17}{section.3.5}%
-\contentsline {section}{\numberline {3.6}User Experience}{19}{section.3.6}%
-\contentsline {section}{\numberline {3.7}Optimisation}{20}{section.3.7}%
-\contentsline {section}{\numberline {3.8}Testing}{21}{section.3.8}%
-\contentsline {chapter}{\numberline {4}Reflection and Evaluation}{22}{chapter.4}%
-\contentsline {chapter}{\numberline {5}Professional Issues}{23}{chapter.5}%
-\contentsline {chapter}{\numberline {A}Appendix}{24}{appendix.A}%
-\contentsline {section}{\numberline {A.1}Code Style}{24}{section.A.1}%
-\contentsline {section}{\numberline {A.2}Development Diary}{24}{section.A.2}%
-\contentsline {section}{\numberline {A.3}Submission Directory Structure}{27}{section.A.3}%
-\contentsline {section}{\numberline {A.4}Demo Video Link}{28}{section.A.4}%
+\contentsline {chapter}{\numberline {3}Development}{12}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Player Movement}{12}{section.3.1}%
+\contentsline {subsection}{\numberline {3.1.1}Architecture}{12}{subsection.3.1.1}%
+\contentsline {subsection}{\numberline {3.1.2}Movement Physics}{13}{subsection.3.1.2}%
+\contentsline {paragraph}{}{13}{paragraph*.4}%
+\contentsline {section}{\numberline {3.2}Enemy Movement}{14}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}Architecture}{14}{subsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.2.2}Configurable Enemies}{15}{subsection.3.2.2}%
+\contentsline {section}{\numberline {3.3}Combat System}{16}{section.3.3}%
+\contentsline {section}{\numberline {3.4}Animals and Cages}{19}{section.3.4}%
+\contentsline {section}{\numberline {3.5}User Interface}{20}{section.3.5}%
+\contentsline {section}{\numberline {3.6}User Experience}{26}{section.3.6}%
+\contentsline {section}{\numberline {3.7}Optimisation}{28}{section.3.7}%
+\contentsline {section}{\numberline {3.8}Testing}{28}{section.3.8}%
+\contentsline {chapter}{\numberline {4}Reflection and Evaluation}{29}{chapter.4}%
+\contentsline {chapter}{\numberline {5}Professional Issues}{30}{chapter.5}%
+\contentsline {chapter}{\numberline {A}Appendix}{32}{appendix.A}%
+\contentsline {section}{\numberline {A.1}Code Style}{32}{section.A.1}%
+\contentsline {section}{\numberline {A.2}Development Diary}{32}{section.A.2}%
+\contentsline {section}{\numberline {A.3}Submission Directory Structure}{35}{section.A.3}%
+\contentsline {section}{\numberline {A.4}Demo Video Link}{36}{section.A.4}%

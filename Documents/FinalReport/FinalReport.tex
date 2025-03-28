@@ -1,6 +1,5 @@
 \documentclass[]{final_report}
 \usepackage{graphicx}
-\usepackage{array}
 \usepackage{xcolor} 
 \usepackage{titlesec}
 \usepackage{listings}
@@ -71,9 +70,9 @@ The video game industry has grown into one of the largest sectors in the enterta
 
 My motivation for this project stems from my interest in the VR industry. By working on this game with Unity 3D, I will gain experience using one of the most widely used engines for VR development and practice working with 3D environments. These skills will transition well into VR development, providing a good foundation for future projects in that field. Additionally, I am aiming to improve my software engineering skills, as creating large games requires solid software engineering principles. To keep up with evolving requirements and user expectations, it is important that the code stays maintainable, efficient and scalable.\newline
 
-The genre of game I am developing is a mix between 3D platformers and action-adventure games. It is set in a fantasy forest, where the player controls an axe-wielding hero tasked with rescuing trapped animals guarded by goblin enemies. There will be a set number of levels, each with increasing difficulty that the player must traverse through. They will explore each level to find and rescue each animal, with simple platforming and obstacles. Once each animal is rescued, they will follow the player around until they take them to the goal point. Points are awarded based on the number of enemies defeated in a level, and to clear each level the player must rescue all the animals being guarded by returning them to the goal. In addition, there will be extra collectibles hidden throughout the levels which will grant the player bonus health and temporary power ups. This level design aims to cater to both ``segments of players labelled as `experiencers' versus `achievers''' \cite{zhao2022dynamic} by offering contained, linear levels which also encourage exploration. A highly successful example of this design is Super Mario 3D World, which my level designs will take some inspiration from.\newline
+The genre of game being developed is a mix between 3D platformers and action-adventure games. It is set in a fantasy forest, where the player controls an axe-wielding hero tasked with rescuing trapped animals guarded by goblin enemies. There will be a set number of levels, each with increasing difficulty that the player must traverse through. They will explore each level to find and rescue each animal, with simple platforming and obstacles. Once each animal is rescued, they will follow the player around until they take them to the goal point. Points are awarded based on the number of enemies defeated in a level, and to clear each level the player must rescue all the animals being guarded by returning them to the goal. In addition, there will be extra collectibles hidden throughout the levels which will grant the player bonus health and temporary power ups. This level design aims to cater to both ``segments of players labelled as `experiencers' versus `achievers''' \cite{zhao2022dynamic} by offering contained, linear levels which also encourage exploration. A highly successful example of this design is Super Mario 3D World, which my level designs will take some inspiration from.\newline
 
-For the project, I have chosen to use Unity game engine, which provides the necessary tools and functions for 3D environments, assets and physics required for the game. I explored and compared several game engines that offer 3D capabilities, such as Unreal Engine, Unity and Godot. These engines vary in features, ease of use, and capabilities, and Unity was the best fit for the game's requirements. To ensure maintainable and scalable code for the project, I have also incorporated common design patterns for game development such as Observer and State Machines which promote extendable and reusable code. Additionally, a large focus of this term was making decisions for good user experience by setting up user friendly controls, camera movement and prototyping the level design.
+\color{red} For the development of this game, the Unity game engine stood out as the best choice\color{black}, which provides the necessary tools and functions for 3D environments, assets and physics required for the game. Several other game engines were compared that offer 3D capabilities, such as Unreal Engine, Unity and Godot. These engines vary in features, ease of use, and capabilities, and Unity was the best fit for the game's requirements. To ensure maintainable and scalable code for the project, common design patterns for game development were researched and incorporated, such as State Machines and Object Pools which promote extendable and reusable code. Additionally, a large focus of the project was making decisions to \color{red} create a good user experience by setting up user friendly controls, user interface, camera movement and level design. \color{black}
 \section{Objectives}
 My main objectives for the project include:
 \begin{itemize}
@@ -143,9 +142,34 @@ The State pattern can be used to implement state machines as opposed to using en
 
 
 \subsection{Observer}\label{observer}
-\color{red}The Observer pattern is another commonly used pattern across many genres of games. It is used in the situation where \color{black} an event occurs within the game, and multiple objects need to be notified to perform specific actions based on this event. The pattern involves observer and subject classes, where the observer contains a method that defines what action to take when notified by the subject, while the subject keeps a list of observers and notifies them when a specific event occurs \cite{nystrom2011game}. This decouples the objects, allowing the subject to notify multiple observers without explicitly referencing them. Observer is commonly used in games for health and damage systems, UI updates, and game event notifications. I have decided to use this pattern in a few places in the game's code. For example, the event of a health change in the player or enemy notifying related elements such as health bars or the game over screen.
+\color{red}
+The Observer Pattern is a behavioral design pattern used to manage communication between objects in a way that allows one object (the subject) to notify multiple other objects (the observers) when its state changes. This pattern is particularly useful in games where multiple objects need to react to specific events, such as changes in the player’s health, score, or game state. In the pattern there are two main components: the subject and the observers. The subject is the object that holds the state or data, which may change over time. When an event occurs, the subject notifies all registered observers. The observers on the other hand, listen for the event changes and define the actions they need to take when notified \cite{nystrom2011game}.
+\newline
+An example of its use in games would be a quest system where the quest progress is the subject, and several observers such as the quest tracker, the reward system, and quest related UI elements are notified whenever the player's progress on a quest changes. When the player completes an objective within the quest, the subject (the quest class) will notify the observers (quest tracker, reward system, UI elements), which then update themselves accordingly. This ensures that all components related to the quest are synchronized without the need for the subject to directly reference each observer.
+\newline
+The main benefit of using the Observer Pattern in game development is that it decouples the components of the game. The subject doesn’t need to know what each observer does, only that it needs to notify them when an event occurs. This means that the subject can focus on its core functionality, while the observers can be independent. Additionally, if new observers need to be added or existing ones modified, this can be done without changing the subject class, making the system more extendable and easier to maintain.
+\newline
+The Observer Pattern is also helpful in event driven systems. Games are often full of events, such as when a player picks up an item, takes damage, or completes a level. Instead of having the subject manage the responses for all these events, the Observer Pattern allows different parts of the game such as the UI, sound systems, or gameplay mechanics, to listen for and respond to the relevant events. This improves the scalability of the game’s architecture as more components are added.
+\color{black}
+
 \subsection{Strategy}\label{strategy}
-The Strategy pattern is a design pattern used to define a family of behaviours and make them interchangeable. This pattern is commonly used in game development to handle different enemy behaviours or player mechanics. The pattern involves encapsulating a set of behaviours and having the client control the behaviour through an interface, instead of hardcoding the behaviour into the client function itself \cite{Doran2017}. This approach allows new behaviours for game objects to be added easily without duplicating the original class, as the class can dynamically swap between different behaviours. This pattern is commonly used in games for varying enemy types that are interchangeable, and for varying attack mechanics for example different weapon types. I have chosen to use this pattern in my game for creating multiple enemy types with varying behaviours.
+\color{black}The Strategy pattern is a design pattern used to define a family of behaviors and allows them to be interchangeable. \color{red} In game development, this pattern is often used to handle different behaviors that an object can perform, such as various movement styles for enemies, different attack strategies for characters, or different types of player abilities. The way this pattern works is by defining a set of behaviors in separate classes, and let the client class decide which behavior to use at runtime.
+\newline
+In an implementation of this pattern, the client class (like an enemy or player character) holds a reference to a strategy interface and uses it to perform a specific action, such as moving or attacking. The actual behavior is defined in separate strategy classes, each of which implements the strategy interface. This means that the client class doesn't need to know the details of the behavior, it just delegates the task to the strategy it has been assigned. This is especially useful in situations where an object may need to switch between different behaviors based on certain conditions during gameplay \cite{Doran2017}.
+\newline
+For example, an enemy character in a game may have different attack strategies, one for melee combat and another for ranged combat. By using the Strategy pattern, the enemy class doesn’t have to contain logic for both melee and ranged attacks. Instead, the enemy can switch between attack strategies by dynamically assigning a different strategy object, based on whether the player is close enough for a melee attack or far away for a ranged attack. This decouples the behavior logic from the enemy class, making it easier to maintain and extend. This approach also allows for more flexibility and extendability in the game's code. New behaviors can be added without modifying the existing class, and changes to existing behaviors only need to be made in the relevant strategy classes. 
+
+
+\color{black}
+
+
+
+
+
+
+
+
+
 \subsection{ObjectPool}\label{objectpool}
 
 \subsection{Singleton}\label{singleton}
@@ -541,6 +565,28 @@ User testing is crucial in game development, as it provides real-world feedback 
 %%%%%%%%%%%%%%%%%%%%%%
 %%% Professional Issues
 \chapter{Professional Issues}
+
+- Legal things to consider when publishing game
+- Legal stuff with assets
+- Legal stuff with unity engine
+
+- Part 2 on if i made the game open source for others to work on what would be involved in that and how would i manage that
+
+\color{red} Game development involves various professional and ethical considerations, particularly in legal compliance and asset usage when publishing a game commercially. Throughout this project, I have had to consider licensing restrictions when using third-party assets and the legal requirements of publishing a game using Unity engine. This section discusses these issues and how they should be addressed professionally if this project were to be published. \newline
+
+The majority of assets used in the game were sourced from the Unity Asset Store, which provides a large variety of assets that you can download and use in Unity Engine. Most assets from the Unity Asset Store are royalty-free on purchase or free download, except for ones labeled as 'restricted', which cannot be used commercially. Any restrictions are detailed in the description of the asset in the store \cite{UnityCommercial}. However, it is important to ensure the correct license type is purchased when downloading an asset for commercial use.
+All Unity assets fall under either Extension, Single Entity, or Multi Entity licence types. Extension assets cover any assets found under the 'tools' category in the store, and users are required to purchase one seat per user that has access to the raw asset files \cite{UnityLicences}. Single Entity and Multi Entity assets can be any other type of asset that doesn't fall under the 'tools' category. Single Entity assets are typically for single users or companies, and permits use by all team members within a single company. Multi Entity assets cover parent, child and sister companies, as well as contractors on a project, allowing them access to the raw asset files across different branches of an organization \cite{UnityLicences}. Currently, all assets used in the game fall under either the Extension or Single Entity license types. As the only developer working on the game, I am a single entity, meaning these assets can be used royalty-free if the game was published commercially, and any Multi Entity licences would not need to be purchased. Failing to purchase the correct asset licenses can lead to a game being removed from distribution platforms and may result in legal disputes.
+
+When publishing a game commercially using Unity engine, it is important to determine whether a paid Unity license is required and what tier is appropriate. Unity offers several licensing plans, with the main options being Unity Personal, Pro, Enterprise, and Industry. Unity Personal is free and intended for individual developers, while the paid tiers are designed for businesses and larger organizations.
+Games can be published commercially using any of these plans, including Unity Personal. However, whether an upgrade to a paid license is required depends on 'total finances', which Unity defines based on revenue and funding. If a developer is providing services to a third party, total finances are measured by the client’s total revenue and funding, regardless of the source. If the developer is not providing services to a third party, total finances are determined by the total revenue and funding generated through the use of Unity. For governmental, non-profit, educational, or academic institutions, total finances are based on the entity’s entire budget \cite{UnityTC}.
+Each licensing tier has a maximum limit on total finances for eligibility. If this limit is exceeded, the user will have to upgrade to the tier that they are elegible for to continue using Unity engine. For this project, the game was developed using Unity Personal, which allows for the game to be published commercially. However, if my total finances were to exceed the \$200,000 USD threshold, upgrading to a Unity Pro license would be required. Using the wrong Unity license would violate Unity's terms of service and could result in restrictions on both the use of the engine and the distribution of games created with it.
+
+
+
+
+
+
+\color{black}
 
 %%%%%%%%%%%%%%%%%%%%%%
 %%% Appendix#

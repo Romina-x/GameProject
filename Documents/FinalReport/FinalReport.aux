@@ -23,16 +23,21 @@
 \citation{unity2022_patterns}
 \citation{nystrom2011game}
 \@writefile{toc}{\contentsline {section}{\numberline {2.2}Design Patterns}{8}{section.2.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.1}Hierarchical State Machine}{8}{subsection.2.2.1}\protected@file@percent }
-\newlabel{HSM}{{2.2.1}{8}{Hierarchical State Machine}{subsection.2.2.1}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.2}Observer}{8}{subsection.2.2.2}\protected@file@percent }
-\newlabel{observer}{{2.2.2}{8}{Observer}{subsection.2.2.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.1}State Machines}{8}{subsection.2.2.1}\protected@file@percent }
+\newlabel{HSM}{{2.2.1}{8}{State Machines}{subsection.2.2.1}{}}
+\citation{nystrom2011game}
 \citation{Doran2017}
 \citation{Singh2022}
 \citation{Unity2024LOD}
 \citation{IndieGamesDevel}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.2}Observer}{9}{subsection.2.2.2}\protected@file@percent }
+\newlabel{observer}{{2.2.2}{9}{Observer}{subsection.2.2.2}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.2.3}Strategy}{9}{subsection.2.2.3}\protected@file@percent }
 \newlabel{strategy}{{2.2.3}{9}{Strategy}{subsection.2.2.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.4}ObjectPool}{9}{subsection.2.2.4}\protected@file@percent }
+\newlabel{objectpool}{{2.2.4}{9}{ObjectPool}{subsection.2.2.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.5}Singleton}{9}{subsection.2.2.5}\protected@file@percent }
+\newlabel{singleton}{{2.2.5}{9}{Singleton}{subsection.2.2.5}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {2.3}Game Mechanics}{9}{section.2.3}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {2.4}Optimisation Techniques}{9}{section.2.4}\protected@file@percent }
 \citation{Kramarzewski2023}
@@ -42,69 +47,92 @@
 \citation{zhao2022dynamic}
 \@writefile{toc}{\contentsline {section}{\numberline {2.5}User Experience}{10}{section.2.5}\protected@file@percent }
 \newlabel{userexperience}{{2.5}{10}{User Experience}{section.2.5}{}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {3}Development}{11}{chapter.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {3}Development}{12}{chapter.3}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {section}{\numberline {3.1}Player Movement}{11}{section.3.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.1}Architecture}{11}{subsection.3.1.1}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {3.1}{\ignorespaces UML Class digram of Player State Machine.}}{11}{figure.caption.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3.1}Player Movement}{12}{section.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.1}Architecture}{12}{subsection.3.1.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3.1}{\ignorespaces UML Class digram of Player State Machine.}}{12}{figure.caption.3}\protected@file@percent }
 \providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
-\newlabel{fig:label_State}{{3.1}{11}{UML Class digram of Player State Machine}{figure.caption.3}{}}
+\newlabel{fig:label_State}{{3.1}{12}{UML Class digram of Player State Machine}{figure.caption.3}{}}
 \citation{unity2024_charactercontroller}
 \citation{unity2024_charactercontroller_reference}
 \citation{pittman2016_jump}
 \citation{unity2024_AI}
 \citation{unity2024_NavAgent}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.2}Movement Physics}{12}{subsection.3.1.2}\protected@file@percent }
-\newlabel{physics}{{3.1.2}{12}{Movement Physics}{subsection.3.1.2}{}}
-\@writefile{toc}{\contentsline {paragraph}{}{12}{paragraph*.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {3.2}Enemy Movement}{13}{section.3.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.1}Architecture}{13}{subsection.3.2.1}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {3.2}{\ignorespaces UML Class digram of Enemy Movement System}}{13}{figure.caption.5}\protected@file@percent }
-\newlabel{fig:label_enemyMovement}{{3.2}{13}{UML Class digram of Enemy Movement System}{figure.caption.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.2}Movement Physics}{13}{subsection.3.1.2}\protected@file@percent }
+\newlabel{physics}{{3.1.2}{13}{Movement Physics}{subsection.3.1.2}{}}
+\@writefile{toc}{\contentsline {paragraph}{}{13}{paragraph*.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3.2}Enemy Movement}{14}{section.3.2}\protected@file@percent }
+\newlabel{enemy_movement}{{3.2}{14}{Enemy Movement}{section.3.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.1}Architecture}{14}{subsection.3.2.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3.2}{\ignorespaces UML Class digram of Enemy Movement System}}{14}{figure.caption.5}\protected@file@percent }
+\newlabel{fig:label_enemyMovement}{{3.2}{14}{UML Class digram of Enemy Movement System}{figure.caption.5}{}}
 \citation{unity2024_Coroutines}
 \citation{unity2024_ScriptableObject}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.2}Configurable Enemies}{14}{subsection.3.2.2}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {3.3}{\ignorespaces UML Class diagram of Enemy Strategy Pattern.}}{15}{figure.caption.6}\protected@file@percent }
-\newlabel{fig:label_strategy}{{3.3}{15}{UML Class diagram of Enemy Strategy Pattern}{figure.caption.6}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {3.3}Combat System}{15}{section.3.3}\protected@file@percent }
-\newlabel{combatsystem}{{3.3}{15}{Combat System}{section.3.3}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.4}{\ignorespaces UML Class diagram of Combat System}}{16}{figure.caption.7}\protected@file@percent }
-\newlabel{fig:label_combat}{{3.4}{16}{UML Class diagram of Combat System}{figure.caption.7}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.2}Configurable Enemies}{15}{subsection.3.2.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3.3}{\ignorespaces UML Class diagram of Enemy Strategy Pattern.}}{16}{figure.caption.6}\protected@file@percent }
+\newlabel{fig:label_strategy}{{3.3}{16}{UML Class diagram of Enemy Strategy Pattern}{figure.caption.6}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.3}Combat System}{16}{section.3.3}\protected@file@percent }
+\newlabel{combatsystem}{{3.3}{16}{Combat System}{section.3.3}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.4}{\ignorespaces UML Class diagram of Combat System}}{17}{figure.caption.7}\protected@file@percent }
+\newlabel{fig:label_combat}{{3.4}{17}{UML Class diagram of Combat System}{figure.caption.7}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.5}{\ignorespaces UML Class diagram of Object Pool Pattern}}{18}{figure.caption.8}\protected@file@percent }
+\newlabel{fig:label_objpool}{{3.5}{18}{UML Class diagram of Object Pool Pattern}{figure.caption.8}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.4}Animals and Cages}{19}{section.3.4}\protected@file@percent }
 \citation{unity2024_UI}
-\@writefile{toc}{\contentsline {section}{\numberline {3.4}Animals and Cages}{17}{section.3.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {3.5}User Interface}{17}{section.3.5}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {3.5}{\ignorespaces UML Class diagram of Health Observer Pattern}}{18}{figure.caption.8}\protected@file@percent }
-\newlabel{fig:label_observer1}{{3.5}{18}{UML Class diagram of Health Observer Pattern}{figure.caption.8}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.6}{\ignorespaces UML Class diagram of Animal Rescue Mechanic}}{20}{figure.caption.9}\protected@file@percent }
+\newlabel{fig:label_rescue}{{3.6}{20}{UML Class diagram of Animal Rescue Mechanic}{figure.caption.9}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.5}User Interface}{20}{section.3.5}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3.7}{\ignorespaces UML Class diagram of Health Observer Pattern}}{21}{figure.caption.10}\protected@file@percent }
+\newlabel{fig:label_observer1}{{3.7}{21}{UML Class diagram of Health Observer Pattern}{figure.caption.10}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.8}{\ignorespaces Goal Activated}}{22}{figure.caption.11}\protected@file@percent }
+\newlabel{fig:label_goal}{{3.8}{22}{Goal Activated}{figure.caption.11}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.9}{\ignorespaces Level Cleared Screen}}{23}{figure.caption.12}\protected@file@percent }
+\newlabel{fig:label_levelcleared}{{3.9}{23}{Level Cleared Screen}{figure.caption.12}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.10}{\ignorespaces UML Class diagram of Level Progression}}{23}{figure.caption.13}\protected@file@percent }
+\newlabel{fig:label_levelprogression}{{3.10}{23}{UML Class diagram of Level Progression}{figure.caption.13}{}}
 \citation{onewheelstudio_2021}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.11}{\ignorespaces UML Class diagram of Singleton Pattern}}{25}{figure.caption.14}\protected@file@percent }
+\newlabel{fig:label_singletonLevelManager}{{3.11}{25}{UML Class diagram of Singleton Pattern}{figure.caption.14}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.12}{\ignorespaces UML Class diagram of SceneLoader class}}{25}{figure.caption.15}\protected@file@percent }
+\newlabel{fig:label_SceneLoader}{{3.12}{25}{UML Class diagram of SceneLoader class}{figure.caption.15}{}}
 \citation{unity_2024_inputsystem}
-\@writefile{toc}{\contentsline {section}{\numberline {3.6}User Experience}{19}{section.3.6}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {3.6}{\ignorespaces FreeLook Camera on Player}}{19}{figure.caption.9}\protected@file@percent }
-\newlabel{fig:label_camera}{{3.6}{19}{FreeLook Camera on Player}{figure.caption.9}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.7}{\ignorespaces Level One Overview}}{20}{figure.caption.10}\protected@file@percent }
-\newlabel{fig:label_level}{{3.7}{20}{Level One Overview}{figure.caption.10}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {3.7}Optimisation}{20}{section.3.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3.6}User Experience}{26}{section.3.6}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3.13}{\ignorespaces FreeLook Camera on Player}}{26}{figure.caption.16}\protected@file@percent }
+\newlabel{fig:label_camera}{{3.13}{26}{FreeLook Camera on Player}{figure.caption.16}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.14}{\ignorespaces Level One Overview}}{27}{figure.caption.17}\protected@file@percent }
+\newlabel{fig:label_level}{{3.14}{27}{Level One Overview}{figure.caption.17}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.15}{\ignorespaces UML Class diagram of Singleton Pattern}}{27}{figure.caption.18}\protected@file@percent }
+\newlabel{fig:label_singletonSoundFX}{{3.15}{27}{UML Class diagram of Singleton Pattern}{figure.caption.18}{}}
 \citation{flashjungle_2022}
 \citation{flashjungle_2022}
-\@writefile{toc}{\contentsline {section}{\numberline {3.8}Testing}{21}{section.3.8}\protected@file@percent }
-\@writefile{toc}{\contentsline {chapter}{\numberline {4}Reflection and Evaluation}{22}{chapter.4}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3.16}{\ignorespaces Heads Up Display}}{28}{figure.caption.19}\protected@file@percent }
+\newlabel{fig:label_HUD}{{3.16}{28}{Heads Up Display}{figure.caption.19}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.7}Optimisation}{28}{section.3.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3.8}Testing}{28}{section.3.8}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {4}Reflection and Evaluation}{29}{chapter.4}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {chapter}{\numberline {5}Professional Issues}{23}{chapter.5}\protected@file@percent }
+\citation{UnityCommercial}
+\citation{UnityLicences}
+\citation{UnityLicences}
+\citation{UnityTC}
+\@writefile{toc}{\contentsline {chapter}{\numberline {5}Professional Issues}{30}{chapter.5}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
 \citation{unity_2022_codestyle}
-\@writefile{toc}{\contentsline {chapter}{\numberline {A}Appendix}{24}{appendix.A}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {A}Appendix}{32}{appendix.A}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {section}{\numberline {A.1}Code Style}{24}{section.A.1}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {A.1}{\ignorespaces Code Style Conventions Followed in the Project}}{24}{table.caption.11}\protected@file@percent }
-\newlabel{tab:codestyle}{{A.1}{24}{Code Style Conventions Followed in the Project}{table.caption.11}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {A.2}Development Diary}{24}{section.A.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {A.3}Submission Directory Structure}{27}{section.A.3}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {A.1}{\ignorespaces Diagram of Directory Structure}}{27}{figure.caption.12}\protected@file@percent }
-\newlabel{fig:label_name2}{{A.1}{27}{Diagram of Directory Structure}{figure.caption.12}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {A.4}Demo Video Link}{28}{section.A.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {A.1}Code Style}{32}{section.A.1}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {A.1}{\ignorespaces Code Style Conventions Followed in the Project}}{32}{table.caption.20}\protected@file@percent }
+\newlabel{tab:codestyle}{{A.1}{32}{Code Style Conventions Followed in the Project}{table.caption.20}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {A.2}Development Diary}{32}{section.A.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {A.3}Submission Directory Structure}{35}{section.A.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {A.1}{\ignorespaces Diagram of Directory Structure}}{35}{figure.caption.21}\protected@file@percent }
+\newlabel{fig:label_name2}{{A.1}{35}{Diagram of Directory Structure}{figure.caption.21}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {A.4}Demo Video Link}{36}{section.A.4}\protected@file@percent }
 \bibstyle{plain}
 \bibdata{references}
 \bibcite{skybox}{25}
@@ -115,5 +143,5 @@
 \bibcite{sound_effects}{30}
 \bibcite{sound_effects}{31}
 \bibcite{sound_effects}{32}
-\newlabel{endpage}{{A.4}{29}{Demo Video Link}{appendix*.13}{}}
-\gdef \@abspage@last{30}
+\newlabel{endpage}{{A.4}{37}{Demo Video Link}{appendix*.22}{}}
+\gdef \@abspage@last{38}

@@ -492,10 +492,9 @@ This class uses the Singleton pattern, as discussed in Section \ref{singleton}, 
     \label{fig:label_singletonLevelManager}
 \end{figure}
 
-The LevelManager implements a simple Finite State Machine (FSM) as discussed in section \ref{HSM} , managing game states using a LevelState enum to represent each level state, as each state requires minimal behavior. The SetGameState() method transitions the game to a new LevelState when called, typically triggered by UI screens associated with those states. For example, when the pause menu is activated, it calls \texttt{LevelManager.Instance.SetGameState(LevelState.Paused)}, and the LevelManager handles pausing the game accordingly. Within SetGameState(), the method determines the new state and executes the appropriate logic. For instance, in the Paused state, EnableGameplay() is called to stop gameplay. Additionally, other classes can query the LevelManager to check the current game state, allowing them to execute state-specific logic only when necessary.
+The LevelManager implements a simple Finite State Machine (FSM) as discussed in section \ref{HSM} , managing game states using a LevelState enum to represent each level state, as each state requires minimal behavior. The SetGameState() method transitions the game to a new LevelState when called, typically triggered by UI screens associated with those states. For example, when the pause menu is activated, it calls \texttt{LevelManager.Instance.SetGameState(LevelState.Paused)}, and the LevelManager handles pausing the game accordingly. Within SetGameState(), the method determines the new state and executes the appropriate logic. For instance, in the Paused state, EnableGameplay() is called to stop gameplay. Additionally, other classes can query the LevelManager to check the current game state, allowing them to execute state-specific logic only when necessary.\newline
 
-\color{black}
-
+The game also implements animated scene transitions to create a smoother and more visually appealing UI experience when navigating through menus for the user. Initially, each UI menu class contained its own button logic for loading scenes, resulting in duplicated code across multiple menu classes. The Title Screen, Level Select and each level are each a seperate scene, most buttons, except for the pause and resume buttons within a level, take the user to a different scene. To improve maintainability and implement animated scene transitions, the button logic was refactored into a dedicated SceneLoader class. The architecture of this class is illustrated in \ref{fig:label_SceneLoader} below.
 
 \begin{figure}[H]
     \centering
@@ -503,6 +502,11 @@ The LevelManager implements a simple Finite State Machine (FSM) as discussed in 
     \caption{UML Class diagram of SceneLoader class}
     \label{fig:label_SceneLoader}
 \end{figure}
+
+In Unity, UI buttons are components that can be attached to UI objects in a scene, each with an OnClick event that allows a method from any class to be assigned. In the game, all UI buttons reference the SceneLoader class in their OnClick events, ensuring a consistent approach to scene transitions. The SceneLoader class provides a LoadScene() method, which takes the name of the scene to load as a string, triggers the transition animation, and then loads the new scene. It also includes an ExitGame() method for buttons that allow the player to quit the game. The transition animation is handled by an object with an Animator component. When a scene loads, this object starts by covering the screen and then plays an animation to reveal the new scene. Within SceneLoader, when a button is pressed, the animator is triggered to play the 'hide' animation, and the scene transition is delayed for the duration of this animation before the new scene is loaded. This ensures smooth and visually appealing transitions between UI screens.
+
+\color{black}
+
 
 \section{User Experience}
 User experience focuses on ensuring that the game is enjoyable and accessible for the player, which includes considerations for controls, camera movement, feedback mechanisms and interface design, as discussed in section \ref{userexperience}. I have selected and begun implementing the camera movement, input options, and a prototype for the level design.

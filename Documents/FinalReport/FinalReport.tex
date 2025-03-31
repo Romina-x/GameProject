@@ -141,7 +141,6 @@ The Hierarchical State Machine (HSM) builds on the FSM by introducing a hierarch
 The State pattern can be used to implement state machines as opposed to using enums to represent each state. This approach defines a base state class that all individual states inherit from, encapsulating state specific behavior into dedicated classes. This makes the system more scalable for more complex and numerous states, as each state manages its own logic without relying on a large switch statement. 
 \color{black} 
 
-
 \subsection{Observer}\label{observer}
 \color{red}
 The Observer Pattern is a behavioral design pattern used to manage communication between objects in a way that allows one object (the subject) to notify multiple other objects (the observers) when its state changes. This pattern is particularly useful in games where multiple objects need to react to specific events, such as changes in the player’s health, score, or game state. In the pattern there are two main components: the subject and the observers. The subject is the object that holds the state or data, which may change over time. When an event occurs, the subject notifies all registered observers. The observers on the other hand, listen for the event changes and define the actions they need to take when notified \cite{nystrom2011game}.
@@ -159,37 +158,39 @@ The Observer Pattern is also helpful in event driven systems. Games are often fu
 In an implementation of this pattern, the client class (like an enemy or player character) holds a reference to a strategy interface and uses it to perform a specific action, such as moving or attacking. The actual behavior is defined in separate strategy classes, each of which implements the strategy interface. This means that the client class doesn't need to know the details of the behavior, it just delegates the task to the strategy it has been assigned. This is especially useful in situations where an object may need to switch between different behaviors based on certain conditions during gameplay \cite{Doran2017}.
 \newline
 For example, an enemy character in a game may have different attack strategies, one for melee combat and another for ranged combat. By using the Strategy pattern, the enemy class doesn’t have to contain logic for both melee and ranged attacks. Instead, the enemy can switch between attack strategies by dynamically assigning a different strategy object, based on whether the player is close enough for a melee attack or far away for a ranged attack. This decouples the behavior logic from the enemy class, making it easier to maintain and extend. This approach also allows for more flexibility and extendability in the game's code. New behaviors can be added without modifying the existing class, and changes to existing behaviors only need to be made in the relevant strategy classes. 
-
-
 \color{black}
 
-
-
-
-
-
-
-
-
 \subsection{ObjectPool}\label{objectpool}
-
+\color{red}
+The Object Pool pattern is is used to improve performance by efficiently reusing objects that are frequently created and destroyed. It is commonly used in game development to optimise the spawning of multiple entities, such as bullets shot from a gun or groups of enemies that continuously respawn. Instead of repeatedly creating and destroying new instances of these objects, the Object Pool keeps a finite amount of pre-created objects that can be reused when needed, improving memory performance.
+\newline
+To implement this pattern, two main components are required which are the object pool and the pooled object. The object pool is initialised with a specified size and creates a list of pooled objects. When an object is requsted, the object pool checks for an available instance from this list and returns it for use. Once the object is no longer needed, it is returned to the pool where it is marked as available for use \cite{Doran2017}. 
+\newline
+A common example of this pattern in games would be a projectile system for a shooting mechanic. Instead of continuously creating and destroying projectiles, a fixed number of them are instantiated in the pool, defining the maximum number that can be active at one time. Once projectiles start firing, they are taken one by one from the pool. Once they have hit a target or disappeared, those instances are returned to the pool so that any new projectiles fired will reuse the same instances of the ones that have been disabled. 
+\newline
+The main way that this pattern optimises memory performance is by avoiding memory fragmentation. If instances of objects are being rapidly allocated and removed from memory, it can lead to the free space in the heap being broken into smaller pieces of memory instead of one large open block \cite{nystrom2011game}. The object pool avoids this by allocating a fixed amount of memory at the start of the game, which remains allocated until the game ends. During gameplay, objects within this pre-allocated memory are reused rather than continuously created and destroyed.
+\color{black}
 \subsection{Singleton}\label{singleton}
-
-\section{Game Mechanics}
-- Discuss different combat mechanics / ways of doing it i could have done \& same for player movement maybe.
-
+\color{red}
+The Singleton pattern is a creational design pattern that ensures a class only has one instance and creates a global point of access to it. It is commonly used in games for managing systems that should only keep a single instance throughout the lifetime of the game, such as audio managers or input handlers.
+Singleton instances are created using a static field within the class that stores the instance. In the constructor, if an instance already exists, the creation of a new one is prevented which ensures that only one instance is ever active at a time. Since the instance is globally accessible, any class can call it to use its methods \cite{Doran2017}. A common use case for the Singleton Pattern in games is managing game state. A game state manager tracks the current state of the game, such as whether it is running, paused, or in a menu. Since the game state must remain consistent across scenes, only one instance of the manager should exist to prevent conflicts or errors. By using a singleton, all relevant classes can access the manager globally to read and update the game state as needed. \newline
+While Singletons can be convinient and easy to use, they can introduce problems in the long term. As it is essentially a global variable, which have their own drawbacks such as making it harder to track down bugs, introducing coupling between classes, and they are not concurrency friendly. Because of this, it's important to ensure Singletons are used well and in the correct context, and alternative approaches should be considered in places where they are starting to introduce such problems.
 \section{Optimisation Techniques}
 \color{red}
 Optimisation techniques are crucial in game development, as performance lag can significantly impact the player's gameplay experience in many game genres. In particular, 3D platformers require precise movement and jumps for navigating levels and obstacles, and experiencing frame drops can make the gameplay frustrating for the player. Some of the main optimisation techniques used for games are level of detail (LOD) management, occlusion culling and frustum culling. \newline
 Occlusion Culling ‘is the mechanism by which Unity avoids rendering computations for GameObjects that are fully hidden from view by other GameObjects’ \cite{Singh2022}. This means that if an object is within the camera's view but fully blocked by another object, it will not be rendered. By doing this, performance is significantly improved as resources are not wasted on elements outside of the player's immediate view. This technique is most beneficial in 3D games with large open world environments, indoor navigation, and densely structured shooter maps, where many objects may be hidden from view at any given time.
------------------------------------------------ ADD FRUSTUM CULLING ---------------------------------------------------------
+\newline
+Frustum Culling is a technique similar to Occlusion Culling, which focusses on avoiding rendering computations for game objects that are outside of the game camera's view.
+
+
 LOD management is an optimization technique that dynamically adjusts the complexity of an object's geometry based on its distance from the camera. In Unity, this is done by using LOD levels, which specify amount of detail of an object’s geometry to be rendered based on the object’s distance from the camera \cite{Unity2024LOD}. When an object is far from the player, a lower-detail version with fewer polygons is rendered, whereas a higher-detail version is used when the object is closer. This approach decreases the GPU's workload, freeing up resources for closer objects. This technique is particularly useful in expansive 3D environments, such as open-world games or any game featuring a vast, open map \cite{IndieGamesDevel}.
 \color{black}
 
 \section{User Experience}\label{userexperience}
 Creating an engaging and intuitive user interface (UI) and user experience (UX) is important in modern game development. 
 UX in games includes the player's overall interaction with the game, including controls, interface design, camera systems, feedback mechanisms, and navigation flows \cite{Kramarzewski2023}. It focuses on ensuring that the game is enjoyable, accessible, and meets player expectations. 
-\newline Designing effective input involves adhering to the principles of ergonomics and user expectations. Ergonomics refers to creating controls that are natural for hand movement, while user expectations involve using input controls that are familiar, so players can quickly learn the controls \cite{Rogers2014}. For example, the WASD keys are commonly used for movement in PC games because they are familiar to most players, and they allow a natural position for the hand on the keyboard. 3D platforming games typically use controller input rather than keyboard, as it allows smoother directional movement with a joystick as opposed to using arrow keys. I have chosen to offer both controller and keyboard input options for better user experience. \newline
+\subsection{Camera and Controls}
+Designing effective input involves adhering to the principles of ergonomics and user expectations. Ergonomics refers to creating controls that are natural for hand movement, while user expectations involve using input controls that are familiar, so players can quickly learn the controls \cite{Rogers2014}. For example, the WASD keys are commonly used for movement in PC games because they are familiar to most players, and they allow a natural position for the hand on the keyboard. 3D platforming games typically use controller input rather than keyboard, as it allows smoother directional movement with a joystick as opposed to using arrow keys. I have chosen to offer both controller and keyboard input options for better user experience. \newline
 
 Camera systems are essential in games to determine the player's perspective of the game world. Common types include first-person, third-person and top-down cameras, each providing different approaches to the gameplay design \cite{Kramarzewski2023}. First person cameras show the game through the eyes of the player character, which offers a more immersive experience. This is commonly used for first-person shooter games like Call of Duty where precise aiming is important. Third person cameras are positioned slightly above and behind the player character which provides a wider view of the area with more focus on the player character. It is typically used in adventure games and 3D platforming games like The Legend of Zelda series and Super Mario Galaxy. Top down cameras are typically used in puzzle or strategy games like Stardew Valley and provides a bird's eye view of the game world. Super Mario 3D world which I am taking some inspiration from, uses a fixed third person camera and this fits with the platformer/adventure theme of my game. \newline
 Level design is an important aspect of creating a compelling user experience in video games. It involves the structure and layout of the game world, including the placement of obstacles, collectibles and enemies, to provide an engaging and challenging experience for players. A well-designed level should balance challenge and accessibility, encouraging exploration and rewarding players for their progress \cite{Kramarzewski2023}. In 3D platformers and action-adventure games, levels are often designed to cater to both "achievers" and "experiencers", players who prefer completing tasks vs players who prefer exploration \cite{zhao2022dynamic}.  My game will attempt to implement this approach by encouraging exploration even in fairly small levels.

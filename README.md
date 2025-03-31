@@ -20,3 +20,7 @@ You can connect a controller to your PC via bluetooth or a wired connection and 
 | Run             | Left Shift (Hold)       | Left Shoulder (Hold)   |
 | Attack          | Left Mouse Button       | Button West                  |
 
+
+## Code
+
+You can find the full project documentation [here](Documents/HtmlDocumentation/index.html).

@@ -18,7 +18,7 @@
 %%% Input project details
 \def\studentname{Romina Petrozzi}
 \def\reportyear{2024}
-\def\projecttitle{Building a Game}
+\def\projecttitle{Building a 3D Game}
 \def\supervisorname{Julien Lange}
 \def\degree{BSc (Hons) in Computer Science}
 \def\fullOrHalfUnit{Full Unit} % indicate if you are doing the project as a Full Unit or Half Unit
@@ -180,11 +180,24 @@ While Singletons can be convinient and easy to use, they can introduce problems 
 Optimisation techniques are crucial in game development, as performance lag can significantly impact the player's gameplay experience in many game genres. In particular, 3D platformers require precise movement and jumps for navigating levels and obstacles, and experiencing frame drops can make the gameplay frustrating for the player. Some of the main optimisation techniques used for games are level of detail (LOD) management, occlusion culling and frustum culling. \newline
 Occlusion Culling ‘is the mechanism by which Unity avoids rendering computations for GameObjects that are fully hidden from view by other GameObjects’ \cite{Singh2022}. This means that if an object is within the camera's view but fully blocked by another object, it will not be rendered. By doing this, performance is significantly improved as resources are not wasted on elements outside of the player's immediate view. This technique is most beneficial in 3D games with large open world environments, indoor navigation, and densely structured shooter maps, where many objects may be hidden from view at any given time.
 \newline
-Frustum Culling is a technique similar to Occlusion Culling, which focusses on avoiding rendering computations for game objects that are outside of the game camera's view.
+Frustum Culling is a technique similar to Occlusion Culling, aimed at optimizing performance by preventing the rendering of game objects that are outside the camera's view (view frustum). When many active objects exist outside the player's field of vision, rendering them is unnecessary, as they are not visible. By culling these objects, the game avoids overprocessing and improves efficiency, especially for objects that are computationly expensive to render. This is done by identifying which objects are relevant to the current view by performing intersection checks against the view frustum \cite{FC2020}. \newline
+Figure \ref{fig:FrustumCulling} illustrates the view frustum and the surrounding areas where different types of culling take place.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\textwidth]{OtherImages/ViewFrustum.png}
+    \caption{Diagram representing different forms of culling. \cite{FC2020}.}
+    \label{fig:FrustumCulling}
+\end{figure}
 
-
-LOD management is an optimization technique that dynamically adjusts the complexity of an object's geometry based on its distance from the camera. In Unity, this is done by using LOD levels, which specify amount of detail of an object’s geometry to be rendered based on the object’s distance from the camera \cite{Unity2024LOD}. When an object is far from the player, a lower-detail version with fewer polygons is rendered, whereas a higher-detail version is used when the object is closer. This approach decreases the GPU's workload, freeing up resources for closer objects. This technique is particularly useful in expansive 3D environments, such as open-world games or any game featuring a vast, open map \cite{IndieGamesDevel}.
+LOD management is an optimization technique that dynamically adjusts the complexity of an object's geometry based on its distance from the camera. In Unity, this is done by using LOD levels, which specify amount of detail of an object’s geometry to be rendered based on the object’s distance from the camera \cite{Unity2024LOD}. When an object is far from the player, a lower-detail version with fewer polygons is rendered, whereas a higher-detail version is used when the object is closer. This approach decreases the GPU's workload, freeing up resources for closer objects. This technique is particularly useful in expansive 3D environments, such as open-world games or any game featuring a vast, open map \cite{IndieGamesDevel}. The image in figure \ref{fig:LOD} shows three different 3D objects and their different level of detail groups. LOD 0 being the highest quality render with the most polygons and LOD 3 being the least detailed with fewest polygons.
+Figure \ref{fig:LOD} displays three different 3D objects, each with differnt levels of detail. LOD 0 represents the highest quality model with the most polygons, while LOD 3 is the least detailed, with the fewest polygons.
 \color{black}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\textwidth]{OtherImages/LOD.png}
+    \caption{Varying levels of detail for 3D objects. \cite{LOD}.}
+    \label{fig:LOD}
+\end{figure}
 
 \section{User Experience}\label{userexperience}
 Creating an engaging and intuitive user interface (UI) and user experience (UX) is important in modern game development. 
@@ -418,8 +431,7 @@ public void OnNotify(float maxHealth, float currentHealth)
 }
 \end{verbatim}
 
-\color{red} Beyond the player and enemy health bars, there are some other UI elements displayed on the HUD. The progression of the level is shown to the user through the UI, with the HUD and level cleared screen. When the player begins the level, the current quest, (find and rescue the animals) is displayed on the HUD. As each animal is rescued the HUD is updated to display how many animals have been rescued, and once they all have, a new quest (reach the goal) is displayed and the goal becomes activated, shown through visual effects surrounding the goal. Once the player walks into the goal, a level complete screen is shown with the player's time and score, this is illustrated in figures \ref{fig:label_goal} and  \ref{fig:label_levelcleared} below:
-
+\color{red} 
 Beyond the player and enemy health bars, additional UI elements are displayed on the HUD to communicate the player's progression through the level. At the start of a level, the HUD displays the current objective: "Rescue the animals". Then, as animals are rescued, the HUD updates dynamically to display the number rescued out of the total. Once all animals have been freed, the objective changes to "Get to the goal," and the goal is activated with a collider and visual effects to highlight its location. When the player walks into the goal collider, a level cleared screen appears, displaying the player's time and score. These events are shown in Figures \ref{fig:label_goal} and \ref{fig:label_levelcleared}. 
 \begin{figure}[H]
     \centering
@@ -570,9 +582,6 @@ The second and third levels increase in difficulty compared to the first, with g
     \label{fig:label_LevelThree}
 \end{figure}
 
-
-
-
 Across all levels, each type of enemy keep the same health and damage values, determining how much damage they deal to the player and how difficult they are to defeat. Similarly, the player has fixed health and attack statistics. Balancing these values was a challenge, as it was important to ensure that enemies were neither too easy or too difficult to defeat, and similarly for the player character. These values were refined through playtesting conducted in the first term of the project, as discussed in section \ref{testing}, where feedback was gathered informally from a few users on how the difficulty could be adjusted. This continued in the second term with more formalised feedback via a user feedback form (detailed in section \ref{reflection}). The results indicated that the majority of players found the gameplay to be easy, as shown in figure \ref{fig:label_difficultyfeedback}.
 
 \begin{figure}[H]
@@ -617,7 +626,14 @@ Another thing that was taken into consideration is the layout and design of item
 - Reduced physics calculations with collision matrix\newline
 \color{black}
 \section{Testing}\label{testing}
+- Scrap most of this \newline
 User testing is crucial in game development, as it provides real-world feedback on gameplay mechanics, usability and player satisfaction. This helps developers find and fix bugs, refine mechanics and enhance the user interface \cite{flashjungle_2022}. This term, I focused on conducting playtesting, a type of user testing that evaluates gameplay mechanics. Other types of user testing include usability testing and beta testing. Usability testing assesses how easily players can navigate the game and understand it's UI, and Beta testing involves testing a nearly complete version of the game in real world conditions to address bugs \cite{flashjungle_2022}. Since the game is still in development, with an incomplete user interface, I will not conduct usability or beta testing until term two. To conduct playtesting I asked different people to play the game and get feedback on what could be better about the gameplay mechanics like the player's movement and combat system. From this I received feedback that helped me better the player's jump, and refine different enemy statistics.
+\color{red}
+\newline - Unit Testing
+\newline - Playtesting
+\newline - Beta Testing
+\newline - Performance Testing
+\color{black}
 %%%%%%%%%%%%%%%%%%%%%%
 %%% Reflection and Evaluation
 \chapter{Reflection and Evaluation}\label{reflection}

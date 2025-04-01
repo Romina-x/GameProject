@@ -61,6 +61,7 @@ Signature: Romina Petrozzi
 %%% Your Abstract here
 
 \begin{abstract}
+- Rewrite this \newline
 This report details the development of a 3D platformer game created using Unity, exploring concepts in game design and software engineering. The game features a fantasy forest world where the player controls a hero tasked with rescuing animals while battling goblin enemies. The report provides an overview of game engines, design patterns for video game development, and user experience considerations. It details the development process so far, including justifications for key design decisions. Additionally, the report focusses on the application of software engineering principles, such as design patterns, testing methodologies, and adherence to a consistent code style. A timeline is also included, detailing the features achieved so far and the adjustments made to the original plan.
 \end{abstract}
 \newpage
@@ -75,7 +76,7 @@ The genre of game being developed is a mix between 3D platformers and action-adv
 
 \color{red} For the development of this game, the Unity game engine stood out as the best choice\color{black}, which provides the necessary tools and functions for 3D environments, assets and physics required for the game. Several other game engines were compared that offer 3D capabilities, such as Unreal Engine, Unity and Godot. These engines vary in features, ease of use, and capabilities, and Unity was the best fit for the game's requirements. To ensure maintainable and scalable code for the project, common design patterns for game development were researched and incorporated, such as State Machines and Object Pools which promote extendable and reusable code. Additionally, a large focus of the project was making decisions to \color{red} create a good user experience by setting up user friendly controls, user interface, camera movement and level design. \color{black}
 \section{Objectives}
-My main objectives for the project include:
+The main objectives for the project include:
 \begin{itemize}
     \item Player Movement System
     \begin{itemize}
@@ -182,7 +183,8 @@ Occlusion Culling ‘is the mechanism by which Unity avoids rendering computatio
 \newline
 Frustum Culling is a technique similar to Occlusion Culling, aimed at optimizing performance by preventing the rendering of game objects that are outside the camera's view (view frustum). When many active objects exist outside the player's field of vision, rendering them is unnecessary, as they are not visible. By culling these objects, the game avoids overprocessing and improves efficiency, especially for objects that are computationly expensive to render. This is done by identifying which objects are relevant to the current view by performing intersection checks against the view frustum \cite{FC2020}. \newline
 Figure \ref{fig:FrustumCulling} illustrates the view frustum and the surrounding areas where different types of culling take place.
-\begin{figure}[h]
+
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.7\textwidth]{OtherImages/ViewFrustum.png}
     \caption{Diagram representing different forms of culling. \cite{FC2020}.}
@@ -192,7 +194,7 @@ Figure \ref{fig:FrustumCulling} illustrates the view frustum and the surrounding
 LOD management is an optimization technique that dynamically adjusts the complexity of an object's geometry based on its distance from the camera. In Unity, this is done by using LOD levels, which specify amount of detail of an object’s geometry to be rendered based on the object’s distance from the camera \cite{Unity2024LOD}. When an object is far from the player, a lower-detail version with fewer polygons is rendered, whereas a higher-detail version is used when the object is closer. This approach decreases the GPU's workload, freeing up resources for closer objects. This technique is particularly useful in expansive 3D environments, such as open-world games or any game featuring a vast, open map \cite{IndieGamesDevel}. The image in figure \ref{fig:LOD} shows three different 3D objects and their different level of detail groups. LOD 0 being the highest quality render with the most polygons and LOD 3 being the least detailed with fewest polygons.
 Figure \ref{fig:LOD} displays three different 3D objects, each with differnt levels of detail. LOD 0 represents the highest quality model with the most polygons, while LOD 3 is the least detailed, with the fewest polygons.
 \color{black}
-\begin{figure}[h]
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.7\textwidth]{OtherImages/LOD.png}
     \caption{Varying levels of detail for 3D objects. \cite{LOD}.}
@@ -203,10 +205,26 @@ Figure \ref{fig:LOD} displays three different 3D objects, each with differnt lev
 Creating an engaging and intuitive user interface (UI) and user experience (UX) is important in modern game development. 
 UX in games includes the player's overall interaction with the game, including controls, interface design, camera systems, feedback mechanisms, and navigation flows \cite{Kramarzewski2023}. It focuses on ensuring that the game is enjoyable, accessible, and meets player expectations. 
 \subsection{Camera and Controls}
-Designing effective input involves adhering to the principles of ergonomics and user expectations. Ergonomics refers to creating controls that are natural for hand movement, while user expectations involve using input controls that are familiar, so players can quickly learn the controls \cite{Rogers2014}. For example, the WASD keys are commonly used for movement in PC games because they are familiar to most players, and they allow a natural position for the hand on the keyboard. 3D platforming games typically use controller input rather than keyboard, as it allows smoother directional movement with a joystick as opposed to using arrow keys. I have chosen to offer both controller and keyboard input options for better user experience. \newline
-
-Camera systems are essential in games to determine the player's perspective of the game world. Common types include first-person, third-person and top-down cameras, each providing different approaches to the gameplay design \cite{Kramarzewski2023}. First person cameras show the game through the eyes of the player character, which offers a more immersive experience. This is commonly used for first-person shooter games like Call of Duty where precise aiming is important. Third person cameras are positioned slightly above and behind the player character which provides a wider view of the area with more focus on the player character. It is typically used in adventure games and 3D platforming games like The Legend of Zelda series and Super Mario Galaxy. Top down cameras are typically used in puzzle or strategy games like Stardew Valley and provides a bird's eye view of the game world. Super Mario 3D world which I am taking some inspiration from, uses a fixed third person camera and this fits with the platformer/adventure theme of my game. \newline
-Level design is an important aspect of creating a compelling user experience in video games. It involves the structure and layout of the game world, including the placement of obstacles, collectibles and enemies, to provide an engaging and challenging experience for players. A well-designed level should balance challenge and accessibility, encouraging exploration and rewarding players for their progress \cite{Kramarzewski2023}. In 3D platformers and action-adventure games, levels are often designed to cater to both "achievers" and "experiencers", players who prefer completing tasks vs players who prefer exploration \cite{zhao2022dynamic}.  My game will attempt to implement this approach by encouraging exploration even in fairly small levels.
+Creating intuitive and easy to use controls enhances the player experience, preventing frustration and confusion from overly complex or unfamiliar controls. Designing effective input involves adhering to the principles of ergonomics and user expectations. Ergonomics refers to creating controls that are natural for hand movement, while user expectations involve using input controls that are familiar, so players can quickly learn the controls \cite{Rogers2014}. For example, the WASD keys on a keyboard are commonly used for movement in PC games because they are familiar to most players, and they allow a natural position for the hand on the keyboard. 3D platforming games typically use controller input rather than keyboard, as it allows smoother directional movement with a joystick as opposed to using arrow keys. \color{red}Genres of games like First Person Shooters (FPS), and platformers have widely accepted control schemes, for example the spacebar on keyboard or X or A button on controllers usually makes the character jump in a platformer \cite{Rogers2014}. Figure \ref{fig:Controller} shows the most commonly used button assignments for game controller in these genres. \newline
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{OtherImages/Controller.png}
+    \caption{Common controller button assignments. \cite{Rogers2014}.}
+    \label{fig:Controller}
+\end{figure}
+\color{black}
+Camera systems are used in games to determine the player's perspective of the game world. \color{red} The camera style in a game significantly influences both its design and control mapping. Therefore, choosing the right camera is crucial, as bad camera controls or perspective can frustrate players and make navigation confusing, affecting the overall user experience \cite{Rogers2014}. \color{black}
+\newline
+Common types of camera include first-person, third-person and top-down cameras, each providing different approaches to the gameplay design \cite{Kramarzewski2023}. First person cameras show the game through the eyes of the player character, which offers a more immersive experience. \color{red} These cameras provide easier aiming for weapons (in shooters), a closer view of weapons and world objects, and make it easier to create atmospheric scenes. However, they make it harder for players to judge jump and movement distances, and since the character is not visible, players may feel less emotionally connected to them. First person cameras are therefore \color{black} commonly used for first-person shooter games like Call of Duty where precise aiming is important.
+\newline 
+Third person cameras are positioned slightly above and behind the player character which provides a wider view of the area with more focus on the player character. \color{red} These cameras provide some advantages over first person cameras, such as providing a wider field of view for the player to anticipate situations, and a clearer view of the character, making movement distances easier to judge. However, they are generally less immersive than first person cameras. Third person cameras are \color{black} typically used in adventure and 3D platforming games, such as The Legend of Zelda series and Super Mario Galaxy, \color{red} where movement is more complex, and the design encourages players to form an emotional connection with the character. There are different ways of implementing third person cameras. Some remain fixed while following the player, while others allow player control to look around while still tracking the character. The choice between them depends on whether a full view of the surroundings is necessary. Some games take a hybrid approach, offering limited camera control to the player \cite{Hutchinson2009}. \color{black}
+\newline
+Top down cameras provide a bird's eye view of the game world, \color{red} positioned directly above the player looking down on them. There are some disadvantages that come with this view, such as not being able to get a good look at the character or the game world. \cite{Rogers2014}. Traditional top down views exist alongside a variation known as the top down/side view, which keeps the same camera angle but displays characters and entities from a side perspective. Top down cameras are typically used in a variety of game genres, including Stardew Valley, and the original Legend of Zelda.
+\color{black}
+\subsection{Level and UI Design}
+-Scrap most of this \newline
+Level design is an important aspect of creating a compelling user experience in video games. It involves the structure and layout of the game world, including the placement of obstacles, collectibles and enemies, to provide an engaging and challenging experience for players. The  design 
+A well-designed level should balance challenge and accessibility, encouraging exploration and rewarding players for their progress \cite{Kramarzewski2023}. In 3D platformers and action-adventure games, levels are often designed to cater to both "achievers" and "experiencers", players who prefer completing tasks vs players who prefer exploration \cite{zhao2022dynamic}.  My game will attempt to implement this approach by encouraging exploration even in fairly small levels.
 
 %%%%%%%%%%%%%%%%%%%%%%
 %%% Development
@@ -369,7 +387,8 @@ protected override IEnumerator Attack()
             _arrow.transform.rotation = _agent.transform.rotation;
 
             // Apply force to the arrow in the direction that the enemy is facing
-            _arrow.Rigidbody.AddForce(_agent.transform.forward * _arrowPrefab.MoveSpeed, ForceMode.VelocityChange);
+            _arrow.Rigidbody.AddForce(_agent.transform.forward * 
+			_arrowPrefab.MoveSpeed, ForceMode.VelocityChange);
             InvokeOnAttack(_damageable);
         }
             
@@ -506,9 +525,9 @@ This class uses the Singleton pattern, as discussed in Section \ref{singleton}, 
     \label{fig:label_singletonLevelManager}
 \end{figure}
 
-The LevelManager implements a simple Finite State Machine (FSM) as discussed in section \ref{HSM} , managing game states using a LevelState enum to represent each level state, as each state requires minimal behavior. The SetGameState() method transitions the game to a new LevelState when called, typically triggered by UI screens associated with those states. For example, when the pause menu is activated, it calls \texttt{LevelManager.Instance.SetGameState(LevelState.Paused)}, and the LevelManager handles pausing the game accordingly. Within SetGameState(), the method determines the new state and executes the appropriate logic. For instance, in the Paused state, EnableGameplay() is called to stop gameplay. Additionally, other classes can query the LevelManager to check the current game state, allowing them to execute state-specific logic only when necessary.\newline
+The LevelManager implements a simple Finite State Machine (FSM) as discussed in section \ref{HSM} , managing game states using a LevelState enum to represent each level state, as each state requires minimal behavior. The SetGameState() method transitions the game to a new LevelState when called, typically triggered by UI screens associated with those states. For example, when the pause menu is activated, it calls \newline \texttt{LevelManager.Instance.SetGameState(LevelState.Paused)}, and the LevelManager handles pausing the game accordingly. Within SetGameState(), the method determines the new state and executes the appropriate logic. For instance, in the Paused state, EnableGameplay() is called to stop gameplay. Additionally, other classes can query the LevelManager to check the current game state, allowing them to execute state-specific logic only when necessary.\newline
 
-The game also implements animated scene transitions to create a smoother and more visually appealing UI experience when navigating through menus for the user. Initially, each UI menu class contained its own button logic for loading scenes, resulting in duplicated code across multiple menu classes. The Title Screen, Level Select and each level are each a seperate scene, most buttons, except for the pause and resume buttons within a level, take the user to a different scene. To improve maintainability and implement animated scene transitions, the button logic was refactored into a dedicated SceneLoader class. The architecture of this class is illustrated in \ref{fig:label_SceneLoader} below.
+The game also implements animated scene transitions to create a smoother and more visually appealing UI experience when navigating through menus for the user. Initially, each UI menu class contained its own button logic for loading scenes, resulting in duplicated code across multiple menu classes. The Title Screen, Level Select and each level are each a seperate scene, so most buttons, except for the pause and resume buttons within a level, take the user to a different scene. To improve maintainability and implement animated scene transitions, the button logic was refactored into a dedicated SceneLoader class. The architecture of this class is illustrated in \ref{fig:label_SceneLoader} below.
 
 \begin{figure}[H]
     \centering
@@ -521,7 +540,7 @@ In Unity, UI buttons are components that can be attached to UI objects in a scen
 \color{black}
 
 \section{User Experience}
-User experience focuses on ensuring that the game is enjoyable and accessible for the player, which includes considerations for controls, camera movement, feedback mechanisms and interface design, as discussed in section \ref{userexperience}. 
+User experience focuses on ensuring that the game is enjoyable and accessible for the player, which includes considerations for controls, camera movement, feedback mechanisms and interface design, as discussed in section \ref{userexperience}. \color{red} In the second term of the project, a user feedback form was created and sent out to gather player opinions on the game. The insights from this feedback will be discussed throughout this section.\color{black}
 \subsection{Camera \& Controls}
 For the camera movement, a fixed third-person perspective was implemented, \color{red} as discussed in section \ref{userexperience}.  The camera stays positioned behind the player and follows their movements without allowing the player to control its angle or view. 
 This camera perspective was chosen because it is the approach used in the games that this project takes inspiration from, Super Mario 3D World and The Legend of Zelda: Link’s Awakening for Switch. Given the relatively small level sizes, full camera control is unnecessary, as the fixed perspective provides a clear view of most of the environment. Additionally, the third-person view ensures that the player can clearly see their character’s movements, which is essential for both platforming and action gameplay. \color{black}
@@ -582,40 +601,83 @@ The second and third levels increase in difficulty compared to the first, with g
     \label{fig:label_LevelThree}
 \end{figure}
 
+In the user feedback collected during term two, players were asked whether they found the gameplay enjoyable. The results of this assessment are shown in Figure \ref{fig:label_funfeedback}.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{OtherImages/EnjoyableFeedback.png}
+    \caption{User Feedback Survey Results: Gameplay}
+    \label{fig:label_funfeedback}
+\end{figure}
+The results ranged from neutral to strongly agree, with no users expressing disagreement, indicating that all participants found the gameplay at least somewhat enjoyable. When asked for additional feedback on this topic, two users specifically mentioned that they enjoyed the platforming elements and found the player’s movement system fun to use. Some users suggested that introducing more weapon types or attack variations could enhance the gameplay experience. Another user highlighted the game’s cute art style, stating that rescuing the animals felt rewarding. Based on this feedback, it would seem the thing most lacking from a fun gameplay experience is more variation in the combat system. Based on this feedback, the main area for improvement in the gameplay experience appears to be more variety in the combat system. Given more time, adding new attack options for the player, such as a bow and arrow, or introducing a wider range of enemy types could help to improve the overall user experience. \newline
 Across all levels, each type of enemy keep the same health and damage values, determining how much damage they deal to the player and how difficult they are to defeat. Similarly, the player has fixed health and attack statistics. Balancing these values was a challenge, as it was important to ensure that enemies were neither too easy or too difficult to defeat, and similarly for the player character. These values were refined through playtesting conducted in the first term of the project, as discussed in section \ref{testing}, where feedback was gathered informally from a few users on how the difficulty could be adjusted. This continued in the second term with more formalised feedback via a user feedback form (detailed in section \ref{reflection}). The results indicated that the majority of players found the gameplay to be easy, as shown in figure \ref{fig:label_difficultyfeedback}.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{OtherImages/DifficultyFeedback.png}
-    \caption{User Feedback Survey Results}
+    \caption{User Feedback Survey Results: Difficulty}
     \label{fig:label_difficultyfeedback}
 \end{figure}
 
 When asked to provide additional feedback on difficulty, three users suggested increasing the enemy difficulty, either by raising their attack power or increasing their numbers in each level. Based on this feedback, the attack power of two of the weaker enemies (archer and scout) was increased to make them more challenging for the player. However, achieving a perfect balance would require further rounds of playtesting and feedback.
 
-
+\color{black}
 \subsection{UI Design}
-
--discuss UI and the feedback chart \newline
-
-Another thing that was taken into consideration is the layout and design of items on the heads up display (HUD) to provide information about the status of the player and level in a clear and helpful way. The HUD contains the player's health, a count of how many animals they've rescued out of the total, the quest task and the game timer. Again, through informal playtesting the current layout was decided on, keeping the quest information in the top left corner, health in the bottom left and the timer in the top right. This is shown in figure \newline
-- still need to reword this properly and discuss chart
-
-
-
-
+\color{red}
+-discuss HUD and main UI and the feedback charts \newline
 \color{black}
 
-\subsection{Sound Design}
-
-
-- Sound FX stuff
+\subsection{Music and Sound Effects}
+\color{red}
+Music and sound effects play an important role in enhancing the player's experience and engagament with the game. They help to create an immersive atmosphere and set the mood of the game. Sound effects also serve as audio feedback for player actions, helping them better understand in game events. Since Forest Rescue is designed to be a lighthearted, casual game, the music needed to reflect this tone. The game features three music tracks: one for the title screen, another for the level select menu, and a third for gameplay. Each track is simple and cheerful, keeping the game's relaxed and happy atmosphere. For the sound effects, I incorporated a variety of sounds for key game events to provide clearer feedback to the player. These include sound effects for UI button presses, combat actions (attacking and taking damage), player movement (jumping, walking, and running), and rescuing animals. 
+\newline
+In the code, playing sound effects efficiently can be difficult, as they need to be triggered from various scripts without tightly coupling sound management to every individual system. To overcome this, I chose to use a singleton, as discussed in section \ref{singleton}, to create a sound effects manager class that can be accessed from anywhere in the code. This structure is detailed in figure \ref{fig:label_singletonSoundFX}.
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.7\textwidth]{UMLDiagrams/SoundFXSingletonUML.drawio.png}
     \caption{UML Class diagram of Singleton Pattern}
     \label{fig:label_singletonSoundFX}
 \end{figure}
+
+The SoundFXManager class provides methods for playing both single sound effects and looping sound effects, such as the sound of running which needs to loop over time. In the Unity editor, two audio prefabs were created and assigned to the SoundFXManager via the \_soundFXObject and \_loopingSoundFXObject fields. These prefabs are used to spawn sound effects into the scene. The PlaySoundFX method takes an audio clip, a position to play it at, and a volume level. It then instantiates the \_soundFXObject prefab at the specified location, initializes it with the given audio clip and volume, and automatically destroys it once the clip has finished playing. The PlayLoopingSoundFX method functions slightly differently, as it also takes a string representing a dictionary key. To prevent multiple instances of the same sound from playing simultaneously and causing audio overlap, each looping sound effect is stored in a dictionary using the unique key. When a class needs to stop a looping sound, it calls StopLoopingSoundFX with the corresponding key. The method then checks if the key exists in the dictionary, stops and destroys the associated audio clip, and removes the entry from the dictionary to ensure proper sound management. These two methods are shown below:
+
+\begin{verbatim}
+public void StartLoopingSoundFX(string key, AudioClip audio, 
+				Transform spawnPosition, float volume)
+{
+    // Prevent multiple instances of the same sound
+    if (activeLoopingSounds.ContainsKey(key))
+    {
+        return; 
+    }
+
+    AudioSource audioSource = Instantiate(_loopingSoundFXObject, 
+					spawnPosition.position, Quaternion.identity);
+    audioSource.clip = audio;
+    audioSource.volume = volume;
+    audioSource.loop = true;
+    audioSource.Play();
+
+    activeLoopingSounds[key] = audioSource;
+}
+\end{verbatim}
+\begin{verbatim}
+public void StopLoopingSoundFX(string key)
+{
+    if (activeLoopingSounds.TryGetValue(key, out AudioSource audioSource))
+    {
+        audioSource.Stop();
+        Destroy(audioSource.gameObject);
+        activeLoopingSounds.Remove(key);
+    }
+}
+\end{verbatim}
+
+Since the SoundFXManager is a singleton, it ensures that only one instance exists throughout the game, preventing duplicate managers and maintaining consistent audio behavior across all scenes. This persistence avoids issues such as duplicated or overlapping sound management when transitioning between scenes. Additionally, being a singleton allows it to be easily accessed from anywhere in the code. Other classes can simply call:
+\newline
+\texttt{SoundFXManager.Instance.PlaySoundFX();} to concicely play sound effects where needed.
+
+\color{black}
+
 
 \section{Optimisation}
 \color{red}
@@ -637,18 +699,18 @@ User testing is crucial in game development, as it provides real-world feedback 
 %%%%%%%%%%%%%%%%%%%%%%
 %%% Reflection and Evaluation
 \chapter{Reflection and Evaluation}\label{reflection}
-
+- Discuss how project went time wise and whether objectives were achieved
+\newline - Discuss what extra i would have done given more time
+\newline - Also discuss this in terms of the areas of user feedback that I didn't get time to implement
 %%%%%%%%%%%%%%%%%%%%%%
 %%% Professional Issues
 \chapter{Professional Issues}
-
-- Legal things to consider when publishing game
+\color{red}
 - Legal stuff with assets
-- Legal stuff with unity engine
+\newline - Legal stuff with unity engine
+\newline - More generalised legal stuff around game publishing outside of unity assets and engine
 
-- Part 2 on if i made the game open source for others to work on what would be involved in that and how would i manage that
-
-\color{red} Game development involves various professional and ethical considerations, particularly in legal compliance and asset usage when publishing a game commercially. Throughout this project, I have had to consider licensing restrictions when using third-party assets and the legal requirements of publishing a game using Unity engine. This section discusses these issues and how they should be addressed professionally if this project were to be published. \newline
+\color{red} Game development involves various professional and ethical considerations, particularly in legal compliance and asset usage when publishing a game commercially. Throughout this project, I have had to consider licensing restrictions when using third party assets and the legal requirements of publishing a game using Unity engine. This section discusses these issues and how they should be addressed professionally if this project were to be published. \newline
 
 The majority of assets used in the game were sourced from the Unity Asset Store, which provides a large variety of assets that you can download and use in Unity Engine. Most assets from the Unity Asset Store are royalty-free on purchase or free download, except for ones labeled as 'restricted', which cannot be used commercially. Any restrictions are detailed in the description of the asset in the store \cite{UnityCommercial}. However, it is important to ensure the correct license type is purchased when downloading an asset for commercial use.
 All Unity assets fall under either Extension, Single Entity, or Multi Entity licence types. Extension assets cover any assets found under the 'tools' category in the store, and users are required to purchase one seat per user that has access to the raw asset files \cite{UnityLicences}. Single Entity and Multi Entity assets can be any other type of asset that doesn't fall under the 'tools' category. Single Entity assets are typically for single users or companies, and permits use by all team members within a single company. Multi Entity assets cover parent, child and sister companies, as well as contractors on a project, allowing them access to the raw asset files across different branches of an organization \cite{UnityLicences}. Currently, all assets used in the game fall under either the Extension or Single Entity license types. As the only developer working on the game, I am a single entity, meaning these assets can be used royalty-free if the game was published commercially, and any Multi Entity licences would not need to be purchased. Failing to purchase the correct asset licenses can lead to a game being removed from distribution platforms and may result in legal disputes.

@@ -1,4 +1,4 @@
-\documentclass[]{final_report}
+\documentclass[10pt]{final_report}
 \usepackage{graphicx}
 \usepackage{xcolor} 
 \usepackage{titlesec}
@@ -176,7 +176,8 @@ The main way that this pattern optimises memory performance is by avoiding memor
 The Singleton pattern is a creational design pattern that ensures a class only has one instance and creates a global point of access to it. It is commonly used in games for managing systems that should only keep a single instance throughout the lifetime of the game, such as audio managers or input handlers.
 Singleton instances are created using a static field within the class that stores the instance. In the constructor, if an instance already exists, the creation of a new one is prevented which ensures that only one instance is ever active at a time. Since the instance is globally accessible, any class can call it to use its methods \cite{Doran2017}. A common use case for the Singleton Pattern in games is managing game state. A game state manager tracks the current state of the game, such as whether it is running, paused, or in a menu. Since the game state must remain consistent across scenes, only one instance of the manager should exist to prevent conflicts or errors. By using a singleton, all relevant classes can access the manager globally to read and update the game state as needed. \newline
 While Singletons can be convinient and easy to use, they can introduce problems in the long term. As it is essentially a global variable, which have their own drawbacks such as making it harder to track down bugs, introducing coupling between classes, and they are not concurrency friendly. Because of this, it's important to ensure Singletons are used well and in the correct context, and alternative approaches should be considered in places where they are starting to introduce such problems.
-\section{Optimisation Techniques}
+
+\section{Optimisation Techniques}\label{optimisation}
 \color{red}
 Optimisation techniques are crucial in game development, as performance lag can significantly impact the player's gameplay experience in many game genres. In particular, 3D platformers require precise movement and jumps for navigating levels and obstacles, and experiencing frame drops can make the gameplay frustrating for the player. Some of the main optimisation techniques used for games are level of detail (LOD) management, occlusion culling and frustum culling. \newline
 Occlusion Culling ‘is the mechanism by which Unity avoids rendering computations for GameObjects that are fully hidden from view by other GameObjects’ \cite{Singh2022}. This means that if an object is within the camera's view but fully blocked by another object, it will not be rendered. By doing this, performance is significantly improved as resources are not wasted on elements outside of the player's immediate view. This technique is most beneficial in 3D games with large open world environments, indoor navigation, and densely structured shooter maps, where many objects may be hidden from view at any given time.
@@ -238,7 +239,7 @@ The design of the user interface (UI) is important for enhancing the user experi
 \end{figure}
 For other UI screens, - AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA finish later
 
-
+\color{black}
 
 
 %%%%%%%%%%%%%%%%%%%%%%
@@ -705,6 +706,8 @@ Given more development time, implementing a goal pointer arrow would have enhanc
 \newline
 Feedback on the general UI was very positive, with all users agreeing or strongly agreeing that it was clear and easy to use. One user also noted that the menus complemented the game's style well. Based on these results, no changes were made. However, additional rounds of testing with a larger pool of users would be necessary to fully evaluate the overall effectiveness of the user interface.
 
+The current font size is \the\fontdimen2\font.
+
 \color{black}
 
 \subsection{Music and Sound Effects}
@@ -762,30 +765,53 @@ Since the SoundFXManager is a singleton, it ensures that only one instance exist
 
 \section{Optimisation}
 \color{red}
-- Frustum Culling\newline
 - LOD groups for terrain\newline
 - NavMesh for pathfinding (preset data rather than realtime pathfinding)\newline
 - Object pooling\newline
 - Reduced physics calculations with collision matrix\newline
+Optimization was a key priority for this game, as the goal was to ensure it runs smoothly on the majority of Windows devices without frame drops. Any performance issues such as lag, would affect the player’s experience, making it difficult to control the player character's movement and combat with precision, which is necessary for this genre of game. The goal was to have the game running at 60 frames per second (FPS) or higher, as this is widely considered the optimal threshold for smooth, responsive gameplay for computers \cite{Samuel2025}. 
+\newline
+One optimisation technique used in the game was frustum culling, which is explained in more detail in section \ref{optimisation}. It involves excluding game objects outside of the camera's view frustum (the region visible to the player). By not rendering objects outside this area, the game reduces CPU usage. In Unity, this is handled automatically by the camera, which excludes anything outside the view frustum. The camera also defines near and far clipping planes, where objects beyond the far clipping plane are not rendered, resulting in  a finite rendering area, as shown in Figure \ref{cullingarea}. Occlusion culling was not implemented alongside frustum culling, as it was considered unnecessary for this game. Given that the levels are relatively small and open, there are few objects that would be culled through occlusion, making it less beneficial.
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{OtherImages/ClippingPlanes.png}
+    \caption{Near and Far clipping planes used by Unity Cameras. \cite{UnityFrustum}.}
+    \label{cullingarea}
+\end{figure}
 
+Additionally, Level of Detail (LOD) groups were used to optimise the game, as discussed in section \ref{optimisation}. Unity provides a LOD component that can be assigned to game objects, which determines the distance from the camera at which different levels of detail for an object are displayed. Since the game features a fairly dense environment filled with terrain and nature elements, it was ensured that assets selected for the terrain and nature included multiple LOD models. Once the terrain and nature elements were placed in the scenes, the LOD components allowed for defining distance thresholds that adjust the level of detail, ensuring that objects further from the camera are rendered with less detail, helping to reduce CPU usage.
+\newline
+Two other optimisations previously discussed include the use of the NavMesh (\ref{enemy_movement}) for enemy and animal pathfinding, and the object pool design pattern for arrow creation (\ref{combatsystem}). Baking NavMesh surfaces, which define walkable areas and obstacles to avoid within each level, the pathfinding is based on a predefined surface as opposed to realtime pathfinding. This approach is more efficient than realtime, and works especially well in environments with static terrain. Additionally, the use of the object pool design pattern for arrow spawning is an effective optimisation for managing memory and reducing CPU usage. As discussed in \ref{objectpool}, the object pool pattern minimises memory allocation overhead and prevents memory fragmentation. It also reduces performance bottlenecks caused by frequent garbage collection and avoids expensive object creation. This is particularly beneficial for the arrows shot by enemies, which would otherwise be created and destroyed quickly, potentially impacting performance.
+\newline 
+Lastly, another optimisation technique used was the implementation of physics layers and the collision matrix. Unity allows the creation of physics layers to categorise game objects and define their interactions. Each layer was configured to interact only where necessary, reducing unnecessary computations. For example, in the combat system, different colliders were assigned separate layers, such as the player, enemy, player weapon, and enemy attack radius. This ensures that interactions are limited to relevant objects. For instance, the archer enemy’s arrows are set to collide only with the player, preventing unnecessary computations with other colliders, such as the player’s weapon, which would otherwise require processing before determining that no interaction is needed. This collision matrix is detailed in figure \ref{collisionmatrix}.
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{OtherImages/CollisionMatrix.png}
+    \caption{Physics Collision Matrix.}
+    \label{collisionmatrix}
+\end{figure}
 
+To test whether these optimisations have helped the game run smoothly, this was tested through both the Unity Profiler and beta testing. The Unity Profiler provides realtime performance information about your application, giving an overview of resource allocation while developing the application \cite{UnityProfiler}. This was used on the device that was used to develop the game, which is a laptop with an Intel Core i5-12500H (2.50 GHz) processor and 16GB of RAM, running Windows 11. The profiler measured these statistics on a simple playthrough of the game, which involved starting from the title screen, navigating to the first level, and playing it to the end. The results for CPU usage are displayed in figure \ref{fig:label_CPU}.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{OtherImages/CPUusage.png}
+    \caption{Unity Profiler graph displaying CPU usage over the course of the game.}
+    \label{fig:label_CPU}
+\end{figure}
 
+The CPU usage graph displays the game's frame rate over time. While occasional spikes occurred during scene transitions and combat, the frame rate consistently remained below the 60 FPS threshold, often staying well under it. This suggests that the game is capable of running at 60 FPS or higher on this device with ease. 
+However, testing on a single device was not sufficient to guarantee smooth performance across different Windows systems. To address this, feedback on performance was included in the user feedback form for beta testing, where users were asked to download and run the game on their own devices and report on its performance. The results of this are detailed in figure \ref{performancefeedback}. 
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{OtherImages/PerformanceFeedback.png}
+    \caption{User Feedback on Game Performance.}
+    \label{performancefeedback}
+\end{figure}
 
-
-
-
-
-
-
-
-
-
-
-
-
+Seven users downloaded and tested the game on various Windows devices, including both PCs and laptops. All users either agreed or strongly agreed that the game ran smoothly on their systems. This feedback suggests that the game performs very well across different Windows devices. However, to fully assess its performance, further testing would be needed, particularly to determine the minimum hardware requirements for running the game at a playable standard.
 
 \color{black}
 \section{Testing}\label{testing}
@@ -803,6 +829,7 @@ User testing is crucial in game development, as it provides real-world feedback 
 - Discuss how project went time wise and whether objectives were achieved
 \newline - Discuss what extra i would have done given more time
 \newline - Also discuss this in terms of the areas of user feedback that I didn't get time to implement
+\newline - and what i would have done differently if i started over
 %%%%%%%%%%%%%%%%%%%%%%
 %%% Professional Issues
 \chapter{Professional Issues}

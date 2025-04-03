@@ -1,6 +1,6 @@
 \ProvidesClass{final_report}
-\LoadClass[11pt, titlepage]{report}
-\usepackage[paperwidth=21cm,paperheight=29.7cm,includehead,headheight=1.5cm,pdftex,hmargin={3cm,2.5cm},vmargin={0cm,2cm},]{geometry} 
+\LoadClass[10pt, titlepage]{report}
+\usepackage[paperwidth=21cm,paperheight=29.7cm,includehead,headheight=1.5cm,pdftex,hmargin={2.5cm,2cm},vmargin={0cm,2cm},]{geometry} 
 \usepackage{fancyhdr}
 \setlength{\headheight}{1.5cm}
 \setlength{\parindent}{0cm} 

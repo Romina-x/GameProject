@@ -13,28 +13,28 @@
 \contentsline {section}{\numberline {2.4}User Experience}{11}{section.2.4}%
 \contentsline {subsection}{\numberline {2.4.1}Camera and Controls}{11}{subsection.2.4.1}%
 \contentsline {subsection}{\numberline {2.4.2}Level and UI Design}{13}{subsection.2.4.2}%
-\contentsline {chapter}{\numberline {3}Development}{14}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Player Movement}{14}{section.3.1}%
-\contentsline {subsection}{\numberline {3.1.1}Architecture}{14}{subsection.3.1.1}%
-\contentsline {subsection}{\numberline {3.1.2}Movement Physics}{15}{subsection.3.1.2}%
-\contentsline {paragraph}{}{15}{paragraph*.7}%
-\contentsline {section}{\numberline {3.2}Enemy Movement}{16}{section.3.2}%
-\contentsline {subsection}{\numberline {3.2.1}Architecture}{16}{subsection.3.2.1}%
-\contentsline {subsection}{\numberline {3.2.2}Configurable Enemies}{17}{subsection.3.2.2}%
-\contentsline {section}{\numberline {3.3}Combat System}{18}{section.3.3}%
-\contentsline {section}{\numberline {3.4}Animals and Cages}{22}{section.3.4}%
-\contentsline {section}{\numberline {3.5}User Interface}{22}{section.3.5}%
-\contentsline {section}{\numberline {3.6}User Experience}{28}{section.3.6}%
-\contentsline {subsection}{\numberline {3.6.1}Camera \& Controls}{28}{subsection.3.6.1}%
-\contentsline {subsection}{\numberline {3.6.2}Level Design}{29}{subsection.3.6.2}%
-\contentsline {subsection}{\numberline {3.6.3}UI Design}{33}{subsection.3.6.3}%
-\contentsline {subsection}{\numberline {3.6.4}Music and Sound Effects}{33}{subsection.3.6.4}%
-\contentsline {section}{\numberline {3.7}Optimisation}{35}{section.3.7}%
-\contentsline {section}{\numberline {3.8}Testing}{35}{section.3.8}%
-\contentsline {chapter}{\numberline {4}Reflection and Evaluation}{36}{chapter.4}%
-\contentsline {chapter}{\numberline {5}Professional Issues}{37}{chapter.5}%
-\contentsline {chapter}{\numberline {A}Appendix}{38}{appendix.A}%
-\contentsline {section}{\numberline {A.1}Code Style}{38}{section.A.1}%
-\contentsline {section}{\numberline {A.2}Development Diary}{38}{section.A.2}%
-\contentsline {section}{\numberline {A.3}Submission Directory Structure}{41}{section.A.3}%
-\contentsline {section}{\numberline {A.4}Demo Video Link}{42}{section.A.4}%
+\contentsline {chapter}{\numberline {3}Development}{15}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Player Movement}{15}{section.3.1}%
+\contentsline {subsection}{\numberline {3.1.1}Architecture}{15}{subsection.3.1.1}%
+\contentsline {subsection}{\numberline {3.1.2}Movement Physics}{16}{subsection.3.1.2}%
+\contentsline {paragraph}{}{16}{paragraph*.8}%
+\contentsline {section}{\numberline {3.2}Enemy Movement}{17}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}Architecture}{17}{subsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.2.2}Configurable Enemies}{18}{subsection.3.2.2}%
+\contentsline {section}{\numberline {3.3}Combat System}{19}{section.3.3}%
+\contentsline {section}{\numberline {3.4}Animals and Cages}{23}{section.3.4}%
+\contentsline {section}{\numberline {3.5}User Interface}{23}{section.3.5}%
+\contentsline {section}{\numberline {3.6}User Experience}{29}{section.3.6}%
+\contentsline {subsection}{\numberline {3.6.1}Camera \& Controls}{29}{subsection.3.6.1}%
+\contentsline {subsection}{\numberline {3.6.2}Level Design}{30}{subsection.3.6.2}%
+\contentsline {subsection}{\numberline {3.6.3}UI Design}{34}{subsection.3.6.3}%
+\contentsline {subsection}{\numberline {3.6.4}Music and Sound Effects}{37}{subsection.3.6.4}%
+\contentsline {section}{\numberline {3.7}Optimisation}{38}{section.3.7}%
+\contentsline {section}{\numberline {3.8}Testing}{39}{section.3.8}%
+\contentsline {chapter}{\numberline {4}Reflection and Evaluation}{41}{chapter.4}%
+\contentsline {chapter}{\numberline {5}Professional Issues}{42}{chapter.5}%
+\contentsline {chapter}{\numberline {A}Appendix}{43}{appendix.A}%
+\contentsline {section}{\numberline {A.1}Code Style}{43}{section.A.1}%
+\contentsline {section}{\numberline {A.2}Development Diary}{43}{section.A.2}%
+\contentsline {section}{\numberline {A.3}Submission Directory Structure}{46}{section.A.3}%
+\contentsline {section}{\numberline {A.4}Demo Video Link}{47}{section.A.4}%

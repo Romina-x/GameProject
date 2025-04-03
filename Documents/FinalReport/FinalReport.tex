@@ -191,8 +191,7 @@ Figure \ref{fig:FrustumCulling} illustrates the view frustum and the surrounding
     \label{fig:FrustumCulling}
 \end{figure}
 
-LOD management is an optimization technique that dynamically adjusts the complexity of an object's geometry based on its distance from the camera. In Unity, this is done by using LOD levels, which specify amount of detail of an object’s geometry to be rendered based on the object’s distance from the camera \cite{Unity2024LOD}. When an object is far from the player, a lower-detail version with fewer polygons is rendered, whereas a higher-detail version is used when the object is closer. This approach decreases the GPU's workload, freeing up resources for closer objects. This technique is particularly useful in expansive 3D environments, such as open-world games or any game featuring a vast, open map \cite{IndieGamesDevel}. The image in figure \ref{fig:LOD} shows three different 3D objects and their different level of detail groups. LOD 0 being the highest quality render with the most polygons and LOD 3 being the least detailed with fewest polygons.
-Figure \ref{fig:LOD} displays three different 3D objects, each with differnt levels of detail. LOD 0 represents the highest quality model with the most polygons, while LOD 3 is the least detailed, with the fewest polygons.
+LOD management is an optimization technique that dynamically adjusts the complexity of an object's geometry based on its distance from the camera. In Unity, this is done by using LOD levels, which specify amount of detail of an object’s geometry to be rendered based on the object’s distance from the camera \cite{Unity2024LOD}. When an object is far from the player, a lower-detail version with fewer polygons is rendered, whereas a higher-detail version is used when the object is closer. This approach decreases the GPU's workload, freeing up resources for closer objects. This technique is particularly useful in expansive 3D environments, such as open-world games or any game featuring a vast, open map \cite{IndieGamesDevel}. Figure \ref{fig:LOD} displays three different 3D objects, each with differnt levels of detail. LOD 0 represents the highest quality model with the most polygons, while LOD 3 is the least detailed, with the fewest polygons.
 \color{black}
 \begin{figure}[H]
     \centering
@@ -221,10 +220,26 @@ Third person cameras are positioned slightly above and behind the player charact
 \newline
 Top down cameras provide a bird's eye view of the game world, \color{red} positioned directly above the player looking down on them. There are some disadvantages that come with this view, such as not being able to get a good look at the character or the game world. \cite{Rogers2014}. Traditional top down views exist alongside a variation known as the top down/side view, which keeps the same camera angle but displays characters and entities from a side perspective. Top down cameras are typically used in a variety of game genres, including Stardew Valley, and the original Legend of Zelda.
 \color{black}
-\subsection{Level and UI Design}
+\subsection{Level and UI Design}\ref{level}
 -Scrap most of this \newline
-Level design is an important aspect of creating a compelling user experience in video games. It involves the structure and layout of the game world, including the placement of obstacles, collectibles and enemies, to provide an engaging and challenging experience for players. The  design 
-A well-designed level should balance challenge and accessibility, encouraging exploration and rewarding players for their progress \cite{Kramarzewski2023}. In 3D platformers and action-adventure games, levels are often designed to cater to both "achievers" and "experiencers", players who prefer completing tasks vs players who prefer exploration \cite{zhao2022dynamic}.  My game will attempt to implement this approach by encouraging exploration even in fairly small levels.
+Level design is an important aspect of creating a compelling user experience in video games. It involves the structure and layout of the game world, including the placement of obstacles, collectibles and enemies, to provide an engaging and challenging experience for players. A well-designed level should balance challenge and accessibility, encouraging exploration and rewarding players for their progress \cite{Kramarzewski2023}. In 3D platformers and action-adventure games, levels are often designed to cater to both "achievers" and "experiencers", players who prefer completing tasks vs players who prefer exploration \cite{zhao2022dynamic}. \color{red} This balance is achieved by designing levels with a core gameplay experience that is engaging for all players while incorporating hidden rewards and exploratory elements for experiencers. At the same time, achievers are provided with clear objectives, such as additional challenges, achievements, or opportunities to earn higher scores. 
+\newline
+Examples of games that take this approach are Super Mario 3D World and The Legend of Zelda: Breath of the Wild which both inspire the development of this game. Super Mario 3D World follows a linear level structure but includes hidden paths, collectibles, and optional challenges that reward players for exploring beyond the main route. Each level introduces new mechanics while maintaining a clear goal, appealing to both task focused players and those who enjoy discovering secrets.
+The Legend of Zelda: Breath of the Wild takes a more open ended approach, allowing players to freely explore its vast world while subtly guiding them through with environmental cues and strategic enemy placement. Shrines and side quests serve as optional rewards that encourage exploration, while structured main quests provide a clear sense of progression.
+\newline
+Beyond the layout of game levels, the art style and overall aesthetic help to improve the user experience. High quality artwork can have a large impact on a game. It can draw a player into a game they might have otherwise overlooked, while making the game environment feel authentic and visually captivating. Additionally, a well designed game world can create a unique atmosphere, which, when paired with the music and mechanic makes a really immersive experience. If the design of the game is visually appealing, players are more likely to tolerate imperfections in the design \cite{Jesse2019}.
+\newline
+The design of the user interface (UI) is important for enhancing the user experience, as it ensures the player can easily navigate the game and receive clear visual feedback to validate their actions. The user interface in video games consists of the heads up display (HUD) and various other screens, such as game over screens, settings menus, and pause menus. The HUD refers to the visual screen overlay that communicates information to the player during gameplay. Typical elements found on the HUD in 3D platforming and action-adventure games are health bars/lives, a map, quest information, and score information \cite{Rogers2014}. The HUD should display relevant information to the player but shouldn't clutter the view of the game too much. For the layout of information on the HUD, its important to prioritize an information hierarchy to ensure that the most important information stands out and is easily accessible to players. The elements should be arranged in a logical way, with the most important information placed in prominent positions on the screen \cite{Hive}. An example of an effective HUD in a 3D platforming game is found in Super Mario Odyssey. Its clear and concise design communicates essential information without obstructing the gameplay, ensuring that the player remains immersed in the game world. This is illustrated in Figure \ref{fig:MarioHUD}.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{OtherImages/MarioOdysseyHUD.jpeg}
+    \caption{HUD display from Super Mario Odyssey}
+    \label{fig:MarioHUD}
+\end{figure}
+For other UI screens, - AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA finish later
+
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%
 %%% Development
@@ -619,11 +634,38 @@ Across all levels, each type of enemy keep the same health and damage values, de
 \end{figure}
 
 When asked to provide additional feedback on difficulty, three users suggested increasing the enemy difficulty, either by raising their attack power or increasing their numbers in each level. Based on this feedback, the attack power of two of the weaker enemies (archer and scout) was increased to make them more challenging for the player. However, achieving a perfect balance would require further rounds of playtesting and feedback.
-
 \color{black}
 \subsection{UI Design}
 \color{red}
 -discuss HUD and main UI and the feedback charts \newline
+In the game, there is a full UI, including a HUD, title screen, level select menu, game over screen, pause screen, settings menu, and level cleared screen, all with animated scene transitions between them. The design and layout of these elements were considered carefully and evaluated in rounds of playtesting and beta testing. First the layout and choice of elements on the HUD was an important design desicion to ensure it helps the user through the level displaying relevant information. The current design of the HUD is displayed in figure \ref{fig:label_HUD}.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{OtherImages/HUD.png}
+    \caption{Level HUD}
+    \label{fig:label_HUD}
+\end{figure}
+The HUD elements selected for the game include health bars for both the player and enemies, an animal rescue counter, a quest tracker, and a game timer. The layout of these elements was refined through casual playtesting over the course of development, leading to several significant adjustments. Initially, the health bar had a different design and was positioned in the top left corner of the screen. However, based on user feedback, it was determined that placing the quest information in the top left was more effective, as players naturally focused their attention on the upper half of the screen.
+As more HUD elements were introduced, such as the quest tracker, inconsistencies in their design made the interface appear cluttered and visually incohesive. To address this, a UI pack from the Unity Asset Store was used to standardise the design of all HUD and UI elements, ensuring they had a unified and polished look that matched the game’s overall aesthetic. The importance of maintaining visual consistency in UI design is discussed further in Section \ref{level}. Similarly, the original Level Cleared and Game Over screen were changed to use elements from this pack so that all the UI screens were cohesive. A figure showing examples of the old vs new UI screens are shown in figure \ref{oldvsnew}.
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{OtherImages/PlayerCamera.png}
+        \caption{FreeLook Camera on Player}
+        \label{fig:label_camera}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{OtherImages/Zelda.png}
+        \caption{Camera from Link's Awakening}
+        \label{fig:label_linkcamera}
+    \end{subfigure}
+    \caption{Comparison of the game's camera system with Link's Awakening}
+\end{figure}
+
+
 \color{black}
 
 \subsection{Music and Sound Effects}

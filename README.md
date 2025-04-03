@@ -23,4 +23,4 @@ You can connect a controller to your PC via bluetooth or a wired connection and 
 
 ## Code
 
-You can find the full project documentation [here](Documents/HtmlDocumentation/index.html).
+You can find the full project documentation in Documents/HtmlDocumentation/index.html.

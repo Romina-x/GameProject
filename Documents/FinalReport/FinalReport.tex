@@ -555,7 +555,7 @@ In Unity, UI buttons are components that can be attached to UI objects in a scen
 \color{black}
 
 \section{User Experience}
-User experience focuses on ensuring that the game is enjoyable and accessible for the player, which includes considerations for controls, camera movement, feedback mechanisms and interface design, as discussed in section \ref{userexperience}. \color{red} In the second term of the project, a user feedback form was created and sent out to gather player opinions on the game. The insights from this feedback will be discussed throughout this section.\color{black}
+User experience focuses on ensuring that the game is enjoyable and accessible for the player, which includes considerations for controls, camera movement, feedback mechanisms and interface design, as discussed in section \ref{userexperience}. \color{red} In the second term of the project, beta testing was carried out which included a user feedback form that was sent out to gather player opinions on the game. The insights from this feedback will be discussed throughout this section, and the beta testing process is discussed in further detail in \ref{testing}.\color{black}
 \subsection{Camera \& Controls}
 For the camera movement, a fixed third-person perspective was implemented, \color{red} as discussed in section \ref{userexperience}.  The camera stays positioned behind the player and follows their movements without allowing the player to control its angle or view. 
 This camera perspective was chosen because it is the approach used in the games that this project takes inspiration from, Super Mario 3D World and The Legend of Zelda: Link’s Awakening for Switch. Given the relatively small level sizes, full camera control is unnecessary, as the fixed perspective provides a clear view of most of the environment. Additionally, the third-person view ensures that the player can clearly see their character’s movements, which is essential for both platforming and action gameplay. \color{black}
@@ -637,34 +637,73 @@ When asked to provide additional feedback on difficulty, three users suggested i
 \color{black}
 \subsection{UI Design}
 \color{red}
--discuss HUD and main UI and the feedback charts \newline
-In the game, there is a full UI, including a HUD, title screen, level select menu, game over screen, pause screen, settings menu, and level cleared screen, all with animated scene transitions between them. The design and layout of these elements were considered carefully and evaluated in rounds of playtesting and beta testing. First the layout and choice of elements on the HUD was an important design desicion to ensure it helps the user through the level displaying relevant information. The current design of the HUD is displayed in figure \ref{fig:label_HUD}.
+The game features a complete UI, including a HUD, title screen, level select menu, game over screen, pause menu, settings menu, and level cleared screen, all with animated scene transitions. The design and layout of these elements were chosen and refined through rounds of playtesting and beta testing. In particular, the HUD's layout and choice of elements were critical design decisions, ensuring that it effectively conveys relevant information to assist the player throughout each level.
+\newline
+The HUD elements selected for the game include health bars for both the player and enemies, an animal rescue counter, a quest tracker, and a game timer. The layout and design of these elements changed over the course of development, leading to some significant adjustments. Initially, the health bar had a different design and was positioned in the top left corner of the screen. However, based on user feedback, it was determined that placing the quest information in the top left was more effective, as players naturally focused their attention on the upper half of the screen.
+\newline
+As more HUD elements were introduced, such as the quest tracker, inconsistencies in their design made the interface appear cluttered and visually incohesive. To address this, a UI pack from the Unity Asset Store was used to standardise the design of all HUD and UI elements, ensuring they had a unified and polished look that matched the game’s overall aesthetic. The importance of maintaining visual consistency in UI design is discussed further in Section \ref{level}. Similarly, for the other UI screens, their design was changed throughout development to include different buttons and information. The original level cleared screen featured only restart and exit game buttons, before other UI like the main menus were added. A figure showing examples of the old vs new UI screens are shown in figure \ref{fig:hud_comparison}.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{OtherImages/HUD.png}
-    \caption{Level HUD}
-    \label{fig:label_HUD}
-\end{figure}
-The HUD elements selected for the game include health bars for both the player and enemies, an animal rescue counter, a quest tracker, and a game timer. The layout of these elements was refined through casual playtesting over the course of development, leading to several significant adjustments. Initially, the health bar had a different design and was positioned in the top left corner of the screen. However, based on user feedback, it was determined that placing the quest information in the top left was more effective, as players naturally focused their attention on the upper half of the screen.
-As more HUD elements were introduced, such as the quest tracker, inconsistencies in their design made the interface appear cluttered and visually incohesive. To address this, a UI pack from the Unity Asset Store was used to standardise the design of all HUD and UI elements, ensuring they had a unified and polished look that matched the game’s overall aesthetic. The importance of maintaining visual consistency in UI design is discussed further in Section \ref{level}. Similarly, the original Level Cleared and Game Over screen were changed to use elements from this pack so that all the UI screens were cohesive. A figure showing examples of the old vs new UI screens are shown in figure \ref{oldvsnew}.
-\begin{figure}[H]
-    \centering
-    \begin{subfigure}{0.48\textwidth}
+    \begin{subfigure}{0.45\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{OtherImages/PlayerCamera.png}
-        \caption{FreeLook Camera on Player}
-        \label{fig:label_camera}
+        \includegraphics[width=\linewidth]{OtherImages/OriginalHUD.png}
+        \caption{Old HUD Design}
+        \label{fig:old_hud}
     \end{subfigure}
     \hfill
-    \begin{subfigure}{0.48\textwidth}
+    \begin{subfigure}{0.45\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{OtherImages/Zelda.png}
-        \caption{Camera from Link's Awakening}
-        \label{fig:label_linkcamera}
+        \includegraphics[width=\linewidth]{OtherImages/HUD.png}
+        \caption{New HUD Design}
+        \label{fig:new_hud}
     \end{subfigure}
-    \caption{Comparison of the game's camera system with Link's Awakening}
+    
+    \vspace{1em} % Adds some vertical spacing
+
+    \begin{subfigure}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{OtherImages/OriginalLevelCleared.png}
+        \caption{Old Level Complete Screen}
+        \label{fig:old_complete}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{OtherImages/LevelComplete.png}
+        \caption{New Level Complete Screen}
+        \label{fig:new_complete}
+    \end{subfigure}
+
+    \caption{Comparison of Old and New HUD and Level Complete Screens}
+    \label{fig:hud_comparison}
+\end{figure}
+The UI screens were designed to be minimalistic to make it easier for players to use, with limited button presses needed to get between screens. The buttons have clear and familiar icons to indicate what they do. -----------FINISH----------- for example the home menu, restart, settings and exit buttons are shown in figure \ref{fig:label_icons}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{OtherImages/Icons.png}
+    \caption{Game Button Icon Examples}
+    \label{fig:label_icons}
 \end{figure}
 
+During beta testing, two of the questions asked in the user feedback survey were based on the usability and looks of the UI and HUD. These questions and results are displayed in figures \ref{fig:label_HUDFeedback} and \ref{fig:label_UIFeedback}.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{OtherImages/HUDFeedback.png}
+    \caption{User Feedback on HUD}
+    \label{fig:label_HUDFeedback}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{OtherImages/UIFeedback.png}
+    \caption{User Feedback on UI}
+    \label{fig:label_UIFeedback}
+\end{figure}
+The 'in-level user interface' refers to the HUD. User feedback on its effectiveness varied, with responses ranging from strong agreement to disagreement. However, 5 out of 7 users agreed or strongly agreed that the HUD's information and layout were useful in helping them progress through a level.
+When asked for additional feedback, two users mentioned difficulty in finding and getting to the goal in the final level, and suggested adding an on screen arrow to guide the player once the goal is activated. Another user suggested incorporating a minimap in the bottom right corner of the screen to provide a top-down view of the level, displaying indicators for the goal and animal locations.
+Given more development time, implementing a goal pointer arrow would have enhanced the player experience. However, adding animal location markers to a minimap might have reduced the game's exploration aspect, potentially impacting the intended gameplay experience.
+\newline
+Feedback on the general UI was very positive, with all users agreeing or strongly agreeing that it was clear and easy to use. One user also noted that the menus complemented the game's style well. Based on these results, no changes were made. However, additional rounds of testing with a larger pool of users would be necessary to fully evaluate the overall effectiveness of the user interface.
 
 \color{black}
 
@@ -728,6 +767,26 @@ Since the SoundFXManager is a singleton, it ensures that only one instance exist
 - NavMesh for pathfinding (preset data rather than realtime pathfinding)\newline
 - Object pooling\newline
 - Reduced physics calculations with collision matrix\newline
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 \color{black}
 \section{Testing}\label{testing}
 - Scrap most of this \newline

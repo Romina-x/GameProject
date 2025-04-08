@@ -34,7 +34,7 @@ public class ScoreManager : MonoBehaviour
     }
 
     private void OnDestroy()
-    {   
+    {
         // Unsubscribe from all enemies
         foreach (Enemy enemy in FindObjectsOfType<Enemy>())
         {
@@ -51,4 +51,5 @@ public class ScoreManager : MonoBehaviour
         _score += score;
         Debug.Log(_score);
     }
+    
 }

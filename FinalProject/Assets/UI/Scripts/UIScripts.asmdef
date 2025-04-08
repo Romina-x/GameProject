@@ -1,0 +1,20 @@
+{
+    "name": "UIScripts",
+    "rootNamespace": "",
+    "references": [
+        "GUID:6055be8ebefd69e48b49212b09b47b2f",
+        "GUID:6a5b2e845b593934486adb9a8ec17170",
+        "GUID:812f4502f8f470a479669e86d54cae9b",
+        "GUID:114b2f06911c2864590a677f04737625",
+        "GUID:fea0c82155c33334c9a91677a8791b15"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

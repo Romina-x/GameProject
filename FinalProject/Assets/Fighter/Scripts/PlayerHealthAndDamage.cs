@@ -17,7 +17,6 @@ public class PlayerHealthAndDamage : MonoBehaviour, IDamageable, IHealthSubject
 
     // State flags
     private bool _isDead = false;
-    private bool _attacked = false;
 
     // Animator hashes
     private int _diedTriggerHash;

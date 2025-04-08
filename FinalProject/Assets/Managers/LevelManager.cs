@@ -8,6 +8,7 @@ using UnityEngine;
 public class LevelManager : MonoBehaviour
 {
     public static LevelManager Instance { get; private set; } // Singleton instance of this class to be accessed
+
     private LevelState _currentState;
 
     // Properties

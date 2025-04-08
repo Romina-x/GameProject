@@ -12,6 +12,8 @@ public class ObjectPool
     private int _size; // How many arrows to use
     private List<PoolableObject> _availableObjectsPool;
 
+    public List<PoolableObject> AvailableObjectsPool { get { return _availableObjectsPool; } }
+
     /// <summary>
     /// Creates a new instance of ObjectPool with the specified prefab and size.
     /// </summary>

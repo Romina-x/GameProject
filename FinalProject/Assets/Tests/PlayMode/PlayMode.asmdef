@@ -5,7 +5,9 @@
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
         "ManagersScripts",
-        "PlayerScripts"
+        "PlayerScripts",
+        "EnemyScripts",
+        "InterfacesScripts"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

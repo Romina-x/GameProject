@@ -1,0 +1,17 @@
+{
+    "name": "EnemyScripts",
+    "rootNamespace": "",
+    "references": [
+        "GUID:6a5b2e845b593934486adb9a8ec17170",
+        "GUID:fea0c82155c33334c9a91677a8791b15"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

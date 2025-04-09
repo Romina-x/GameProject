@@ -1,13 +1,13 @@
 # 🌲 Forest Rescue 🪓  
 Forest rescue a 3D platforming / action-adventure game set in a fantasy forest, where you need to defeat goblins and rescue animals! 
 <p align="center">
-    <img src="/Documents/FinalReport/OtherImages/GameImage.png" alt="Tileset: Ultica">
+    <img src="/Documents/FinalReport/OtherImages/GameImage.png" alt="Tileset: Ultica" width="70%">
 </p>
 
 ## Contents
 - [How to Download And Play](#how-to-download-and-play-windows-devices-only)
 - [How to run in the Unity Editor](#how-to-run-in-the-unity-editor)
-- [How to Share Feedback](#how-to-share-your-feedback)
+- [Share Your Feedback](#share-your-feedback)
 - [Directory Structure and Code Documentation](#directory-structure-and-code-documentation)
 
 ## 🎮 How to Download and Play (Windows Devices Only)
@@ -36,7 +36,7 @@ GPU:Graphics card with DX10 (shader model 4.0) capabilities.
 
 
 ## Share Your Feedback 
-Leave feedback here : ➡️ **[User Feedback Form](https://docs.google.com/forms/d/e/1FAIpQLSfYDNJzHmAWeYxdV7bLPPbsJIW2R6UqZe9Kt2eWmDSAP7TOhg/viewform)**
+Leave feedback here : ➡️ **[User Feedback Form](https://docs.google.com/forms/d/e/1FAIpQLSfYDNJzHmAWeYxdV7bLPPbsJIW2R6UqZe9Kt2eWmDSAP7TOhg/viewform)** <br>
 You can also report any bugs you find here: ➡️ **[Bug Report Form](https://docs.google.com/forms/d/e/1FAIpQLSeGxXRMbLGKBaWU_mlh32TSN13TTJqoxCiIrTSPRz3m5WpXHw/viewform?usp=header)**
 
 
@@ -45,10 +45,10 @@ You can also report any bugs you find here: ➡️ **[Bug Report Form](https://d
 ## Directory Structure and Code Documentation
 You can find the full project documentation in [Documents/HtmlDocumentation/index.html](Documents/HtmlDocumentation/index.html)
 
-## Submission Directory Structure
+### Directory Structure
 
 <p align="center">
-    <img src="/Documents/FinalReport/OtherImages/FileStructure.png" alt="Tileset: Ultica">
+    <img src="/Documents/FinalReport/OtherImages/FileStructure.png" alt="Tileset: Ultica" width="50%">
 </p>
 
 The `Assets` folder contains all of the work completed so far including the 3D models for the player, enemies, terrain etc., as well as the associated scripts and animations. The diagram highlights the most important subfolders, such as the scripts folders, where all the C# scripts are organised.  

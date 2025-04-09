@@ -11,7 +11,7 @@ Forest rescue a 3D platforming / action-adventure game set in a fantasy forest, 
 - [Share Your Feedback](#share-your-feedback)
 - [Directory Structure and Code Documentation](#directory-structure-and-code-documentation)
 
-## 🎮 How to Download and Play (Windows Devices Only)
+## How to Download and Play (Windows Devices Only)
 
 1. Download the **[Latest Release](https://gitlab.cim.rhul.ac.uk/zkac336/PROJECT/-/releases)**.
 2. Unzip the file, and the Forest Rescue application will be inside.
@@ -26,7 +26,7 @@ You can connect a controller to your PC via bluetooth or a wired connection and 
 | Attack          | Left Mouse Button       | Button West                  |
 
 
-## 📝 How to Run in the Unity Editor
+## How to Run in the Unity Editor
 1. Download the latest version of the Unity Hub
 2. Clone this repository, and open the FinalProject folder in the Unity Editor. 
 

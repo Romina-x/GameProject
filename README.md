@@ -45,3 +45,67 @@ You can also report any bugs you find here: ➡️ **[Bug Report Form](https://d
 ## Directory Structure and Code Documentation
 You can find the full project documentation in [Documents/HtmlDocumentation/index.html](Documents/HtmlDocumentation/index.html)
 
+## Submission Directory Structure
+
+<p align="center">
+    <img src="/Documents/FinalReport/OtherImages/FileStructure.png" alt="Tileset: Ultica">
+</p>
+
+The `Assets` folder contains all of the work completed so far including the 3D models for the player, enemies, terrain etc., as well as the associated scripts and animations. The diagram highlights the most important subfolders, such as the scripts folders, where all the C# scripts are organised.  
+Note that not all folders are included in the diagram.
+
+---
+
+### Files Relevant to the Player State Machine:
+
+- [`PlayerBaseState.cs`](FinalProject/Assets/Fighter/Scripts/PlayerBaseState.cs), [`PlayerRunState.cs`](FinalProject/Assets/Fighter/Scripts/PlayerRunState.cs), [`PlayerJumpState.cs`](FinalProject/Assets/Fighter/Scripts/PlayerJumpState.cs), [`PlayerStateMachine.cs`](FinalProject/Assets/Fighter/Scripts/PlayerStateMachine.cs), [`PlayerStateFactory.cs`](FinalProject/Assets/Fighter/Scripts/PlayerStateFactory.cs)  
+  *(There are other state files within this folder — Jump and Run are just two examples.)*
+
+---
+
+### Files Relevant to the Combat System:
+
+- [`IDamageable.cs`](FinalProject/Assets/Interfaces/IDamageable.cs)
+- [`PlayerHealthAndDamage.cs`](FinalProject/Assets/Fighter/Scripts/PlayerHealthAndDamage.cs), [`WeaponManager.cs`](FinalProject/Assets/Fighter/Scripts/WeaponManager.cs), [`WeaponAttributes.cs`](FinalProject/Assets/Fighter/Scripts/WeaponAttributes.cs)
+- [`Enemy.cs`](FinalProject/Assets/CuteGoblins/Scripts/Enemy.cs), [`AttackRadius.cs`](FinalProject/Assets/CuteGoblins/Scripts/AttackRadius.cs), [`RangedAttackRadius.cs`](FinalProject/Assets/CuteGoblins/Scripts/RangedAttackRadius.cs), [`ObjectPool.cs`](FinalProject/Assets/CuteGoblins/Scripts/ObjectPool.cs), [`PoolableObject.cs`](FinalProject/Assets/CuteGoblins/Scripts/PoolableObject.cs), [`Arrow.cs`](FinalProject/Assets/CuteGoblins/Scripts/Arrow.cs)
+
+---
+
+### Files Relevant to Enemy Movement:
+
+- [`Enemy.cs`](FinalProject/Assets/CuteGoblins/Scripts/Enemy.cs), [`FollowRadius.cs`](FinalProject/Assets/CuteGoblins/Scripts/FollowRadius.cs), [`EnemyMovement.cs`](FinalProject/Assets/CuteGoblins/Scripts/EnemyMovement.cs), [`EnemyScriptableObject.cs`](FinalProject/Assets/CuteGoblins/Scripts/EnemyScriptableObject.cs), [`RangedEnemyMovement.cs`](FinalProject/Assets/CuteGoblins/Scripts/RangedEnemyMovement.cs)
+
+---
+
+### Files Relevant to the Health UI System:
+
+- [`IHealthSubject.cs`](FinalProject/Assets/Interfaces/IHealthSubject.cs), [`IHealthObserver.cs`](FinalProject/Assets/Interfaces/IHealthObserver.cs)
+- [`PlayerHealthBar.cs`](FinalProject/Assets/UI/Scripts/PlayerHealthBar.cs), [`EnemyHealthBar.cs`](FinalProject/Assets/UI/Scripts/EnemyHealthBar.cs), [`GameOver.cs`](FinalProject/Assets/UI/Scripts/GameOver.cs)
+
+---
+
+### Files Relevant to Animal Rescue:
+
+- [`Cage.cs`](FinalProject/Assets/CuteRaccoons/Scripts/Cage.cs)
+- [`Animal.cs`](FinalProject/Assets/Interfaces/Animal.cs), [`AnimalTeleportRadius.cs`](FinalProject/Assets/Interfaces/AnimalTeleportRadius.cs)
+
+---
+
+### Files Relevant to Level Progression and Score System:
+
+- [`UIQuestManager.cs`](FinalProject/Assets/CuteRaccoons/Scripts/UIQuestManager.cs)
+- [`LevelManager.cs`](FinalProject/Assets/Managers/LevelManager.cs), [`LevelState.cs`](FinalProject/Assets/Managers/LevelState.cs)
+- [`GoalRadius.cs`](FinalProject/Assets/UI/Scripts/GoalRadius.cs), [`LevelCleared.cs`](FinalProject/Assets/UI/Scripts/LevelCleared.cs), [`GameTimer.cs`](FinalProject/Assets/UI/Scripts/GameTimer.cs), [`ScoreManager.cs`](FinalProject/Assets/UI/Scripts/ScoreManager.cs), [`SceneLoader.cs`](FinalProject/Assets/UI/Scripts/SceneLoader.cs)
+
+---
+
+### Files Relevant to the Sound System:
+
+- [`SoundFXManager.cs`](FinalProject/Assets/Managers/SoundFXManager.cs), [`SoundMixerManager.cs`](FinalProject/Assets/Managers/SoundMixerManager.cs)
+
+---
+
+### Test Files:
+
+- [`LevelManagerTests.cs`](FinalProject/Assets/Tests/EditMode/LevelManagerTests.cs), [`PlayerStateFactoryTests.cs`](FinalProject/Assets/Tests/EditMode/PlayerStateFactoryTests.cs)
+- [`SoundFXManagerTests.cs`](FinalProject/Assets/Tests/EditMode/SoundFXManagerTests.cs), [`ObjectPoolTests.cs`](FinalProject/Assets/Tests/EditMode/ObjectPoolTests.cs)

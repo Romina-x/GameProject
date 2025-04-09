@@ -4,26 +4,17 @@ Forest rescue a 3D platforming / action-adventure game set in a fantasy forest, 
     <img src="/Documents/FinalReport/OtherImages/GameImage.png" alt="Tileset: Ultica">
 </p>
 
-## How to Download  
+## Contents
+- [How to Download And Play](#how-to-download-and-play-windows-devices-only)
+- [How to run in the Unity Editor](#how-to-run-in-the-unity-editor)
+- [How to Share Feedback](#how-to-share-your-feedback)
+- [Directory Structure and Code Documentation](#directory-structure-and-code-documentation)
 
-1. Download the **[Latest Release]()**.
-1. Unzip the `ForestRescue-Release-0.1.zip` file. 
---- 
+## 🎮 How to Download and Play (Windows Devices Only)
 
-## Please Share Your Feedback!  
-You can report any bugs you find here: ➡️ **[Bug Report Form](https://docs.google.com/forms/d/1C2DCYjMNWSjHBqWtp8T-Iw0YDlmQlC47mu9CCe_cVSs/edit)**
-
+1. Download the **[Latest Release](https://gitlab.cim.rhul.ac.uk/zkac336/PROJECT/-/releases)**.
+2. Unzip the file, and the Forest Rescue application will be inside.
 ---
-
-### System Requirements:
-Unity Hub system requirements:
-OS: Windows 7 SP1+, 8, 10, 64-bit versions only; Mac OS X 10.13+; Ubuntu 16.04, 18.04, and CentOS 7.
-GPU:Graphics card with DX10 (shader model 4.0) capabilities.
-
-### How To Play:
-- Download the latest release of the game from : 
-
-
 ### Game Controls:
 You can connect a controller to your PC via bluetooth or a wired connection and it will automatically connect to the game when running.
 | Action          | Keyboard       | Game Controller        |
@@ -34,6 +25,21 @@ You can connect a controller to your PC via bluetooth or a wired connection and 
 | Attack          | Left Mouse Button       | Button West                  |
 
 
-## Code
+## 📝 How to Run in the Unity Editor
+1. Download the latest version of the Unity Hub
+2. Clone this repository, and open the FinalProject folder in the Unity Editor. 
 
-You can find the full project documentation in [Link Text](Documents/HtmlDocumentation/index.html)
+### System Requirements:
+Unity Hub system requirements:
+OS: Windows 7 SP1+, 8, 10, 64-bit versions only; Mac OS X 10.13+; Ubuntu 16.04, 18.04, and CentOS 7.
+GPU:Graphics card with DX10 (shader model 4.0) capabilities.
+
+
+## How to Share Your Feedback 
+You can report any bugs you find here: ➡️ **[Bug Report Form](https://docs.google.com/forms/d/1C2DCYjMNWSjHBqWtp8T-Iw0YDlmQlC47mu9CCe_cVSs/edit)**
+
+---
+
+## Directory Structure and Code Documentation
+You can find the full project documentation in [Documents/HtmlDocumentation/index.html](Documents/HtmlDocumentation/index.html)
+

@@ -35,8 +35,10 @@ OS: Windows 7 SP1+, 8, 10, 64-bit versions only; Mac OS X 10.13+; Ubuntu 16.04, 
 GPU:Graphics card with DX10 (shader model 4.0) capabilities.
 
 
-## How to Share Your Feedback 
-You can report any bugs you find here: ➡️ **[Bug Report Form](https://docs.google.com/forms/d/1C2DCYjMNWSjHBqWtp8T-Iw0YDlmQlC47mu9CCe_cVSs/edit)**
+## Share Your Feedback 
+Leave feedback here : ➡️ **[User Feedback Form](https://docs.google.com/forms/d/e/1FAIpQLSfYDNJzHmAWeYxdV7bLPPbsJIW2R6UqZe9Kt2eWmDSAP7TOhg/viewform)**
+You can also report any bugs you find here: ➡️ **[Bug Report Form](https://docs.google.com/forms/d/e/1FAIpQLSeGxXRMbLGKBaWU_mlh32TSN13TTJqoxCiIrTSPRz3m5WpXHw/viewform?usp=header)**
+
 
 ---
 

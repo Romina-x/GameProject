@@ -117,7 +117,6 @@ The main objectives for the project include:
 \chapter{Background}
 Game development is a multidisciplinary process that includes areas such as creating a game concept, designing its mechanics, and creating an engaging user interface and experience. Each of these elements are equally important to create a game that is accessible, enjoyable, and polished. This section covers the research that was carried out for the game, discussing the different approaches explored for various aspects of development. 
 
-
 \section{Game Engines}
 Game engines are platforms that make it easier to create computer games. They allow you to integrate and combine into single unit individual game elements such as animations, interaction with the user, or detection of collisions between objects \cite{Barczak2019}. These engines provide reusable components, allowing developers to focus on gameplay and design rather than redeveloping fundamental systems. There are many engines available, each suited to different types of projects. Popular engines for both 3D and 2D game development include Unreal Engine, Unity and Godot, while GameMaker and Construct are popular for 2D development. As this project is focused on 3D game development, my primary research concentrated on those engines.
 \newline
@@ -241,7 +240,7 @@ Icon design also plays an important role in the usability design of a game's UI.
 \section{Player Movement}
 Creating smooth and responsive movement for the player is essential for the user experience, as 3D platformer games require precise movements to traverse the levels. The player's movement covers standing idle, walking, running and jumping. 
 \subsection{Architecture}
-The architecture for the player's movement uses a Hierarchical State Machine (HSM) , as discussed in section \ref{HSM}.  A HSM was implemented for the player's movement as there was shared behaviour that needed to be applied across multiple states without duplicating it into each one. For example, there is a Grounded super state that applies gravity to the Idle, Walk and Run substates. Figure \ref{fig:label_State} details this architecture:
+The architecture for the player's movement uses a Hierarchical State Machine (HSM) , as discussed in Section \ref{HSM}.  A HSM was implemented for the player's movement as there was shared behaviour that needed to be applied across multiple states without duplicating it into each one. For example, there is a Grounded super state that applies gravity to the Idle, Walk and Run substates. Figure \ref{fig:label_State} details this architecture:
 
 \begin{figure}[h!]
     \centering
@@ -254,23 +253,32 @@ The PlayerStateMachine is the core component which manages the players states an
 \subsection{Movement Physics}\label{physics}
 In the game, Unity's built in Character Controller was used for player movement rather than implementing Rigidbody based movement. The built in character controller allows you to easily implement basic movement (Walking) with collisions, but the player will not be affected by physics \cite{unity2024_charactercontroller}. In contrast, Rigidbodies put the game object under the effect of Unity's physics engine, and gravity is automatically applied and the object will react to impact from other Rigidbodies. In the game, the player needs to move around and jump across platforms, and the combat mechanics are physical. Therefore, the game requires limited use of physics beyond gravity.  This is why the built-in Character Controller was chosen, as it avoids complex physics calculations and interactions that are not necessary. \newline
 The Character Controller component is a capsule-shaped collider that can be told to move in some direction from a script. It will stop at walls, walk upstairs and walk on slopes \cite{unity2024_charactercontroller_reference}. The controller uses the Move() method to apply movement to the player by taking a movement vector and adjusting the player's position. This was used for the player's walking and running states, incorporating a run multiplier to differentiate between walking and running speeds. However, the Character Controller does not cover all movement aspects, so the gravity and jump mechanics were implemented separately.  \newline
-The jump trajectory is calculated by applying an initial upward velocity and adjusting it with gravity over time. The initial velocity is calculated based on the desired maximum jump height and the time it takes to reach the apex of the jump. This ensured that the player reaches the jump height within the given time. Once the initial velocity is applied, gravity is applied continuously which decelerates the player until the apex, then accelerates them back to the ground. To calculate the initial velocity and gravity required for a parabolic jump motion, the following equations outlined by Kyle Pittman were used \cite{pittman2016_jump}:
-\begin{equation}
-\text{Gravity} = \frac{-2 \cdot \text{MaxJumpHeight}}{(\text{TimeToApex})^2}
-\end{equation}
+The jump trajectory is calculated by applying an initial upward velocity and adjusting it with gravity over time. The initial velocity is calculated based on the desired maximum jump height and the time it takes to reach the apex of the jump. This ensured that the player reaches the jump height within the given time. Once the initial velocity is applied, gravity is applied continuously which decelerates the player until the apex, then accelerates them back to the ground. To calculate the initial velocity and gravity required for a parabolic jump motion, the following equations outlined by Kyle Pittman were used \cite{pittman2016_jump}, detailed in Figure \ref{equations}.
+\begin{figure}[H]
+	\begin{equation}
+	\text{Gravity} = \frac{-2 \cdot \text{MaxJumpHeight}}{(\text{TimeToApex})^2}
+	\end{equation}
 
-\begin{equation}
-\text{Initial Jump Velocity} = \frac{2 \cdot \text{MaxJumpHeight}}{\text{TimeToApex}}
-\end{equation}
+	\begin{equation}
+	\text{Initial Jump Velocity} = \frac{2 \cdot \text{MaxJumpHeight}}{\text{TimeToApex}}
+	\end{equation}
+	\caption{Equations for parabolic jump motion.}
+	\label{equations}
+\end{figure}
+
+
 \paragraph{}
-\begin{verbatim}
-private void SetupJumpVariables()
-{
-    float timeToApex = _maxJumpTime / 2;
-    _gravity = (-2 * _maxJumpHeight) / Mathf.Pow(timeToApex, 2);
-    _initialJumpVelocity = (2 * _maxJumpHeight) / timeToApex;
-}
-\end{verbatim}
+\begin{figure}[H]
+	\begin{verbatim}
+	private void SetupJumpVariables()
+	{
+	    float timeToApex = _maxJumpTime / 2;
+	    _gravity = (-2 * _maxJumpHeight) / Mathf.Pow(timeToApex, 2);
+	    _initialJumpVelocity = (2 * _maxJumpHeight) / timeToApex;
+	}
+	\end{verbatim}
+	\caption{Application of jump equations in the code.}
+\end{figure}
 For the gravity applied to the player while grounded, a smaller value of gravity was used to avoid unnecessary gravitational calculations and to prevent the high gravity from slowing down the player's movement. \newline
 
 %%%%%%%%%%%%%%%%%%%%%%
@@ -279,14 +287,16 @@ For the gravity applied to the player while grounded, a smaller value of gravity
 The enemy movement in the game is implemented dynamically based on the player's proximity. There are two enemy types, long range and short range which both exhibit different movement behaviours. Short ranged enemies start in an idle state and begin to chase the player when they come within a specified range. Once the player moves out of this range, the enemies return back to their original starting position. Long ranged enemies that shoot the player from a distance stand still, and dynamically rotate to face and aim at the player. To implement this behaviour with intelligent navigation, Unity's AI module was used, which supports AI pathfinding using NavMesh Surfaces and NavMeshAgents \cite{unity2024_AI}. 
 A NavMeshAgent is assigned to each enemy, allowing them to navigate across a NavMeshSurface while avoiding obstacles in their path. These agents are configured with properties such as movement speed, acceleration, avoidance priority, and movement radius, which control their movement behaviour \cite{unity2024_NavAgent}. The NavMeshSurface is assigned to the level's entire terrain, defining the ground area that the enemies can move on. This approach allows enemies to intelligently avoid obstacles and dynamically chase the player while navigating complex environments. \newline
 \subsection{Architecture}
-Unlike the player movement system, the State Machine design pattern was not used for the enemy movement states. The enemy states: Idle, Chasing and Returning are relatively simple, and using a State Machine would likely overcomplicate the system for such few states. The current design is detailed in figure \ref{fig:label_enemyMovement}.
+Unlike the player movement system, the State Machine design pattern was not used for the enemy movement states. The enemy states: Idle, Chasing and Returning are relatively simple, and using a State Machine would likely overcomplicate the system for such few states. The current design is detailed in Figure \ref{fig:label_enemyMovement}.
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{UMLDiagrams/EnemyMovementUML.drawio}
     \caption{UML Class digram of Enemy Movement System}
     \label{fig:label_enemyMovement}
 \end{figure}
-The FollowRadius component detects when the player enters or exits the proximity radius. It makes use of a SphereCollider which calls OnTriggerEnter() and OnTriggerExit() when the player enters or exits the radius. It communicates this to EnemyMovement using events. 
+The FollowRadius component detects when the player enters or exits the proximity radius. It makes use of a SphereCollider which calls OnTriggerEnter() and OnTriggerExit() when the player enters or exits the radius. It communicates this to EnemyMovement using events. The OnTriggerEnter() method is detailed in Figure \ref{ontriggerenter}.
+
+\begin{figure}[H]
 \begin{verbatim}
 private void OnTriggerEnter(Collider other) 
 {
@@ -297,7 +307,12 @@ private void OnTriggerEnter(Collider other)
     }
 }
 \end{verbatim}
-EnemyMovement subscribes to the PlayerEnter and PlayerExit events from FollowRadius and manages the enemy's movement coroutines based on the event. A coroutine is a method that allows you to spread tasks across several frames. It can pause execution and return control to Unity but then continue where it left off on the following frame \cite{unity2024_Coroutines}. Coroutines were used instead of the Update() method which runs every frame. This is because the enemy movement relies on constant checks for position updates such as the player's position to follow, and using a coroutine allows this behaviour to execute over time without repeatedly checking every frame. One of the coroutines from EnemyMovement is shown below:
+\caption{OnTriggerEnter() method from the FollowRadius class.}
+\label{ontriggerenter}
+\end{figure}
+
+EnemyMovement subscribes to the PlayerEnter and PlayerExit events from FollowRadius and manages the enemy's movement coroutines based on the event. A coroutine is a method that allows you to spread tasks across several frames. It can pause execution and return control to Unity but then continue where it left off on the following frame \cite{unity2024_Coroutines}. Coroutines were used instead of the Update() method which runs every frame. This is because the enemy movement relies on constant checks for position updates such as the player's position to follow, and using a coroutine allows this behaviour to execute over time without repeatedly checking every frame. One of the coroutines from EnemyMovement is detailed in Figure \ref{followtarget}.
+\begin{figure}[H]
 \begin{verbatim}
 private IEnumerator FollowTarget()
 {
@@ -313,11 +328,15 @@ private IEnumerator FollowTarget()
     }
 }
 \end{verbatim}
+\caption{FollowTarget() method from the EnemyMovement class.}
+\label{followtarget}
+\end{figure}
+
 RangedEnemyMovement inherits from EnemyMovement, allowing different movement behaviour for long ranged enemies. It overrides the OnPlayerEntered and OnPlayerExit methods from EnemyMovement to start and stop an aiming coroutine when the player enters or exits the FollowRadius. This enables the Enemy class to use two different movement types interchangeably depending on the enemy type, similarly to the strategy pattern.
-The Enemy class manages the overall behaviour and state of the enemies in the game. Concerning movement, it is responsible for configuring the properties of the NavMeshAgent (such as speed and stopping distance) but delegates the actual movement logic to the EnemyMovement or RangedEnemyMovement classes. This separation allows the Enemy class to keep its focus on managing overall enemy behaviours while delegating the more complex logic to other dedicated classes. For movement, it works with the EnemyMovement class, while for combat, it interacts with the AttackRadius class (Detailed in \ref{combatsystem}). 
+The Enemy class manages the overall behaviour and state of the enemies in the game. Concerning movement, it is responsible for configuring the properties of the NavMeshAgent (such as speed and stopping distance) but delegates the actual movement logic to the EnemyMovement or RangedEnemyMovement classes. This separation allows the Enemy class to keep its focus on managing overall enemy behaviours while delegating the more complex logic to other dedicated classes. For movement, it works with the EnemyMovement class, while for combat, it interacts with the AttackRadius class (Detailed in Section \ref{combatsystem}). 
 
 \subsection{Configurable Enemies}
-Currently in the game there are three enemy types, Goblin Warrior, Scout and Archer. Warrior and Scout are both  short range and vary in attack speed, health and movement speed. Archer is a long ranged enemy with differing attack speed, health, and movement properties to Warrior and Scout. To enable multiple enemy types the Strategy pattern was used \ref{strategy} in conjunction with Unity's ScriptableObject feature. Strategy was used here to enable the Enemy class to use different behaviours interchangeably without hardcoding multiple Enemy classes for different enemy types. Unity's ScriptableObject is a data container that allows you to create customisable assets in the Unity editor \cite{unity2024_ScriptableObject}. This was used along with the Strategy pattern methodology to create separate configurable data containers for the three different enemy types. This design is detailed in figure \ref{fig:label_strategy}.
+Currently in the game there are three enemy types, Goblin Warrior, Scout and Archer. Warrior and Scout are both  short range and vary in attack speed, health and movement speed. Archer is a long ranged enemy with differing attack speed, health, and movement properties to Warrior and Scout. To enable multiple enemy types the Strategy pattern was used, as discussed in Section \ref{strategy}, in conjunction with Unity's ScriptableObject feature. Strategy was used here to enable the Enemy class to use different behaviours interchangeably without hardcoding multiple Enemy classes for different enemy types. Unity's ScriptableObject is a data container that allows you to create customisable assets in the Unity editor \cite{unity2024_ScriptableObject}. This was used along with the Strategy pattern methodology to create separate configurable data containers for the three different enemy types. This design is detailed in Figure \ref{fig:label_strategy}.
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{UMLDiagrams/EnemyStrategyUML.drawio}
@@ -327,7 +346,7 @@ Currently in the game there are three enemy types, Goblin Warrior, Scout and Arc
 The EnemyScriptableObject stores all the customizable parameters, such as health, attack speed, and movement speed. The Enemy class uses the data from the assigned ScriptableObject (GoblinWarrior, GoblinScout for GoblinArcher) to adjust its behaviour dynamically. This approach decouples the enemy configuration from the core enemy logic, allowing new enemy types to be added easily by creating new ScriptableObjects without modifying the Enemy class. 
 
 \section{Combat System}\label{combatsystem}
-The combat system is a core feature of the game, enabling attack and damage mechanics between the player and enemies. The design focusses on handling the damage mechanic in a consistent way across both enemies and player, while accommodating their differing attack mechanics. This was achieved by creating an IDamageable interface, which must be implemented by all game objects capable of taking damage. This design is detailed in figure  \ref{fig:label_combat}.
+The combat system is a core feature of the game, enabling attack and damage mechanics between the player and enemies. The design focusses on handling the damage mechanic in a consistent way across both enemies and player, while accommodating their differing attack mechanics. This was achieved by creating an IDamageable interface, which must be implemented by all game objects capable of taking damage. This design is detailed in Figure  \ref{fig:label_combat}.
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{UMLDiagrams/CombatUML.drawio.png}
@@ -335,7 +354,8 @@ The combat system is a core feature of the game, enabling attack and damage mech
     \label{fig:label_combat}
 \end{figure}
 The IDamageable interface is the core of the system, which defines a TakeDamage() method which reduces the entity's health based on an incoming damage value. Both the Enemy and PlayerHealthAndDamage classes implement this interface, ensuring damage is applied in a consistent way for both entities. 
-\newline The player's combat mechanic is controlled by the WeaponAttributes class. The weapon is equipped with a Box Collider that calls the OnTriggerEnter() method on collision. Within OnTriggerEnter(), the TakeDamage() method is called on the enemy that entered the collider. 
+\newline The player's combat mechanic is controlled by the WeaponAttributes class. The weapon is equipped with a Box Collider that calls the OnTriggerEnter() method on collision. Within OnTriggerEnter(), the TakeDamage() method is called on the enemy that entered the collider. This is detailed in Figure \ref{ontriggerenter2} 
+\begin{figure}[H]
 \begin{verbatim}
 private void OnTriggerEnter(Collider other)
 {
@@ -347,8 +367,13 @@ private void OnTriggerEnter(Collider other)
     }
 }
 \end{verbatim}
+\caption{OnTriggerEnter method from the WeaponAttributes class.}
+\label{ontriggerenter2}
+\end{figure}
 The WeaponManager class manages the weapon's Box Collider, ensuring that it is only enabled during the player's attack animation. This is achieved with Unity animation events, which call the EnableWeaponCollider() method at the appropriate time during the attack animation.\newline 
-The enemy's combat system differs from the player's, as it does not rely on weapon collision mechanics. Instead, the AttackRadius class manages the enemy's attack behaviour. This system uses a Sphere Collider that defines a radius in which the player can take damage. When the player is within this radius, the enemy periodically attacks by calling the player's TakeDamage() method. The  attacks are based on a set delay, allowing different enemy types to vary in attack speed. The Attack coroutine from AttackRadius is shown below:
+The enemy's combat system differs from the player's, as it does not rely on weapon collision mechanics. Instead, the AttackRadius class manages the enemy's attack behaviour. This system uses a Sphere Collider that defines a radius in which the player can take damage. When the player is within this radius, the enemy periodically attacks by calling the player's TakeDamage() method. The  attacks are based on a set delay, allowing different enemy types to vary in attack speed. The Attack coroutine from AttackRadius is detailed in Figure \ref{attackradius}.
+
+\begin{figure}[H]
 \begin{verbatim}
 protected virtual IEnumerator Attack()
 {
@@ -368,14 +393,20 @@ protected virtual IEnumerator Attack()
     _attackCoroutine = null;
 }
 \end{verbatim}
-All enemy types in the game can be stunned after being hit by the player. When stunned, enemies are unable to attack until the 'get hit' animation has ended. This is controlled by a CanAttack variable defined in the Enemy class, which is checked in the Attack coroutine to determine when the enemy can attack. RangedAttackRadius provides the attack logic for the Archer enemy, which inherits from AttackRadius. This enemy begins firing arrows periodically while aiming at the player when the player has entered the RangedAttackRadius, and stops when they've left the radius. To achieve this behaviour, the Object Pool pattern \ref{objectpool} was used to manage the creation of arrows. This pattern avoids repeatedly creating and destroying arrows, improving performance. The architecture for this is shown in \ref{fig:label_objpool} below:
+\caption{Attack() coroutine from the AttackRadius class.}
+\label{attackradius}
+\end{figure}
+
+All enemy types in the game can be stunned after being hit by the player. When stunned, enemies are unable to attack until the 'get hit' animation has ended. This is controlled by a CanAttack variable defined in the Enemy class, which is checked in the Attack coroutine to determine when the enemy can attack. RangedAttackRadius provides the attack logic for the Archer enemy, which inherits from AttackRadius. This enemy begins firing arrows periodically while aiming at the player when the player has entered the RangedAttackRadius, and stops when they've left the radius. To achieve this behaviour, the Object Pool pattern was used, as discussed in Section \ref{objectpool}, to manage the creation of arrows. This pattern avoids repeatedly creating and destroying arrows, improving performance. The architecture for this is shown in Figure \ref{fig:label_objpool} below.
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{UMLDiagrams/ArrowPoolUML.drawio.png}
     \caption{UML Class diagram of Object Pool Pattern}
     \label{fig:label_objpool}
 \end{figure}
-The ObjectPool class manages a pool of reusable objects, which in this case would be the arrows. It keeps a list (\_availableObjectsPool) of available objects to be used, and provides methods for creating a pool of objects, getting an available object to use from that pool and returning already used objects back to the pool. PoolableObject represents an object to be used in the object pool, defining a method to ensure objects that inherit from this class are returned to the object pool once disabled. The Arrow class manages the arrow prefab that will be used in the object pool, which inherits from PoolableObject. It defines all of the arrow's properties and handles dealing damage to the player on collision. RangedAttackRadius overrides the Attack coroutine from AttackRadius to implement this new behaviour shown below:
+The ObjectPool class manages a pool of reusable objects, which in this case would be the arrows. It keeps a list (\_availableObjectsPool) of available objects to be used, and provides methods for creating a pool of objects, getting an available object to use from that pool and returning already used objects back to the pool. PoolableObject represents an object to be used in the object pool, defining a method to ensure objects that inherit from this class are returned to the object pool once disabled. The Arrow class manages the arrow prefab that will be used in the object pool, which inherits from PoolableObject. It defines all of the arrow's properties and handles dealing damage to the player on collision. RangedAttackRadius overrides the Attack coroutine from AttackRadius to implement this new behaviour, detailed in Figure \ref{attackcoroutine2}.
+
+\begin{figure}[H]
 \begin{verbatim}
 protected override IEnumerator Attack()
 {
@@ -409,26 +440,30 @@ protected override IEnumerator Attack()
     _attackCoroutine = null;
 }
 \end{verbatim}
-Each time the ranged enemy attacks, it gets a new available arrow from the object pool using GetObject(). Then, the properties of the arrow are configured, including the damage it does and its spawn position in relation to the enemy. The Arrow prefab uses a Rigidbody component, as discussed in section \ref{physics}, which allows it to use and react to physics. This allows for a force to be applied to the arrow, shooting it in the direction of the player at a specific speed. 
+\caption{Attack() coroutine from the RangedAttackRadius class.}
+\label{attackcoroutine2}
+\end{figure}
+
+Each time the ranged enemy attacks, it gets a new available arrow from the object pool using GetObject(). Then, the properties of the arrow are configured, including the damage it does and its spawn position in relation to the enemy. The Arrow prefab uses a Rigidbody component, as discussed in Section \ref{physics}, which allows it to use and react to physics. This allows for a force to be applied to the arrow, shooting it in the direction of the player at a specific speed. 
 
 %%%%%%%%%%%%%%%%%%%%%%
 %%% Animals and Cages
 \section{Animals and Cages}
-The main gameplay mechanic of the game is rescuing animals around the map. In each level there are three animals stuck within cages that are guarded by enemies for the player to find and rescue. To rescue an animal the player has to defeat the enemies that surround the animal's cage. The amount of enemies surrounding each cage varies to increase/decrease the difficulty of the parts of each level. Once the player rescues an animal they break free from the cage and follow the player around the map. The architecture of this mechanic is detailed in figure \ref{fig:label_rescue} below. 
+The main gameplay mechanic of the game is rescuing animals around the map. In each level there are three animals stuck within cages that are guarded by enemies for the player to find and rescue. To rescue an animal the player has to defeat the enemies that surround the animal's cage. The amount of enemies surrounding each cage varies to increase/decrease the difficulty of the parts of each level. Once the player rescues an animal they break free from the cage and follow the player around the map. The architecture of this mechanic is detailed in Figure \ref{fig:label_rescue} below. 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.7\textwidth]{UMLDiagrams/AnimalRescueUML.drawio.png}
     \caption{UML Class diagram of Animal Rescue Mechanic}
     \label{fig:label_rescue}
 \end{figure}
-The Cage class controls the logic for freeing animals once all assigned enemies have been defeated. Each cage has a list of associated Enemy objects that are assigned to each specific cage in the Unity editor. The class subscribes to the OnDefeated event of each of its associated enemies, allowing it to be notified when one of them dies. Each time OnEnemyDefeated is triggered, the cage checks if all assigned enemies in the list have been defeated. Once this condition is met, the FreeAnimal() method is called, which handles the visual and sound effects for the cage's destruction and prompts the animal to start moving. The Animal class manages this movement behavior which includes staying idle inside the cage until freed. Once freed, the Cage script calls the Animal's StartFollowing() method which allows the Animal to follow the player. The follow movement uses the same logic that the Enemy movement uses to chase the player, discussed in section \ref{enemy_movement}. To prevent animals from getting stuck around the map far from the player, a teleportation system ensures they remain near the player. The TeleportRadius class represents a sphere collider around the player for this system. If an animal exits this radius, it calls the Animal's TeleportToPlayer() method, ensuring they stay within a reasonable distance of the player.
+The Cage class controls the logic for freeing animals once all assigned enemies have been defeated. Each cage has a list of associated Enemy objects that are assigned to each specific cage in the Unity editor. The class subscribes to the OnDefeated event of each of its associated enemies, allowing it to be notified when one of them dies. Each time OnEnemyDefeated is triggered, the cage checks if all assigned enemies in the list have been defeated. Once this condition is met, the FreeAnimal() method is called, which handles the visual and sound effects for the cage's destruction and prompts the animal to start moving. The Animal class manages this movement behavior which includes staying idle inside the cage until freed. Once freed, the Cage script calls the Animal's StartFollowing() method which allows the Animal to follow the player. The follow movement uses the same logic that the Enemy movement uses to chase the player, discussed in Section \ref{enemy_movement}. To prevent animals from getting stuck around the map far from the player, a teleportation system ensures they remain near the player. The TeleportRadius class represents a sphere collider around the player for this system. If an animal exits this radius, it calls the Animal's TeleportToPlayer() method, ensuring they stay within a reasonable distance of the player.
 
 %%%%%%%%%%%%%%%%%%%%%%
 %%% User Experience#
 \section{User Interface}
-The design of the user interface (UI) is an important part of enhancing the overall user experience for the game, as discussed in section \ref{userexperience}. Therefore creating a full UI was a large focus of the development to achieve a complete and professional looking game that is intuitive for the player to use. The UI includes a title screen, level selection menu, settings and pause menus and a HUD (Heads Up Display) for the levels.  \newline
+The design of the user interface (UI) is an important part of enhancing the overall user experience for the game, as discussed in Section \ref{userexperience}. Therefore creating a full UI was a large focus of the development to achieve a complete and professional looking game that is intuitive for the player to use. The UI includes a title screen, level selection menu, settings and pause menus and a HUD (Heads Up Display) for the levels.  \newline
 To set up the UI components, Unity's built-in UI package was used \cite{unity2024_UI} to create multiple canvases to display various types of information to the user. 
-For communication between the UI elements involving health changes and relevant game objects, the Observer pattern was used, as discussed in section \ref{observer}. The pattern was used in this context to decouple the UI components from the game logic. This allows the game objects to act as subjects, and notify the relevant UI components (observers) without needing to hold direct references to them. Currently, there are two subjects (the enemy and player), and three observers (the enemy and player's health bars and the game over screen). This design is shown in figure \ref{fig:label_observer1}.
+For communication between the UI elements involving health changes and relevant game objects, the Observer pattern was used, as discussed in Section \ref{observer}. The pattern was used in this context to decouple the UI components from the game logic. This allows the game objects to act as subjects, and notify the relevant UI components (observers) without needing to hold direct references to them. Currently, there are two subjects (the enemy and player), and three observers (the enemy and player's health bars and the game over screen). This design is shown in Figure \ref{fig:label_observer1}.
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{UMLDiagrams/HealthObserverUML.drawio.png}
@@ -436,7 +471,8 @@ For communication between the UI elements involving health changes and relevant 
     \label{fig:label_observer1}
 \end{figure}
 There are two interfaces to manage health changes: one for the subject and one for the observers. The IHealthSubject interface defines methods for registering, unregistering and notifying observers about health changes. The IHealthObserver interface specifies an OnNotify() method, that passes the observer the updated health value and defines what it should do given the new value. 
-The PlayerHealthAndDamage and Enemy classes implement the IHealthSubject interface. Each holds a list of observers that are managed with the register and unregister observer methods. When a health change happens, the subjects notify their observers by calling the OnNotify() method for each observer in the list.  
+The PlayerHealthAndDamage and Enemy classes implement the IHealthSubject interface. Each holds a list of observers that are managed with the register and unregister observer methods. When a health change happens, the subjects notify their observers by calling the OnNotify() method for each observer in the list. An example of this is detailed in Figure \ref{notifyhealthobservers}.
+\begin{figure}[H]
 \begin{verbatim}
 public void NotifyHealthObservers()
 {
@@ -446,15 +482,21 @@ public void NotifyHealthObservers()
     }
 }
 \end{verbatim}
+\caption{NotifyHealthObservers() method from the PlayerHealthAndDamage class.}
+\label{notifyhealthobservers}
+\end{figure}
 The PlayerHealthBar, EnemyHealthBar and GameOver classes implement the IHealthObserver interface. The Game Over screen needs to observe the player's health and subsequently pop up if their health is below zero. 
-The health bars observe the player and enemies to display their current health in real time. Each observer registers itself with its associated subject by calling the subject's RegisterHealthObserver(this) method. Once registered, the subject calls the observer's OnNotify() method whenever there is a health update. For example, when an Enemy notifies the EnemyHealthBar, the following method is called:
+The health bars observe the player and enemies to display their current health in real time. Each observer registers itself with its associated subject by calling the subject's RegisterHealthObserver(this) method. Once registered, the subject calls the observer's OnNotify() method whenever there is a health update. For example, when an Enemy notifies the EnemyHealthBar, the following method detailed in Figure \ref{onnotify} is called.
+\begin{figure}[H]
 \begin{verbatim}
 public void OnNotify(float maxHealth, float currentHealth)
 {
     UpdateHealthBar(maxHealth, currentHealth);
 }
 \end{verbatim}
-
+\caption{OnNotify() method from the EnemyHealthBar class.}
+\label{onnotify}
+\end{figure}
 Beyond the player and enemy health bars, additional UI elements are displayed on the HUD to communicate the player's progression through the level. At the start of a level, the HUD displays the current objective: "Rescue the animals". Then, as animals are rescued, the HUD updates dynamically to display the number rescued out of the total. Once all animals have been freed, the objective changes to "Get to the goal," and the goal is activated with a collider and visual effects to highlight its location. When the player walks into the goal collider, a level cleared screen appears, displaying the player's time and score. These events are shown in Figures \ref{fig:label_goal} and \ref{fig:label_levelcleared}. 
 \begin{figure}[H]
     \centering
@@ -470,7 +512,7 @@ Beyond the player and enemy health bars, additional UI elements are displayed on
     \label{fig:label_levelcleared}
 \end{figure}
 
-The architecture for the level progression is detailed in figure \ref{fig:label_levelprogression} below:
+The architecture for the level progression is detailed in Figure \ref{fig:label_levelprogression} below.
 
 \begin{figure}[H]
     \centering
@@ -479,7 +521,8 @@ The architecture for the level progression is detailed in figure \ref{fig:label_
     \label{fig:label_levelprogression}
 \end{figure}
 
-The UIQuestManager manages the quest system by tracking the number of rescued animals, updating the quest dialog, and activating the goal when all animals have been freed. The Animal class defines an OnRescued event, which UIQuestManager subscribes to in order to be notified whenever an animal is rescued. Each time UIQuestManager is notified of this event, it updates the count on the HUD and checks whether all animals have been rescued. If so, it changes the quest dialog and activates the goal. The OnAnimalRescued method, which handles this logic, is shown below:
+The UIQuestManager manages the quest system by tracking the number of rescued animals, updating the quest dialog, and activating the goal when all animals have been freed. The Animal class defines an OnRescued event, which UIQuestManager subscribes to in order to be notified whenever an animal is rescued. Each time UIQuestManager is notified of this event, it updates the count on the HUD and checks whether all animals have been rescued. If so, it changes the quest dialog and activates the goal. The OnAnimalRescued method, which handles this logic, is shown in Figure \ref{onanimalrescued}.
+\begin{figure}[H]
 \begin{verbatim}
 private void OnAnimalRescued()
 {
@@ -495,8 +538,13 @@ private void OnAnimalRescued()
     }
 }
 \end{verbatim}
+\caption{OnAnimalRescued() method from the UIQuestManager class.}
+\label{onanimalrescued}
+\end{figure}
 The ActivateGoal() method enables the GoalRadius object and instantiates the visual effect that signals the goal’s activation. GoalRadius represents the collider that the player must enter to complete the level. When the player collides with it, the OnTriggerEnter() method triggers the Setup() method in the LevelCleared class, which manages the level completion screen.
-LevelCleared retrieves the elapsed time from GameTimer and the total score from the ScoreManager to display them on the UI. The ScoreManager tracks the player’s score throughout the level by subscribing to the Enemy class's OnDefeat event. Each time an enemy is defeated, its score is added to the total. When LevelCleared retrieves this value, it combines it with the completion time and applies a score multiplier, rewarding players for defeating more enemies and finishing the level quickly. The Setup() method from LevelCleared, which handles this logic, is shown below:
+LevelCleared retrieves the elapsed time from GameTimer and the total score from the ScoreManager to display them on the UI. The ScoreManager tracks the player’s score throughout the level by subscribing to the Enemy class's OnDefeat event. Each time an enemy is defeated, its score is added to the total. When LevelCleared retrieves this value, it combines it with the completion time and applies a score multiplier, rewarding players for defeating more enemies and finishing the level quickly. The Setup() method from LevelCleared, which handles this logic, is shown in Figure \ref{setup}.
+
+\begin{figure}[H]
 \begin{verbatim}
 public void Setup()
 {
@@ -518,6 +566,9 @@ public void Setup()
     _scoreText.text = $"{finalScore:N0}";
 }
 \end{verbatim}
+\caption{Setup() method from the LevelCleared class.}
+\label{setup}
+\end{figure}
 
 Another important aspect of the UI is managing gameplay pausing during specific UI screens, such as the pause menu or game over screen, and allowing different classes to respond based on the current game state. To achieve this, the LevelManager class handles transitions between the key game states: Playing, Paused, LevelCleared, and GameOver.
 This class uses the Singleton pattern, as discussed in Section \ref{singleton}, ensuring that the game state can be read globally without requiring direct references in multiple classes. Additionally, it guarantees that only one instance of LevelManager exists per level. The architecture of this system is illustrated in Figure \ref{fig:label_singletonLevelManager}.
@@ -529,9 +580,9 @@ This class uses the Singleton pattern, as discussed in Section \ref{singleton}, 
     \label{fig:label_singletonLevelManager}
 \end{figure}
 
-The LevelManager implements a simple Finite State Machine (FSM) as discussed in section \ref{HSM} , managing game states using a LevelState enum to represent each level state, as each state requires minimal behavior. The SetGameState() method transitions the game to a new LevelState when called, typically triggered by UI screens associated with those states. For example, when the pause menu is activated, it calls \newline \texttt{LevelManager.Instance.SetGameState(LevelState.Paused)}, and the LevelManager handles pausing the game accordingly. Within SetGameState(), the method determines the new state and executes the appropriate logic. For instance, in the Paused state, EnableGameplay() is called to stop gameplay. Additionally, other classes can query the LevelManager to check the current game state, allowing them to execute state-specific logic only when necessary.\newline
+The LevelManager implements a simple Finite State Machine (FSM) as discussed in Section \ref{HSM} , managing game states using a LevelState enum to represent each level state, as each state requires minimal behavior. The SetGameState() method transitions the game to a new LevelState when called, typically triggered by UI screens associated with those states. For example, when the pause menu is activated, it calls \newline \texttt{LevelManager.Instance.SetGameState(LevelState.Paused)}, and the LevelManager handles pausing the game accordingly. Within SetGameState(), the method determines the new state and executes the appropriate logic. For instance, in the Paused state, EnableGameplay() is called to stop gameplay. Additionally, other classes can query the LevelManager to check the current game state, allowing them to execute state-specific logic only when necessary.\newline
 
-The game also implements animated scene transitions to create a smoother and more visually appealing UI experience when navigating through menus for the user. Initially, each UI menu class contained its own button logic for loading scenes, resulting in duplicated code across multiple menu classes. The Title Screen, Level Select and each level are each a seperate scene, so most buttons, except for the pause and resume buttons within a level, take the user to a different scene. To improve maintainability and implement animated scene transitions, the button logic was refactored into a dedicated SceneLoader class. The architecture of this class is illustrated in \ref{fig:label_SceneLoader} below.
+The game also implements animated scene transitions to create a smoother and more visually appealing UI experience when navigating through menus for the user. Initially, each UI menu class contained its own button logic for loading scenes, resulting in duplicated code across multiple menu classes. The Title Screen, Level Select and each level are each a seperate scene, so most buttons, except for the pause and resume buttons within a level, take the user to a different scene. To improve maintainability and implement animated scene transitions, the button logic was refactored into a dedicated SceneLoader class. The architecture of this class is illustrated in Figure \ref{fig:label_SceneLoader} below.
 
 \begin{figure}[H]
     \centering
@@ -543,10 +594,10 @@ The game also implements animated scene transitions to create a smoother and mor
 In Unity, UI buttons are components that can be attached to UI objects in a scene, each with an OnClick event that allows a method from any class to be assigned. In the game, all UI buttons reference the SceneLoader class in their OnClick events, ensuring a consistent approach to scene transitions. The SceneLoader class provides a LoadScene() method, which takes the name of the scene to load as a string, triggers the transition animation, and then loads the new scene. It also includes an ExitGame() method for buttons that allow the player to quit the game. The transition animation is handled by an object with an Animator component. When a scene loads, this object starts by covering the screen and then plays an animation to reveal the new scene. Within SceneLoader, when a button is pressed, the animator is triggered to play the 'hide' animation, and the scene transition is delayed for the duration of this animation before the new scene is loaded. This ensures smooth and visually appealing transitions between UI screens.
 
 \section{User Experience}\label{UX}
-User experience focuses on ensuring that the game is enjoyable and accessible for the player, which includes considerations for controls, camera movement, feedback mechanisms and interface design, as discussed in section \ref{userexperience}. In the second term of the project, beta testing was carried out which included a user feedback form that was sent out to gather player opinions on the game. The insights from this feedback will be discussed throughout this section, and the beta testing process is discussed in further detail in \ref{testing}.
+User experience focuses on ensuring that the game is enjoyable and accessible for the player, which includes considerations for controls, camera movement, feedback mechanisms and interface design, as discussed in Section \ref{userexperience}. In the second term of the project, beta testing was carried out which included a user feedback form that was sent out to gather player opinions on the game. The insights from this feedback will be discussed throughout this Section, and the beta testing process is discussed in further detail in Section \ref{testing}.
 
 \subsection{Camera \& Controls}
-For the camera movement, a fixed third-person perspective was implemented, as discussed in section \ref{userexperience}.  The camera stays positioned behind the player and follows their movements without allowing the player to control its angle or view. 
+For the camera movement, a fixed third-person perspective was implemented, as discussed in Section \ref{userexperience}.  The camera stays positioned behind the player and follows their movements without allowing the player to control its angle or view. 
 This camera perspective was chosen because it is the approach used in the games that this project takes inspiration from, Super Mario 3D World and The Legend of Zelda: Link’s Awakening for Switch. Given the relatively small level sizes, full camera control is unnecessary, as the fixed perspective provides a clear view of most of the environment. Additionally, the third-person view ensures that the player can clearly see their character’s movements, which is essential for both platforming and action gameplay.
 \begin{figure}[H]
     \centering
@@ -566,9 +617,11 @@ This camera perspective was chosen because it is the approach used in the games 
     \caption{Comparison of the game's camera system with Link's Awakening}
 \end{figure}
 
-To achieve smooth and dynamic camera movement for this scenario, Unity's Cinemachine package was used. Cinemachine allows you to create professional looking camera movement with automatic damping and target tracking \cite{onewheelstudio_2021}. The FreeLook camera that Cinemachine provides was used to create the third person camera as shown in figure \ref{fig:label_camera}
+To achieve smooth and dynamic camera movement for this scenario, Unity's Cinemachine package was used. Cinemachine allows you to create professional looking camera movement with automatic damping and target tracking \cite{onewheelstudio_2021}. The FreeLook camera that Cinemachine provides was used to create the third person camera as shown in Figure \ref{fig:label_camera}
 Cinemachine allows you to define different camera properties such as follow speed and field of view to achieve the best perspective that would show a sufficient view of the world within the camera. \newline
-As discussed in \ref{userexperience}, player controls are an important factor towards offering a great user experience. To allow the player to use either keyboard inputs or game controller inputs, Unity's new Input System was used. The input system allows players to control the game in a variety of ways including external devices, touch screen or gestures \cite{unity_2024_inputsystem}. This is done by setting up 'Actions' such as running, which can have multiple input options linked to it. For example the run action is linked to both the Left Shift key on the keyboard, and the Left Trigger button on a controller. Below is an example of how the directional movement input is read using the corresponding input action:
+As discussed in Section \ref{userexperience}, player controls are an important factor towards offering a great user experience. To allow the player to use either keyboard inputs or game controller inputs, Unity's new Input System was used. The input system allows players to control the game in a variety of ways including external devices, touch screen or gestures \cite{unity_2024_inputsystem}. This is done by setting up 'Actions' such as running, which can have multiple input options linked to it. For example the run action is linked to both the Left Shift key on the keyboard, and the Left Trigger button on a controller. Below is an example of how the directional movement input is read using the corresponding input action, detailed in Figure \ref{onmovementinput}.
+
+\begin{figure}[H]
 \begin{verbatim}
 private void OnMovementInput(InputAction.CallbackContext context)
 {
@@ -577,10 +630,13 @@ private void OnMovementInput(InputAction.CallbackContext context)
     _isMovementPressed = input != Vector2.zero;
 }
 \end{verbatim}
-OnMovementInput is triggered when the movement input action is performed (Joystick or WASD key movements) and provides 'context' of the action. In this case we read the input as a two dimensional vector in the direction that the player is pressing, which is then used for the Move() method of the Character Controller \ref{physics}.  \newline
+\caption{OnMovementInput() method from the PlayerStateMachine class.}
+\label{onmovementinput}
+\end{figure}
+OnMovementInput is triggered when the movement input action is performed (Joystick or WASD key movements) and provides 'context' of the action. In this case we read the input as a two dimensional vector in the direction that the player is pressing, which is then used for the Move() method of the Character Controller (Discussed in Section \ref{physics}). 
 
 \subsection{Level Design}\label{leveldesign}
-One of the objectives for the project surrounding user experience was to design three levels of varying difficulty. A key aspect of level design is to keep a balance between challenge and accessibility for all levels of players as discussed in \ref{userexperience}. Since this game is aimed at all ages, it was important to start with a very easy introduction and gradually increase the difficulty. The three levels are of progressive difficulty, with the first level starting as an introduction to the game’s mechanics. Ideally, with more time, this could have been expanded into a dedicated tutorial level with full instructions on controls and core mechanics. For now, level one is designed to be linear, ensuring that players naturally encounter animals to rescue and enemies to fight without needing to search for them. The first enemies appear individually and are easy to defeat, allowing the player to learn combat mechanics in a low pressure environment. Additionally, two collectible hearts are placed in accessible locations to help players restore their health as they progress. An overview of this level is shown in figure \ref{fig:label_LevelOne}.
+One of the objectives for the project surrounding user experience was to design three levels of varying difficulty. A key aspect of level design is to keep a balance between challenge and accessibility for all levels of players as discussed in Section \ref{userexperience}. Since this game is aimed at all ages, it was important to start with a very easy introduction and gradually increase the difficulty. The three levels are of progressive difficulty, with the first level starting as an introduction to the game’s mechanics. Ideally, with more time, this could have been expanded into a dedicated tutorial level with full instructions on controls and core mechanics. For now, level one is designed to be linear, ensuring that players naturally encounter animals to rescue and enemies to fight without needing to search for them. The first enemies appear individually and are easy to defeat, allowing the player to learn combat mechanics in a low pressure environment. Additionally, two collectible hearts are placed in accessible locations to help players restore their health as they progress. An overview of this level is shown in Figure \ref{fig:label_LevelOne}.
 
 \begin{figure}[H]
     \centering
@@ -589,7 +645,7 @@ One of the objectives for the project surrounding user experience was to design 
     \label{fig:label_LevelOne}
 \end{figure}
 
-The second and third levels increase in difficulty compared to the first, with groups of two enemies guarding most cages. Unlike level one, these levels are less linear, requiring more exploration to find collectible hearts and animals to rescue. Level three presents the greatest challenge, incorporating more difficult platforming sections and additional enemies beyond those guarding cages, encouraging players to engage in combat for a higher score. This level design aimed to keep a balance between platforming and exploration while keeping the environments fairly small to maintain a short and light hearted gameplay experience. An overview of these levels are shown in figures \ref{fig:label_LevelTwo} and \ref{fig:label_LevelThree}. \newline
+The second and third levels increase in difficulty compared to the first, with groups of two enemies guarding most cages. Unlike level one, these levels are less linear, requiring more exploration to find collectible hearts and animals to rescue. Level three presents the greatest challenge, incorporating more difficult platforming sections and additional enemies beyond those guarding cages, encouraging players to engage in combat for a higher score. This level design aimed to keep a balance between platforming and exploration while keeping the environments fairly small to maintain a short and light hearted gameplay experience. An overview of these levels are shown in Figures \ref{fig:label_LevelTwo} and \ref{fig:label_LevelThree}. \newline
 
 \begin{figure}[H]
     \centering
@@ -613,7 +669,7 @@ In the user feedback collected during term two, players were asked whether they 
     \label{fig:label_funfeedback}
 \end{figure}
 The results ranged from neutral to strongly agree, with no users expressing disagreement, indicating that all participants found the gameplay at least somewhat enjoyable. When asked for additional feedback on this topic, two users specifically mentioned that they enjoyed the platforming elements and found the player’s movement system fun to use. Some users suggested that introducing more weapon types or attack variations could enhance the gameplay experience. Another user highlighted the game’s cute art style, stating that rescuing the animals felt rewarding. Based on this feedback, it would seem the thing most lacking from a fun gameplay experience is more variation in the combat system. Based on this feedback, the main area for improvement in the gameplay experience appears to be more variety in the combat system. Given more time, adding new attack options for the player, such as a bow and arrow, or introducing a wider range of enemy types could help to improve the overall user experience. \newline
-Across all levels, each type of enemy keep the same health and damage values, determining how much damage they deal to the player and how difficult they are to defeat. Similarly, the player has fixed health and attack statistics. Balancing these values was a challenge, as it was important to ensure that enemies were neither too easy or too difficult to defeat, and similarly for the player character. These values were refined through playtesting conducted in the first term of the project, as discussed in section \ref{testing}, where feedback was gathered informally from a few users on how the difficulty could be adjusted. This continued in the second term with more formalised feedback via a user feedback form (detailed in section \ref{reflection}). The results indicated that the majority of players found the gameplay to be easy, as shown in figure \ref{fig:label_difficultyfeedback}.
+Across all levels, each type of enemy keep the same health and damage values, determining how much damage they deal to the player and how difficult they are to defeat. Similarly, the player has fixed health and attack statistics. Balancing these values was a challenge, as it was important to ensure that enemies were neither too easy or too difficult to defeat, and similarly for the player character. These values were refined through playtesting conducted in the first term of the project, as discussed in Section \ref{testing}, where feedback was gathered informally from a few users on how the difficulty could be adjusted. This continued in the second term with more formalised feedback via the beta testing user feedback form. The results indicated that the majority of players found the gameplay to be easy, as shown in Figure \ref{fig:label_difficultyfeedback}.
 
 \begin{figure}[H]
     \centering
@@ -630,7 +686,8 @@ The game features a complete UI, including a HUD, title screen, level select men
 \newline
 The HUD elements selected for the game include health bars for both the player and enemies, an animal rescue counter, a quest tracker, and a game timer. The layout and design of these elements changed over the course of development, leading to some significant adjustments. Initially, the health bar had a different design and was positioned in the top left corner of the screen. However, based on user feedback, it was determined that placing the quest information in the top left was more effective, as players naturally focused their attention on the upper half of the screen.
 \newline
-As more HUD elements were introduced, such as the quest tracker, inconsistencies in their design made the interface appear cluttered and visually incohesive. To address this, a UI pack from the Unity Asset Store was used to standardise the design of all HUD and UI elements, ensuring they had a unified and polished look that matched the game’s overall aesthetic. The importance of maintaining visual consistency in UI design is discussed further in Section \ref{level}. Similarly, for the other UI screens, their design was changed throughout development to include different buttons and information. The original level cleared screen featured only restart and exit game buttons, before other UI like the main menus were added. A figure showing examples of the old vs new UI screens are shown in figure \ref{fig:hud_comparison}.
+As more HUD elements were introduced, such as the quest tracker, inconsistencies in their design made the interface appear cluttered and visually incohesive. To address this, a UI pack from the Unity Asset Store was used to standardise the design of all HUD and UI elements, ensuring they had a unified and polished look that matched the game’s overall aesthetic. The importance of maintaining visual consistency in UI design is discussed further in Section \ref{level}. Similarly, for the other UI screens, their design was changed throughout development to include different buttons and information. The original level cleared screen featured only restart and exit game buttons, before other UI like the main menus were added. Examples of the old vs new UI screens are shown in Figure \ref{fig:hud_comparison}.
+
 \begin{figure}[H]
     \centering
     \begin{subfigure}{0.45\textwidth}
@@ -666,7 +723,7 @@ As more HUD elements were introduced, such as the quest tracker, inconsistencies
     \caption{Comparison of Old and New HUD and Level Complete Screens}
     \label{fig:hud_comparison}
 \end{figure}
-The UI screens were designed to be minimalistic to make it easier for players to use, with limited button presses needed to get between screens. The buttons have clear and familiar icons to indicate what they do. The importance of familiarity in icon design is discussed further in section \ref{level}. For example, the home menu, restart, settings and exit buttons are shown in figure \ref{fig:label_icons}. 
+The UI screens were designed to be minimalistic to make it easier for players to use, with limited button presses needed to get between screens. The buttons have clear and familiar icons to indicate what they do. The importance of familiarity in icon design is discussed further in Section \ref{level}. For example, the home menu, restart, settings and exit buttons are shown in Figure \ref{fig:label_icons}. 
 
 \begin{figure}[H]
     \centering
@@ -675,7 +732,7 @@ The UI screens were designed to be minimalistic to make it easier for players to
     \label{fig:label_icons}
 \end{figure}
 
-During beta testing, two of the questions asked in the user feedback survey were based on the usability and looks of the UI and HUD. These questions and results are displayed in figures \ref{fig:label_HUDFeedback} and \ref{fig:label_UIFeedback}.
+During beta testing, two of the questions asked in the user feedback survey were based on the usability and looks of the UI and HUD. These questions and results are displayed in Figures \ref{fig:label_HUDFeedback} and \ref{fig:label_UIFeedback}.
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{OtherImages/HUDFeedback.png}
@@ -698,7 +755,7 @@ Feedback on the general UI was very positive, with all users agreeing or strongl
 
 Music and sound effects play an important role in enhancing the player's experience and engagement with the game. They help to create an immersive atmosphere and set the mood of the game. Sound effects also serve as audio feedback for player actions, helping them better understand in-game events. Since Forest Rescue is designed to be a light hearted, casual game, the music needed to reflect this tone. The game features three music tracks: one for the title screen, another for the level select menu, and a third for gameplay. Each track is simple and cheerful, keeping the game's relaxed and happy atmosphere. For the sound effects, I incorporated a variety of sounds for key game events to provide clearer feedback to the player. These include sound effects for UI button presses, combat actions (attacking and taking damage), player movement (jumping, walking, and running), and rescuing animals. 
 \newline
-In the code, playing sound effects efficiently can be difficult, as they need to be triggered from various scripts without tightly coupling sound management to every individual system. To overcome this, a singleton was implemented, as discussed in section \ref{singleton}, to create a sound effects manager class that can be accessed from anywhere in the code. This structure is detailed in figure \ref{fig:label_singletonSoundFX}.
+In the code, playing sound effects efficiently can be difficult, as they need to be triggered from various scripts without tightly coupling sound management to every individual system. To overcome this, a singleton was implemented, as discussed in Section \ref{singleton}, to create a sound effects manager class that can be accessed from anywhere in the code. This structure is detailed in Figure \ref{fig:label_singletonSoundFX}.
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.7\textwidth]{UMLDiagrams/SoundFXSingletonUML.drawio.png}
@@ -706,8 +763,9 @@ In the code, playing sound effects efficiently can be difficult, as they need to
     \label{fig:label_singletonSoundFX}
 \end{figure}
 
-The SoundFXManager class provides methods for playing both single sound effects and looping sound effects, such as the sound of running which needs to loop over time. In the Unity editor, two audio prefabs were created and assigned to the SoundFXManager via the \_soundFXObject and \_loopingSoundFXObject fields. These prefabs are used to spawn sound effects into the scene. The PlaySoundFX method takes an audio clip, a position to play it at, and a volume level. It then instantiates the \_soundFXObject prefab at the specified location, initializes it with the given audio clip and volume, and automatically destroys it once the clip has finished playing. The PlayLoopingSoundFX method functions slightly differently, as it also takes a string representing a dictionary key. To prevent multiple instances of the same sound from playing simultaneously and causing audio overlap, each looping sound effect is stored in a dictionary using the unique key. When a class needs to stop a looping sound, it calls StopLoopingSoundFX with the corresponding key. The method then checks if the key exists in the dictionary, stops and destroys the associated audio clip, and removes the entry from the dictionary to ensure proper sound management. These two methods are shown below:
+The SoundFXManager class provides methods for playing both single sound effects and looping sound effects, such as the sound of running which needs to loop over time. In the Unity editor, two audio prefabs were created and assigned to the SoundFXManager via the \_soundFXObject and \_loopingSoundFXObject fields. These prefabs are used to spawn sound effects into the scene. The PlaySoundFX method takes an audio clip, a position to play it at, and a volume level. It then instantiates the \_soundFXObject prefab at the specified location, initializes it with the given audio clip and volume, and automatically destroys it once the clip has finished playing. The PlayLoopingSoundFX method functions slightly differently, as it also takes a string representing a dictionary key. To prevent multiple instances of the same sound from playing simultaneously and causing audio overlap, each looping sound effect is stored in a dictionary using the unique key. When a class needs to stop a looping sound, it calls StopLoopingSoundFX with the corresponding key. The method then checks if the key exists in the dictionary, stops and destroys the associated audio clip, and removes the entry from the dictionary to ensure proper sound management. These two methods are detailed in Figure \ref{loopingsoundfx}.
 
+\begin{figure}[H]
 \begin{verbatim}
 public void StartLoopingSoundFX(string key, AudioClip audio, 
 				Transform spawnPosition, float volume)
@@ -727,7 +785,8 @@ public void StartLoopingSoundFX(string key, AudioClip audio,
 
     activeLoopingSounds[key] = audioSource;
 }
-\end{verbatim}
+\end{verbatim} 
+\paragraph{}
 \begin{verbatim}
 public void StopLoopingSoundFX(string key)
 {
@@ -739,6 +798,9 @@ public void StopLoopingSoundFX(string key)
     }
 }
 \end{verbatim}
+\caption{Start and StopLoopingSoundFX methods from the SoundFXManager class.}
+\label{loopingsoundfx}
+\end{figure}
 
 Since the SoundFXManager is a singleton, it ensures that only one instance exists throughout the game, preventing duplicate managers and maintaining consistent audio behavior across all scenes. This persistence avoids issues such as duplicated or overlapping sounds when transitioning between scenes. Additionally, being a singleton allows it to be easily accessed from anywhere in the code. Other classes can simply call:
 \newline
@@ -748,7 +810,7 @@ Since the SoundFXManager is a singleton, it ensures that only one instance exist
 
 Optimisation was a key priority for this game, as the goal was to ensure it runs smoothly on the majority of Windows devices without frame drops. Any performance issues such as lag, would affect the player’s experience, making it difficult to control the player character's movement and combat with precision, which is necessary for this genre of game. The goal was to have the game running at 60 frames per second (FPS) or higher, as this is widely considered the optimal threshold for smooth, responsive gameplay for computers \cite{Samuel2025}. 
 \newline
-One optimisation technique used in the game was frustum culling, which is explained in more detail in section \ref{optimisation}. It involves excluding game objects outside of the camera's view frustum (the region visible to the player). By not rendering objects outside this area, the game reduces CPU usage. In Unity, this is handled automatically by the camera, which excludes anything outside the view frustum. The camera also defines near and far clipping planes, where objects beyond the far clipping plane are not rendered, resulting in  a finite rendering area, as shown in Figure \ref{cullingarea}. Occlusion culling was not implemented alongside frustum culling, as it was considered unnecessary for this game. Given that the levels are relatively small and open, there are few objects that would be culled through occlusion, making it less beneficial.
+One optimisation technique used in the game was frustum culling, which is explained in more detail in Section \ref{optimisation}. It involves excluding game objects outside of the camera's view frustum (the region visible to the player). By not rendering objects outside this area, the game reduces CPU usage. In Unity, this is handled automatically by the camera, which excludes anything outside the view frustum. The camera also defines near and far clipping planes, where objects beyond the far clipping plane are not rendered, resulting in  a finite rendering area, as shown in Figure \ref{cullingarea}. Occlusion culling was not implemented alongside frustum culling, as it was considered unnecessary for this game. Given that the levels are relatively small and open, there are few objects that would be culled through occlusion, making it less beneficial.
 
 \begin{figure}[H]
     \centering
@@ -757,11 +819,11 @@ One optimisation technique used in the game was frustum culling, which is explai
     \label{cullingarea}
 \end{figure}
 
-Additionally, Level of Detail (LOD) groups were used to optimise the game, as discussed in section \ref{optimisation}. Unity provides a LOD component that can be assigned to game objects, which determines the distance from the camera at which different levels of detail for an object are displayed. Since the game features a fairly dense environment filled with terrain and nature elements, it was ensured that assets selected for the terrain and nature included multiple LOD models. Once the terrain and nature elements were placed in the scenes, the LOD components allowed for defining distance thresholds that adjust the level of detail, ensuring that objects further from the camera are rendered with less detail, helping to reduce CPU usage.
+Additionally, Level of Detail (LOD) groups were used to optimise the game, as discussed in Section \ref{optimisation}. Unity provides a LOD component that can be assigned to game objects, which determines the distance from the camera at which different levels of detail for an object are displayed. Since the game features a fairly dense environment filled with terrain and nature elements, it was ensured that assets selected for the terrain and nature included multiple LOD models. Once the terrain and nature elements were placed in the scenes, the LOD components allowed for defining distance thresholds that adjust the level of detail, ensuring that objects further from the camera are rendered with less detail, helping to reduce CPU usage.
 \newline
-Two other optimisations previously discussed include the use of the NavMesh (\ref{enemy_movement}) for enemy and animal pathfinding, and the object pool design pattern for arrow creation (\ref{combatsystem}). Baking NavMesh surfaces, which define walkable areas and obstacles to avoid within each level, means that the pathfinding is based on a predefined surface as opposed to real time pathfinding. This approach is more efficient than real time, and works especially well in environments with static terrain. Additionally, the use of the object pool design pattern for arrow spawning is an effective optimisation for managing memory and reducing CPU usage. As discussed in \ref{objectpool}, the object pool pattern minimises memory allocation overhead and prevents memory fragmentation. It also reduces performance bottlenecks caused by frequent garbage collection and avoids expensive object creation. This is particularly beneficial for the arrows shot by enemies, which would otherwise be created and destroyed quickly, potentially impacting performance.
+Two other optimisations previously discussed include the use of the NavMesh (Discussed in Section \ref{enemy_movement}) for enemy and animal pathfinding, and the object pool design pattern for arrow creation (Discussed in Section \ref{combatsystem}). Baking NavMesh surfaces, which define walkable areas and obstacles to avoid within each level, means that the pathfinding is based on a predefined surface as opposed to real time pathfinding. This approach is more efficient than real time, and works especially well in environments with static terrain. Additionally, the use of the object pool design pattern for arrow spawning is an effective optimisation for managing memory and reducing CPU usage. As discussed in \ref{objectpool}, the object pool pattern minimises memory allocation overhead and prevents memory fragmentation. It also reduces performance bottlenecks caused by frequent garbage collection and avoids expensive object creation. This is particularly beneficial for the arrows shot by enemies, which would otherwise be created and destroyed quickly, potentially impacting performance.
 \newline 
-Lastly, another optimisation technique used was the implementation of physics layers and the collision matrix. Unity allows the creation of physics layers to categorise game objects and define their interactions. Each layer was configured to interact only where necessary, reducing unnecessary computations. For example, in the combat system, different colliders were assigned separate layers, such as the player, enemy, player weapon, and enemy attack radius. This ensures that interactions are limited to relevant objects. For instance, the archer enemy’s arrows are set to collide only with the player, preventing unnecessary computations with other colliders, such as the player’s weapon, which would otherwise require processing before determining that no interaction is needed. This collision matrix is detailed in figure \ref{collisionmatrix}.
+Lastly, another optimisation technique used was the implementation of physics layers and the collision matrix. Unity allows the creation of physics layers to categorise game objects and define their interactions. Each layer was configured to interact only where necessary, reducing unnecessary computations. For example, in the combat system, different colliders were assigned separate layers, such as the player, enemy, player weapon, and enemy attack radius. This ensures that interactions are limited to relevant objects. For instance, the archer enemy’s arrows are set to collide only with the player, preventing unnecessary computations with other colliders, such as the player’s weapon, which would otherwise require processing before determining that no interaction is needed. This collision matrix is detailed in Figure \ref{collisionmatrix}.
 
 \begin{figure}[H]
     \centering
@@ -770,7 +832,7 @@ Lastly, another optimisation technique used was the implementation of physics la
     \label{collisionmatrix}
 \end{figure}
 
-To test whether these optimisations have helped the game run smoothly, this was tested through both the Unity Profiler and beta testing. The Unity Profiler provides real time performance information about your application, giving an overview of resource allocation while developing the application \cite{UnityProfiler}. This was used on the device that was used to develop the game, which is a laptop with an Intel Core i5-12500H (2.50 GHz) processor and 16GB of RAM, running Windows 11. The profiler measured these statistics on a simple playthrough of the game, which involved starting from the title screen, navigating to the first level, and playing it to the end. The results for CPU usage are displayed in figure \ref{fig:label_CPU}.
+To test whether these optimisations have helped the game run smoothly, this was tested through both the Unity Profiler and beta testing. The Unity Profiler provides real time performance information about your application, giving an overview of resource allocation while developing the application \cite{UnityProfiler}. This was used on the device that was used to develop the game, which is a laptop with an Intel Core i5-12500H (2.50 GHz) processor and 16GB of RAM, running Windows 11. The profiler measured these statistics on a simple playthrough of the game, which involved starting from the title screen, navigating to the first level, and playing it to the end. The results for CPU usage are displayed in Figure \ref{fig:label_CPU}.
 
 \begin{figure}[H]
     \centering
@@ -780,7 +842,7 @@ To test whether these optimisations have helped the game run smoothly, this was 
 \end{figure}
 
 The CPU usage graph displays the game's frame rate over time. While occasional spikes occurred during scene transitions and combat, the frame rate consistently remained below the 60 FPS threshold, often staying well under it. This suggests that the game is capable of running at 60 FPS or higher on this device with ease. 
-However, testing on a single device was not sufficient to guarantee smooth performance across different Windows systems. To address this, feedback on performance was included in the user feedback form for beta testing, where users were asked to download and run the game on their own devices and report on its performance. The results of this are detailed in figure \ref{performancefeedback}. 
+However, testing on a single device was not sufficient to guarantee smooth performance across different Windows systems. To address this, feedback on performance was included in the user feedback form for beta testing, where users were asked to download and run the game on their own devices and report on its performance. The results of this are detailed in Figure \ref{performancefeedback}. 
 
 \begin{figure}[H]
     \centering
@@ -796,14 +858,13 @@ Seven users downloaded and tested the game on various Windows devices, including
 To ensure the game was both functional and user friendly, a range of testing methods were employed throughout development to evaluate usability, stability, and performance. Game development typically involves numerous testing strategies as part of both quality assurance (QA) and user experience (UX) design. Unity’s documentation outlines several key approaches, including unit testing, integration testing, regression testing, functional testing, performance testing, and beta testing \cite{UnityTesting}. For this project, the most relevant and feasible methods that were applied are unit testing, playtesting, beta testing, and performance testing. 
 These selected methods provided coverage across usability, functionality, and performance, giving a well-rounded evaluation of the game's quality within the time constraints of the project development.\newline
 
-Unit testing is a technique that involves testing individual components of the game code. This helps make sure bugs are caught early on and that any changes to the code do not break existing functionality \cite{UnityTesting}. Automated unit testing was carried out using the Unity Test Framework (UTF), which extends the C\# test framework NUnit. The UTF allows tests to be run in both Edit Mode and Play Mode \cite{UnityUTF}. Edit Mode tests are typically used for isolated units of code that do not rely on the game being actively running. In contrast, Play Mode tests are for code that interacts with the game environment, such as components that must be attached to GameObjects or systems that require runtime behaviour, making them more appropriate for integration testing. The core components of the code that can run without play mode were tested using edit mode tests, such as the LevelManager state machine states, object pool base class \color{red}---------------FINISH------------------------------\color{black}\newline
+Unit testing is a technique that involves testing individual components of the game code. This helps make sure bugs are caught early on and that any changes to the code do not break existing functionality \cite{UnityTesting}. Automated unit testing was carried out using the Unity Test Framework (UTF), which extends the C\# test framework NUnit. The UTF allows tests to be run in both Edit Mode and Play Mode \cite{UnityUTF}. Edit Mode tests are typically used for isolated units of code that do not rely on the game being actively running. In contrast, Play Mode tests are for code that interacts with the game environment, such as components that must be attached to GameObjects or systems that require runtime behaviour, making them more appropriate for integration testing. Some core components of the code, such as the LevelManager state machine states, the base ObjectPool class, and the SoundFXManager, were tested using a combination of edit mode and play mode unit tests. However, the scope of testing was limited due to the runtime behaviours of most other classes. Features like collisions, animation transitions, and input handling are tightly coupled with Unity’s runtime environment, making them difficult to test in isolation without extensive mocking. As a result, only standalone logic components were covered by unit tests during the project timeline. Testing these components still provided assurance that key systems continued working as new code was added.\newline
 
+Playtesting focuses on evaluating core game mechanics during development, offering feedback on balance and difficulty, while also being used to find bugs \cite{flashjungle_2022}. In this project, playtesting was conducted informally at multiple stages by asking users to try early versions of the game and provide feedback. This process was especially valuable in refining user interface components, player movement, and combat mechanics. For example, feedback helped improve the layout and clarity of HUD elements (Discussed in  Section \ref{UIDesign}), informed adjustments to enemy difficulty balancing (Discussed in Section \ref{leveldesign}), and influenced key combat system decisions, such as implementing a temporary stunned effect on enemies after being hit, which improved the overall combat and fairness. \newline
 
-Playtesting focuses on evaluating core game mechanics during development, offering feedback on balance and difficulty, while also being used to find bugs \cite{flashjungle_2022}. In this project, playtesting was conducted informally at multiple stages by asking users to try early versions of the game and provide feedback. This process was especially valuable in refining user interface components, player movement, and combat mechanics. For example, feedback helped improve the layout and clarity of HUD elements (see section \ref{UIDesign}), informed adjustments to enemy difficulty balancing (see section \ref{leveldesign}), and influenced key combat system decisions, such as implementing a temporary stunned effect on enemies after being hit, which improved the overall combat and fairness. \newline
+Beta testing is similar in principle to playtesting but is conducted more formally, using a nearly complete version of the game. It involves a larger group of testers and aims to identify final bugs, gather user feedback on the overall experience, and make last minute adjustments prior to release \cite{flashjungle_2022}. This process involves distributing a beta version of the game, accompanied by structured bug report and user feedback forms for testers to complete after playing. For this project, beta testing began in Week 8 of Term 2, immediately after the final planned feature (sound effects) was implemented. This timing allowed for a two week window to collect user feedback and apply improvements before the end of term. A formal user feedback form was distributed and completed by seven users, compared to the smaller group of two who participated in earlier playtesting. While an ideal beta test would involve a significantly larger user base to ensure a broader range of feedback, constraints around finding players and time made this challenging. A separate bug report form was also provided and completed by testers who encountered bugs in their playtime. The feedback collected through the user feedback form is analysed and discussed in the User Experience Development Section (\ref{UX}). A typical bug report form includes a summary of the issue, the platform on which it occurred, and clear steps to reproduce the bug. During this phase, two users identified previously unknown bugs. These included objects in the level terrain missing colliders, and an issue where the player could collide with cages, but enemies could not. These bugs were reviewed and fixed based on the feedback provided through the submitted forms. Overall, the beta testing phase provided the most comprehensive feedback throughout development, enabling the refinement of multiple features and ensuring there were not any major bugs in the game. \newline
 
-Beta testing is similar in principle to playtesting but is conducted more formally, using a nearly complete version of the game. It involves a larger group of testers and aims to identify final bugs, gather user feedback on the overall experience, and make last minute adjustments prior to release \cite{flashjungle_2022}. This process involves distributing a beta version of the game, accompanied by structured bug report and user feedback forms for testers to complete after playing. For this project, beta testing began in Week 8 of Term 2, immediately after the final planned feature (sound effects) was implemented. This timing allowed for a two week window to collect user feedback and apply improvements before the end of term. A formal user feedback form was distributed and completed by seven users, compared to the smaller group of two who participated in earlier playtesting. While an ideal beta test would involve a significantly larger user base to ensure a broader range of feedback, constraints around finding players and time made this challenging. A separate bug report form was also provided and completed by testers who encountered bugs in their playtime. The feedback collected through the user feedback form is analysed and discussed in the User Experience Development section (\ref{UX}). A typical bug report form includes a summary of the issue, the platform on which it occurred, and clear steps to reproduce the bug. During this phase, two users identified previously unknown bugs. These included objects in the level terrain missing colliders, and an issue where the player could collide with cages, but enemies could not. These bugs were reviewed and fixed based on the feedback provided through the submitted forms. Overall, the beta testing phase provided the most comprehensive feedback throughout development, enabling the refinement of multiple features and ensuring there were not any major bugs in the game. \newline
-
-Lastly, performance testing was carried out, which involves testing the game to ensure that it runs smoothly and efficiently on different hardware and software configurations \cite{UnityTesting}. This was done using the unity profiler tool, along with beta testing. The method and results of this were discussed further in the Optimisation Development section \ref{optimisationdev}.  
+Lastly, performance testing was carried out, which involves testing the game to ensure that it runs smoothly and efficiently on different hardware and software configurations \cite{UnityTesting}. This was done using the unity profiler tool, along with beta testing. The method and results of this were discussed further in the Optimisation Development Section \ref{optimisationdev}.  
 
 %%%%%%%%%%%%%%%%%%%%%%
 %%% Reflection and Evaluation
@@ -811,7 +872,7 @@ Lastly, performance testing was carried out, which involves testing the game to 
 
 This chapter reflects on the development of the project, evaluating whether its objectives were successfully achieved and identifying areas for potential improvement. 
 \newline
-Overall, the project progressed well in terms of time and meeting its objectives. All of the original goals outlined in section \ref{objectives} were successfully completed by the planned deadline, which was week ten of term two. However, some individual tasks exceeded their estimated timeframes, including the implementation of the player movement system and the third enemy type. This was primarily due to the extra time required to refactor these systems using the hierarchical state machine and object pooling design patterns.
+Overall, the project progressed well in terms of time and meeting its objectives. All of the original goals outlined in Section \ref{objectives} were successfully completed by the planned deadline, which was week ten of term two. However, some individual tasks exceeded their estimated timeframes, including the implementation of the player movement system and the third enemy type. This was primarily due to the extra time required to refactor these systems using the hierarchical state machine and object pooling design patterns.
 While these refactors extended development time, they improved the modularity and maintainability of the game code, which was important as the game scaled in complexity. This suggests that the initial time estimates did not properly account for the time taken to refactor the core systems. In future projects, more buffer time would be allocated to account for improvements like these, particularly when refactoring multiple areas of the code.
 \newline
 Additionally, while there was time for some playtesting and one structured round of beta testing, fully testing and refining the game for release would have required multiple rounds of beta testing with a larger group of users. In future project timelines, this would need to be accounted for to produce a more polished game for release. \newline
@@ -827,7 +888,7 @@ In terms of testing, it would have been beneficial to incorporate integration te
 %%%%%%%%%%%%%%%%%%%%%%
 %%% Professional Issues
 \chapter{Professional Issues}
-Game development involves various professional and ethical considerations, particularly in legal compliance and asset usage when publishing a game commercially. Throughout this project, I have had to consider licensing restrictions when using third party assets and the legal requirements of publishing a game using Unity engine. This section discusses these issues and how they should be addressed professionally if this project were to be published. \newline
+Game development involves various professional and ethical considerations, particularly in legal compliance and asset usage when publishing a game commercially. Throughout this project, I have had to consider licensing restrictions when using third party assets and the legal requirements of publishing a game using Unity engine. This Section discusses these issues and how they should be addressed professionally if this project were to be published. \newline
 
 The majority of assets used in the game were sourced from the Unity Asset Store, which provides a large variety of assets that you can download and use in Unity Engine. Most assets from the Unity Asset Store are royalty-free on purchase or free download, except for ones labeled as 'restricted', which cannot be used commercially. Any restrictions are detailed in the description of the asset in the store \cite{UnityCommercial}. However, it is important to ensure the correct license type is purchased when downloading an asset for commercial use.
 All Unity assets fall under either Extension, Single Entity, or Multi Entity licence types. Extension assets cover any assets found under the 'tools' category in the store, and users are required to purchase one seat per user that has access to the raw asset files \cite{UnityLicences}. Single Entity and Multi Entity assets can be any other type of asset that does not fall under the 'tools' category. Single Entity assets are typically for single users or companies, and permits use by all team members within a single company. Multi Entity assets cover parent, child and sister companies, as well as contractors on a project, allowing them access to the raw asset files across different branches of an organisation \cite{UnityLicences}. Currently, all assets used in the game fall under either the Extension or Single Entity license types. As the only developer working on the game, I am a single entity, meaning these assets can be used royalty-free if the game was published commercially, and any Multi Entity licences would not need to be purchased. Failing to purchase the correct asset licenses can lead to a game being removed from distribution platforms and may result in legal disputes.
@@ -844,7 +905,7 @@ Awareness of licensing types and Unity’s publishing terms influenced asset sel
 \appendix
 \chapter{Appendix}
 \section{Code Style}
-Below is the code style I decided on, following Unity's guidelines \cite{unity_2022_codestyle}.
+Below is the code style used, following Unity's guidelines \cite{unity_2022_codestyle}.
 \begin{table}[H]
 \centering
 \begin{tabular}{|p{4cm}|p{8cm}|}
@@ -996,28 +1057,43 @@ Files relevant to animal rescue:
 
 %%%% ADD YOUR BIBLIOGRAPHY HERE
 \newpage
+\phantomsection
+\addcontentsline{toc}{section}{Bibliography}
 \bibliographystyle{plain}
 \raggedright
 \bibliography{references}
 
+
+\newpage
+\phantomsection
+\addcontentsline{toc}{section}{Assets Used}
 \renewcommand{\bibname}{Assets Used}
 \begin{thebibliography}{99}
 
-\bibitem[25]{skybox} Key Mouse. Customizable Skybox. Available at: \url{https://assetstore.unity.com/packages/2d/textures-materials/sky/customizable-skybox-174576}
+\bibitem[41]{skybox} Key Mouse. Customizable Skybox. Available at: \url{https://assetstore.unity.com/packages/2d/textures-materials/sky/customizable-skybox-174576}
 
-\bibitem[26]{forest_textures} Proxy Games. Stylized Nature Kit Lite. Available at: \url{https://assetstore.unity.com/packages/3d/environments/stylized-nature-kit-lite-176906}. 
+\bibitem[42]{forest_textures} Proxy Games. Stylized Nature Kit Lite. Available at: \url{https://assetstore.unity.com/packages/3d/environments/stylized-nature-kit-lite-176906}. 
 
-\bibitem[27]{VFX} Lana Studio. Hyper Casual FX. Available at: \url{https://assetstore.unity.com/packages/vfx/particles/hyper-casual-fx-200333}.
+\bibitem[43]{VFX} Lana Studio. Hyper Casual FX. Available at: \url{https://assetstore.unity.com/packages/vfx/particles/hyper-casual-fx-200333}.
 
-\bibitem[28]{player} SEMA Game Studio. Modular Cute Fantasy Character Pack \#1. Available at: \url{https://assetstore.unity.com/packages/3d/characters/humanoids/fantasy/modular-cute-fantasy-character-pack-1-293865}
+\bibitem[44]{player} SEMA Game Studio. Modular Cute Fantasy Character Pack \#1. Available at: \url{https://assetstore.unity.com/packages/3d/characters/humanoids/fantasy/modular-cute-fantasy-character-pack-1-293865}
 
-\bibitem[29]{sound_effects} SURIYUN. Monsters Forest Pack 2. Available at: \url{https://assetstore.unity.com/packages/3d/characters/creatures/monsters-forest-pack-2-251936}. 
+\bibitem[45]{sound_effects} SURIYUN. Monsters Forest Pack 2. Available at: \url{https://assetstore.unity.com/packages/3d/characters/creatures/monsters-forest-pack-2-251936}. 
 
-\bibitem[30]{sound_effects} Meshtint Studio. Forest Ruins Pack Cute Series. Available at: \url{https://assetstore.unity.com/packages/3d/environments/fantasy/forest-ruins-pack-cute-series-182412}. 
+\bibitem[46]{sound_effects} Meshtint Studio. Forest Ruins Pack Cute Series. Available at: \url{https://assetstore.unity.com/packages/3d/environments/fantasy/forest-ruins-pack-cute-series-182412}. 
 
-\bibitem[31]{sound_effects} Lost Panda Games. Low Poly Cartoon Item Pack - 3D. Available at: \url{https://assetstore.unity.com/packages/3d/props/low-poly-cartoon-item-pack-3d-274991}. 
+\bibitem[47]{sound_effects} Lost Panda Games. Low Poly Cartoon Item Pack - 3D. Available at: \url{https://assetstore.unity.com/packages/3d/props/low-poly-cartoon-item-pack-3d-274991}. 
 
-\bibitem[32]{sound_effects} SURIYUN. Cute Goblin. Available at: \url{https://assetstore.unity.com/packages/3d/characters/creatures/cute-goblin-225492}. 
+\bibitem[48]{sound_effects} SURIYUN. Cute Goblin. Available at: \url{https://assetstore.unity.com/packages/3d/characters/creatures/cute-goblin-225492}. 
+
+\bibitem[49]{sound_effects} Monsieur Fred. Adventure/Exploration Music Pack. Available at: \url{https://assetstore.unity.com/packages/audio/music/adventure-exploration-music-pack-196816}. 
+
+\bibitem[50]{sound_effects} B.G.M. Casual Game BGM \#5. Available at: \url{https://assetstore.unity.com/packages/audio/music/casual-game-bgm-5-135943}. 
+
+\bibitem[51]{sound_effects} Dustyroom. FREE Casual Game SFX  Pack. Available at: \url{https://assetstore.unity.com/packages/audio/sound-fx/free-casual-game-sfx-pack-54116}. 
+
+
+\bibitem[52]{sound_effects} Layer Lab. GUI - Yellow Kid. Available at: \url{https://assetstore.unity.com/packages/2d/gui/gui-yellow-kid-177697}. 
 
 \end{thebibliography}
 

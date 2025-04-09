@@ -1,8 +1,9 @@
 # 🌲 Forest Rescue 🪓  
 Forest rescue a 3D platforming / action-adventure game set in a fantasy forest, where you need to defeat goblins and rescue animals! 
-<p align="center">
-    <img src="/Documents/FinalReport/OtherImages/GameImage.png" alt="Tileset: Ultica" width="70%">
-</p>
+<div align="center">
+  <img src="/Documents/FinalReport/OtherImages/GameImage.png" alt="Game Image" width="60%">
+</div>
+
 
 ## Contents
 - [How to Download And Play](#how-to-download-and-play-windows-devices-only)
@@ -47,9 +48,9 @@ You can find the full project documentation in [Documents/HtmlDocumentation/inde
 
 ### Directory Structure
 
-<p align="center">
-    <img src="/Documents/FinalReport/OtherImages/FileStructure.png" alt="Tileset: Ultica" width="50%">
-</p>
+<div align="center">
+  <img src="/Documents/FinalReport/OtherImages/FileStructure.png" alt="Game Image" width="30%">
+</div>
 
 The `Assets` folder contains all of the work completed so far including the 3D models for the player, enemies, terrain etc., as well as the associated scripts and animations. The diagram highlights the most important subfolders, such as the scripts folders, where all the C# scripts are organised.  
 Note that not all folders are included in the diagram.

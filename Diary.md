@@ -1,8 +1,20 @@
-# Week 19
+# Week 12
+### 08/04/2025
+- Finished off unit tests for selected files, and fixed error caused by merge of branches which made Unity unable to find ScoreManager script.
+
+# Week 9
+### 19/03/2025
+- Set up test assemblies for unit testing and wrote unit tests for the level manager state machine.
+
+# Week 8
+### 16/03/2025 - Objective Complete : Playable Builds
+- Created first builds of the game for Windows and Mac, and distributed them for beta testing.
+### 14/03/2025
+- Bug fixes to all current known bugs, including scores being incorrect past the first level, player jump animation desync, and adding missing terrain colliders.
 ### 13/03/2025
 - Tidied up code files to remove redundant code and made sure XML documentation has been added to all files.
 - Removed observer pattern from animal rescue logic because it was overcomplicated for the scenario (only one observer).
-### 12/03/2025
+### 12/03/2025 - Objective Complete : Music and Sound Effects
 - Added all remaining sound effects to the game.
 - Bugfix to LevelCleared and GameOver scripts not changing the level state back to play mode once disabled which caused title screen movement to stop.
 ### 11/03/2025
@@ -14,19 +26,19 @@
 - Added background music for all scenes.
 - Began adding sound effects for player.
 
-# Week 18
+# Week 7
 ### 07/03/2025
 - Fixed bug that was causing game to crash when playing a level a second time.
 ### 06/03/2025
 - Started balancing enemy stats for difficulty.
 - Changed archer enemy to stay standing in place.
-### 05/03/2025
+### 05/03/2025 - Objective Complete : Three Levels
 - Created new levels: level one and two.
 - Changed the original level to be level three so that level one and two are easier and more introductory for beginners.
 - Linked all relevant UI buttons to new level scenes.
 
-# Week 17
-### 27/02/2025
+# Week 6
+### 27/02/2025 - Objective Complete : Full User Interface
 - Created the level select menu scene.
 - Linked all scenes together (TitleScreen, LevelSelect, LevelOne) through button presses.
 - Created scene transition animations and a SceneLoader script to enable them when buttons are pressed.
@@ -36,12 +48,12 @@
 ### 25/02/2025
 - Created a scene for the game title screen.
 
-# Week 16
-### 20/02/2025
+# Week 5
+### 20/02/2025 - Objective Complete : Three Enemy Types
 - Configured the archer goblin movement.
 - Synced arrow's position and shot timing with the position of the enemy and attack animation.
 
-# Week 15
+# Week 4
 ### 13/02/2025
 - Created an arrow prefab and configured the enemy to shoot them with object pooling.
 ### 12/02/2025
@@ -49,8 +61,8 @@
 - Removed redundant functionality for basic enemy attack script.
 - Created a new animator for archer goblin.
 
-# Week 14
-### 08/02/2025
+# Week 3
+### 08/02/2025 - Objective Complete : Level Completion and Scoring System
 - Implemented a score system which shows a final score for the player on the Level Cleared screen.
 ### 07/02/2025
 - Created a pause button and pause menu for the level.
@@ -61,7 +73,7 @@
 ### 04/02/2025
 - Began refactoring scripts to use a LevelManager which controls the states of the level. (Playing, GameOver etc)
 
-# Week 13
+# Week 2
 ### 31/01/2025
 - Created a collider to detect the player entering the goal area.
 - Configured the goal scripts to activate the level cleared UI screen on collision.
@@ -73,7 +85,7 @@
 - Created UI elements for questlines and created basic show and hide animations for them.
 - Configured the quest animations and UI to show based on whether the animals are rescued or not.
 
-# Week 12 - Start of Term 2
+# Week 1 - Start of Term 2
 ### 24/01/2025
 - Improved the enemy combat mechanics based on user feedback by disabling enemies from being able to attack while stunned.
 - Bugfix to prevent enemies from attacking during their death animation.
@@ -84,7 +96,7 @@
 - Began working on animal follow mechanic (Animal follows the player once rescued from its cage).
 - Created Animal script to manage the movement and set it up with basic following.
 
-# Week 11
+# Week 11 - End of Term 1
 ### 06/12/2024
 - Bugfix to player's NavMeshAgent which was causing the agent to not relocate to the player when they leave the NavMeshSurface.
 - Bugfix to the heart idle animation which was overriding the positions of all hearts in the scene.
@@ -121,7 +133,7 @@
 - Extra bug fixing for player movement:
 - Fix to jump animation bug which caused it to look like a double jump.
 - Fix to bug that caused animations to get stuck when pressing jump twice.
-### 9/11/2024
+### 9/11/2024 - Objective Complete : Combat System
 - Added a movement radius to the enemy: Now the enemy only starts following the player if the player enters it's follow radius. The Enemy returns to spawn if player exits the radius.
 ### 6/11/2024
 - Aded player attack mechanic: Enemy takes damage on collision with the player's axe.
@@ -133,7 +145,7 @@
 - Implemented enemy attack mechanic: Enemy auto attacks when the player is in range (Within the attack radius).
 
 # Week 6
-### 29/10/2024
+### 29/10/2024 - Objective Complete : Player Movement System
 - Refactored all the states out into their respective classes.
 - Fixed gravity and running bugs from refactored code.
 

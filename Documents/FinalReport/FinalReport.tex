@@ -102,6 +102,14 @@ The main objectives for the project include:
     \begin{itemize}
 	\item{Design three unique level layouts, increasing in difficulty.}
     \end{itemize}
+    \item Music and Sound Effects
+    \begin{itemize}
+	\item{Add music and sound effects to the game for all scenes and events.}
+    \end{itemize}
+    \item Playable Build
+    \begin{itemize}
+	\item{Generate a functional game build for Windows that can be distributed for testing and feedback.}
+    \end{itemize}
     \item Testing and Optimisation
     \begin{itemize}
 	\item{Playtest the game with a few users to find and fix bugs, and optimise performance for smoother gameplay.}
@@ -924,7 +932,106 @@ Below is the code style used, following Unity's guidelines \cite{unity_2022_code
 \end{table}
 
 \section{Development Diary}
-\textbf{Week 11}\newline
+\textbf{Week 12}\newline
+08/04/2025
+\newline- Finished off unit tests for selected files, and fixed error caused by merge of branches which made Unity unable to find ScoreManager script.
+
+\textbf{Week 9}\newline
+19/03/2025
+\newline- Set up test assemblies for unit testing and wrote unit tests for the level manager state machine.
+
+\textbf{Week 8}\newline
+16/03/2025 - Objective Complete : Playable Builds
+\newline- Created first builds of the game for Windows and Mac, and distributed them for beta testing.\newline
+14/03/2025
+\newline- Bug fixes to all current known bugs, including scores being incorrect past the first level, player jump animation desync, and adding missing terrain colliders.\newline
+13/03/2025
+\newline- Tidied up code files to remove redundant code and made sure XML documentation has been added to all files.
+\newline- Removed observer pattern from animal rescue logic because it was overcomplicated for the scenario (only one observer).\newline
+12/03/2025 - Objective Complete : Music and Sound Effects
+\newline- Added all remaining sound effects to the game.
+\newline- Bugfix to LevelCleared and GameOver scripts not changing the level state back to play mode once disabled which caused title screen movement to stop.\newline
+11/03/2025
+\newline- Finished adding player sound effects
+\newline- Changed sound settings menu script to save user preferences.\newline
+10/03/2025
+\newline- Created SoundFXManager script to easily play sound effects from within the code.
+\newline- Created SoundMixerManager script along with a sound settings menu to enable volume to be controlled with an audio mixer.
+\newline- Added background music for all scenes.
+\newline- Began adding sound effects for player.
+
+\textbf{Week 7}\newline
+07/03/2025
+\newline- Fixed bug that was causing game to crash when playing a level a second time.\newline
+06/03/2025
+\newline- Started balancing enemy stats for difficulty.
+\newline- Changed archer enemy to stay standing in place.\newline
+05/03/2025 - Objective Complete : Three Levels
+\newline- Created new levels: level one and two.
+\newline- Changed the original level to be level three so that level one and two are easier and more introductory for beginners.
+\newline- Linked all relevant UI buttons to new level scenes.
+
+\textbf{Week 6}\newline
+27/02/2025 - Objective Complete : Full User Interface
+\newline- Created the level select menu scene.
+\newline- Linked all scenes together (TitleScreen, LevelSelect, LevelOne) through button presses.
+\newline- Created scene transition animations and a SceneLoader script to enable them when buttons are pressed.\newline
+26/02/2025
+\newline- Added all UI elements to title screen (non functional).
+\newline- Created a movement script to move and animate the player and enemies in a circle.\newline
+25/02/2025
+\newline- Created a scene for the game title screen.
+
+\textbf{Week 5}\newline
+20/02/2025 - Objective Complete : Three Enemy Types
+\newline- Configured the archer goblin movement.
+\newline- Synced arrow's position and shot timing with the position of the enemy and attack animation.
+
+\textbf{Week 4}\newline
+13/02/2025
+\newline- Created an arrow prefab and configured the enemy to shoot them with object pooling.\newline
+12/02/2025
+\newline- Began prototyping the archer goblin.
+\newline- Removed redundant functionality for basic enemy attack script.
+\newline- Created a new animator for archer goblin.
+
+\textbf{Week 3}\newline
+08/02/2025 - Objective Complete : Level Completion and Scoring System
+\newline- Implemented a score system which shows a final score for the player on the Level Cleared screen.\newline
+07/02/2025
+\newline- Created a pause button and pause menu for the level.
+\newline- Created an in game timer element for the HUD.\newline
+06/02/2025
+\newline- Redesigned the current UI elements with new UI assets.
+\newline- Updated Game Over, Level Cleared screens and the Player's Health Bar.\newline
+04/02/2025
+\newline- Began refactoring scripts to use a LevelManager which controls the states of the level. (Playing, GameOver etc)
+
+\textbf{Week 2}\newline
+31/01/2025
+\newline- Created a collider to detect the player entering the goal area.
+\newline- Configured the goal scripts to activate the level cleared UI screen on collision.
+\newline- Created a goal indicator arrow to direct the player towards the goal after rescuing all the animals.\newline
+30/01/2025
+\newline- Redesign of quest UI based on user feedback.\newline
+29/01/2025
+\newline- Refactored animal script to use observer pattern.
+\newline- Created UI elements for questlines and created basic show and hide animations for them.
+\newline- Configured the quest animations and UI to show based on whether the animals are rescued or not.
+
+\textbf{Week 1 - Start of Term 2}\newline
+24/01/2025
+\newline- Improved the enemy combat mechanics based on user feedback by disabling enemies from being able to attack while stunned.
+\newline- Bugfix to prevent enemies from attacking during their death animation.\newline
+23/01/2025
+\newline- Created teleport mechanic for when animals get stuck too far away from the player.
+\newline- Set up new physics layers for the animals and teleport radius and configured them in the collision matrix.\newline
+22/01/2025
+\newline- Began working on animal follow mechanic (Animal follows the player once rescued from its cage).
+\newline- Created Animal script to manage the movement and set it up with basic following.
+
+
+\textbf{Week 11 - End Of Term 1}\newline
 06/12/2024
 \newline- Bugfix to player's NavMeshAgent which was causing the agent to not relocate to the player when they leave the NavMeshSurface.
 \newline- Bugfix to the heart idle animation which was overriding the positions of all hearts in the scene.
@@ -961,7 +1068,7 @@ Below is the code style used, following Unity's guidelines \cite{unity_2022_code
 \newline- Extra bug fixing for player movement:
 \newline- Fix to jump animation bug which caused it to look like a double jump.
 \newline- Fix to bug that caused animations to get stuck when pressing jump twice.
-\newline9/11/2024
+\newline9/11/2024 - Objective Complete : Combat System
 \newline- Added a movement radius to the enemy: Now the enemy only starts following the player if the player enters its follow radius. The Enemy returns to spawn if player exits the radius.
 \newline6/11/2024
 \newline- Aded player attack mechanic: Enemy takes damage on collision with the player's axe.
@@ -973,7 +1080,7 @@ Below is the code style used, following Unity's guidelines \cite{unity_2022_code
 \newline- Implemented enemy attack mechanic: Enemy auto attacks when the player is in range (Within the attack radius).
 
 \textbf{Week 6}\newline
-29/10/2024
+29/10/2024 - Objective Complete : Player Movement System
 \newline- Refactored all the states out into their respective classes.
 \newline- Fixed gravity and running bugs from refactored code.
 

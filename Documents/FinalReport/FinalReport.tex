@@ -1139,13 +1139,13 @@ Files relevant to the combat system:
 \begin{itemize}
     \item \texttt{IDamageable.cs} (Assets/Interfaces)
     \item \texttt{PlayerHealthAndDamage.cs, WeaponManager.cs, WeaponAttributes.cs} (Assets/Fighter/Scripts)
-    \item \texttt{Enemy.cs, AttackRadius.cs} (Assets/CuteGoblins/Scripts)
+    \item \texttt{Enemy.cs, AttackRadius.cs, RangedAttackRadius.cs, ObjectPool.cs, PoolableObject.cs, Arrow.cs} (Assets/CuteGoblins/Scripts)
 \end{itemize}
 Files relevant to enemy movement:
 \begin{itemize}
-    \item \texttt{Enemy.cs, FollowRadius.cs, EnemyMovement.cs, EnemyScriptableObject.cs} (Assets/CuteGoblins/Scripts)
+    \item \texttt{Enemy.cs, FollowRadius.cs, EnemyMovement.cs, EnemyScriptableObject.cs,}\newline  \texttt{RangedEnemyMovement.cs} (Assets/CuteGoblins/Scripts)
 \end{itemize}
-Files relevant to the user interface:
+Files relevant to the health UI system:
 \begin{itemize}
     \item \texttt{IHealthSubject, IHealthObserver} (Assets/Interfaces)
     \item \texttt{PlayerHealthBar.cs, EnemyHealthBar.cs, GameOver.cs} (Assets/UI/Scripts)
@@ -1153,11 +1153,20 @@ Files relevant to the user interface:
 Files relevant to animal rescue:
 \begin{itemize}
     \item \texttt{Cage.cs} (Assets/CuteRaccoons/Scripts)
-    \item \texttt{IDefeatSubject.cs, IDefeatObserver.cs} (Assets/Interfaces)
+    \item \texttt{Animal.cs, AnimalTeleportRadius.cs} (Assets/Interfaces)
 \end{itemize}
 
+Files relevant to the level progression and score system:
+\begin{itemize}
+    \item \texttt{UIQuestManager.cs} (Assets/CuteRaccoons/Scripts)
+    \item \texttt{LevelManager.cs, LevelState.cs} (Assets/Managers)
+    \item \texttt{GoalRadius.cs, LevelCleared.cs, GameTimer.cs, ScoreManager.cs, SceneLoader.cs} (Assets/UI/Scripts)
+\end{itemize}
 
-
+Files relevant to sound system:
+\begin{itemize}
+    \item \texttt{SoundFXManager.cs, SoundMixerManager.cs} (Assets/Managers)
+\end{itemize}
 
 \section{Demo Video Link}
 \url{https://youtu.be/4mPIEk5YFJI}

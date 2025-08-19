@@ -1,5 +1,5 @@
 # 🌲 Forest Rescue 🪓  
-Forest rescue a 3D platforming / action-adventure game set in a fantasy forest, where you need to defeat goblins and rescue animals! 
+Forest rescue is a 3D platforming / action-adventure game set in a fantasy forest, where you need to defeat goblins and rescue animals! 
 <div align="center">
   <img src="/Documents/FinalReport/OtherImages/GameImage.png" alt="Game Image" width="60%">
 </div>
@@ -109,4 +109,3 @@ Note that not all folders are included in the diagram.
 ### Test Files:
 
 - [`LevelManagerTests.cs`](FinalProject/Assets/Tests/EditMode/LevelManagerTests.cs), [`PlayerStateFactoryTests.cs`](FinalProject/Assets/Tests/EditMode/PlayerStateFactoryTests.cs)
-- [`SoundFXManagerTests.cs`](FinalProject/Assets/Tests/EditMode/SoundFXManagerTests.cs), [`ObjectPoolTests.cs`](FinalProject/Assets/Tests/EditMode/ObjectPoolTests.cs)
